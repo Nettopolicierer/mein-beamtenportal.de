@@ -37,6 +37,32 @@ def clean_html(raw_html: str, post_title: str = "") -> str:
     for tag in soup.find_all(attrs={"data-tag": True}):
         tag.decompose()
 
+    # Der komplette Hero (Cover-Bild, Titel, Untertitel, CTA-Buttons,
+    # Bewertungsbadge) steckt bei jedem Post in einem wp-block-cover, der
+    # immer den Hero-CTA-Link "#content-start" enthaelt ("Zum Ratgeber") -
+    # das ist ein eindeutigerer Anker als Text-/Titel-Vergleiche, die bei
+    # abweichenden H1-Formulierungen (SEO-Titel != on-page H1) versagen.
+    # Manche Posts haben mehrere Cover-Bloecke (z.B. weiter unten im
+    # Cross-Selling-Bereich) - nur den mit dem Hero-Link entfernen. Muss vor
+    # dem Button-Marker laufen, sonst ist die "button"-Klasse fuer den
+    # Fallback schon durch "btn" ersetzt.
+    content_start_link = soup.find("a", href="#content-start")
+    hero_cover = (
+        content_start_link.find_parent("div", class_="wp-block-cover")
+        if content_start_link
+        else None
+    )
+    # Fallback fuer die wenigen Posts mit abweichendem Hero-Template (z.B.
+    # Rechner-Landingpages ohne "#content-start"-Anker, dafuer mit anderem
+    # Booking-Link): der allererste Cover-Block, sofern er einen Button
+    # enthaelt, ist bei diesen Templates ebenfalls immer der Hero.
+    if not hero_cover:
+        first_cover = soup.find("div", class_="wp-block-cover")
+        if first_cover and first_cover.find("a", class_=re.compile(r"\bbutton\b")):
+            hero_cover = first_cover
+    if hero_cover:
+        hero_cover.decompose()
+
     # Rank-Math-Inhaltsverzeichnis in eine saubere <nav class="toc"><ul>...
     # Struktur ueberfuehren, bevor der Whitelist-Trim die Original-Divs
     # plattwalzt (sonst: einzelne <a>-Links ohne jede Struktur).
