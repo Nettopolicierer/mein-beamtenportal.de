@@ -18,6 +18,16 @@ def clean_html(raw_html: str, post_title: str = "") -> str:
     for img in soup.find_all("img", src=re.compile("BITTE_BILD_ID_EINTRAGEN")):
         img.decompose()
 
+    # Greyd-Theme "Dynamic Tags" (data-tag="date"/"categories" etc.) - werden
+    # normalerweise serverseitig durch echte Werte ersetzt, stehen im rohen
+    # API-Export aber nur als Platzhalter-Label da ("Beitragsdatum"). Muss vor
+    # dem Whitelist-Trim laufen, sonst ist das data-tag-Attribut schon weg.
+    for tag in soup.find_all(attrs={"data-tag": True}):
+        tag.decompose()
+    for ul in soup.find_all("ul"):
+        if not ul.get_text(strip=True) and not ul.find("img"):
+            ul.decompose()
+
     # Hero-Block vor dem eigentlichen Inhalt entfernen: Cover-Bild, CTA-Buttons,
     # Google-Bewertungsbadge und jede Ueberschrift, die den Post-Titel
     # wiederholt (h1 + oft zusaetzlich ein doppeltes h2) - das rendert die
@@ -44,6 +54,36 @@ def clean_html(raw_html: str, post_title: str = "") -> str:
     for tag in soup.find_all(["p", "li"]):
         if not tag.get_text(strip=True) and not tag.find("img"):
             tag.decompose()
+
+    # Feste Template-Bausteine, die in fast jedem Post vorkommen und von der
+    # neuen Seitenvorlage selbst gerendert werden: CTA-Buttons zur Buchung
+    # und die Google-Bewertungsbadge (Sterne-Bild + "X reviews"-Zeile).
+    for a in soup.find_all("a", href=True):
+        if "cal.eu/mein-beamtenportal" in a["href"] or a["href"] == "#content-start":
+            a.decompose()
+    for p_tag in soup.find_all("p"):
+        text = p_tag.get_text(strip=True)
+        if text == "Google Reviews" or re.match(r"^\d(\.\d)?\s*Stars", text) or "reviews</strong>" in str(p_tag):
+            p_tag.decompose()
+    for img in soup.find_all("img", src=re.compile(r"/(g\.webp|stars\.svg)$")):
+        img.decompose()
+
+    # Direkt aufeinanderfolgende Bilder mit identischer src (Cover- +
+    # Feature-Bild-Dopplung) auf ein Vorkommen reduzieren.
+    for img in soup.find_all("img"):
+        prev = img.find_previous_sibling()
+        while prev and isinstance(prev, NavigableString) and not prev.strip():
+            prev = prev.find_previous_sibling()
+        if prev and prev.name == "img" and prev.get("src") == img.get("src"):
+            img.decompose()
+
+    # Freistehenden Text (durch unwrap() entstanden, z.B. Subtitle-Spans) in
+    # <p> einpacken statt als nacktes Text-Fragment im HTML zu belassen.
+    for node in list(soup.contents):
+        if isinstance(node, NavigableString) and node.strip():
+            p = soup.new_tag("p")
+            node.replace_with(p)
+            p.string = node.strip()
 
     result = str(soup)
     result = re.sub(r"\n{3,}", "\n\n", result)
