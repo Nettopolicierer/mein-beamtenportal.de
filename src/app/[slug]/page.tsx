@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ALL_POSTS, getPost, getRelatedPosts, formatDate, BOOKING_LINK } from "@/lib/content";
+import { ALL_POSTS, getPost, formatDate, getRelatedPosts, BOOKING_LINK } from "@/lib/content";
 
 export function generateStaticParams() {
   return ALL_POSTS.map((post) => ({ slug: post.slug }));
@@ -29,11 +30,6 @@ export async function generateMetadata({
   };
 }
 
-// Nutzer-Vorgabe (ArticlePage-Template): 1:1 übernommen, keine
-// Tailwind-Klasse geändert, nur mit echten Daten befüllt. Eigener Header
-// aus dem Template weggelassen - kommt schon global aus layout.tsx, ein
-// zweiter würde doppelt erscheinen (entspricht Anweisung 2: keine neuen
-// schwebenden Elemente).
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const post = getPost(slug);
@@ -42,90 +38,108 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const related = getRelatedPosts(post);
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] font-sans text-gray-900 antialiased">
-      <main className="mx-auto max-w-7xl space-y-10 px-4 py-8 sm:px-6 lg:px-8">
-        {/* 2. HERO SECTION (2 Spalten: Links Hero-Card, Rechts Inhaltsverzeichnis) */}
-        <section className="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-12">
-          {/* LINKE SPALTE: Berater-Card (8 Spalten) */}
-          <div className="flex flex-col justify-center rounded-3xl border border-gray-100 bg-white p-6 shadow-sm lg:col-span-8 md:p-8">
-            <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-12">
-              {/* Text links (7 Spalten) */}
-              <div className="space-y-4 md:col-span-7">
-                <h1 className="text-2xl leading-tight font-bold text-[#0a2540] md:text-3xl">
-                  Jetzt kostenfreie Beratung buchen
-                </h1>
-                <p className="text-sm leading-relaxed text-gray-600 md:text-base">
-                  Vereinbaren Sie jetzt Ihre persönliche Beratung mit mir und finden Sie die
-                  richtige Vorsorge-Lösung, die wirklich zu Ihnen passt.
-                </p>
-                <div>
-                  <Link
-                    href={BOOKING_LINK}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block rounded-xl bg-[#0a2540] px-6 py-3 font-semibold text-white shadow-md transition hover:bg-[#081d33]"
-                  >
-                    Termin buchen
-                  </Link>
-                </div>
-              </div>
-
-              {/* Foto rechts INNERHALB der Karte (5 Spalten) */}
-              <div className="h-56 w-full md:col-span-5 md:h-full">
-                <img
-                  src="/albert-portrait.webp"
-                  alt="Albert Sibert"
-                  className="h-full max-h-[280px] w-full rounded-2xl object-cover"
-                />
-              </div>
-            </div>
+    <article>
+      {/* Hero: Hintergrundbild + Titel + Untertitel + CTAs, wie im Original */}
+      <div className="relative">
+        {post.featuredImage && (
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${post.featuredImage})` }}
+          />
+        )}
+        <div className="absolute inset-0 bg-primary/80" />
+        <div className="relative mx-auto max-w-4xl px-6 py-20 text-center">
+          <div className="mb-4 flex flex-wrap items-center justify-center gap-2 text-xs text-white/70">
+            {post.categories.map((cat) => (
+              <span key={cat} className="rounded-full bg-white/15 px-2.5 py-0.5 font-medium">
+                {cat}
+              </span>
+            ))}
+            <span>{formatDate(post.date)}</span>
           </div>
-
-          {/* RECHTE SPALTE: Inhaltsverzeichnis (4 Spalten) */}
-          <div className="flex flex-col justify-center rounded-3xl border border-gray-100 bg-[#f3f6f9] p-6 lg:col-span-4 md:p-8">
-            <h2 className="mb-4 text-xl font-bold text-[#0a2540]">Inhalt</h2>
-            <ul className="space-y-3 text-sm font-medium text-gray-700">
-              {post.toc.map((entry) => (
-                <li key={entry.href}>
-                  <a href={entry.href} className="block transition hover:text-blue-600">
-                    • {entry.text}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <h1 className="font-heading mb-4 text-3xl font-bold text-white sm:text-4xl">{post.title}</h1>
+          {post.subtitle && <p className="mb-8 text-lg text-white/85">{post.subtitle}</p>}
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <Link
+              href={BOOKING_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-lg bg-white px-6 py-3 text-sm font-semibold text-primary hover:bg-white/90"
+            >
+              Kostenfreie Beratung anfordern
+            </Link>
+            <Link
+              href="#content-start"
+              className="rounded-lg border border-white px-6 py-3 text-sm font-semibold text-white hover:bg-white/10"
+            >
+              Zum Ratgeber
+            </Link>
           </div>
-        </section>
+        </div>
+      </div>
 
-        {/* 3. DUNKELBLAUES BANNER */}
-        <section className="rounded-3xl bg-[#0a2540] p-8 text-white shadow-lg md:p-10">
-          <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12">
-            <div className="lg:col-span-7">
-              <h2 className="text-2xl leading-tight font-bold md:text-3xl">{post.title}</h2>
-            </div>
-            <div className="rounded-2xl bg-white p-6 text-center text-gray-900 shadow-md lg:col-span-5">
-              <h3 className="mb-3 text-lg font-bold">Kostenfreie, individuelle Beratung</h3>
+      {/* Trust-Badge (Google Reviews), wie im Original direkt unter dem Hero */}
+      <div className="border-b border-mediumlight/40 bg-white py-4">
+        <div className="mx-auto flex max-w-4xl items-center justify-center gap-3 px-6">
+          <Image src="/proven-expert.webp" alt="ProvenExpert" width={32} height={32} unoptimized />
+          <Image src="/stars.svg" alt="" width={90} height={16} unoptimized />
+          <span className="text-sm text-mediumdark">5.0 Stars | 8 reviews</span>
+        </div>
+      </div>
+
+      {/* Artikeltext + sticky Sidebar (Inhalt + Buchungs-CTA) */}
+      <div
+        id="content-start"
+        className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 py-16 lg:grid-cols-[1fr_260px]"
+      >
+        <div
+          className="prose max-w-none prose-headings:font-heading prose-headings:text-primary prose-a:text-primary"
+          dangerouslySetInnerHTML={{ __html: post.html }}
+        />
+
+        <aside className="hidden lg:block">
+          <div className="sticky top-24 z-10 flex flex-col gap-4">
+            {post.toc.length > 0 && (
+              <nav className="rounded-xl bg-base p-5">
+                <p className="font-heading mb-2 text-sm font-bold text-primary">Inhalt</p>
+                <ul className="flex flex-col gap-1.5 text-xs">
+                  {post.toc.map((entry) => (
+                    <li key={entry.href}>
+                      <a
+                        href={entry.href}
+                        title={entry.text}
+                        className="block truncate text-mediumdark hover:text-primary"
+                      >
+                        {entry.text}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            )}
+
+            <div className="rounded-xl bg-primary p-5 text-center">
+              <p className="font-heading mb-4 text-base font-bold text-white">
+                Kostenfreie, individuelle Beratung
+              </p>
               <Link
                 href={BOOKING_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mb-2 block w-full rounded-xl bg-[#0a2540] px-4 py-3 text-sm font-bold tracking-wider text-white uppercase transition hover:bg-[#081d33]"
+                className="mb-3 block rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-primary hover:bg-white/90"
               >
-                TERMIN BUCHEN
+                Termin buchen
               </Link>
-              <p className="text-xs font-medium text-gray-500">100% kostenfrei &amp; unverbindlich</p>
+              <p className="text-xs text-white/70">100% kostenfrei &amp; unverbindlich</p>
             </div>
           </div>
-        </section>
+        </aside>
+      </div>
 
-        {/* 4. HAUPTARTIKEL CONTENT (Zentriert & begrenzte Breite) */}
-        <article
-          className="prose mx-auto max-w-4xl space-y-8 rounded-3xl border border-gray-100 bg-white p-6 shadow-sm md:p-10 prose-headings:text-[#0a2540] prose-a:text-blue-700"
-          dangerouslySetInnerHTML={{ __html: post.html }}
-        />
-
-        {related.length > 0 && (
-          <section className="mx-auto max-w-4xl">
-            <h2 className="mb-6 text-2xl font-bold text-[#0a2540]">
+      {related.length > 0 && (
+        <div className="bg-base">
+          <div className="mx-auto max-w-6xl px-6 py-16">
+            <h2 className="font-heading mb-8 text-2xl font-bold text-primary">
               Diese Beiträge könnten Sie ebenfalls interessieren
             </h2>
             <div className="grid gap-6 sm:grid-cols-3">
@@ -133,28 +147,28 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                 <Link
                   key={r.slug}
                   href={`/${r.slug}`}
-                  className="group flex flex-col gap-3 rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition-colors hover:border-blue-200"
+                  className="group flex flex-col gap-3 rounded-2xl border border-mediumlight/40 bg-white p-6 transition-colors hover:border-primary/30"
                 >
-                  <span className="text-xs text-gray-500">{formatDate(r.date)}</span>
-                  <h3 className="text-base leading-snug font-semibold text-[#0a2540] group-hover:text-blue-700">
+                  <span className="text-xs text-mediumdark">{formatDate(r.date)}</span>
+                  <h3 className="font-heading text-base leading-snug font-semibold text-primary group-hover:opacity-80">
                     {r.title}
                   </h3>
-                  <p className="line-clamp-2 text-sm text-gray-500">{r.description}</p>
-                  <span className="text-sm font-medium text-blue-700 group-hover:underline">
+                  <p className="line-clamp-2 text-sm text-mediumdark">{r.description}</p>
+                  <span className="text-sm font-medium text-primary group-hover:underline">
                     mehr erfahren →
                   </span>
                 </Link>
               ))}
             </div>
-          </section>
-        )}
-
-        <div className="mx-auto max-w-4xl">
-          <Link href="/ratgeber" className="text-sm font-medium text-blue-700 hover:underline">
-            ← Zurück zum Ratgeber
-          </Link>
+          </div>
         </div>
-      </main>
-    </div>
+      )}
+
+      <div className="mx-auto max-w-4xl px-6 py-8">
+        <Link href="/ratgeber" className="text-sm font-medium text-primary hover:underline">
+          ← Zurück zum Ratgeber
+        </Link>
+      </div>
+    </article>
   );
 }
