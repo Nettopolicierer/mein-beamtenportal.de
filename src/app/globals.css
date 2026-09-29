@@ -169,12 +169,13 @@ body {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-  gap: 1.25rem;
-  background: var(--color-primary);
+  gap: 1.5rem;
+  background: linear-gradient(155deg, var(--color-primary), color-mix(in srgb, var(--color-primary) 85%, #000));
   color: #fff;
-  border-radius: 0.75rem;
-  padding: 1.25rem;
+  border-radius: 1rem;
+  padding: 1.75rem;
   margin: 1.5rem 0;
+  box-shadow: 0 8px 24px -8px rgb(0 0 0 / 0.35);
 }
 .prose .team-box img {
   width: 84px !important;
@@ -193,18 +194,24 @@ body {
 /* Nur der Icon+Name-Wrapper (enthaelt h4) wird selbst zur Flex-Zeile -
    NICHT der Inhalts-Wrapper (enthaelt h2), sonst geraten dessen eigene
    Kinder (Ueberschrift/Absatz/Liste) faelschlich nebeneinander statt
-   normal untereinander zu stehen. */
+   normal untereinander zu stehen. Ein duenner Trenner grenzt die
+   Foto+Name-Spalte optisch vom Fließtext ab. */
 .prose .team-box > div:has(h4) {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.9rem;
   flex: 0 0 auto;
+  padding-right: 1.5rem;
+  margin-right: 0.25rem;
+  border-right: 1px solid rgb(255 255 255 / 0.18);
+  align-self: stretch;
 }
-/* Echtes Portraitfoto (statt generisches Icon) rund und mit object-fit:
-   cover darstellen, nicht wie ein Icon "contain". */
+/* Echtes Portraitfoto (statt generisches Icon) rund, mit object-fit:cover
+   und einem dezenten Ring statt "contain" wie ein generisches Icon. */
 .prose .team-box img.profile-photo {
   object-fit: cover;
   border-radius: 9999px;
+  border: 3px solid rgb(255 255 255 / 0.25);
 }
 .prose .team-box p,
 .prose .team-box h2,
@@ -215,9 +222,14 @@ body {
   flex: 1 1 0%;
   min-width: 0;
 }
+.prose .team-box h2,
+.prose .team-box h3 {
+  font-size: 1.35rem;
+}
 .prose .team-box p {
   font-size: 0.85rem;
   line-height: 1.5;
+  color: rgb(255 255 255 / 0.8);
 }
 .prose .team-box ul {
   color: #fff;
@@ -225,20 +237,32 @@ body {
   min-width: 0;
   list-style: none;
   padding: 0;
-  margin: 0.75rem 0 0;
+  margin: 1.1rem 0 0;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 .prose .team-box li {
   position: relative;
-  padding-left: 1.5rem;
+  margin: 0;
+  padding-left: 2.1rem;
   font-size: 0.9rem;
+  line-height: 1.45;
 }
 .prose .team-box li::before {
   content: "\2713";
   position: absolute;
   left: 0;
+  top: 0.05rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: rgb(255 255 255 / 0.15);
+  font-size: 0.7rem;
+  font-weight: 700;
 }
 .prose .team-box strong {
   color: #fff;

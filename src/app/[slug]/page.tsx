@@ -126,7 +126,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
               );
             })()}
 
-            <div className="rounded-xl bg-primary p-5 text-center">
+            <div className="rounded-xl bg-gradient-to-br from-primary to-primary/80 p-5 text-center shadow-lg shadow-primary/20">
               <p className="font-heading mb-4 text-base font-bold text-white">
                 Kostenfreie, individuelle Beratung
               </p>
@@ -134,7 +134,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                 href={BOOKING_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mb-3 block rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-primary hover:bg-white/90"
+                className="mb-3 block rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-primary transition-colors hover:bg-white/90"
               >
                 Termin buchen
               </Link>
