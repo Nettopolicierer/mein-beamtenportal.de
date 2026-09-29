@@ -102,10 +102,14 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             {post.toc.length > 0 && (
               <nav className="rounded-xl bg-base p-5">
                 <p className="font-heading mb-2 text-sm font-bold text-primary">Inhalt</p>
-                <ul className="flex max-h-56 flex-col gap-1.5 overflow-y-auto text-xs leading-snug">
+                <ul className="flex flex-col gap-1.5 text-xs">
                   {post.toc.map((entry) => (
                     <li key={entry.href}>
-                      <a href={entry.href} className="text-mediumdark hover:text-primary">
+                      <a
+                        href={entry.href}
+                        title={entry.text}
+                        className="block truncate text-mediumdark hover:text-primary"
+                      >
                         {entry.text}
                       </a>
                     </li>

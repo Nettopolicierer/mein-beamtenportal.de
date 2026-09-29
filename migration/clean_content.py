@@ -230,6 +230,20 @@ def clean_html(raw_html: str, post_title: str = "") -> dict:
         byline = ueber_uns_heading.find_previous("h4")
         if byline:
             byline.string = "Albert Sibert"
+            # Das Icon steckt als <img> in einem <figure>, das Geschwister
+            # (nicht Vorfahre) des h4-umschliessenden Divs ist.
+            byline_img = None
+            byline_parent = byline.find_parent()
+            if byline_parent:
+                prev_sib = byline_parent.find_previous_sibling()
+                if prev_sib:
+                    byline_img = prev_sib.find("img") if prev_sib.name != "img" else prev_sib
+            if byline_img:
+                byline_img["src"] = "/albert-portrait.webp"
+                byline_img["alt"] = "Albert Sibert"
+                byline_img["style"] = ""  # feste Icon-Groesse (z.B. 48px) verwerfen, echtes Fotoformat nutzen
+                existing_class = byline_img.get("class") or []
+                byline_img["class"] = list(existing_class) + ["profile-photo"]
         ueber_uns_heading.string = "Über mich"
         old_paras = ueber_uns_heading.find_next_siblings("p", limit=2)
         for op in old_paras:
@@ -266,7 +280,7 @@ def clean_html(raw_html: str, post_title: str = "") -> dict:
     # reduzieren. id bleibt an Ueberschriften erhalten (Sprungmarken des
     # Inhaltsverzeichnisses funktionieren sonst nicht mehr). class bleibt nur
     # an unseren eigenen Markern (btn/icon-row/blue-background/team-box).
-    MARKER_CLASSES = {"btn", "icon-row", "blue-background", "team-box", "summary-box", "photo-cta"}
+    MARKER_CLASSES = {"btn", "icon-row", "blue-background", "team-box", "summary-box", "photo-cta", "profile-photo"}
     for tag in soup.find_all(True):
         if tag.name not in KEEP_TAGS:
             tag.unwrap()
