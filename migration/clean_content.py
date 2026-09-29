@@ -170,11 +170,12 @@ def clean_html(raw_html: str, post_title: str = "") -> dict:
             box.append(anchor)
             box.append(next_list)
 
-    # "Team"-Box ("Wir sind ein Team unabhängiger Finanzberater...") hat im
-    # Original einen eigenen Navy-Hintergrund mit Bild + Text nebeneinander -
-    # per Marker-Klasse erhalten statt zu einer klassenlosen Box zu werden.
-    team_box = soup.find("div", class_="has-primary-background-color")
-    if team_box:
+    # Navy-Boxen ("Wir sind ein Team...", "Redaktionsteam / Über uns",
+    # "Kostenfreie, individuelle Beratung") - im Original stehen pro Post
+    # bis zu drei davon (nicht nur die erste!), jede mit eigenem
+    # Navy-Hintergrund. find_all statt find, sonst verlieren die
+    # nachfolgenden Boxen ihre Formatierung komplett.
+    for team_box in soup.find_all("div", class_="has-primary-background-color"):
         team_box["class"] = ["team-box"]
 
     # Alle Attribute ausser href/src/alt entfernen, Tags auf Whitelist

@@ -148,11 +148,32 @@ body {
   flex-shrink: 0;
   margin: 0 auto;
 }
-.prose .team-box p {
+.prose .team-box p,
+.prose .team-box h2,
+.prose .team-box h3,
+.prose .team-box h4 {
   color: #fff;
   margin: 0;
   flex: 1;
   min-width: 240px;
+}
+.prose .team-box ul {
+  color: #fff;
+  flex: 1;
+  min-width: 240px;
+}
+.prose .team-box strong {
+  color: #fff;
+}
+/* Buchungs-Button auf Navy-Grund invertiert (weiß statt navy), sonst
+   unsichtbar vor dem gleichfarbigen Hintergrund. */
+.prose .team-box a.btn {
+  background: #fff;
+  color: var(--color-primary) !important;
+  flex: none;
+}
+.prose .team-box a.btn:hover {
+  background: color-mix(in srgb, #fff 90%, var(--color-primary));
 }
 
 /* "Das Wichtigste in Kürze"-Box: farblich abgesetzt, Listenpunkte mit
