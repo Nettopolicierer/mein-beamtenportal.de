@@ -7,13 +7,16 @@ import { formatDate } from "@/lib/content";
 
 export function PostList({ posts }: { posts: Post[] }) {
   const categories = useMemo(() => {
-    const seen: string[] = [];
+    const counts = new Map<string, number>();
     for (const p of posts) {
       for (const c of p.categories) {
-        if (!seen.includes(c)) seen.push(c);
+        counts.set(c, (counts.get(c) ?? 0) + 1);
       }
     }
-    return seen.sort();
+    // Nach Haeufigkeit statt alphabetisch, damit die aussagekraeftigsten
+    // Kategorien (z.B. "Beamte", "PKV") zuerst stehen statt zwischen
+    // Nischenkategorien unterzugehen.
+    return [...counts.keys()].sort((a, b) => counts.get(b)! - counts.get(a)!);
   }, [posts]);
 
   const [active, setActive] = useState<string | null>(null);
@@ -56,8 +59,9 @@ export function PostList({ posts }: { posts: Post[] }) {
             className="group flex flex-col gap-3 rounded-2xl border border-mediumlight/40 bg-base p-6 transition-all hover:border-primary/30"
           >
             <div className="flex items-center gap-2 text-xs text-mediumdark">
-              <span>{post.categories[0] ?? "Ratgeber"}</span>
-              <span>·</span>
+              <span className="rounded-full bg-primary/10 px-2 py-0.5 font-medium text-primary">
+                {post.categories[0] ?? "Ratgeber"}
+              </span>
               <span>{formatDate(post.date)}</span>
             </div>
             <h2 className="text-base leading-snug font-semibold text-primary group-hover:opacity-80">

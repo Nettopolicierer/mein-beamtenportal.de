@@ -53,7 +53,7 @@
     "date": "2026-09-02T10:00:00",
     "modified": "2026-08-30T12:04:46",
     "categories": [
-      "pkv",
+      "PKV",
       "Referendare"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2026/06/towfiqu-barbhuiya-NwIExsCqXdM-unsplash-scaled.jpg",
@@ -114,8 +114,8 @@
     "date": "2026-08-31T10:00:00",
     "modified": "2026-08-23T00:34:00",
     "categories": [
-      "Referendare",
-      "Pension"
+      "Pension",
+      "Referendare"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2026/06/windows-qtpt4WGlz3Y-unsplash-1.jpg",
     "featuredImageAlt": "Beamtin plant ihre Altersvorsorge",
@@ -295,8 +295,8 @@
     "date": "2026-08-24T10:00:00",
     "modified": "2026-08-27T15:59:15",
     "categories": [
-      "BU",
-      "Pension"
+      "Pension",
+      "BU"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2026/06/marc-najera-SwK6MSxTLDE-unsplash-scaled.jpg",
     "featuredImageAlt": "Pensionierte Beamte genießen die Rente",
@@ -356,7 +356,7 @@
     "date": "2026-08-19T10:00:00",
     "modified": "2026-08-13T15:46:20",
     "categories": [
-      "pkv",
+      "PKV",
       "Referendare"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2026/06/catherine-tskho-W8hoW9sZYRM-unsplash.jpg",
@@ -477,8 +477,8 @@
     "date": "2026-08-13T15:20:23",
     "modified": "2026-08-13T15:27:38",
     "categories": [
-      "Anwärter",
-      "Beamte"
+      "Beamte",
+      "Anwärter"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2026/06/2h-media-bzkOoES402E-unsplash-scaled.jpg",
     "featuredImageAlt": "Beamter plant, wie er seine Gehaltserhöhung investieren kann",
@@ -586,7 +586,7 @@
     "date": "2026-06-16T10:00:00",
     "modified": "2026-06-20T12:59:33",
     "categories": [
-      "pkv",
+      "PKV",
       "Krankenversicherung"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2026/06/brooke-cagle-uWVWQ8gF8PE-unsplash-scaled.jpg",
@@ -935,7 +935,7 @@
     "date": "2026-06-05T08:48:18",
     "modified": "2026-06-05T09:11:26",
     "categories": [
-      "pkv",
+      "PKV",
       "Referendare"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2026/06/brooke-cagle-uHVRvDr7pg-unsplash-scaled.jpg",
@@ -988,8 +988,8 @@
     "date": "2026-06-04T10:00:00",
     "modified": "2026-06-01T19:34:53",
     "categories": [
-      "pkv",
       "Beamte",
+      "PKV",
       "Krankenversicherung"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2026/05/vitaly-gariev-vJHBwF4-DW0-unsplash-scaled.jpg",
@@ -1095,8 +1095,8 @@
     "date": "2026-06-01T19:42:23",
     "modified": "2026-06-01T19:42:45",
     "categories": [
-      "DU",
-      "Beamte"
+      "Beamte",
+      "DU"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2026/06/aleksandra-sapozhnikova-UNZanYII6ME-unsplash-scaled.jpg",
     "featuredImageAlt": "Dienstunfähigkeit bei Beamten – Pension und Versorgungslücke verstehen",
@@ -1148,8 +1148,8 @@
     "date": "2026-06-01T10:00:00",
     "modified": "2026-06-01T19:22:48",
     "categories": [
-      "pkv",
-      "Beamte"
+      "Beamte",
+      "PKV"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2026/05/sable-flow-pNodosEZ5Oc-unsplash-scaled.jpg",
     "featuredImageAlt": "Beihilfe Beamte – Erstattungsleistungen und PKV-Kombination für Beamte",
@@ -1201,7 +1201,7 @@
     "date": "2026-05-30T10:00:00",
     "modified": "2026-06-01T19:25:34",
     "categories": [
-      "pkv",
+      "PKV",
       "Referendare"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2026/05/jan-baborak-O4nTgxWr5Sc-unsplash-scaled.jpg",
@@ -1351,7 +1351,7 @@
     "date": "2026-01-31T09:00:00",
     "modified": "2026-02-16T08:55:28",
     "categories": [
-      "pkv",
+      "PKV",
       "Referendare"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2026/01/pexels-george-milton-7034015.webp",
@@ -1404,7 +1404,7 @@
     "date": "2026-01-30T09:00:00",
     "modified": "2026-02-16T08:43:22",
     "categories": [
-      "pkv",
+      "PKV",
       "Referendare"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/10/pexels-mart-production-7550361-scaled.webp",
@@ -1457,7 +1457,7 @@
     "date": "2026-01-29T09:00:00",
     "modified": "2026-02-16T08:43:40",
     "categories": [
-      "pkv",
+      "PKV",
       "Referendare"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/10/pexels-yankrukov-8199678-scaled.webp",
@@ -1506,7 +1506,7 @@
     "date": "2026-01-28T09:00:00",
     "modified": "2026-02-16T08:43:57",
     "categories": [
-      "pkv",
+      "PKV",
       "Referendare"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/10/pexels-karolina-grabowska-5908493-scaled.webp",
@@ -1612,7 +1612,7 @@
     "date": "2026-01-27T09:00:00",
     "modified": "2026-02-16T08:44:13",
     "categories": [
-      "pkv",
+      "PKV",
       "Referendare"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/11/pexels-george-milton-7034587.jpg",
@@ -1717,7 +1717,7 @@
     "date": "2026-01-26T09:00:00",
     "modified": "2026-02-16T08:44:26",
     "categories": [
-      "pkv",
+      "PKV",
       "Referendare"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/11/pexels-george-milton-7034720.jpg",
@@ -1806,7 +1806,7 @@
     "date": "2026-01-25T09:00:00",
     "modified": "2026-02-16T08:44:53",
     "categories": [
-      "pkv",
+      "PKV",
       "Referendare"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2026/01/pexels-shvets-production-7516381.webp",
@@ -1863,8 +1863,8 @@
     "date": "2026-01-25T09:00:00",
     "modified": "2026-02-16T08:44:42",
     "categories": [
-      "Referendare",
-      "pkv"
+      "PKV",
+      "Referendare"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2026/01/pexels-yaroslav-shuraev-9489781.webp",
     "featuredImageAlt": "Versicherung Referendariat Lehramt Brandenburg",
@@ -1920,9 +1920,9 @@
     "date": "2026-01-24T09:00:00",
     "modified": "2026-02-16T08:45:06",
     "categories": [
+      "PKV",
       "Referendare",
-      "Anwärter",
-      "pkv"
+      "Anwärter"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/11/pexels-karola-g-5899102.jpg",
     "featuredImageAlt": "Anwartschaft im Referendariat",
@@ -1974,8 +1974,8 @@
     "date": "2026-01-23T09:00:00",
     "modified": "2026-02-16T08:45:33",
     "categories": [
-      "Referendare",
-      "pkv"
+      "PKV",
+      "Referendare"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2026/01/pexels-helenalopes-271760011.webp",
     "featuredImageAlt": "versicherung referendariat lehramt berlin",
@@ -2023,7 +2023,7 @@
     "date": "2026-01-23T09:00:00",
     "modified": "2026-02-16T08:45:20",
     "categories": [
-      "pkv"
+      "PKV"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/11/pexels-george-milton-7034503.jpg",
     "featuredImageAlt": "Anwartschaft für die private Krankenversicherung für Studenten",
@@ -2116,7 +2116,7 @@
     "date": "2026-01-21T09:00:00",
     "modified": "2026-02-16T08:45:48",
     "categories": [
-      "pkv"
+      "PKV"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/11/pexels-george-milton-7034460.jpg",
     "featuredImageAlt": "Anwartschaft im Lehramt, Lehramtsstudent Anwartschaft",
@@ -2156,10 +2156,10 @@
     "date": "2026-01-20T09:00:00",
     "modified": "2026-01-09T10:13:44",
     "categories": [
-      "Krankenversicherung",
-      "Anwärter",
       "Beamte",
-      "Referendare"
+      "Krankenversicherung",
+      "Referendare",
+      "Anwärter"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/11/pexels-george-milton-7034432.jpg",
     "featuredImageAlt": "krankenversicherung für beamtenanwärter",
@@ -2408,9 +2408,9 @@
     "date": "2026-01-15T08:00:00",
     "modified": "2026-02-16T08:46:00",
     "categories": [
-      "Referendare",
+      "PKV",
       "Krankenversicherung",
-      "pkv"
+      "Referendare"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/11/pexels-george-milton-7034466.jpg",
     "featuredImageAlt": "im referendariat privat versichert",
@@ -2458,8 +2458,8 @@
     "date": "2026-01-14T09:00:00",
     "modified": "2026-01-05T16:12:25",
     "categories": [
-      "Lehrer",
-      "Pension"
+      "Pension",
+      "Lehrer"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/12/pexels-karola-g-7320744.jpg",
     "featuredImageAlt": "wann können lehrer in rente gehen",
@@ -2555,8 +2555,8 @@
     "date": "2026-01-13T09:00:00",
     "modified": "2026-01-05T16:09:56",
     "categories": [
-      "Lehrer",
-      "Pension"
+      "Pension",
+      "Lehrer"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/11/pexels-karola-g-5238129.jpg",
     "featuredImageAlt": "wie viel pension bekommt ein lehrer netto",
@@ -2604,8 +2604,8 @@
     "date": "2026-01-13T08:00:00",
     "modified": "2026-02-16T08:46:11",
     "categories": [
-      "Referendare",
-      "pkv"
+      "PKV",
+      "Referendare"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/11/pexels-karola-g-5901382.jpg",
     "featuredImageAlt": "Kosten der pkv für referendare",
@@ -2701,8 +2701,8 @@
     "date": "2026-01-12T08:00:00",
     "modified": "2026-02-16T08:46:23",
     "categories": [
-      "Referendare",
-      "pkv"
+      "PKV",
+      "Referendare"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/11/pexels-george-milton-7034200.jpg",
     "featuredImageAlt": "Referendariat pkv oder gkv",
@@ -2754,8 +2754,8 @@
     "date": "2026-01-10T09:00:00",
     "modified": "2026-01-09T09:53:53",
     "categories": [
-      "DU",
-      "Referendare"
+      "Referendare",
+      "DU"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/12/pexels-karola-g-5908768.jpg",
     "featuredImageAlt": "Kosten Dienstunfähigkeitsversicherung Referendariat",
@@ -2795,8 +2795,8 @@
     "date": "2026-01-09T09:00:00",
     "modified": "2026-01-05T16:04:24",
     "categories": [
-      "Pension",
-      "Beamte"
+      "Beamte",
+      "Pension"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/12/pexels-anthonyshkraba-production-8791029.jpg",
     "featuredImageAlt": "pension lehrer berlin",
@@ -2840,8 +2840,8 @@
     "date": "2026-01-08T09:00:00",
     "modified": "2026-01-05T16:03:28",
     "categories": [
-      "Pension",
-      "Beamte"
+      "Beamte",
+      "Pension"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/12/pexels-karola-g-6632927.jpg",
     "featuredImageAlt": "pension beamte niedersachsen",
@@ -3021,8 +3021,8 @@
     "date": "2026-01-05T15:44:45",
     "modified": "2026-01-05T15:44:48",
     "categories": [
-      "DU",
-      "Beamte"
+      "Beamte",
+      "DU"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/12/pexels-karola-g-7320505.jpg",
     "featuredImageAlt": "dienstunfähigkeitsversicherung sinnvoll beamte",
@@ -3070,8 +3070,8 @@
     "date": "2025-12-27T09:00:00",
     "modified": "2025-12-21T16:20:23",
     "categories": [
-      "Pension",
-      "Beamte"
+      "Beamte",
+      "Pension"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/12/pexels-karola-g-5900036.jpg",
     "featuredImageAlt": "Pension beamte in berlin berechnung",
@@ -3286,8 +3286,8 @@
     "date": "2025-12-22T09:00:00",
     "modified": "2025-12-21T16:10:11",
     "categories": [
-      "Pension",
-      "Beamte"
+      "Beamte",
+      "Pension"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/12/pexels-karola-g-6632924.jpg",
     "featuredImageAlt": "Pension beamte in nrw",
@@ -3331,8 +3331,8 @@
     "date": "2025-12-20T09:00:00",
     "modified": "2025-12-12T13:56:31",
     "categories": [
-      "Pension",
-      "Beamte"
+      "Beamte",
+      "Pension"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/12/pexels-karola-g-6029189.jpg",
     "featuredImageAlt": "ruhegehalt bei dienstunfähigkeit tabelle beamte",
@@ -3376,8 +3376,8 @@
     "date": "2025-12-19T09:00:00",
     "modified": "2025-12-12T13:31:03",
     "categories": [
-      "Lehrer",
-      "Pension"
+      "Pension",
+      "Lehrer"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/12/pexels-karola-g-44914941.jpg",
     "featuredImageAlt": "Pension für Lehrer in Sachsen",
@@ -3560,8 +3560,8 @@
     "date": "2025-12-15T09:00:00",
     "modified": "2025-12-12T12:56:17",
     "categories": [
-      "Pension",
-      "Beamte"
+      "Beamte",
+      "Pension"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/11/pexels-tima-miroshnichenko-5698383.jpg",
     "featuredImageAlt": "ehepaar beide beamte pension",
@@ -3601,8 +3601,8 @@
     "date": "2025-12-13T09:00:00",
     "modified": "2025-12-12T13:35:56",
     "categories": [
-      "Lehrer",
-      "Pension"
+      "Pension",
+      "Lehrer"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/12/pexels-mikhail-nilov-8317769.jpg",
     "featuredImageAlt": "Pension Lehrer in Berlin",
@@ -3646,8 +3646,8 @@
     "date": "2025-12-12T09:00:00",
     "modified": "2025-12-05T16:23:29",
     "categories": [
-      "Pension",
-      "Beamte"
+      "Beamte",
+      "Pension"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/11/pexels-tima-miroshnichenko-5591274.jpg",
     "featuredImageAlt": "pension beamte saarland",
@@ -3691,8 +3691,8 @@
     "date": "2025-12-11T09:00:00",
     "modified": "2025-12-05T16:21:31",
     "categories": [
-      "Pension",
-      "Beamte"
+      "Beamte",
+      "Pension"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/11/pexels-helenalopes-27086781.jpg",
     "featuredImageAlt": "pension beamte sachsen",
@@ -3740,8 +3740,8 @@
     "date": "2025-12-10T09:00:00",
     "modified": "2025-12-05T16:18:46",
     "categories": [
-      "Pension",
-      "Beamte"
+      "Beamte",
+      "Pension"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/11/pexels-tima-miroshnichenko-5698319.jpg",
     "featuredImageAlt": "pension beamte baden württemberg",
@@ -3781,8 +3781,8 @@
     "date": "2025-12-09T09:00:00",
     "modified": "2025-12-05T16:18:27",
     "categories": [
-      "Pension",
-      "Beamte"
+      "Beamte",
+      "Pension"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/11/pexels-shvets-production-7545264.jpg",
     "featuredImageAlt": "Pension Beamte Hessen",
@@ -3822,8 +3822,8 @@
     "date": "2025-12-08T09:00:00",
     "modified": "2025-12-05T16:09:38",
     "categories": [
-      "Pension",
-      "Beamte"
+      "Beamte",
+      "Pension"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/11/pexels-ron-lach-10223598.jpg",
     "featuredImageAlt": "pension beamte bayern",
@@ -3875,8 +3875,8 @@
     "date": "2025-12-06T09:00:00",
     "modified": "2025-12-03T08:14:50",
     "categories": [
-      "Pension",
-      "Beamte"
+      "Beamte",
+      "Pension"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/11/pexels-karola-g-5882679.jpg",
     "featuredImageAlt": "Altersvorsorge für beamte",
@@ -3916,9 +3916,9 @@
     "date": "2025-12-04T09:00:00",
     "modified": "2025-12-03T08:14:22",
     "categories": [
-      "Rechner",
       "Beamte",
-      "Pension"
+      "Pension",
+      "Rechner"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/11/pexels-karola-g-8528402.jpg",
     "featuredImageAlt": "beamtenpension rechner, ruhegehalt berechnen beamte",
@@ -3966,8 +3966,8 @@
     "date": "2025-12-03T09:00:00",
     "modified": "2025-12-01T09:52:27",
     "categories": [
-      "DU",
-      "Lehrer"
+      "Lehrer",
+      "DU"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/11/pexels-ivan-s-4458599.jpg",
     "featuredImageAlt": "dienstunfähigkeitsversicherung für lehramtsstudenten",
@@ -4011,8 +4011,8 @@
     "date": "2025-12-02T09:00:00",
     "modified": "2025-12-01T09:52:14",
     "categories": [
-      "BU",
-      "Lehrer"
+      "Lehrer",
+      "BU"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/11/pexels-george-milton-7034626.jpg",
     "featuredImageAlt": "berufsunfähigkeitsversicherung für lehramtsstudenten",
@@ -4390,8 +4390,8 @@
     "date": "2025-11-24T09:00:00",
     "modified": "2026-02-16T08:46:36",
     "categories": [
-      "Lehrer",
-      "pkv"
+      "PKV",
+      "Lehrer"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/10/pexels-george-milton-7034445.jpg",
     "featuredImageAlt": "optionstarif und anwartschaft im lehramtsstudium",
@@ -4439,8 +4439,8 @@
     "date": "2025-11-22T09:00:00",
     "modified": "2025-12-02T12:07:45",
     "categories": [
-      "Lehrer",
-      "Pension"
+      "Pension",
+      "Lehrer"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/11/pexels-shvets-production-8972765.jpg",
     "featuredImageAlt": "pension für lehrer in niedersachsen",
@@ -4484,8 +4484,8 @@
     "date": "2025-11-21T09:00:00",
     "modified": "2025-12-01T09:57:13",
     "categories": [
-      "Lehrer",
-      "Pension"
+      "Pension",
+      "Lehrer"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/11/pexels-karola-g-5899275.jpg",
     "featuredImageAlt": "Pension als Lehrer in Teilzeit",
@@ -4569,8 +4569,8 @@
     "date": "2025-11-19T09:00:00",
     "modified": "2025-12-02T12:06:48",
     "categories": [
-      "Lehrer",
-      "Pension"
+      "Pension",
+      "Lehrer"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/11/pexels-yankrukov-6817723.jpg",
     "featuredImageAlt": "pension für lehrer in bayern, pension lehrer bayern",
@@ -4622,8 +4622,8 @@
     "date": "2025-11-18T09:00:00",
     "modified": "2025-12-02T12:05:29",
     "categories": [
-      "Lehrer",
-      "Pension"
+      "Pension",
+      "Lehrer"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/11/pexels-shvets-production-7545351.jpg",
     "featuredImageAlt": "pension lehrer nrw, pension für lehrer in nrw",
@@ -4676,8 +4676,8 @@
     "modified": "2026-02-16T08:46:51",
     "categories": [
       "Beamte",
-      "Krankenversicherung",
-      "pkv"
+      "PKV",
+      "Krankenversicherung"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/10/pexels-julio-lopez-75309646-29179706-scaled.webp",
     "featuredImageAlt": "beihilfe im ausland für beamte",
@@ -4726,8 +4726,8 @@
     "modified": "2026-02-16T08:47:07",
     "categories": [
       "Beamte",
-      "Krankenversicherung",
-      "pkv"
+      "PKV",
+      "Krankenversicherung"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/11/pexels-yankrukov-8837404.jpg",
     "featuredImageAlt": "beihilge freiwillig gesetzlich versicherter beamter",
@@ -4763,9 +4763,9 @@
     "date": "2025-11-13T09:00:00",
     "modified": "2025-11-10T14:19:06",
     "categories": [
+      "PKV",
       "Lehrer",
-      "Krankenversicherung",
-      "pkv"
+      "Krankenversicherung"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/10/pexels-george-milton-7034430.jpg",
     "featuredImageAlt": "Lehrer krankheiten statistik 2025",
@@ -4900,9 +4900,9 @@
     "date": "2025-11-07T09:00:00",
     "modified": "2026-02-16T08:48:28",
     "categories": [
-      "Krankenversicherung",
       "Beamte",
-      "pkv"
+      "PKV",
+      "Krankenversicherung"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/11/pexels-shvets-production-7545362.jpg",
     "featuredImageAlt": "private krankenversicherung beamte kosten im alter",
@@ -5036,8 +5036,8 @@
     "date": "2025-11-04T09:00:00",
     "modified": "2025-11-05T11:34:36",
     "categories": [
-      "BU",
-      "Beamte"
+      "Beamte",
+      "BU"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/10/pexels-george-milton-7034425.jpg",
     "featuredImageAlt": "Brauchen beamte eine berufsunfähigkeitsversicherung",
@@ -5081,9 +5081,9 @@
     "date": "2025-11-03T09:00:00",
     "modified": "2026-02-16T08:48:39",
     "categories": [
-      "Krankenversicherung",
       "Beamte",
-      "pkv"
+      "PKV",
+      "Krankenversicherung"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/10/pexels-anna-nekrashevich-7552374.jpg",
     "featuredImageAlt": "warum beamte privat versichert",
@@ -5120,8 +5120,8 @@
     "modified": "2025-10-29T11:49:48",
     "categories": [
       "Beamte",
-      "Krankenversicherung",
-      "pkv"
+      "PKV",
+      "Krankenversicherung"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/10/pexels-george-milton-7034417.jpg",
     "featuredImageAlt": "Unterschied Dienstunfähigkeit Berufsunfähigkeit für Beamte",
@@ -5170,7 +5170,7 @@
     "modified": "2026-02-16T08:49:10",
     "categories": [
       "Beamte",
-      "pkv"
+      "PKV"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/10/pexels-helenalopes-27176001.jpg",
     "featuredImageAlt": "was ist beihilfe, beihilfe für beamte",
@@ -5259,8 +5259,8 @@
     "date": "2025-10-27T08:50:27",
     "modified": "2026-02-16T08:49:31",
     "categories": [
-      "pkv",
       "Beamte",
+      "PKV",
       "Krankenversicherung"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/10/pexels-silverkblack-23224847.jpg",
@@ -5309,8 +5309,8 @@
     "date": "2025-10-24T09:00:00",
     "modified": "2026-02-16T08:49:43",
     "categories": [
-      "pkv",
       "Beamte",
+      "PKV",
       "Krankenversicherung"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/10/pexels-olly-3760279.jpg",
@@ -5359,8 +5359,8 @@
     "date": "2025-10-22T11:21:41",
     "modified": "2026-02-16T08:49:54",
     "categories": [
-      "pkv",
       "Beamte",
+      "PKV",
       "Krankenversicherung"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/10/pexels-karola-g-5882642.jpg",
@@ -5409,8 +5409,8 @@
     "date": "2025-10-21T09:00:00",
     "modified": "2026-02-16T08:50:08",
     "categories": [
-      "pkv",
-      "Beamte"
+      "Beamte",
+      "PKV"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/10/pexels-silverkblack-23496948-scaled.webp",
     "featuredImageAlt": "private Krankenversicherung für Beamte kosten",
@@ -5458,8 +5458,8 @@
     "date": "2025-10-20T09:00:00",
     "modified": "2026-02-16T08:50:57",
     "categories": [
-      "pkv",
       "Beamte",
+      "PKV",
       "Krankenversicherung"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/10/pexels-shvets-production-7545279-scaled.webp",
@@ -5500,9 +5500,9 @@
     "date": "2025-10-18T09:00:00",
     "modified": "2026-02-16T08:51:14",
     "categories": [
-      "Krankenversicherung",
       "Beamte",
-      "pkv"
+      "PKV",
+      "Krankenversicherung"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/10/pexels-mikael-blomkvist-4153229-scaled.webp",
     "featuredImageAlt": "ablehnung der pkv als beamter, ablehnung der privaten Krankenversicherung als beamter",
@@ -5554,7 +5554,7 @@
     "date": "2025-10-17T09:00:00",
     "modified": "2026-02-16T08:51:35",
     "categories": [
-      "pkv",
+      "PKV",
       "Krankenversicherung"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/10/pexels-hillaryfox-1595388-scaled.webp",
@@ -5607,8 +5607,8 @@
     "date": "2025-10-16T09:01:39",
     "modified": "2025-10-13T14:40:22",
     "categories": [
-      "BU",
-      "Beamte"
+      "Beamte",
+      "BU"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/10/pexels-marcus-aurelius-4064029-scaled.webp",
     "featuredImageAlt": "berufsunfähigkeitsversicherung beamte sinnvoll",
@@ -5661,8 +5661,8 @@
     "modified": "2026-02-16T08:51:50",
     "categories": [
       "Beamte",
+      "PKV",
       "Krankenversicherung",
-      "pkv",
       "Rechner"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/09/pexels-mikhail-nilov-6963857-scaled.webp",
@@ -5703,8 +5703,8 @@
     "date": "2025-10-13T09:27:45",
     "modified": "2026-02-16T08:52:06",
     "categories": [
-      "pkv",
       "Beamte",
+      "PKV",
       "Krankenversicherung"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/10/pexels-marcus-aurelius-4064024-scaled.webp",
@@ -5865,8 +5865,8 @@
     "date": "2025-10-09T09:00:00",
     "modified": "2026-02-16T08:52:19",
     "categories": [
-      "pkv",
       "Beamte",
+      "PKV",
       "Krankenversicherung"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/10/pexels-mikhail-nilov-8872214-scaled.webp",
@@ -5915,8 +5915,8 @@
     "date": "2025-10-08T09:00:00",
     "modified": "2026-02-16T08:53:19",
     "categories": [
-      "pkv",
       "Beamte",
+      "PKV",
       "Krankenversicherung"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/10/pexels-cristian-rojas-10041234-scaled.webp",
@@ -5965,8 +5965,8 @@
     "date": "2025-10-07T09:00:00",
     "modified": "2026-02-16T08:53:11",
     "categories": [
-      "pkv",
-      "Beamte"
+      "Beamte",
+      "PKV"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/10/pexels-edmond-dantes-4339473-scaled.webp",
     "featuredImageAlt": "Öffnungsaktion in der PKV für Beamte",
@@ -6010,8 +6010,8 @@
     "date": "2025-10-06T10:06:20",
     "modified": "2025-10-08T08:41:49",
     "categories": [
-      "BU",
-      "Lehrer"
+      "Lehrer",
+      "BU"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/10/pexels-andrew-3132388-scaled.webp",
     "featuredImageAlt": "als lehrer berufsunfähig, lehrer mit depressionen am Tisch",
@@ -6059,9 +6059,9 @@
     "date": "2025-10-06T09:07:27",
     "modified": "2026-02-16T08:53:30",
     "categories": [
+      "PKV",
       "Lehrer",
-      "Krankenversicherung",
-      "pkv"
+      "Krankenversicherung"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/10/pexels-karolina-grabowska-8910224-scaled.webp",
     "featuredImageAlt": "wer zahlt die krankenversicherung im mutterschutz von lehern",
@@ -6105,9 +6105,9 @@
     "date": "2025-10-03T10:46:17",
     "modified": "2025-10-08T08:40:37",
     "categories": [
-      "BU",
       "Beamte",
-      "Lehrer"
+      "Lehrer",
+      "BU"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/09/pexels-sora-shimazaki-5668887-scaled.webp",
     "featuredImageAlt": "Was ist die Öffnungsklausel in der PKV für Beamte, berufsunfähigkeitsversicherung für beamte lehrer sinnvoll",
@@ -6155,9 +6155,9 @@
     "date": "2025-10-01T13:21:50",
     "modified": "2026-02-16T08:53:51",
     "categories": [
-      "Krankenversicherung",
+      "PKV",
       "Lehrer",
-      "pkv"
+      "Krankenversicherung"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/09/pexels-fauxels-3182742-scaled.webp",
     "featuredImageAlt": "PKV für Lehrer - 3 junge Lehrer am Schreibtisch",
@@ -6323,9 +6323,9 @@
     "date": "2025-09-18T09:21:00",
     "modified": "2025-10-07T09:42:35",
     "categories": [
-      "DU",
+      "Lehrer",
       "BU",
-      "Lehrer"
+      "DU"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/09/pexels-max-fischer-5212352.webp",
     "featuredImageAlt": "Lehrer mit Schülern vor eienr Tafel - Dienstunfähigkeitsversicherung für lehrer bis zu welchem alter sinnvoll?",
@@ -6418,8 +6418,8 @@
     "date": "2025-09-16T10:00:00",
     "modified": "2025-10-07T09:37:38",
     "categories": [
-      "BU",
-      "Lehrer"
+      "Lehrer",
+      "BU"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/09/pexels-olly-3760137.webp",
     "featuredImageAlt": "berufsunfähigkeitsversicherung für lehrer sinnvoll",
@@ -6471,8 +6471,8 @@
     "date": "2025-09-15T07:49:00",
     "modified": "2025-10-03T11:06:58",
     "categories": [
-      "BU",
-      "Lehrer"
+      "Lehrer",
+      "BU"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/09/pexels-mikhail-nilov-6963857-scaled.webp",
     "featuredImageAlt": "Ein Lehrer ermittelt die Berufsunfähigkeitsversicherung für Lehrer Kosten, pkv kosten rechner private krankenversicherung beamte",
@@ -6646,10 +6646,10 @@
     "date": "2025-09-09T08:40:30",
     "modified": "2026-02-16T08:54:43",
     "categories": [
-      "Lehrer",
       "Beamte",
-      "Krankenversicherung",
-      "pkv"
+      "PKV",
+      "Lehrer",
+      "Krankenversicherung"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/09/pexels-max-fischer-5212325-scaled.webp",
     "featuredImageAlt": "PKV für verbeamtete Lehrer. Lehrerin vor Tafel",
@@ -6783,8 +6783,8 @@
     "date": "2025-09-05T13:58:04",
     "modified": "2026-01-08T08:56:29",
     "categories": [
-      "Anwärter",
-      "Krankenversicherung"
+      "Krankenversicherung",
+      "Anwärter"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/09/pexels-max-fischer-5212354-scaled.webp",
     "featuredImageAlt": "PKV für Beamtenanwärter",
@@ -6828,8 +6828,8 @@
     "date": "2025-09-05T11:02:32",
     "modified": "2026-01-08T08:55:58",
     "categories": [
-      "Krankenversicherung",
-      "Lehrer"
+      "Lehrer",
+      "Krankenversicherung"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/09/pexels-pavel-danilyuk-7220921-scaled.webp",
     "featuredImageAlt": "pkv für kinder von lehrern, junge lehrerfamilie mit kind",
@@ -6885,8 +6885,8 @@
     "date": "2025-09-04T16:25:13",
     "modified": "2025-10-07T11:35:36",
     "categories": [
-      "Referendare",
-      "Krankenversicherung"
+      "Krankenversicherung",
+      "Referendare"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/09/pexels-max-fischer-5212703-scaled-e1757082609105.webp",
     "featuredImageAlt": "Lehrerin vor einer Klasse, pkv für referendare",
@@ -6981,8 +6981,8 @@
     "modified": "2025-11-07T15:46:16",
     "categories": [
       "Beamte",
-      "Anwärter",
-      "Krankenversicherung"
+      "Krankenversicherung",
+      "Anwärter"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/09/pexels-sora-shimazaki-5668887-scaled.webp",
     "featuredImageAlt": "Was ist die Öffnungsklausel in der PKV für Beamte, berufsunfähigkeitsversicherung für beamte lehrer sinnvoll",
@@ -7034,8 +7034,8 @@
     "date": "2025-09-02T09:49:24",
     "modified": "2026-01-08T08:56:14",
     "categories": [
-      "Lehrer",
       "Beamte",
+      "Lehrer",
       "Krankenversicherung"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/09/pexels-fauxels-3182745-scaled.webp",
@@ -7093,8 +7093,8 @@
     "modified": "2025-10-30T16:37:04",
     "categories": [
       "Beamte",
-      "Anwärter",
-      "Krankenversicherung"
+      "Krankenversicherung",
+      "Anwärter"
     ],
     "featuredImage": "https://mein-beamtenportal.de/wp-content/uploads/2025/08/pexels-karolina-grabowska-7692643.webp",
     "featuredImageAlt": "Bild von einer Lehrerin mit Kindern an einem Tisch. Hero Section Bild für den Beitrag PKV für Beamte",

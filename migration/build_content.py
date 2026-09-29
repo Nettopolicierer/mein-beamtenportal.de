@@ -46,6 +46,16 @@ def make_description(post) -> str:
     return ""
 
 
+# WP-Kategorienamen sind uneinheitlich grossgeschrieben ("pkv" statt "PKV")
+# - Akronyme korrigieren, damit die Filter-Chips auf /ratgeber konsistent
+# aussehen.
+CATEGORY_NAME_FIXES = {"pkv": "PKV"}
+
+
+def fix_category_name(name: str) -> str:
+    return CATEGORY_NAME_FIXES.get(name, name)
+
+
 out_posts = []
 skipped = []
 for p in posts:
@@ -57,7 +67,7 @@ for p in posts:
     cleaned = clean_html(p["content"]["rendered"], title)
     html = cleaned["html"]
     title, html = apply_title_override(slug, title, html)
-    cats = [categories[cid]["name"] for cid in p.get("categories", []) if cid in categories]
+    cats = [fix_category_name(categories[cid]["name"]) for cid in p.get("categories", []) if cid in categories]
     # "Allgemein" ist WP-Standardkategorie ohne Aussagekraft, nur behalten wenn einzige.
     non_generic = [c for c in cats if c != "Allgemein"]
     display_cats = non_generic if non_generic else cats
@@ -77,6 +87,16 @@ for p in posts:
         "featuredImageAlt": fm["alt"] if fm else "",
         "html": html,
     })
+
+# Jeder Post traegt oft 2+ Kategorien in willkuerlicher WP-Reihenfolge - die
+# ERSTE wird aber als alleiniger Badge auf Artikelkarten/Hero angezeigt.
+# Nach Gesamt-Haeufigkeit ueber alle Posts sortieren, damit dort immer die
+# aussagekraeftigste (statt eine zufaellige Nebenkategorie) vorne steht.
+from collections import Counter
+
+category_counts = Counter(c for post in out_posts for c in post["categories"])
+for post in out_posts:
+    post["categories"].sort(key=lambda c: -category_counts[c])
 
 out_pages = []
 for pg in pages:
