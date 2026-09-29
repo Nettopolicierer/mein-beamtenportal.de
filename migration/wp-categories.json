@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "count": 108,
+    "name": "Allgemein",
+    "slug": "allgemein"
+  },
+  {
+    "id": 11,
+    "count": 9,
+    "name": "Anwärter",
+    "slug": "anwaerter"
+  },
+  {
+    "id": 8,
+    "count": 61,
+    "name": "Beamte",
+    "slug": "beamte"
+  },
+  {
+    "id": 9,
+    "count": 21,
+    "name": "BU",
+    "slug": "bu"
+  },
+  {
+    "id": 18,
+    "count": 10,
+    "name": "DU",
+    "slug": "du"
+  },
+  {
+    "id": 10,
+    "count": 35,
+    "name": "Krankenversicherung",
+    "slug": "krankenversicherung"
+  },
+  {
+    "id": 7,
+    "count": 38,
+    "name": "Lehrer",
+    "slug": "lehrer"
+  },
+  {
+    "id": 21,
+    "count": 41,
+    "name": "Pension",
+    "slug": "pension"
+  },
+  {
+    "id": 17,
+    "count": 45,
+    "name": "pkv",
+    "slug": "pkv"
+  },
+  {
+    "id": 20,
+    "count": 2,
+    "name": "Rechner",
+    "slug": "rechner"
+  },
+  {
+    "id": 12,
+    "count": 28,
+    "name": "Referendare",
+    "slug": "referendare"
+  }
+]
