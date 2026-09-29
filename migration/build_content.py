@@ -19,6 +19,25 @@ def strip_tags(html: str) -> str:
     return re.sub(r"<[^>]+>", " ", html)
 
 
+# Titel gezielt auf das Beamten-Publikum zuschneiden: bei diesem Beitrag war
+# der Originaltitel generisch ("als Absolvent") formuliert, obwohl der Inhalt
+# (siehe Excerpt) sich klar an Referendare vor der Verbeamtung richtet.
+TITLE_OVERRIDES = {
+    "krankenversicherung-absolvent": "Krankenversicherung als Referendar: GKV oder PKV vor der Verbeamtung?",
+}
+
+
+def apply_title_override(slug: str, title: str, html: str) -> tuple[str, str]:
+    override = TITLE_OVERRIDES.get(slug)
+    if not override:
+        return title, html
+    # Erste Überschrift im Content (fasst meist den Titel noch einmal aus)
+    # ebenfalls anpassen, sonst widerspricht sie dem neuen Seitentitel.
+    html = re.sub(r"(<h2[^>]*>)[^<]*Absolvent[^<]*(</h2>)", r"\1" + override + r"\2", html, count=1)
+    html = html.replace("Krankenversicherung als Absolvent", "Krankenversicherung als Referendar")
+    return override, html
+
+
 def make_description(post) -> str:
     excerpt = strip_tags(post["excerpt"]["rendered"]).strip()
     excerpt = re.sub(r"\s+", " ", excerpt)
@@ -36,6 +55,7 @@ for p in posts:
         continue
     title = p["title"]["rendered"].strip()
     html = clean_html(p["content"]["rendered"], title)
+    title, html = apply_title_override(slug, title, html)
     cats = [categories[cid]["name"] for cid in p.get("categories", []) if cid in categories]
     # "Allgemein" ist WP-Standardkategorie ohne Aussagekraft, nur behalten wenn einzige.
     non_generic = [c for c in cats if c != "Allgemein"]

@@ -1,18 +1,30 @@
 """Reduziert WordPress-Gutenberg-HTML auf sauberes, semantisches HTML fuer die
 Next.js-Migration. Entfernt Block-Wrapper (wp-block-*, Cover-Bilder mit
 Platzhalter-IDs, Style-Attribute), behaelt Ueberschriften/Absaetze/Listen/
-Bilder/Tabellen/Zitate.
+Bilder/Tabellen/Zitate. Baut das Rank-Math-Inhaltsverzeichnis und
+Buchungs-Buttons als eigene, stylebare Bausteine nach.
 """
 import json
 import re
 from bs4 import BeautifulSoup, NavigableString
 
-KEEP_TAGS = {"h2", "h3", "h4", "p", "ul", "ol", "li", "blockquote", "img",
-             "table", "thead", "tbody", "tr", "th", "td", "a", "strong", "em", "br"}
+# "div" bleibt bewusst NICHT erhalten (unwrap statt keep): die
+# Hero-Bereinigung entfernt vorangehende Geschwister-Elemente der
+# Duplikat-Ueberschrift - das funktioniert nur zuverlaessig auf einer
+# flachen Struktur. Verschachtelte Divs wuerden das aushebeln.
+KEEP_TAGS = {"h1", "h2", "h3", "h4", "p", "ul", "ol", "li", "blockquote", "img",
+             "table", "thead", "tbody", "tr", "th", "td", "a", "strong", "em",
+             "br", "nav"}
 
 
 def clean_html(raw_html: str, post_title: str = "") -> str:
     soup = BeautifulSoup(raw_html, "lxml")
+
+    # <style>/<script> IMMER komplett entfernen (decompose, nicht unwrap) -
+    # sonst wird ihr Inhalt (z.B. ".gs_xyz { color: ... }") zu sichtbarem
+    # Fliesstext, sobald das Tag selbst unwrapped wird.
+    for tag in soup.find_all(["style", "script"]):
+        tag.decompose()
 
     # Platzhalter-Cover-Bilder (BITTE_BILD_ID_EINTRAGEN) komplett entfernen.
     for img in soup.find_all("img", src=re.compile("BITTE_BILD_ID_EINTRAGEN")):
@@ -24,46 +36,108 @@ def clean_html(raw_html: str, post_title: str = "") -> str:
     # dem Whitelist-Trim laufen, sonst ist das data-tag-Attribut schon weg.
     for tag in soup.find_all(attrs={"data-tag": True}):
         tag.decompose()
-    for ul in soup.find_all("ul"):
-        if not ul.get_text(strip=True) and not ul.find("img"):
-            ul.decompose()
+
+    # Rank-Math-Inhaltsverzeichnis in eine saubere <nav class="toc"><ul>...
+    # Struktur ueberfuehren, bevor der Whitelist-Trim die Original-Divs
+    # plattwalzt (sonst: einzelne <a>-Links ohne jede Struktur).
+    for toc in soup.find_all("div", class_="wp-block-rank-math-toc-block"):
+        heading = toc.find(["h2", "h3", "h4"])
+        heading_text = heading.get_text(strip=True) if heading else "Inhalt"
+        links = [(a.get("href", ""), a.get_text(strip=True)) for a in toc.find_all("a")]
+        nav = soup.new_tag("nav")
+        nav["class"] = ["toc"]
+        title_p = soup.new_tag("p")
+        title_p["class"] = ["toc-title"]
+        title_p.string = heading_text
+        nav.append(title_p)
+        ul = soup.new_tag("ul")
+        for href, text in links:
+            li = soup.new_tag("li")
+            a = soup.new_tag("a", href=href)
+            a.string = text
+            li.append(a)
+            ul.append(li)
+        nav.append(ul)
+        toc.replace_with(nav)
+
+    # Buchungs-Buttons (Gutenberg "button"-Klasse) als eigenen Marker
+    # erhalten, damit sie in der neuen Vorlage wie ein Button aussehen statt
+    # wie ein normaler Textlink - sonst wuerden sie durch den Whitelist-Trim
+    # zu ununterscheidbaren <a>-Links.
+    for a in soup.find_all("a", class_=re.compile(r"\bbutton\b")):
+        href = a.get("href", "")
+        text = a.get_text(strip=True)
+        new_a = soup.new_tag("a", href=href)
+        new_a["class"] = ["btn"]
+        new_a.string = text
+        a.replace_with(new_a)
 
     # Hero-Block vor dem eigentlichen Inhalt entfernen: Cover-Bild, CTA-Buttons,
-    # Google-Bewertungsbadge und jede Ueberschrift, die den Post-Titel
-    # wiederholt (h1 + oft zusaetzlich ein doppeltes h2) - das rendert die
-    # neue Seitenvorlage selbst, nicht der Artikelinhalt.
+    # Google-Bewertungsbadge und jede Ueberschrift, die den Post-/Seitentitel
+    # wiederholt (h1 + bei Posts oft zusaetzlich ein doppeltes h2) - das
+    # rendert die neue Seitenvorlage selbst, nicht der Artikelinhalt. Greyd
+    # verschachtelt den Hero oft tief (Cover > Inner-Container > Group > h1),
+    # waehrend die zweite (h2-)Dopplung meist auf einer anderen Ebene liegt -
+    # ein einfaches find_previous_siblings() auf der Ueberschrift selbst
+    # erfasst deshalb nicht zuverlaessig alles davor. Stattdessen: die LETZTE
+    # Dopplungs-Ueberschrift suchen und auf JEDER Ebene ihrer Ahnenkette bis
+    # zum Wurzel-Element vorherige Geschwister entfernen.
     if post_title:
-        title_norm = post_title.strip()
-        while True:
-            first_heading = soup.find(["h1", "h2", "h3"])
-            if not first_heading or first_heading.get_text(strip=True) != title_norm:
-                break
-            for sibling in list(first_heading.find_previous_siblings()):
-                sibling.decompose()
-            first_heading.decompose()
+        title_norm = post_title.strip().lower()
+        last_match = None
+        for heading in soup.find_all(["h1", "h2", "h3"]):
+            # get_text(strip=True) strippt jedes Text-Fragment einzeln VOR dem
+            # Verketten und frisst dadurch Leerzeichen um Inline-Tags wie
+            # <em> weg ("Über " + "uns" -> "Überuns"). Nur die Aussenraender
+            # stripp en, nicht pro Fragment.
+            heading_text = heading.get_text().strip().lower()
+            if heading_text == title_norm:
+                last_match = heading
+            elif last_match is not None:
+                break  # erste Nicht-Dopplung nach mind. einem Treffer = echter Inhalt
 
-    # Alle Attribute ausser href/src/alt entfernen, Tags auf Whitelist reduzieren.
+        if last_match is not None:
+            node = last_match
+            while node is not None and node.parent is not None:
+                for sibling in list(node.find_previous_siblings()):
+                    sibling.decompose()
+                node = node.parent
+            last_match.decompose()
+
+    # Alle Attribute ausser href/src/alt entfernen, Tags auf Whitelist
+    # reduzieren. id bleibt an Ueberschriften erhalten (Sprungmarken des
+    # Inhaltsverzeichnisses funktionieren sonst nicht mehr). class bleibt nur
+    # an unseren eigenen Markern (toc/toc-title/btn) erhalten.
+    MARKER_CLASSES = {"toc", "toc-title", "btn"}
     for tag in soup.find_all(True):
         if tag.name not in KEEP_TAGS:
             tag.unwrap()
             continue
         allowed_attrs = {"href", "src", "alt"} & tag.attrs.keys()
-        tag.attrs = {k: tag.attrs[k] for k in allowed_attrs}
+        attrs = {k: tag.attrs[k] for k in allowed_attrs}
+        if tag.name in {"h1", "h2", "h3", "h4"} and tag.attrs.get("id"):
+            attrs["id"] = tag.attrs["id"]
+        existing_class = tag.attrs.get("class")
+        if existing_class:
+            kept = [c for c in existing_class if c in MARKER_CLASSES]
+            if kept:
+                attrs["class"] = kept
+        tag.attrs = attrs
 
     # Leere Absaetze/Listenpunkte entfernen.
     for tag in soup.find_all(["p", "li"]):
         if not tag.get_text(strip=True) and not tag.find("img"):
             tag.decompose()
+    for container in soup.find_all(["ul", "nav"]):
+        if not container.get_text(strip=True) and not container.find("img"):
+            container.decompose()
 
     # Feste Template-Bausteine, die in fast jedem Post vorkommen und von der
-    # neuen Seitenvorlage selbst gerendert werden: CTA-Buttons zur Buchung
-    # und die Google-Bewertungsbadge (Sterne-Bild + "X reviews"-Zeile).
-    for a in soup.find_all("a", href=True):
-        if "cal.eu/mein-beamtenportal" in a["href"] or a["href"] == "#content-start":
-            a.decompose()
+    # neuen Seitenvorlage selbst gerendert werden: die Google-Bewertungsbadge
+    # (Sterne-Bild + "X reviews"-Zeile) direkt im Hero.
     for p_tag in soup.find_all("p"):
         text = p_tag.get_text(strip=True)
-        if text == "Google Reviews" or re.match(r"^\d(\.\d)?\s*Stars", text) or "reviews</strong>" in str(p_tag):
+        if text == "Google Reviews" or re.match(r"^\d(\.\d)?\s*Stars", text):
             p_tag.decompose()
     for img in soup.find_all("img", src=re.compile(r"/(g\.webp|stars\.svg)$")):
         img.decompose()
