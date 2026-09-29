@@ -113,13 +113,29 @@ body {
   border-radius: 0.75rem;
 }
 
-/* Team-Illustration (identisches Bild in jedem Beitrag, "Wir sind ein
-   Team..."-Absatz) hatte im Original eine feste kleine Größe per
-   Custom-CSS, die beim Export nicht erhalten blieb - sonst rendert sie in
-   voller Nativgröße (2500x2500px). */
-.prose img[src*="irvan-maulana"] {
-  max-width: 140px;
-  height: auto;
-  display: block;
-  margin: 1.5rem auto;
+/* "Team"-Box ("Wir sind ein Team unabhängiger Finanzberater..."): im
+   Original ein Navy-Kasten mit Bild links, Text rechts. */
+.prose .team-box {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+.prose .team-box img {
+  width: 140px !important;
+  height: 140px !important;
+  object-fit: contain;
+  flex-shrink: 0;
+  margin: 0 auto;
+}
+.prose .team-box p {
+  color: #fff;
+  margin: 0;
+  flex: 1;
+  min-width: 240px;
 }

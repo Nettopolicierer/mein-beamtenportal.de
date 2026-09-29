@@ -150,11 +150,18 @@ def clean_html(raw_html: str, post_title: str = "") -> dict:
             row.append(heading)
             group.replace_with(row)
 
+    # "Team"-Box ("Wir sind ein Team unabhängiger Finanzberater...") hat im
+    # Original einen eigenen Navy-Hintergrund mit Bild + Text nebeneinander -
+    # per Marker-Klasse erhalten statt zu einer klassenlosen Box zu werden.
+    team_box = soup.find("div", class_="has-primary-background-color")
+    if team_box:
+        team_box["class"] = ["team-box"]
+
     # Alle Attribute ausser href/src/alt entfernen, Tags auf Whitelist
     # reduzieren. id bleibt an Ueberschriften erhalten (Sprungmarken des
     # Inhaltsverzeichnisses funktionieren sonst nicht mehr). class bleibt nur
-    # an unseren eigenen Markern (btn/icon-row) erhalten.
-    MARKER_CLASSES = {"btn", "icon-row", "blue-background"}
+    # an unseren eigenen Markern (btn/icon-row/blue-background/team-box).
+    MARKER_CLASSES = {"btn", "icon-row", "blue-background", "team-box"}
     for tag in soup.find_all(True):
         if tag.name not in KEEP_TAGS:
             tag.unwrap()
