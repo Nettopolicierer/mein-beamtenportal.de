@@ -23,9 +23,24 @@
   --font-hand: var(--font-caveat);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+/* Anker-Sprungziele (Inhaltsverzeichnis) duerfen nicht hinter dem fixierten
+   Header verschwinden. */
+.prose h2[id],
+.prose h3[id],
+.prose h4[id] {
+  scroll-margin-top: 6rem;
+}
+#content-start {
+  scroll-margin-top: 5rem;
 }
 
 /* Im Artikeltext eingebettete Buchungs-Buttons (aus Gutenberg "button"-Klasse
