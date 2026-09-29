@@ -37,19 +37,21 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
-      <div className="mb-6 flex flex-wrap items-center gap-3 text-xs text-slate-500">
+      <div className="mb-6 flex flex-wrap items-center gap-3 text-xs text-mediumdark">
         {post.categories.map((cat) => (
-          <span key={cat} className="rounded-full bg-slate-100 px-2.5 py-0.5 font-medium text-slate-600">
+          <span key={cat} className="rounded-full bg-base px-2.5 py-0.5 font-medium text-primary">
             {cat}
           </span>
         ))}
         <span>{formatDate(post.date)}</span>
       </div>
 
-      <h1 className="mb-8 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">{post.title}</h1>
+      <h1 className="font-heading mb-8 text-3xl font-bold tracking-tight text-primary sm:text-4xl">
+        {post.title}
+      </h1>
 
       {post.featuredImage && (
-        <div className="relative mb-10 aspect-video w-full overflow-hidden rounded-xl bg-slate-100">
+        <div className="relative mb-10 aspect-video w-full overflow-hidden rounded-xl bg-base">
           <Image
             src={post.featuredImage}
             alt={post.featuredImageAlt || post.title}
@@ -62,12 +64,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       )}
 
       <div
-        className="prose prose-slate max-w-none prose-headings:font-semibold prose-a:text-blue-700"
+        className="prose max-w-none prose-headings:font-heading prose-headings:text-primary prose-a:text-primary"
         dangerouslySetInnerHTML={{ __html: post.html }}
       />
 
-      <div className="mt-14 border-t border-slate-100 pt-8">
-        <Link href="/ratgeber" className="text-sm font-medium text-blue-700 hover:underline">
+      <div className="mt-14 border-t border-mediumlight/40 pt-8">
+        <Link href="/ratgeber" className="text-sm font-medium text-primary hover:underline">
           ← Zurück zum Ratgeber
         </Link>
       </div>

@@ -50,3 +50,5 @@ export function formatDate(iso: string): string {
     timeZone: "Europe/Berlin",
   }).format(new Date(iso));
 }
+
+export const BOOKING_LINK = "https://cal.eu/mein-beamtenportal/kostenfreie-erstberatung";

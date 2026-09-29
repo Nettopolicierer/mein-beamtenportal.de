@@ -12,11 +12,11 @@ export const metadata: Metadata = {
 export default function RatgeberPage() {
   return (
     <div className="mx-auto max-w-5xl px-6 py-16">
-      <p className="mb-3 text-xs font-semibold tracking-widest text-blue-700 uppercase">Ratgeber</p>
-      <h1 className="mb-4 text-4xl font-bold tracking-tight text-slate-900">
+      <p className="mb-3 text-xs font-semibold tracking-widest text-primary uppercase">Ratgeber</p>
+      <h1 className="font-heading mb-4 text-4xl font-bold tracking-tight text-primary">
         Wissen rund um Beihilfe, Pension &amp; PKV.
       </h1>
-      <p className="mb-12 max-w-2xl text-slate-500">
+      <p className="mb-12 max-w-2xl text-mediumdark">
         {SORTED_POSTS.length} Beiträge für Beamtinnen, Beamte, Referendare und Anwärter im
         öffentlichen Dienst.
       </p>

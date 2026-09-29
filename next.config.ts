@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    // Logo ist ein lokales SVG; Next optimiert SVGs standardmäßig nicht.
+    dangerouslyAllowSVG: true,
+  },
 };
 
 export default nextConfig;

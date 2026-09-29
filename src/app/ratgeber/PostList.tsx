@@ -26,7 +26,7 @@ export function PostList({ posts }: { posts: Post[] }) {
           type="button"
           onClick={() => setActive(null)}
           className={`rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors ${
-            active === null ? "bg-blue-700 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+            active === null ? "bg-primary text-white" : "bg-base text-mediumdark hover:bg-mediumlight/30"
           }`}
         >
           Alle ({posts.length})
@@ -39,7 +39,7 @@ export function PostList({ posts }: { posts: Post[] }) {
               type="button"
               onClick={() => setActive(cat)}
               className={`rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors ${
-                active === cat ? "bg-blue-700 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                active === cat ? "bg-primary text-white" : "bg-base text-mediumdark hover:bg-mediumlight/30"
               }`}
             >
               {cat} ({count})
@@ -53,22 +53,22 @@ export function PostList({ posts }: { posts: Post[] }) {
           <Link
             key={post.slug}
             href={`/${post.slug}`}
-            className="group flex flex-col gap-3 rounded-2xl border border-slate-100 bg-slate-50 p-6 transition-all hover:border-blue-200 hover:bg-blue-50/40"
+            className="group flex flex-col gap-3 rounded-2xl border border-mediumlight/40 bg-base p-6 transition-all hover:border-primary/30"
           >
-            <div className="flex items-center gap-2 text-xs text-slate-500">
+            <div className="flex items-center gap-2 text-xs text-mediumdark">
               <span>{post.categories[0] ?? "Ratgeber"}</span>
               <span>·</span>
               <span>{formatDate(post.date)}</span>
             </div>
-            <h2 className="text-base leading-snug font-semibold text-slate-900 group-hover:text-blue-700">
+            <h2 className="text-base leading-snug font-semibold text-primary group-hover:opacity-80">
               {post.title}
             </h2>
-            <p className="line-clamp-3 text-sm text-slate-500">{post.description}</p>
+            <p className="line-clamp-3 text-sm text-mediumdark">{post.description}</p>
           </Link>
         ))}
 
         {visible.length === 0 && (
-          <p className="col-span-2 py-8 text-center text-sm text-slate-400">
+          <p className="col-span-2 py-8 text-center text-sm text-mediumdark/70">
             Noch keine Beiträge in dieser Kategorie.
           </p>
         )}

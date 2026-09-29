@@ -1,16 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Raleway, Mulish } from "next/font/google";
 import Link from "next/link";
+import Image from "next/image";
+import { BOOKING_LINK } from "@/lib/content";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const raleway = Raleway({
+  variable: "--font-raleway",
   subsets: ["latin"],
+  weight: ["500", "600", "700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const mulish = Mulish({
+  variable: "--font-mulish",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
 });
 
 // Apex ist die kanonische Domain (www leitet per 301 auf Apex um) - siehe
@@ -30,7 +34,7 @@ export const metadata: Metadata = {
 
 const NAV = [
   { href: "/ratgeber", label: "Ratgeber" },
-  { href: "/ueber-uns", label: "Über uns" },
+  { href: "/ueber-uns", label: "Über Uns" },
   { href: "/kontakt", label: "Kontakt" },
 ];
 
@@ -40,38 +44,53 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="de" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col bg-white text-slate-900">
-        <header className="border-b border-slate-100">
-          <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-            <Link href="/" className="text-lg font-semibold tracking-tight">
-              Mein Beamtenportal
+    <html lang="de" className={`${raleway.variable} ${mulish.variable} h-full antialiased`}>
+      <body className="flex min-h-full flex-col bg-white font-sans text-foreground">
+        <header className="sticky top-0 z-40 border-b border-mediumlight/40 bg-white/95 backdrop-blur">
+          <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+            <Link href="/" className="shrink-0">
+              <Image src="/logo.svg" alt="Mein Beamtenportal" width={150} height={63} priority />
             </Link>
-            <nav className="flex items-center gap-6 text-sm font-medium text-slate-600">
+            <nav className="hidden items-center gap-8 text-sm font-medium tracking-wide text-primary uppercase sm:flex">
               {NAV.map((item) => (
-                <Link key={item.href} href={item.href} className="hover:text-slate-900">
+                <Link key={item.href} href={item.href} className="hover:opacity-70">
                   {item.label}
                 </Link>
               ))}
             </nav>
+            <Link
+              href={BOOKING_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary/90"
+            >
+              Kostenfreies Erstgespräch
+            </Link>
           </div>
         </header>
 
         <main className="flex-1">{children}</main>
 
-        <footer className="border-t border-slate-100 bg-slate-50">
-          <div className="mx-auto flex max-w-5xl flex-col gap-4 px-6 py-10 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
-            <p>© {new Date().getFullYear()} Mein Beamtenportal</p>
-            <div className="flex gap-5">
-              <Link href="/impressum" className="hover:text-slate-900">
-                Impressum
-              </Link>
-              <Link href="/datenschutz" className="hover:text-slate-900">
-                Datenschutz
-              </Link>
-              <Link href="/kontakt" className="hover:text-slate-900">
-                Kontakt
-              </Link>
+        <footer className="border-t border-mediumlight/40 bg-base">
+          <div className="mx-auto max-w-6xl px-6 py-12">
+            <Image src="/logo.svg" alt="Mein Beamtenportal" width={140} height={59} className="mb-4" />
+            <p className="mb-8 max-w-sm text-sm text-mediumdark">
+              Ihr unabhängiges Informationsportal für Vorsorge, Beihilfe und Absicherung im
+              öffentlichen Dienst.
+            </p>
+            <div className="flex flex-col gap-4 border-t border-mediumlight/40 pt-6 text-sm text-mediumdark sm:flex-row sm:items-center sm:justify-between">
+              <p>© {new Date().getFullYear()} Mein Beamtenportal</p>
+              <div className="flex gap-5">
+                <Link href="/impressum" className="hover:text-primary">
+                  Impressum
+                </Link>
+                <Link href="/datenschutz" className="hover:text-primary">
+                  Datenschutz
+                </Link>
+                <Link href="/kontakt" className="hover:text-primary">
+                  Kontakt
+                </Link>
+              </div>
             </div>
           </div>
         </footer>

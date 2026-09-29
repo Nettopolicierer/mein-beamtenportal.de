@@ -1,69 +1,197 @@
 import Link from "next/link";
-import { SORTED_POSTS, getAllCategories, formatDate } from "@/lib/content";
+import { SORTED_POSTS, formatDate, BOOKING_LINK } from "@/lib/content";
+
+const STATS = [
+  { value: "Ø 66,7 %", label: "Ruhegehaltssatz bei der Beamtenpension – den Höchstsatz von 71,75 % erreichen nur wenige." },
+  { value: "50–90 %", label: "übernimmt die Beihilfe je Bundesland von den Krankheitskosten – der Rest läuft über die Krankenversicherung." },
+  { value: "1,79 %", label: "mehr Pension bringt jedes volle Dienstjahr nach dem Beamtenversorgungsgesetz." },
+];
+
+const BENEFITS = [
+  {
+    title: "Spezialisiert auf Beamte",
+    text: "Ihr persönliches Konzept baut auf einer speziellen Auswahl geprüfter Produkte, um höchste Qualität zu gewährleisten.",
+  },
+  {
+    title: "Modern & Digital",
+    text: "Virtuelle Treffen, E-Signaturen und eine benutzerfreundliche Finanz-App – auf Wunsch auch persönliche Gespräche.",
+  },
+  {
+    title: "Nachhaltiges Wissen",
+    text: "Sie sollen eigenverantwortlich und selbstbewusst die besten finanziellen Entscheidungen treffen können.",
+  },
+  {
+    title: "Alles aus einer Hand",
+    text: "Eine vielfältige Palette an Versicherungsoptionen, damit Sie stets bestmöglich aufgestellt sind.",
+  },
+];
+
+const TESTIMONIALS = [
+  {
+    quote:
+      "100% Zufriedenheit und Weiterempfehlung: ich hatte zu jeder Zeit das Gefühl, dass auf meine Bedürfnisse eingegangen wurde.",
+    name: "Lena S.",
+  },
+  {
+    quote:
+      "Albert hat immer ein offenes Ohr, meldet sich umgehend zurück wenn man ein Anliegen hat und klärt rasch alles ab.",
+    name: "Annabell B.",
+  },
+  {
+    quote: "Vielen Dank für die super Beratung! Ich fühle mich sehr gut aufgehoben.",
+    name: "Felipe A.",
+  },
+];
 
 export default function Home() {
-  const latest = SORTED_POSTS.slice(0, 6);
-  const categories = getAllCategories();
+  const latest = SORTED_POSTS.slice(0, 3);
 
   return (
     <div>
-      <section className="mx-auto max-w-4xl px-6 py-20 text-center">
-        <p className="mb-3 text-xs font-semibold tracking-widest text-blue-700 uppercase">
-          Für Beamtinnen &amp; Beamte
-        </p>
-        <h1 className="mb-6 text-4xl font-bold tracking-tight text-balance text-slate-900 sm:text-5xl">
-          Beihilfe, Pension &amp; PKV für Beamte – verständlich erklärt.
-        </h1>
-        <p className="mx-auto mb-8 max-w-xl text-slate-500">
-          Unabhängige Beratung für Beamtinnen, Beamte, Referendare und Anwärter im öffentlichen
-          Dienst.
-        </p>
-        <Link
-          href="/ratgeber"
-          className="inline-flex items-center justify-center rounded-lg bg-blue-700 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-800"
-        >
-          Ratgeber entdecken
-        </Link>
+      {/* Hero */}
+      <section className="bg-base">
+        <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 px-6 py-24 text-center">
+          <h1 className="font-heading max-w-3xl text-4xl font-bold tracking-tight text-balance text-primary sm:text-5xl">
+            Pension, Beihilfe und PKV verstehen.
+          </h1>
+          <p className="max-w-xl text-mediumdark">
+            Ihr unabhängiges Informationsportal für Vorsorge, Beihilfe und Absicherung im
+            öffentlichen Dienst.
+          </p>
+          <Link
+            href={BOOKING_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-lg bg-primary px-7 py-3.5 text-sm font-semibold text-white hover:bg-primary/90"
+          >
+            Kostenfreies Erstgespräch
+          </Link>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-8 text-sm text-mediumdark">
+            <div>
+              <span className="font-heading block text-xl font-bold text-primary">&gt;300</span>
+              Beamte beraten
+            </div>
+            <div>
+              <span className="font-heading block text-xl font-bold text-primary">&gt;5</span>
+              Jahre Erfahrung
+            </div>
+            <div>
+              <span className="font-heading block text-xl font-bold text-primary">4,9/5</span>
+              ProvenExpert
+            </div>
+          </div>
+        </div>
       </section>
 
-      <section className="border-t border-slate-100 bg-slate-50">
-        <div className="mx-auto max-w-5xl px-6 py-16">
-          <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
-            <h2 className="text-2xl font-semibold text-slate-900">Neueste Beiträge</h2>
-            <Link href="/ratgeber" className="text-sm font-medium text-blue-700 hover:underline">
-              Alle Beiträge →
-            </Link>
-          </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {latest.map((post) => (
-              <Link
-                key={post.slug}
-                href={`/${post.slug}`}
-                className="group flex flex-col gap-3 rounded-2xl border border-slate-100 bg-white p-6 transition-all hover:border-blue-200"
-              >
-                <div className="flex items-center gap-2 text-xs text-slate-500">
-                  <span>{post.categories[0] ?? "Ratgeber"}</span>
-                  <span>·</span>
-                  <span>{formatDate(post.date)}</span>
-                </div>
-                <h3 className="text-base leading-snug font-semibold text-slate-900 group-hover:text-blue-700">
-                  {post.title}
-                </h3>
-              </Link>
+      {/* Stats / Problem */}
+      <section className="mx-auto max-w-5xl px-6 py-20">
+        <p className="mb-3 text-xs font-semibold tracking-widest text-primary uppercase">
+          Das Beihilfe-Problem
+        </p>
+        <h2 className="font-heading mb-4 max-w-2xl text-2xl font-bold text-primary sm:text-3xl">
+          Beihilfe, Pension und PKV für Beamte – was Ihnen wirklich zusteht
+        </h2>
+        <p className="mb-12 max-w-2xl text-mediumdark">
+          Das Versorgungssystem für Beamte unterscheidet sich grundlegend von der gesetzlichen
+          Rente. Wer die Regeln zur Beihilfe, zur privaten Krankenversicherung, zur
+          Dienstunfähigkeit und zur Pension nicht genau kennt, verschenkt häufig Geld oder verpasst
+          wichtige Versorgungsansprüche.
+        </p>
+        <div className="grid gap-6 sm:grid-cols-3">
+          {STATS.map((s) => (
+            <div key={s.value} className="rounded-2xl bg-base p-6">
+              <p className="font-heading mb-2 text-3xl font-bold text-primary">{s.value}</p>
+              <p className="text-sm text-mediumdark">{s.label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Benefits */}
+      <section className="bg-base">
+        <div className="mx-auto max-w-5xl px-6 py-20">
+          <p className="mb-3 text-xs font-semibold tracking-widest text-primary uppercase">
+            Ihre Vorteile
+          </p>
+          <h2 className="font-heading mb-12 max-w-2xl text-2xl font-bold text-primary sm:text-3xl">
+            Was Mein Beamtenportal auszeichnet
+          </h2>
+          <div className="grid gap-8 sm:grid-cols-2">
+            {BENEFITS.map((b) => (
+              <div key={b.title}>
+                <h3 className="font-heading mb-2 text-lg font-semibold text-primary">{b.title}</h3>
+                <p className="text-sm text-mediumdark">{b.text}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-5xl px-6 py-16">
-        <h2 className="mb-6 text-2xl font-semibold text-slate-900">Themen</h2>
-        <div className="flex flex-wrap gap-2">
-          {categories.map((cat) => (
-            <span key={cat} className="rounded-full bg-slate-100 px-3.5 py-1.5 text-sm font-medium text-slate-600">
-              {cat}
-            </span>
+      {/* Latest posts */}
+      <section className="mx-auto max-w-5xl px-6 py-20">
+        <div className="mb-10 flex flex-wrap items-center justify-between gap-4">
+          <h2 className="font-heading text-2xl font-bold text-primary">Neueste Beiträge</h2>
+          <Link href="/ratgeber" className="text-sm font-medium text-primary hover:underline">
+            Alle Beiträge →
+          </Link>
+        </div>
+        <div className="grid gap-6 sm:grid-cols-3">
+          {latest.map((post) => (
+            <Link
+              key={post.slug}
+              href={`/${post.slug}`}
+              className="group flex flex-col gap-3 rounded-2xl border border-mediumlight/40 bg-white p-6 transition-colors hover:border-primary/30"
+            >
+              <div className="flex items-center gap-2 text-xs text-mediumdark">
+                <span>{post.categories[0] ?? "Ratgeber"}</span>
+                <span>·</span>
+                <span>{formatDate(post.date)}</span>
+              </div>
+              <h3 className="font-heading text-base leading-snug font-semibold text-primary group-hover:opacity-80">
+                {post.title}
+              </h3>
+            </Link>
           ))}
         </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="bg-base">
+        <div className="mx-auto max-w-5xl px-6 py-20">
+          <p className="mb-3 text-xs font-semibold tracking-widest text-primary uppercase">
+            Kundenstimmen
+          </p>
+          <h2 className="font-heading mb-12 max-w-2xl text-2xl font-bold text-primary sm:text-3xl">
+            Das Feedback unserer Kund*innen
+          </h2>
+          <div className="grid gap-6 sm:grid-cols-3">
+            {TESTIMONIALS.map((t) => (
+              <div key={t.name} className="rounded-2xl bg-white p-6">
+                <p className="mb-4 text-sm text-mediumdark">&ldquo;{t.quote}&rdquo;</p>
+                <p className="text-sm font-semibold text-primary">{t.name}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="mx-auto max-w-3xl px-6 py-20 text-center">
+        <h2 className="font-heading mb-4 text-2xl font-bold text-primary sm:text-3xl">
+          Bereit für Klarheit?
+        </h2>
+        <p className="mb-8 text-mediumdark">
+          Unser erstes Gespräch dient in erster Linie dazu, uns persönlich kennenzulernen und
+          Klarheit über Ihre Wünsche und Erwartungen zu schaffen.
+        </p>
+        <Link
+          href={BOOKING_LINK}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center rounded-lg bg-primary px-7 py-3.5 text-sm font-semibold text-white hover:bg-primary/90"
+        >
+          Kostenfreies Erstgespräch vereinbaren
+        </Link>
       </section>
     </div>
   );
