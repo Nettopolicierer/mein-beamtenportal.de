@@ -154,7 +154,7 @@ def clean_html(raw_html: str, post_title: str = "") -> dict:
     # reduzieren. id bleibt an Ueberschriften erhalten (Sprungmarken des
     # Inhaltsverzeichnisses funktionieren sonst nicht mehr). class bleibt nur
     # an unseren eigenen Markern (btn/icon-row) erhalten.
-    MARKER_CLASSES = {"btn", "icon-row"}
+    MARKER_CLASSES = {"btn", "icon-row", "blue-background"}
     for tag in soup.find_all(True):
         if tag.name not in KEEP_TAGS:
             tag.unwrap()

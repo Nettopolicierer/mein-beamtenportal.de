@@ -83,18 +83,35 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
         {post.toc.length > 0 && (
           <aside className="hidden lg:block">
-            <nav className="sticky top-24 rounded-xl bg-base p-5">
-              <p className="font-heading mb-3 text-sm font-bold text-primary">Inhalt</p>
-              <ul className="flex flex-col gap-2 text-sm">
-                {post.toc.map((entry) => (
-                  <li key={entry.href}>
-                    <a href={entry.href} className="text-mediumdark hover:text-primary">
-                      {entry.text}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+            <div className="sticky top-24 flex flex-col gap-4">
+              <nav className="rounded-xl bg-base p-5">
+                <p className="font-heading mb-3 text-sm font-bold text-primary">Inhalt</p>
+                <ul className="flex flex-col gap-2 text-sm">
+                  {post.toc.map((entry) => (
+                    <li key={entry.href}>
+                      <a href={entry.href} className="text-mediumdark hover:text-primary">
+                        {entry.text}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+
+              <div className="rounded-xl bg-primary p-5 text-center">
+                <p className="font-heading mb-4 text-base font-bold text-white">
+                  Kostenfreie, individuelle Beratung
+                </p>
+                <Link
+                  href={BOOKING_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mb-3 block rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-primary hover:bg-white/90"
+                >
+                  Termin buchen
+                </Link>
+                <p className="text-xs text-white/70">100% kostenfrei &amp; unverbindlich</p>
+              </div>
+            </div>
           </aside>
         )}
       </div>
