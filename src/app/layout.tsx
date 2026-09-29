@@ -82,12 +82,37 @@ export default function RootLayout({
 
         <footer className="border-t border-mediumlight/40 bg-base">
           <div className="mx-auto max-w-6xl px-6 py-12">
-            <Image src="/logo.svg" alt="Mein Beamtenportal" width={140} height={59} className="mb-4" />
-            <p className="mb-8 max-w-sm text-sm text-mediumdark">
-              Ihr unabhängiges Informationsportal für Vorsorge, Beihilfe und Absicherung im
-              öffentlichen Dienst.
-            </p>
-            <div className="flex flex-col gap-4 border-t border-mediumlight/40 pt-6 text-sm text-mediumdark sm:flex-row sm:items-center sm:justify-between">
+            <div className="grid gap-10 sm:grid-cols-[2fr_1fr_1fr]">
+              <div>
+                <Image src="/logo.svg" alt="Mein Beamtenportal" width={140} height={59} className="mb-4" />
+                <p className="max-w-sm text-sm text-mediumdark">
+                  Ihr unabhängiges Informationsportal für Vorsorge, Beihilfe und Absicherung im
+                  öffentlichen Dienst.
+                </p>
+              </div>
+              <div className="flex flex-col gap-2 text-sm">
+                <p className="mb-1 font-semibold text-primary">Navigation</p>
+                <Link href="/ueber-uns" className="text-mediumdark hover:text-primary">
+                  Über Uns
+                </Link>
+                <Link href="/ratgeber" className="text-mediumdark hover:text-primary">
+                  Ratgeber
+                </Link>
+                <Link href="/kontakt" className="text-mediumdark hover:text-primary">
+                  Kontakt
+                </Link>
+              </div>
+              <div className="flex flex-col gap-2 text-sm">
+                <p className="mb-1 font-semibold text-primary">Kontakt</p>
+                <Link href="mailto:kontakt@mein-beamtenportal.de" className="text-mediumdark hover:text-primary">
+                  kontakt@mein-beamtenportal.de
+                </Link>
+                <Link href="tel:+4917692609041" className="text-mediumdark hover:text-primary">
+                  +49 176 92609041
+                </Link>
+              </div>
+            </div>
+            <div className="mt-10 flex flex-col gap-4 border-t border-mediumlight/40 pt-6 text-sm text-mediumdark sm:flex-row sm:items-center sm:justify-between">
               <p>© {new Date().getFullYear()} Mein Beamtenportal</p>
               <div className="flex gap-5">
                 <Link href="/impressum" className="hover:text-primary">
@@ -95,9 +120,6 @@ export default function RootLayout({
                 </Link>
                 <Link href="/datenschutz" className="hover:text-primary">
                   Datenschutz
-                </Link>
-                <Link href="/kontakt" className="hover:text-primary">
-                  Kontakt
                 </Link>
               </div>
             </div>

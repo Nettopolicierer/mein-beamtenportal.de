@@ -210,6 +210,29 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Absicherungs-CTA */}
+      <section className="bg-primary">
+        <div className="mx-auto max-w-3xl px-6 py-20 text-center">
+          <h2 className="font-heading mb-4 text-2xl font-bold text-white sm:text-3xl">
+            Beihilfe und Pension allein reichen nicht.
+          </h2>
+          <p className="mb-6 text-lg text-white/90">Entscheidend ist, was Sie wirklich absichern.</p>
+          <p className="mx-auto mb-8 max-w-xl text-white/70">
+            Die meisten Beamten gehen davon aus, gut versorgt zu sein — bis sie sehen, welche
+            Lücken trotzdem bestehen. In 45 Minuten zeigen wir Ihnen, wo Handlungsbedarf besteht
+            und was Sie konkret tun können.
+          </p>
+          <Link
+            href={BOOKING_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-lg bg-white px-7 py-3.5 text-sm font-semibold text-primary hover:bg-white/90"
+          >
+            Jetzt Termin sichern
+          </Link>
+        </div>
+      </section>
+
       {/* Final CTA */}
       <section className="mx-auto max-w-3xl px-6 py-20 text-center">
         <h2 className="font-heading mb-4 text-2xl font-bold text-primary sm:text-3xl">
