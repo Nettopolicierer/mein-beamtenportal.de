@@ -98,11 +98,11 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         />
 
         <aside className="hidden lg:block">
-          <div className="sticky top-24 flex flex-col gap-4">
+          <div className="sticky top-24 z-10 flex flex-col gap-4">
             {post.toc.length > 0 && (
               <nav className="rounded-xl bg-base p-5">
-                <p className="font-heading mb-3 text-sm font-bold text-primary">Inhalt</p>
-                <ul className="flex flex-col gap-2 text-sm">
+                <p className="font-heading mb-2 text-sm font-bold text-primary">Inhalt</p>
+                <ul className="flex max-h-56 flex-col gap-1.5 overflow-y-auto text-xs leading-snug">
                   {post.toc.map((entry) => (
                     <li key={entry.href}>
                       <a href={entry.href} className="text-mediumdark hover:text-primary">

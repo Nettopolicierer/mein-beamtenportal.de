@@ -40,7 +40,7 @@ export const metadata: Metadata = {
 
 const NAV = [
   { href: "/ratgeber", label: "Ratgeber" },
-  { href: "/ueber-uns", label: "Über Uns" },
+  { href: "/ueber-uns", label: "Über Mich" },
   { href: "/kontakt", label: "Kontakt" },
 ];
 
@@ -93,7 +93,7 @@ export default function RootLayout({
               <div className="flex flex-col gap-2 text-sm">
                 <p className="mb-1 font-semibold text-primary">Navigation</p>
                 <Link href="/ueber-uns" className="text-mediumdark hover:text-primary">
-                  Über Uns
+                  Über Mich
                 </Link>
                 <Link href="/ratgeber" className="text-mediumdark hover:text-primary">
                   Ratgeber

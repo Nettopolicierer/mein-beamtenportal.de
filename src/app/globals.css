@@ -118,14 +118,18 @@ body {
   margin-bottom: 0.75rem;
 }
 
-/* Hervorhebungs-Überschriften ("blue-background" aus WordPress): volle
-   Breite, Navy-Hintergrund, weißer Text - bricht bewusst aus dem
-   Textblock aus, um Kernabschnitte visuell abzusetzen. */
+/* Hervorhebungs-Überschriften ("blue-background" aus WordPress): zieht
+   sich über die volle Bildschirmbreite (nicht nur den Textblock), damit
+   sich der Abschnitt deutlicher vom Rest abhebt - klassischer
+   Full-Bleed-Trick, bricht bewusst aus allen umgebenden Containern aus. */
 .prose h2.blue-background {
   background: var(--color-primary);
   color: #fff;
-  padding: 1rem 1.5rem;
-  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
 }
 
 /* "Team"-Box ("Wir sind ein Team unabhängiger Finanzberater..."): im
@@ -161,6 +165,22 @@ body {
   color: #fff;
   flex: 1;
   min-width: 240px;
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.prose .team-box li {
+  position: relative;
+  padding-left: 1.5rem;
+  font-size: 0.9rem;
+}
+.prose .team-box li::before {
+  content: "\2713";
+  position: absolute;
+  left: 0;
 }
 .prose .team-box strong {
   color: #fff;

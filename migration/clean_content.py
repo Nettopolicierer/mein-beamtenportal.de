@@ -87,7 +87,10 @@ def clean_html(raw_html: str, post_title: str = "") -> dict:
     toc_entries = []
     for toc in soup.find_all("div", class_="wp-block-rank-math-toc-block"):
         for a in toc.find_all("a"):
-            toc_entries.append({"href": a.get("href", ""), "text": a.get_text(strip=True)})
+            text = a.get_text(strip=True)
+            if text == "Über uns":
+                text = "Über mich"  # bleibt konsistent mit der personalisierten Box unten
+            toc_entries.append({"href": a.get("href", ""), "text": text})
         toc.decompose()
 
     # Zweites TOC-Plugin ("Stackable Table of Contents") steckt zusaetzlich
@@ -218,6 +221,46 @@ def clean_html(raw_html: str, post_title: str = "") -> dict:
     # nachfolgenden Boxen ihre Formatierung komplett.
     for team_box in soup.find_all("div", class_="has-primary-background-color"):
         team_box["class"] = ["team-box"]
+
+    # "Über uns" (Redaktionsteam-Textbaustein) auf "Über mich" personalisieren
+    # mit 3 Highlights - Albert tritt als Einzelperson auf, nicht als
+    # anonymes Redaktionsteam.
+    ueber_uns_heading = soup.find(["h2", "h3"], id="u")
+    if ueber_uns_heading and ueber_uns_heading.get_text(strip=True) == "Über uns":
+        byline = ueber_uns_heading.find_previous("h4")
+        if byline:
+            byline.string = "Albert Sibert"
+        ueber_uns_heading.string = "Über mich"
+        old_paras = ueber_uns_heading.find_next_siblings("p", limit=2)
+        for op in old_paras:
+            op.decompose()
+        intro = soup.new_tag("p")
+        intro.string = (
+            "Ich bin Albert Sibert, unabhängiger Finanzberater mit Schwerpunkt auf Beamte, "
+            "Referendare und Anwärter im öffentlichen Dienst. Ich begleite Sie bei Beihilfe, "
+            "PKV, Dienstunfähigkeit und Altersvorsorge – ohne Fachjargon, ohne Druck."
+        )
+        highlights_ul = soup.new_tag("ul")
+        for lead, rest in [
+            ("Über 250 Partnergesellschaften:", "Ich vergleiche unabhängig, statt nur ein Produkt zu verkaufen."),
+            ("Spezialisiert auf den öffentlichen Dienst:", "Beihilfe, PKV und Beamtenversorgung kenne ich im Detail."),
+            ("Persönliche Betreuung:", "Sie erreichen mich direkt, ohne Warteschleife oder Callcenter."),
+        ]:
+            li = soup.new_tag("li")
+            strong = soup.new_tag("strong")
+            strong.string = lead
+            li.append(strong)
+            li.append(" " + rest)
+            highlights_ul.append(li)
+        # h2 + Intro + Highlights in EINEN Container packen, damit sie im
+        # Flex-Layout der team-box als ein Block stehen statt als drei
+        # separate Flex-Items unkontrolliert umzubrechen.
+        content_wrap = soup.new_tag("div")
+        ueber_uns_heading.insert_before(content_wrap)
+        ueber_uns_heading.extract()
+        content_wrap.append(ueber_uns_heading)
+        content_wrap.append(intro)
+        content_wrap.append(highlights_ul)
 
     # Alle Attribute ausser href/src/alt entfernen, Tags auf Whitelist
     # reduzieren. id bleibt an Ueberschriften erhalten (Sprungmarken des
