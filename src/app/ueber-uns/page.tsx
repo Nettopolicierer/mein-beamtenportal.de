@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { BOOKING_LINK } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -37,14 +38,25 @@ export default function UeberUnsPage() {
       </div>
 
       <div className="bg-base">
-        <div className="mx-auto max-w-4xl px-6 py-16">
-          <p className="mx-auto max-w-2xl text-center text-mediumdark">
-            Ich bin Albert Sibert, unabhängiger Finanzberater mit Schwerpunkt auf Beamte,
-            Referendare und Anwärter im öffentlichen Dienst. Ich kenne die Besonderheiten der
-            Beihilfe, der privaten Krankenversicherung und der Beamtenversorgung genau und
-            begleite Sie bei Beihilfe, PKV, Dienstunfähigkeit und Altersvorsorge – ohne
-            Fachjargon, ohne Druck.
-          </p>
+        <div className="mx-auto max-w-5xl px-6 py-16">
+          <div className="grid items-center gap-10 lg:grid-cols-[320px_1fr]">
+            <div className="relative mx-auto aspect-[4/5] w-full max-w-xs overflow-hidden rounded-3xl lg:mx-0 lg:max-w-none">
+              <Image
+                src="/albert-ueber-mich.jpg"
+                alt="Albert Sibert, unabhängiger Finanzberater für Beamte"
+                fill
+                className="object-cover"
+                unoptimized
+              />
+            </div>
+            <p className="text-mediumdark">
+              Ich bin Albert Sibert, unabhängiger Finanzberater mit Schwerpunkt auf Beamte,
+              Referendare und Anwärter im öffentlichen Dienst. Ich kenne die Besonderheiten der
+              Beihilfe, der privaten Krankenversicherung und der Beamtenversorgung genau und
+              begleite Sie bei Beihilfe, PKV, Dienstunfähigkeit und Altersvorsorge – ohne
+              Fachjargon, ohne Druck.
+            </p>
+          </div>
 
           <div className="mt-12 grid gap-6 sm:grid-cols-3">
             {HIGHLIGHTS.map((h) => (

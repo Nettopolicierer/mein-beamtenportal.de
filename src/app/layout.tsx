@@ -5,6 +5,7 @@ import Image from "next/image";
 import { BOOKING_LINK } from "@/lib/content";
 import { CookieConsentProvider } from "@/components/cookie-consent/CookieConsentProvider";
 import { ClarityTag } from "@/components/ClarityTag";
+import { ScrollCtaPopup } from "@/components/ScrollCtaPopup";
 import "./globals.css";
 
 const raleway = Raleway({
@@ -129,6 +130,7 @@ export default function RootLayout({
             </div>
           </div>
         </footer>
+        <ScrollCtaPopup />
         </CookieConsentProvider>
       </body>
     </html>
