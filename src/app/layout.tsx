@@ -3,6 +3,8 @@ import { Raleway, Mulish, Caveat } from "next/font/google";
 import Link from "next/link";
 import Image from "next/image";
 import { BOOKING_LINK } from "@/lib/content";
+import { CookieConsentProvider } from "@/components/cookie-consent/CookieConsentProvider";
+import { ClarityTag } from "@/components/ClarityTag";
 import "./globals.css";
 
 const raleway = Raleway({
@@ -55,6 +57,8 @@ export default function RootLayout({
       className={`${raleway.variable} ${mulish.variable} ${caveat.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-white font-sans text-foreground">
+        <CookieConsentProvider>
+        <ClarityTag />
         <header className="sticky top-0 z-40 border-b border-mediumlight/40 bg-white/95 backdrop-blur">
           <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
             <Link href="/" className="shrink-0">
@@ -125,6 +129,7 @@ export default function RootLayout({
             </div>
           </div>
         </footer>
+        </CookieConsentProvider>
       </body>
     </html>
   );
