@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ALL_POSTS, getPost, formatDate, BOOKING_LINK } from "@/lib/content";
+import { ALL_POSTS, getPost, formatDate, getRelatedPosts, BOOKING_LINK } from "@/lib/content";
 
 export function generateStaticParams() {
   return ALL_POSTS.map((post) => ({ slug: post.slug }));
@@ -33,6 +33,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) notFound();
+
+  const related = getRelatedPosts(post);
 
   return (
     <article>
@@ -116,7 +118,35 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         )}
       </div>
 
-      <div className="mx-auto max-w-4xl border-t border-mediumlight/40 px-6 pb-16">
+      {related.length > 0 && (
+        <div className="bg-base">
+          <div className="mx-auto max-w-6xl px-6 py-16">
+            <h2 className="font-heading mb-8 text-2xl font-bold text-primary">
+              Diese Beiträge könnten Sie ebenfalls interessieren
+            </h2>
+            <div className="grid gap-6 sm:grid-cols-3">
+              {related.map((r) => (
+                <Link
+                  key={r.slug}
+                  href={`/${r.slug}`}
+                  className="group flex flex-col gap-3 rounded-2xl border border-mediumlight/40 bg-white p-6 transition-colors hover:border-primary/30"
+                >
+                  <span className="text-xs text-mediumdark">{formatDate(r.date)}</span>
+                  <h3 className="font-heading text-base leading-snug font-semibold text-primary group-hover:opacity-80">
+                    {r.title}
+                  </h3>
+                  <p className="line-clamp-2 text-sm text-mediumdark">{r.description}</p>
+                  <span className="text-sm font-medium text-primary group-hover:underline">
+                    mehr erfahren →
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="mx-auto max-w-4xl px-6 py-8">
         <Link href="/ratgeber" className="text-sm font-medium text-primary hover:underline">
           ← Zurück zum Ratgeber
         </Link>

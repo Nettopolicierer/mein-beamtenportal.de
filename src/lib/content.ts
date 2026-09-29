@@ -50,6 +50,16 @@ export function getAllCategories(): string[] {
   return Array.from(seen).sort();
 }
 
+export function getRelatedPosts(current: Post, limit = 3): Post[] {
+  const sameCategory = SORTED_POSTS.filter(
+    (p) => p.slug !== current.slug && p.categories.some((c) => current.categories.includes(c))
+  );
+  const rest = SORTED_POSTS.filter(
+    (p) => p.slug !== current.slug && !sameCategory.includes(p)
+  );
+  return [...sameCategory, ...rest].slice(0, limit);
+}
+
 export function formatDate(iso: string): string {
   return new Intl.DateTimeFormat("de-DE", {
     day: "numeric",
