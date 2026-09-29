@@ -20,6 +20,7 @@
   --color-mediumlight: var(--color-mediumlight);
   --font-sans: var(--font-mulish);
   --font-heading: var(--font-raleway);
+  --font-hand: var(--font-caveat);
 }
 
 body {

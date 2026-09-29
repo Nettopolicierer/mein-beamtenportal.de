@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Raleway, Mulish } from "next/font/google";
+import { Raleway, Mulish, Caveat } from "next/font/google";
 import Link from "next/link";
 import Image from "next/image";
 import { BOOKING_LINK } from "@/lib/content";
@@ -15,6 +15,12 @@ const mulish = Mulish({
   variable: "--font-mulish",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
+});
+
+const caveat = Caveat({
+  variable: "--font-caveat",
+  subsets: ["latin"],
+  weight: ["600", "700"],
 });
 
 // Apex ist die kanonische Domain (www leitet per 301 auf Apex um) - siehe
@@ -44,7 +50,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="de" className={`${raleway.variable} ${mulish.variable} h-full antialiased`}>
+    <html
+      lang="de"
+      className={`${raleway.variable} ${mulish.variable} ${caveat.variable} h-full antialiased`}
+    >
       <body className="flex min-h-full flex-col bg-white font-sans text-foreground">
         <header className="sticky top-0 z-40 border-b border-mediumlight/40 bg-white/95 backdrop-blur">
           <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">

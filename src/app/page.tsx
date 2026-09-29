@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { SORTED_POSTS, formatDate, BOOKING_LINK } from "@/lib/content";
 
 const STATS = [
@@ -50,23 +51,57 @@ export default function Home() {
     <div>
       {/* Hero */}
       <section className="bg-base">
-        <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 px-6 py-24 text-center">
-          <h1 className="font-heading max-w-3xl text-4xl font-bold tracking-tight text-balance text-primary sm:text-5xl">
-            Pension, Beihilfe und PKV verstehen.
-          </h1>
-          <p className="max-w-xl text-mediumdark">
-            Ihr unabhängiges Informationsportal für Vorsorge, Beihilfe und Absicherung im
-            öffentlichen Dienst.
-          </p>
-          <Link
-            href={BOOKING_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-lg bg-primary px-7 py-3.5 text-sm font-semibold text-white hover:bg-primary/90"
-          >
-            Kostenfreies Erstgespräch
-          </Link>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-8 text-sm text-mediumdark">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-6 py-16 sm:py-20 lg:grid-cols-2">
+          <div>
+            <h1 className="font-hand text-6xl leading-none font-bold text-primary sm:text-7xl">
+              Mein Beamtenportal
+            </h1>
+            <p className="font-hand mt-3 text-3xl text-primary sm:text-4xl">
+              Pension, Beihilfe und PKV verstehen.
+            </p>
+            <p className="mt-6 max-w-md text-mediumdark">
+              Ihr unabhängiges Informationsportal für Vorsorge, Beihilfe und Absicherung im
+              öffentlichen Dienst.
+            </p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <Link
+                href={BOOKING_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-white hover:bg-primary/90"
+              >
+                Kostenfreies Erstgespräch
+              </Link>
+              <Link
+                href="/ratgeber"
+                className="rounded-lg border border-primary px-6 py-3 text-sm font-semibold text-primary hover:bg-primary/5"
+              >
+                Beratung
+              </Link>
+            </div>
+
+            <div className="mt-8 flex items-center gap-3">
+              <Image src="/proven-expert.webp" alt="ProvenExpert" width={40} height={40} unoptimized />
+              <Image src="/stars.svg" alt="" width={90} height={16} unoptimized />
+              <span className="text-sm text-mediumdark">4,90 von 5 Sternen</span>
+            </div>
+          </div>
+
+          <div className="relative mx-auto aspect-square w-full max-w-sm lg:max-w-none">
+            <Image
+              src="/hero-illustration.png"
+              alt="Mein Beamtenportal"
+              fill
+              className="object-contain"
+              unoptimized
+              priority
+            />
+          </div>
+        </div>
+
+        <div className="border-t border-mediumlight/40">
+          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-10 px-6 py-8 text-center text-sm text-mediumdark sm:justify-between">
             <div>
               <span className="font-heading block text-xl font-bold text-primary">&gt;300</span>
               Beamte beraten
