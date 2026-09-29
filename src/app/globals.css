@@ -163,11 +163,15 @@ body {
 .prose .team-box > div {
   flex: 1 1 0%;
   min-width: 0;
+}
+/* Nur der Icon+Name-Wrapper (enthaelt h4) wird selbst zur Flex-Zeile -
+   NICHT der Inhalts-Wrapper (enthaelt h2), sonst geraten dessen eigene
+   Kinder (Ueberschrift/Absatz/Liste) faelschlich nebeneinander statt
+   normal untereinander zu stehen. */
+.prose .team-box > div:has(h4) {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-}
-.prose .team-box > div:has(h4) {
   flex: 0 0 auto;
 }
 /* Echtes Portraitfoto (statt generisches Icon) rund und mit object-fit:
@@ -184,6 +188,10 @@ body {
   margin: 0;
   flex: 1 1 0%;
   min-width: 0;
+}
+.prose .team-box p {
+  font-size: 0.85rem;
+  line-height: 1.5;
 }
 .prose .team-box ul {
   color: #fff;
