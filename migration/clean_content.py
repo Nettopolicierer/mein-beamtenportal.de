@@ -14,7 +14,7 @@ from bs4 import BeautifulSoup, NavigableString
 # flachen Struktur. Verschachtelte Divs wuerden das aushebeln.
 KEEP_TAGS = {"h1", "h2", "h3", "h4", "p", "ul", "ol", "li", "blockquote", "img",
              "table", "thead", "tbody", "tr", "th", "td", "a", "strong", "em",
-             "br", "nav"}
+             "br", "nav", "details", "summary", "div"}
 
 
 def clean_html(raw_html: str, post_title: str = "") -> dict:
@@ -132,11 +132,29 @@ def clean_html(raw_html: str, post_title: str = "") -> dict:
                 node = node.parent
             last_match.decompose()
 
+    # Icon direkt vor einer Zwischenueberschrift (z.B. Persona-Boxen wie
+    # "Tobias dachte lange...") stand im Original in einer Flex-Gruppe neben
+    # der Ueberschrift. Ohne die Gruppierung faellt das Icon auf eine eigene
+    # Zeile ueber der Ueberschrift - wird deshalb in einen eigenen
+    # <div class="icon-row"> zusammengefasst und per Flex gestylt.
+    for group in soup.find_all("div", class_="is-layout-flex"):
+        fig = group.find("figure", recursive=False)
+        heading = group.find(["h2", "h3", "h4"], recursive=False)
+        img = fig.find("img") if fig else None
+        if img and heading:
+            row = soup.new_tag("div")
+            row["class"] = ["icon-row"]
+            img.extract()
+            heading.extract()
+            row.append(img)
+            row.append(heading)
+            group.replace_with(row)
+
     # Alle Attribute ausser href/src/alt entfernen, Tags auf Whitelist
     # reduzieren. id bleibt an Ueberschriften erhalten (Sprungmarken des
     # Inhaltsverzeichnisses funktionieren sonst nicht mehr). class bleibt nur
-    # an unseren eigenen Markern (toc/toc-title/btn) erhalten.
-    MARKER_CLASSES = {"btn"}
+    # an unseren eigenen Markern (btn/icon-row) erhalten.
+    MARKER_CLASSES = {"btn", "icon-row"}
     for tag in soup.find_all(True):
         if tag.name not in KEEP_TAGS:
             tag.unwrap()
@@ -165,7 +183,7 @@ def clean_html(raw_html: str, post_title: str = "") -> dict:
     for tag in soup.find_all(["p", "li"]):
         if not tag.get_text(strip=True) and not tag.find("img"):
             tag.decompose()
-    for container in soup.find_all(["ul", "nav"]):
+    for container in soup.find_all(["ul", "nav", "div"]):
         if not container.get_text(strip=True) and not container.find("img"):
             container.decompose()
 

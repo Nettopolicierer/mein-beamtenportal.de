@@ -43,3 +43,41 @@ body {
 .prose a.btn:hover {
   background: color-mix(in srgb, var(--color-primary) 90%, white);
 }
+
+/* Icon + Überschrift nebeneinander (Persona-/Story-Boxen wie
+   "Tobias dachte lange..."), aus WordPress-Flex-Gruppen migriert. */
+.prose .icon-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+.prose .icon-row img {
+  margin: 0;
+  flex-shrink: 0;
+}
+.prose .icon-row h2,
+.prose .icon-row h3,
+.prose .icon-row h4 {
+  margin: 0;
+}
+
+/* FAQ-Accordion (aus WordPress migrierte <details>/<summary>-Elemente). */
+.prose details {
+  border: 1px solid var(--color-mediumlight);
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  margin: 0.75rem 0;
+}
+.prose details + details {
+  margin-top: 0.75rem;
+}
+.prose summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+}
+.prose details[open] summary {
+  margin-bottom: 0.75rem;
+}
