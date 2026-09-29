@@ -17,7 +17,13 @@ KEEP_TAGS = {"h1", "h2", "h3", "h4", "p", "ul", "ol", "li", "blockquote", "img",
              "br", "nav"}
 
 
-def clean_html(raw_html: str, post_title: str = "") -> str:
+def clean_html(raw_html: str, post_title: str = "") -> dict:
+    """Gibt {"html", "subtitle", "toc"} zurueck. "subtitle" ist der Hero-
+    Untertitel (aus dem sonst komplett entfernten Cover-Block), "toc" eine
+    Liste von {"href","text"} fuers Rank-Math-Inhaltsverzeichnis - beides
+    wird von der Seitenvorlage separat gerendert (Hero-Band / Sidebar),
+    nicht mehr inline in den Artikeltext eingebettet.
+    """
     soup = BeautifulSoup(raw_html, "lxml")
 
     # <style>/<script> IMMER komplett entfernen (decompose, nicht unwrap) -
@@ -60,31 +66,27 @@ def clean_html(raw_html: str, post_title: str = "") -> str:
         first_cover = soup.find("div", class_="wp-block-cover")
         if first_cover and first_cover.find("a", class_=re.compile(r"\bbutton\b")):
             hero_cover = first_cover
+    # Untertitel aus dem Hero-Cover sichern, bevor der ganze Block entfernt
+    # wird: der erste <p> darin, der nicht Teil der Button-Gruppe ist.
+    subtitle = ""
     if hero_cover:
+        for p_tag in hero_cover.find_all("p"):
+            if p_tag.find_parent("div", class_="wp-block-greyd-buttons"):
+                continue
+            text = p_tag.get_text(strip=True)
+            if text:
+                subtitle = text
+                break
         hero_cover.decompose()
 
-    # Rank-Math-Inhaltsverzeichnis in eine saubere <nav class="toc"><ul>...
-    # Struktur ueberfuehren, bevor der Whitelist-Trim die Original-Divs
-    # plattwalzt (sonst: einzelne <a>-Links ohne jede Struktur).
+    # Rank-Math-Inhaltsverzeichnis als strukturierte Daten extrahieren (fuer
+    # eine echte, mitscrollende Sidebar in der Seitenvorlage) und aus dem
+    # Artikeltext entfernen statt es inline einzubetten.
+    toc_entries = []
     for toc in soup.find_all("div", class_="wp-block-rank-math-toc-block"):
-        heading = toc.find(["h2", "h3", "h4"])
-        heading_text = heading.get_text(strip=True) if heading else "Inhalt"
-        links = [(a.get("href", ""), a.get_text(strip=True)) for a in toc.find_all("a")]
-        nav = soup.new_tag("nav")
-        nav["class"] = ["toc"]
-        title_p = soup.new_tag("p")
-        title_p["class"] = ["toc-title"]
-        title_p.string = heading_text
-        nav.append(title_p)
-        ul = soup.new_tag("ul")
-        for href, text in links:
-            li = soup.new_tag("li")
-            a = soup.new_tag("a", href=href)
-            a.string = text
-            li.append(a)
-            ul.append(li)
-        nav.append(ul)
-        toc.replace_with(nav)
+        for a in toc.find_all("a"):
+            toc_entries.append({"href": a.get("href", ""), "text": a.get_text(strip=True)})
+        toc.decompose()
 
     # Buchungs-Buttons (Gutenberg "button"-Klasse) als eigenen Marker
     # erhalten, damit sie in der neuen Vorlage wie ein Button aussehen statt
@@ -134,7 +136,7 @@ def clean_html(raw_html: str, post_title: str = "") -> str:
     # reduzieren. id bleibt an Ueberschriften erhalten (Sprungmarken des
     # Inhaltsverzeichnisses funktionieren sonst nicht mehr). class bleibt nur
     # an unseren eigenen Markern (toc/toc-title/btn) erhalten.
-    MARKER_CLASSES = {"toc", "toc-title", "btn"}
+    MARKER_CLASSES = {"btn"}
     for tag in soup.find_all(True):
         if tag.name not in KEEP_TAGS:
             tag.unwrap()
@@ -148,6 +150,15 @@ def clean_html(raw_html: str, post_title: str = "") -> str:
             kept = [c for c in existing_class if c in MARKER_CLASSES]
             if kept:
                 attrs["class"] = kept
+        # Bild-Groesse erhalten: kleine Icons (z.B. "width:auto;height:48px")
+        # haben im Original eine explizite Pixel-Groesse per Inline-Style,
+        # die sonst verloren geht - Icons wuerden dann in ihrer vollen
+        # SVG-Nativgroesse (teils 300px+) gerendert statt als kleines Icon.
+        if tag.name == "img":
+            style = tag.attrs.get("style", "")
+            size_decls = re.findall(r"(width|height)\s*:\s*(\d+px)", style)
+            if size_decls:
+                attrs["style"] = ";".join(f"{prop}:{val}" for prop, val in size_decls)
         tag.attrs = attrs
 
     # Leere Absaetze/Listenpunkte entfernen.
@@ -187,7 +198,7 @@ def clean_html(raw_html: str, post_title: str = "") -> str:
 
     result = str(soup)
     result = re.sub(r"\n{3,}", "\n\n", result)
-    return result.strip()
+    return {"html": result.strip(), "subtitle": subtitle, "toc": toc_entries}
 
 
 if __name__ == "__main__":
@@ -195,6 +206,8 @@ if __name__ == "__main__":
     sample = posts[0]
     cleaned = clean_html(sample["content"]["rendered"], sample["title"]["rendered"])
     print(f"Vorher: {len(sample['content']['rendered'])} Zeichen")
-    print(f"Nachher: {len(cleaned)} Zeichen")
+    print(f"Nachher: {len(cleaned['html'])} Zeichen")
+    print(f"Untertitel: {cleaned['subtitle']!r}")
+    print(f"TOC-Eintraege: {len(cleaned['toc'])}")
     print("--- erste 1500 Zeichen ---")
-    print(cleaned[:1500])
+    print(cleaned["html"][:1500])

@@ -54,7 +54,8 @@ for p in posts:
         skipped.append(slug)
         continue
     title = p["title"]["rendered"].strip()
-    html = clean_html(p["content"]["rendered"], title)
+    cleaned = clean_html(p["content"]["rendered"], title)
+    html = cleaned["html"]
     title, html = apply_title_override(slug, title, html)
     cats = [categories[cid]["name"] for cid in p.get("categories", []) if cid in categories]
     # "Allgemein" ist WP-Standardkategorie ohne Aussagekraft, nur behalten wenn einzige.
@@ -66,6 +67,8 @@ for p in posts:
     out_posts.append({
         "slug": slug,
         "title": title,
+        "subtitle": cleaned["subtitle"],
+        "toc": cleaned["toc"],
         "description": make_description(p),
         "date": p["date"],
         "modified": p["modified"],
@@ -78,11 +81,12 @@ for p in posts:
 out_pages = []
 for pg in pages:
     title = pg["title"]["rendered"].strip()
-    html = clean_html(pg["content"]["rendered"], title)
+    cleaned = clean_html(pg["content"]["rendered"], title)
     out_pages.append({
         "slug": pg["slug"],
         "title": title,
-        "html": html,
+        "subtitle": cleaned["subtitle"],
+        "html": cleaned["html"],
     })
 
 with open("src/content-posts.json", "w") as f:

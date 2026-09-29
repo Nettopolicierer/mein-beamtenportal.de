@@ -28,37 +28,6 @@ body {
   color: var(--foreground);
 }
 
-/* Rank-Math-Inhaltsverzeichnis (aus WordPress migriert, siehe
-   migration/clean_content.py) als eigene Box im Artikel-Fließtext. */
-.prose .toc {
-  background: var(--color-base);
-  border-radius: 0.75rem;
-  padding: 1.25rem 1.5rem;
-  margin: 1.5rem 0;
-}
-.prose .toc .toc-title {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  color: var(--color-primary);
-  margin: 0 0 0.75rem;
-}
-.prose .toc ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  gap: 0.4rem;
-}
-.prose .toc a {
-  text-decoration: none;
-  color: var(--color-primary);
-  opacity: 0.85;
-}
-.prose .toc a:hover {
-  opacity: 1;
-  text-decoration: underline;
-}
-
 /* Im Artikeltext eingebettete Buchungs-Buttons (aus Gutenberg "button"-Klasse
    migriert) wie einen echten Button statt einen Textlink darstellen. */
 .prose a.btn {

@@ -1,9 +1,16 @@
 import posts from "@/content-posts.json";
 import pages from "@/content-pages.json";
 
+export interface TocEntry {
+  href: string;
+  text: string;
+}
+
 export interface Post {
   slug: string;
   title: string;
+  subtitle: string;
+  toc: TocEntry[];
   description: string;
   date: string;
   modified: string;
@@ -16,6 +23,7 @@ export interface Post {
 export interface StaticPage {
   slug: string;
   title: string;
+  subtitle: string;
   html: string;
 }
 

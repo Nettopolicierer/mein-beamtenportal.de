@@ -7,7 +7,8 @@ export function StaticPageView({ slug }: { slug: string }) {
 
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
-      <h1 className="font-heading mb-8 text-3xl font-bold tracking-tight text-primary">{page.title}</h1>
+      <h1 className="font-heading mb-4 text-3xl font-bold tracking-tight text-primary">{page.title}</h1>
+      {page.subtitle && <p className="mb-8 text-lg text-mediumdark">{page.subtitle}</p>}
       <div
         className="prose max-w-none prose-headings:font-heading prose-headings:text-primary prose-a:text-primary"
         dangerouslySetInnerHTML={{ __html: page.html }}
