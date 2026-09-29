@@ -99,11 +99,18 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
         <aside className="hidden lg:block">
           <div className="sticky top-24 z-10 flex flex-col gap-4">
-            {post.toc.length > 0 && (
+            {(() => {
+              // Der erste TOC-Eintrag wiederholt meist nur den Artikeltitel
+              // und verlinkt auf eine Ueberschrift, die beim Bereinigen als
+              // Hero-Duplikat entfernt wurde - Klick fuehrt ins Leere, daher
+              // raus aus der Liste.
+              const visibleToc = post.toc.filter((entry) => entry.text.trim() !== post.title.trim());
+              if (visibleToc.length === 0) return null;
+              return (
               <nav className="rounded-xl bg-base p-5">
                 <p className="font-heading mb-2 text-sm font-bold text-primary">Inhalt</p>
                 <ul className="flex flex-col gap-1.5 text-xs">
-                  {post.toc.map((entry) => (
+                  {visibleToc.map((entry) => (
                     <li key={entry.href}>
                       <a
                         href={entry.href}
@@ -116,7 +123,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                   ))}
                 </ul>
               </nav>
-            )}
+              );
+            })()}
 
             <div className="rounded-xl bg-primary p-5 text-center">
               <p className="font-heading mb-4 text-base font-bold text-white">

@@ -350,6 +350,13 @@ def clean_html(raw_html: str, post_title: str = "") -> dict:
     for img in soup.find_all("img", src=re.compile(r"/(g\.webp|stars\.svg)$")):
         img.decompose()
 
+    # Rechtliche Hinweis-/Disclaimer-Zeilen klein und kursiv absetzen statt
+    # im normalen Fliesstext unterzugehen.
+    for p_tag in soup.find_all("p"):
+        text = p_tag.get_text(strip=True)
+        if text.startswith("Hinweis:") or text.startswith("Disclaimer:"):
+            p_tag["class"] = ["legal-note"]
+
     # Direkt aufeinanderfolgende Bilder mit identischer src (Cover- +
     # Feature-Bild-Dopplung) auf ein Vorkommen reduzieren.
     for img in soup.find_all("img"):
