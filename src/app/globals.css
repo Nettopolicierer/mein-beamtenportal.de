@@ -139,3 +139,39 @@ body {
   flex: 1;
   min-width: 240px;
 }
+
+/* "Das Wichtigste in Kürze"-Box: farblich abgesetzt, Listenpunkte mit
+   Häkchen statt normaler Aufzählungszeichen. */
+.prose .summary-box {
+  background: var(--color-base);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+.prose .summary-box .icon-row {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+.prose .summary-box ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.prose .summary-box li {
+  position: relative;
+  padding-left: 1.75rem;
+}
+.prose .summary-box li::before {
+  content: "\2713";
+  position: absolute;
+  left: 0;
+  top: 0.05rem;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+.prose .summary-box li p {
+  margin: 0;
+}

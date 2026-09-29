@@ -150,6 +150,26 @@ def clean_html(raw_html: str, post_title: str = "") -> dict:
             row.append(heading)
             group.replace_with(row)
 
+    # "Das Wichtigste in Kürze"-Box: Überschrift (ggf. schon zur icon-row
+    # zusammengefasst) + die direkt folgende Liste in eine gemeinsame,
+    # farblich abgesetzte Box packen statt als normale Fliesstext-Liste.
+    kuerze_heading = None
+    for h in soup.find_all(["h2", "h3", "h4"]):
+        if h.get_text(strip=True) == "Das Wichtigste in Kürze":
+            kuerze_heading = h
+            break
+    if kuerze_heading:
+        anchor = kuerze_heading.parent if kuerze_heading.parent.get("class") == ["icon-row"] else kuerze_heading
+        next_list = anchor.find_next_sibling(["ul", "ol"])
+        if next_list:
+            box = soup.new_tag("div")
+            box["class"] = ["summary-box"]
+            anchor.insert_before(box)
+            anchor.extract()
+            next_list.extract()
+            box.append(anchor)
+            box.append(next_list)
+
     # "Team"-Box ("Wir sind ein Team unabhängiger Finanzberater...") hat im
     # Original einen eigenen Navy-Hintergrund mit Bild + Text nebeneinander -
     # per Marker-Klasse erhalten statt zu einer klassenlosen Box zu werden.
@@ -161,7 +181,7 @@ def clean_html(raw_html: str, post_title: str = "") -> dict:
     # reduzieren. id bleibt an Ueberschriften erhalten (Sprungmarken des
     # Inhaltsverzeichnisses funktionieren sonst nicht mehr). class bleibt nur
     # an unseren eigenen Markern (btn/icon-row/blue-background/team-box).
-    MARKER_CLASSES = {"btn", "icon-row", "blue-background", "team-box"}
+    MARKER_CLASSES = {"btn", "icon-row", "blue-background", "team-box", "summary-box"}
     for tag in soup.find_all(True):
         if tag.name not in KEEP_TAGS:
             tag.unwrap()

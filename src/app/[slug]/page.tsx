@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ALL_POSTS, getPost, formatDate, getRelatedPosts, BOOKING_LINK } from "@/lib/content";
 
@@ -77,6 +78,15 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         </div>
       </div>
 
+      {/* Trust-Badge (Google Reviews), wie im Original direkt unter dem Hero */}
+      <div className="border-b border-mediumlight/40 bg-white py-4">
+        <div className="mx-auto flex max-w-4xl items-center justify-center gap-3 px-6">
+          <Image src="/proven-expert.webp" alt="ProvenExpert" width={32} height={32} unoptimized />
+          <Image src="/stars.svg" alt="" width={90} height={16} unoptimized />
+          <span className="text-sm text-mediumdark">5.0 Stars | 8 reviews</span>
+        </div>
+      </div>
+
       <div id="content-start" className="mx-auto grid max-w-6xl gap-10 px-6 py-16 lg:grid-cols-[1fr_260px]">
         <div
           className="prose max-w-none prose-headings:font-heading prose-headings:text-primary prose-a:text-primary"
@@ -116,6 +126,37 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             </div>
           </aside>
         )}
+      </div>
+
+      <div className="mx-auto max-w-6xl px-6 pb-16">
+        <div className="grid overflow-hidden rounded-3xl bg-base sm:grid-cols-2">
+          <div className="flex flex-col justify-center gap-4 p-10">
+            <h2 className="font-heading text-3xl font-bold text-primary">
+              Jetzt kostenfreie Beratung buchen
+            </h2>
+            <p className="text-mediumdark">
+              Vereinbaren Sie jetzt Ihre persönliche Beratung mit mir und finden Sie die richtige
+              Vorsorge-Lösung, die wirklich zu Ihnen passt.
+            </p>
+            <Link
+              href={BOOKING_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex w-fit items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-white hover:bg-primary/90"
+            >
+              Termin buchen
+            </Link>
+          </div>
+          <div className="relative hidden min-h-[320px] sm:block">
+            <Image
+              src="/albert-portrait.webp"
+              alt="Albert Sibert"
+              fill
+              className="rounded-tr-[3rem] object-cover"
+              unoptimized
+            />
+          </div>
+        </div>
       </div>
 
       {related.length > 0 && (
