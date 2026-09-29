@@ -88,6 +88,18 @@ def clean_html(raw_html: str, post_title: str = "") -> dict:
             toc_entries.append({"href": a.get("href", ""), "text": a.get_text(strip=True)})
         toc.decompose()
 
+    # Zweites TOC-Plugin ("Stackable Table of Contents") steckt zusaetzlich
+    # in JEDEM Post - komplett redundant zur Rank-Math-Box oben, wird aber
+    # NICHT von der bisherigen Erkennung erfasst (andere Blockklasse) und
+    # blieb deshalb unveraendert im Artikeltext stehen: eine zweite,
+    # unformatierte "Inhalt"-Liste mitten/am Ende des Artikels.
+    for stk_nav in soup.find_all("nav", class_="wp-block-stackable-table-of-contents"):
+        wrapper = stk_nav.find_parent("div", class_="wp-block-group") or stk_nav
+        heading = wrapper.find_previous_sibling(["h2", "h3", "h4"])
+        if heading and heading.get_text(strip=True) == "Inhalt":
+            heading.decompose()
+        wrapper.decompose()
+
     # Buchungs-Buttons (Gutenberg "button"-Klasse) als eigenen Marker
     # erhalten, damit sie in der neuen Vorlage wie ein Button aussehen statt
     # wie ein normaler Textlink - sonst wuerden sie durch den Whitelist-Trim
