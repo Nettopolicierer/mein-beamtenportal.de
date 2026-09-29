@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ALL_POSTS, getPost, formatDate, getRelatedPosts, BOOKING_LINK } from "@/lib/content";
-import { TestimonialStrip } from "@/components/TestimonialStrip";
 
 export function generateStaticParams() {
   return ALL_POSTS.map((post) => ({ slug: post.slug }));
@@ -78,9 +78,16 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         </div>
       </div>
 
-      {/* Echte Kundenstimmen (ProvenExpert) als scrollbare Karten-Reihe,
-          direkt unter dem Hero - ersetzt die vorherige reinen Sterne-Zeile. */}
-      <TestimonialStrip />
+      {/* Trust-Badge (ProvenExpert), kompakt direkt unter dem Hero - das
+          volle Testimonial-Grid sitzt stattdessen auf der Startseite, wo es
+          nicht vom eigentlichen Artikeltext ablenkt/wegnimmt. */}
+      <div className="border-b border-mediumlight/40 bg-white py-4">
+        <div className="mx-auto flex max-w-4xl items-center justify-center gap-3 px-6">
+          <Image src="/proven-expert.webp" alt="ProvenExpert" width={32} height={32} unoptimized />
+          <Image src="/stars.svg" alt="" width={90} height={16} unoptimized />
+          <span className="text-sm text-mediumdark">4,9/5 · echte Kundenstimmen</span>
+        </div>
+      </div>
 
       {/* Artikeltext + sticky Sidebar (Inhalt + Buchungs-CTA) */}
       <div

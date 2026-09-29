@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { SORTED_POSTS, formatDate, BOOKING_LINK } from "@/lib/content";
+import { TestimonialStrip } from "@/components/TestimonialStrip";
 
 const STATS = [
   { value: "Ø 66,7 %", label: "Ruhegehaltssatz bei der Beamtenpension – den Höchstsatz von 71,75 % erreichen nur wenige." },
@@ -24,23 +25,6 @@ const BENEFITS = [
   {
     title: "Alles aus einer Hand",
     text: "Eine vielfältige Palette an Versicherungsoptionen, damit Sie stets bestmöglich aufgestellt sind.",
-  },
-];
-
-const TESTIMONIALS = [
-  {
-    quote:
-      "100% Zufriedenheit und Weiterempfehlung: ich hatte zu jeder Zeit das Gefühl, dass auf meine Bedürfnisse eingegangen wurde.",
-    name: "Lena S.",
-  },
-  {
-    quote:
-      "Albert hat immer ein offenes Ohr, meldet sich umgehend zurück wenn man ein Anliegen hat und klärt rasch alles ab.",
-    name: "Annabell B.",
-  },
-  {
-    quote: "Vielen Dank für die super Beratung! Ich fühle mich sehr gut aufgehoben.",
-    name: "Felipe A.",
   },
 ];
 
@@ -191,24 +175,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials */}
-      <section className="bg-base">
-        <div className="mx-auto max-w-5xl px-6 py-20">
-          <p className="mb-3 text-xs font-semibold tracking-widest text-primary uppercase">
-            Kundenstimmen
-          </p>
-          <h2 className="font-heading mb-12 max-w-2xl text-2xl font-bold text-primary sm:text-3xl">
-            Das Feedback unserer Kund*innen
-          </h2>
-          <div className="grid gap-6 sm:grid-cols-3">
-            {TESTIMONIALS.map((t) => (
-              <div key={t.name} className="rounded-2xl bg-white p-6">
-                <p className="mb-4 text-sm text-mediumdark">&ldquo;{t.quote}&rdquo;</p>
-                <p className="text-sm font-semibold text-primary">{t.name}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <TestimonialStrip />
 
       {/* Absicherungs-CTA */}
       <section className="bg-primary">
