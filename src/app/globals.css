@@ -124,17 +124,30 @@ body {
 
 /* Hervorhebungs-Überschriften ("blue-background" aus WordPress): Hintergrund
    geht über die volle Seitenbreite, der Text bleibt exakt an seiner
-   normalen Position stehen. Box-Shadow-Trick statt width:100vw + negative
-   Margin: die Box selbst behaelt ihre normale Breite/Position (Text
-   verschiebt sich nicht), zwei riesige Schatten ohne Unschaerfe malen die
-   Hintergrundfarbe optisch bis zum Bildschirmrand weiter - ohne dass das
-   Element selbst breiter wird oder Scrollbar-Rundungsfehler entstehen. */
+   normalen Position stehen. Pseudo-Element statt Box-Shadow (voriger
+   Versuch hatte einen Bug: box-shadow mit Offset statt Spread erzeugt zwei
+   LOSGELÖSTE Kopien 100vw entfernt statt einer durchgehenden Fläche - der
+   Balken wirkte dadurch abgeschnitten). Das ::before liegt hinter dem Text
+   (z-index:-1), ist exakt so hoch wie die Überschrift (top:0;bottom:0) und
+   über die klassische left:50%+translateX(-50%)-Zentrierung 100vw breit -
+   der Text selbst bleibt unverändert an seiner normalen Position. */
 .prose h2.blue-background {
-  background: var(--color-primary);
+  position: relative;
+  z-index: 0;
   color: #fff;
   padding: 1.5rem 0;
   margin: 1.5rem 0;
-  box-shadow: 100vw 0 0 var(--color-primary), -100vw 0 0 var(--color-primary);
+}
+.prose h2.blue-background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  background: var(--color-primary);
+  z-index: -1;
 }
 
 /* "Team"-Box ("Wir sind ein Team unabhängiger Finanzberater..."): im
