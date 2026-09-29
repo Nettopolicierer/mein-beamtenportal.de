@@ -35,6 +35,12 @@ const TESTIMONIALS = [
     quote:
       'Immer freundlich und stets bereit für Rückfragen. Auch das "Mit-rein-nehmen" in die Thematik und das gute Erklären hat mir gefallen.',
   },
+  {
+    name: "Jana P.",
+    role: "Lehramtsstudentin",
+    quote:
+      "Albert hat sich mit mehreren Online-Terminen sehr viel Zeit genommen, meine Situation zu verstehen und mir daraufhin verschiedene Möglichkeiten vorgestellt. Kosten und Provision wurden offen angesprochen.",
+  },
 ];
 
 export function TestimonialStrip() {
