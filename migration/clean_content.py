@@ -8,6 +8,8 @@ import json
 import re
 from bs4 import BeautifulSoup, NavigableString
 
+BOOKING_LINK_FALLBACK = "https://cal.eu/mein-beamtenportal/kostenfreie-erstberatung"
+
 # "div" bleibt bewusst NICHT erhalten (unwrap statt keep): die
 # Hero-Bereinigung entfernt vorangehende Geschwister-Elemente der
 # Duplikat-Ueberschrift - das funktioniert nur zuverlaessig auf einer
@@ -106,6 +108,11 @@ def clean_html(raw_html: str, post_title: str = "") -> dict:
     # zu ununterscheidbaren <a>-Links.
     for a in soup.find_all("a", class_=re.compile(r"\bbutton\b")):
         href = a.get("href", "")
+        # Manche Buttons oeffnen im Original ein JS-Popup (Lead-Formular)
+        # statt zu verlinken - ohne diese Popup-Logik zeigen wir stattdessen
+        # den Buchungslink, sonst waere der Button ein totes href="".
+        if not href:
+            href = BOOKING_LINK_FALLBACK
         text = a.get_text(strip=True)
         new_a = soup.new_tag("a", href=href)
         new_a["class"] = ["btn"]
@@ -182,6 +189,28 @@ def clean_html(raw_html: str, post_title: str = "") -> dict:
             box.append(anchor)
             box.append(next_list)
 
+    # Inline-Foto-CTA-Karten (z.B. "Jetzt kostenfreie Beratung buchen" oder
+    # "Meine Ultimative PKV-Checkliste zum Download") - ein wp-block-cover
+    # MITTEN im Artikel (nicht der Hero, der ist schon entfernt) mit echtem
+    # Foto, direkt vorangestellt eine Textgruppe (Ueberschrift + Absatz +
+    # Button). Bild-URL und Text kommen aus dem jeweiligen Post, nicht
+    # hartkodiert - je nach Post ist der Inhalt unterschiedlich.
+    for cover in list(soup.find_all("div", class_="wp-block-cover")):
+        img = cover.find("img")
+        if not img:
+            continue
+        prev = cover.find_previous_sibling("div", class_="wp-block-group")
+        if not prev or not prev.find(["h2", "h3", "h4"]):
+            continue
+        card = soup.new_tag("div")
+        card["class"] = ["photo-cta"]
+        cover.replace_with(card)  # Karte uebernimmt die Position des Covers
+        new_img = soup.new_tag("img", src=img.get("src", ""))
+        new_img["alt"] = img.get("alt", "")
+        prev.extract()
+        card.append(prev)
+        card.append(new_img)
+
     # Navy-Boxen ("Wir sind ein Team...", "Redaktionsteam / Über uns",
     # "Kostenfreie, individuelle Beratung") - im Original stehen pro Post
     # bis zu drei davon (nicht nur die erste!), jede mit eigenem
@@ -194,7 +223,7 @@ def clean_html(raw_html: str, post_title: str = "") -> dict:
     # reduzieren. id bleibt an Ueberschriften erhalten (Sprungmarken des
     # Inhaltsverzeichnisses funktionieren sonst nicht mehr). class bleibt nur
     # an unseren eigenen Markern (btn/icon-row/blue-background/team-box).
-    MARKER_CLASSES = {"btn", "icon-row", "blue-background", "team-box", "summary-box"}
+    MARKER_CLASSES = {"btn", "icon-row", "blue-background", "team-box", "summary-box", "photo-cta"}
     for tag in soup.find_all(True):
         if tag.name not in KEEP_TAGS:
             tag.unwrap()

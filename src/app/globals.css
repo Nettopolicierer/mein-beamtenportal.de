@@ -211,3 +211,34 @@ body {
 .prose .summary-box li p {
   margin: 0;
 }
+
+/* Inline-Foto-CTA-Karte (z.B. "Jetzt kostenfreie Beratung buchen" oder ein
+   Checklisten-Download) - kommt aus dem Artikeltext selbst, mit echtem
+   Bild + Text + Button aus dem jeweiligen Post. */
+.prose .photo-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  background: var(--color-base);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+.prose .photo-cta > div {
+  flex: 1;
+  min-width: 240px;
+}
+.prose .photo-cta h2,
+.prose .photo-cta h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+.prose .photo-cta img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  flex-shrink: 0;
+  margin: 0 auto;
+}
