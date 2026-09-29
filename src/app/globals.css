@@ -122,18 +122,25 @@ body {
   margin-bottom: 0.75rem;
 }
 
-/* Hervorhebungs-Überschriften ("blue-background" aus WordPress): zieht
-   sich über die volle Bildschirmbreite (nicht nur den Textblock), damit
-   sich der Abschnitt deutlicher vom Rest abhebt - klassischer
-   Full-Bleed-Trick, bricht bewusst aus allen umgebenden Containern aus. */
+/* Hervorhebungs-Überschriften ("blue-background" aus WordPress): breiter
+   als der Textblock, damit sich der Abschnitt deutlich abhebt. Bewusst
+   NICHT der 100vw-Trick (führte zu Scrollbar-bedingtem Verschieben/
+   Abschneiden je nach Viewport) - stattdessen symmetrisch relativ zur
+   eigenen Spalte, dadurch immer korrekt zentriert. */
 .prose h2.blue-background {
   background: var(--color-primary);
   color: #fff;
-  padding: 1.25rem 1.5rem;
-  width: 100vw;
-  max-width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  padding: 1.5rem 2rem;
+  margin-left: -2rem;
+  margin-right: -2rem;
+}
+@media (min-width: 640px) {
+  .prose h2.blue-background {
+    margin-left: -3rem;
+    margin-right: -3rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
 }
 
 /* "Team"-Box ("Wir sind ein Team unabhängiger Finanzberater..."): im
@@ -265,10 +272,14 @@ body {
   margin-bottom: 0.5rem;
 }
 .prose .photo-cta img {
-  width: 160px;
-  height: 160px;
+  width: 100px;
+  height: 100px;
   object-fit: cover;
   border-radius: 0.75rem;
   flex-shrink: 0;
   margin: 0 auto;
+}
+.prose .photo-cta h2,
+.prose .photo-cta h3 {
+  font-size: 1.05rem;
 }

@@ -93,7 +93,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 py-16 lg:grid-cols-[1fr_260px]"
       >
         <div
-          className="prose max-w-none prose-headings:font-heading prose-headings:text-primary prose-a:text-primary"
+          className="prose prose-sm max-w-none leading-normal prose-headings:font-heading prose-headings:text-primary prose-p:leading-relaxed prose-a:text-primary sm:prose-base"
           dangerouslySetInnerHTML={{ __html: post.html }}
         />
 
@@ -150,11 +150,11 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                   className="group flex flex-col gap-3 rounded-2xl border border-mediumlight/40 bg-white p-6 transition-colors hover:border-primary/30"
                 >
                   <span className="text-xs text-mediumdark">{formatDate(r.date)}</span>
-                  <h3 className="font-heading text-base leading-snug font-semibold text-primary group-hover:opacity-80">
+                  <h3 className="font-heading text-base leading-snug font-semibold text-gray-900">
                     {r.title}
                   </h3>
                   <p className="line-clamp-2 text-sm text-mediumdark">{r.description}</p>
-                  <span className="text-sm font-medium text-primary group-hover:underline">
+                  <span className="text-sm font-medium text-gray-900 group-hover:underline">
                     mehr erfahren →
                   </span>
                 </Link>

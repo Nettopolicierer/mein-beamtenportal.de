@@ -222,6 +222,33 @@ def clean_html(raw_html: str, post_title: str = "") -> dict:
     for team_box in soup.find_all("div", class_="has-primary-background-color"):
         team_box["class"] = ["team-box"]
 
+    # "Wir sind ein Team..."-Box auf Albert als Einzelperson personalisieren
+    # (Ich-Form) und die generische Illustration gegen sein echtes
+    # Portraitfoto tauschen.
+    for team_box in soup.find_all("div", class_="team-box"):
+        p_tag = team_box.find("p")
+        if p_tag and p_tag.get_text(strip=True).startswith("Wir sind ein Team"):
+            p_tag.string = (
+                "Ich bin Albert Sibert, unabhängiger Finanzberater mit Schwerpunkt auf Beamte, "
+                "Referendare und Anwärter. Ich weiß, wie überwältigend Versicherungs- und "
+                "Finanzthemen sein können – deshalb nehme ich mir die Zeit, die es braucht. Kein "
+                "Fachjargon, kein Druck – nur ehrliche, verständliche Beratung, damit Sie gute "
+                "Entscheidungen treffen können. Ob bei PKV, BU oder Vermögensaufbau."
+            )
+            # Diese Box hat im Original 2 <img> (Mobile-/Desktop-Variante der
+            # Illustration) - nur eins zum echten Foto machen, das andere
+            # verwerfen, sonst bleiben zwei Bilder uebrig.
+            imgs = team_box.find_all("img")
+            if imgs:
+                imgs[0]["src"] = "/albert-portrait.webp"
+                imgs[0]["alt"] = "Albert Sibert"
+                imgs[0]["style"] = ""
+                existing_class = imgs[0].get("class") or []
+                imgs[0]["class"] = list(existing_class) + ["profile-photo"]
+                for extra in imgs[1:]:
+                    extra.decompose()
+            break
+
     # "Über uns" (Redaktionsteam-Textbaustein) auf "Über mich" personalisieren
     # mit 3 Highlights - Albert tritt als Einzelperson auf, nicht als
     # anonymes Redaktionsteam.
@@ -250,9 +277,9 @@ def clean_html(raw_html: str, post_title: str = "") -> dict:
             op.decompose()
         intro = soup.new_tag("p")
         intro.string = (
-            "Ich bin Albert Sibert, unabhängiger Finanzberater mit Schwerpunkt auf Beamte, "
-            "Referendare und Anwärter im öffentlichen Dienst. Ich begleite Sie bei Beihilfe, "
-            "PKV, Dienstunfähigkeit und Altersvorsorge – ohne Fachjargon, ohne Druck."
+            "Unabhängiger Finanzberater mit Schwerpunkt auf Beamte, Referendare und Anwärter im "
+            "öffentlichen Dienst. Ich begleite Sie bei Beihilfe, PKV, Dienstunfähigkeit und "
+            "Altersvorsorge – ohne Fachjargon, ohne Druck."
         )
         highlights_ul = soup.new_tag("ul")
         for lead, rest in [
