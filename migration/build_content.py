@@ -51,9 +51,20 @@ def make_description(post) -> str:
 # aussehen.
 CATEGORY_NAME_FIXES = {"pkv": "PKV"}
 
+# Auf Wunsch des Nutzers inhaltlich zu grobkoernige/ueberlappende Kategorien
+# zusammenlegen, damit auf /ratgeber weniger, aussagekraeftigere Filter-Chips
+# stehen (z.B. "Krankenversicherung" ist inhaltlich dasselbe wie "PKV").
+CATEGORY_MERGES = {
+    "Krankenversicherung": "PKV",
+    "Rechner": "Pension",
+    "Lehrer": "Beamte",
+    "Anwärter": "Referendare",
+}
+
 
 def fix_category_name(name: str) -> str:
-    return CATEGORY_NAME_FIXES.get(name, name)
+    name = CATEGORY_NAME_FIXES.get(name, name)
+    return CATEGORY_MERGES.get(name, name)
 
 
 out_posts = []
@@ -67,7 +78,11 @@ for p in posts:
     cleaned = clean_html(p["content"]["rendered"], title)
     html = cleaned["html"]
     title, html = apply_title_override(slug, title, html)
-    cats = [fix_category_name(categories[cid]["name"]) for cid in p.get("categories", []) if cid in categories]
+    raw_cats = [fix_category_name(categories[cid]["name"]) for cid in p.get("categories", []) if cid in categories]
+    # Nach Normalisierung/Zusammenlegung koennen Duplikate entstehen (z.B. ein
+    # Post mit sowohl "PKV" als auch "Krankenversicherung") - deduplizieren,
+    # Reihenfolge des ersten Vorkommens beibehalten.
+    cats = list(dict.fromkeys(raw_cats))
     # "Allgemein" ist WP-Standardkategorie ohne Aussagekraft, nur behalten wenn einzige.
     non_generic = [c for c in cats if c != "Allgemein"]
     display_cats = non_generic if non_generic else cats
