@@ -353,6 +353,18 @@ body {
 .prose .team-box strong {
   color: #fff;
 }
+/* Der @tailwindcss/typography-Plugin setzt ".prose a" auf eine dunkle
+   Standardfarbe (--tw-prose-links) - auf dem Navy-Hintergrund der team-box
+   (z.B. LinkedIn/WhatsApp-Links) dadurch praktisch unsichtbarer Text neben
+   dem sichtbaren Haekchen-Icon. Explizit auf Weiss zuruecksetzen. */
+.prose .team-box a:not(.btn) {
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-color: rgb(255 255 255 / 0.4);
+}
+.prose .team-box a:not(.btn):hover {
+  text-decoration-color: #fff;
+}
 /* Buchungs-Button auf Navy-Grund invertiert (weiß statt navy), sonst
    unsichtbar vor dem gleichfarbigen Hintergrund. */
 .prose .team-box a.btn {

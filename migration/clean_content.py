@@ -34,6 +34,16 @@ def clean_html(raw_html: str, post_title: str = "") -> dict:
     for tag in soup.find_all(["style", "script"]):
         tag.decompose()
 
+    # Eingebettete Greyd-Formulare (z.B. der interaktive PKV-Kostenrechner)
+    # brauchen Backend/JS, das es hier nicht gibt - "form" steht nicht auf
+    # der KEEP_TAGS-Whitelist, wuerde also weiter unten nur unwrapped statt
+    # entfernt, und ALLE Formularfelder (inkl. versteckter Honeypot-Felder
+    # wie "Contact me by fax only", deren hidden-Attribut beim Attribut-Trim
+    # ebenfalls verloren geht) blieben als nackter, unbedienbarer Text-/Div-
+    # Wust im Artikel stehen. Komplett entfernen statt kaputt darzustellen.
+    for tag in soup.find_all("form"):
+        tag.decompose()
+
     # Platzhalter-Cover-Bilder (BITTE_BILD_ID_EINTRAGEN) komplett entfernen.
     for img in soup.find_all("img", src=re.compile("BITTE_BILD_ID_EINTRAGEN")):
         img.decompose()
@@ -440,6 +450,48 @@ def clean_html(raw_html: str, post_title: str = "") -> dict:
             p = soup.new_tag("p")
             node.replace_with(p)
             p.string = node.strip()
+
+    # Rank-Math exportiert manche TOC-Links (z.B. "#u-1"), deren Ziel-ID im
+    # eigentlichen Artikeltext gar nicht existiert - Rank Math dedupliziert
+    # kollidierende IDs (mehrere Elemente mit id="u", siehe Author-Box-Fix
+    # oben) offenbar nur clientseitig beim Rendern; der Rohtext-Export
+    # behaelt die kollidierende ID. Damit die Sidebar-Links zuverlaessig zum
+    # richtigen Abschnitt springen: IDs im finalen Dokument in Reihenfolge
+    # deduplizieren (erstes Vorkommen behaelt die ID, weitere bekommen
+    # -1, -2, ...) und die TOC-Hrefs danach ueber den Ueberschriften-TEXT neu
+    # auflösen statt sich auf die urspruengliche, moeglicherweise falsche ID
+    # zu verlassen.
+    seen_ids = {}
+    for tag in soup.find_all(id=True):
+        original_id = tag["id"]
+        if original_id not in seen_ids:
+            seen_ids[original_id] = 0
+            continue
+        seen_ids[original_id] += 1
+        tag["id"] = f"{original_id}-{seen_ids[original_id]}"
+
+    headings_by_text = {}
+    for heading in soup.find_all(["h1", "h2", "h3"]):
+        heading_id = heading.get("id")
+        if not heading_id:
+            continue
+        headings_by_text.setdefault(heading.get_text(strip=True), heading_id)
+    # Manche Rank-Math-TOC-Eintraege zeigen auf Abschnitte, die es im
+    # migrierten Artikel gar nicht mehr gibt: die eigentliche H1 (steht im
+    # Hero der Seitenvorlage, nicht im Fliesstext), Cross-Selling-/Kontakt-
+    # Bloecke am Artikelende (werden durch eigene Next.js-Sektionen ersetzt)
+    # oder vereinzelt verwaiste Alt-Eintraege einer schon umbenannten
+    # Ueberschrift ("Über den Autor" neben dem aktuellen "Über mich"). Solche
+    # Eintraege ohne aufloesbares Ziel rausfiltern statt eine tote
+    # Sidebar-Sprungmarke stehen zu lassen.
+    resolved_entries = []
+    for entry in toc_entries:
+        resolved_id = headings_by_text.get(entry["text"])
+        if not resolved_id:
+            continue
+        entry["href"] = f"#{resolved_id}"
+        resolved_entries.append(entry)
+    toc_entries = resolved_entries
 
     result = str(soup)
     result = re.sub(r"\n{3,}", "\n\n", result)
