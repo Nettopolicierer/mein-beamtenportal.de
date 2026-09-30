@@ -7,6 +7,7 @@ import { BOOKING_LINK } from "@/lib/content";
 import { CookieConsentProvider } from "@/components/cookie-consent/CookieConsentProvider";
 import { ClarityTag } from "@/components/ClarityTag";
 import { ScrollCtaPopup } from "@/components/ScrollCtaPopup";
+import { MobileNav } from "@/components/MobileNav";
 import "./globals.css";
 
 const raleway = Raleway({
@@ -62,7 +63,7 @@ export default function RootLayout({
         <CookieConsentProvider>
         <ClarityTag />
         <header className="sticky top-0 z-40 border-b border-mediumlight/40 bg-white/95 backdrop-blur">
-          <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+          <div className="relative mx-auto flex max-w-6xl items-center justify-between gap-3 px-6 py-4">
             <Link href="/" className="shrink-0">
               <Image src="/logo.svg" alt="Mein Beamtenportal" width={150} height={63} priority />
             </Link>
@@ -73,14 +74,17 @@ export default function RootLayout({
                 </Link>
               ))}
             </nav>
-            <Link
-              href={BOOKING_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary/90"
-            >
-              Kostenfreies Erstgespräch
-            </Link>
+            <div className="flex shrink-0 items-center gap-2">
+              <Link
+                href={BOOKING_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-lg bg-primary px-3.5 py-2.5 text-xs font-semibold text-white hover:bg-primary/90 sm:px-5 sm:text-sm"
+              >
+                Kostenfreies Erstgespräch
+              </Link>
+              <MobileNav />
+            </div>
           </div>
         </header>
 
