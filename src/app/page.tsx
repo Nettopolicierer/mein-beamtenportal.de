@@ -1,9 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Check } from "lucide-react";
 import { SORTED_POSTS, formatDate, BOOKING_LINK } from "@/lib/content";
 import { TestimonialStrip } from "@/components/TestimonialStrip";
 import { PensionCalculator } from "@/components/PensionCalculator";
 import { Reveal } from "@/components/Reveal";
+
+const LEISTUNGSVERSPRECHEN = [
+  "Eine umfassende Analyse Ihrer aktuellen Absicherung",
+  "Den passenden PKV-Tarif abgestimmt auf Beihilfesatz und Laufbahn",
+  "Berechnung Ihrer voraussichtlichen Pension und möglicher Lücken (auch bei Beamten auf Widerruf/Probe)",
+  "Unabhängige Beratung zu Dienstunfähigkeitsversicherung und Altersvorsorge",
+  "Verständliche Erklärungen statt Fachchinesisch",
+  "Persönliche Betreuung und schnelle Rückmeldung bei Fristen",
+];
 
 const STATS = [
   { value: "Ø 66,7 %", label: "Ruhegehaltssatz bei der Beamtenpension – den Höchstsatz von 71,75 % erreichen nur wenige." },
@@ -102,6 +112,27 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Leistungsversprechen */}
+      <section className="mx-auto max-w-5xl px-6 py-20">
+        <Reveal>
+          <p className="mb-3 text-xs font-semibold tracking-widest text-primary uppercase">
+            Beratung
+          </p>
+          <h2 className="font-heading max-w-2xl text-2xl font-bold text-primary sm:text-3xl">
+            Mein Leistungsversprechen für <span className="font-hand text-3xl font-normal underline decoration-primary/40 sm:text-4xl">Ihre</span> Beihilfe und Vorsorge
+          </h2>
+          <span className="mt-3 mb-10 block h-1 w-12 rounded-full bg-primary" />
+          <ul className="grid gap-x-10 gap-y-4 sm:grid-cols-2">
+            {LEISTUNGSVERSPRECHEN.map((item) => (
+              <li key={item} className="flex items-start gap-3">
+                <Check className="mt-0.5 size-5 shrink-0 text-primary" />
+                <span className="text-mediumdark">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       </section>
 
       {/* Stats / Problem */}
