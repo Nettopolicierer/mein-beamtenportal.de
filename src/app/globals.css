@@ -95,6 +95,20 @@ body {
   background: color-mix(in srgb, var(--color-primary) 90%, white);
 }
 
+/* Freistehende WordPress-Illustrationen im Artikeltext (z.B. "Konditionen
+   und Fristen"-Aufmacher-Bilder) haben keine feste Breite und hingen dadurch
+   links ausgerichtet mit grossem Leerraum daneben statt zentriert und
+   sauber begrenzt zu wirken. Icon-row/Team-box/Profile-photo haben eigene,
+   spezifischere Regeln (siehe unten) und sind davon nicht betroffen. */
+.prose img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: min(100%, 420px);
+  height: auto;
+  border-radius: 0.75rem;
+}
+
 /* Icon + Überschrift nebeneinander (Persona-/Story-Boxen wie
    "Tobias dachte lange..."), aus WordPress-Flex-Gruppen migriert. */
 .prose .icon-row {
