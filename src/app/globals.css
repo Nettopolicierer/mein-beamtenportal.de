@@ -102,11 +102,28 @@ body {
    spezifischere Regeln (siehe unten) und sind davon nicht betroffen. */
 .prose img {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: min(100%, 420px);
+  margin: 0 auto 1.5rem;
+  max-width: min(100%, 320px);
   height: auto;
   border-radius: 0.75rem;
+}
+/* Ab Tablet-Breite lassen wir den Fliesstext um das Bild herumlaufen statt
+   es als eigenen Block zwischen die Absaetze zu klemmen - wirkt dadurch als
+   Teil des Textes statt zufaellig platziert. Ueberschriften clearen den
+   Float, damit er nicht in den naechsten Abschnitt hineinragt. */
+@media (min-width: 640px) {
+  .prose img {
+    float: right;
+    max-width: 260px;
+    margin: 0.25rem 0 1.25rem 1.75rem;
+  }
+}
+.prose h2,
+.prose h3,
+.prose .icon-row,
+.prose .summary-box,
+.prose .team-box {
+  clear: both;
 }
 
 /* Icon + Überschrift nebeneinander (Persona-/Story-Boxen wie
