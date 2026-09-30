@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Raleway, Mulish, Caveat } from "next/font/google";
 import Link from "next/link";
 import Image from "next/image";
+import { Analytics } from "@vercel/analytics/next";
 import { BOOKING_LINK } from "@/lib/content";
 import { CookieConsentProvider } from "@/components/cookie-consent/CookieConsentProvider";
 import { ClarityTag } from "@/components/ClarityTag";
@@ -132,6 +133,7 @@ export default function RootLayout({
         </footer>
         <ScrollCtaPopup />
         </CookieConsentProvider>
+        <Analytics />
       </body>
     </html>
   );

@@ -14,6 +14,16 @@ media = json.load(open("migration/wp-media.json"))
 
 RESERVED_SLUGS = {p["slug"] for p in pages}
 
+# Bilder liegen nicht mehr auf der WordPress-Installation (die Domain zeigt seit
+# dem Go-Live auf Vercel) - migration/localize_media.py hat sie nach
+# public/wp-media/ heruntergeladen. Alle wp-content/uploads-URLs im Content auf
+# den lokalen Pfad umschreiben.
+WP_UPLOADS_RE = re.compile(r'https?://(?:www\.)?mein-beamtenportal\.de/wp-content/uploads/')
+
+
+def localize_media_urls(text: str) -> str:
+    return WP_UPLOADS_RE.sub("/wp-media/", text)
+
 
 def strip_tags(html: str) -> str:
     return re.sub(r"<[^>]+>", " ", html)
@@ -109,7 +119,7 @@ for p in posts:
         continue
     title = p["title"]["rendered"].strip()
     cleaned = clean_html(p["content"]["rendered"], title)
-    html = cleaned["html"]
+    html = localize_media_urls(cleaned["html"])
     title, html = apply_title_override(slug, title, html)
     raw_cats = [fix_category_name(categories[cid]["name"]) for cid in p.get("categories", []) if cid in categories]
     # Nach Normalisierung/Zusammenlegung koennen Duplikate entstehen (z.B. ein
@@ -132,7 +142,7 @@ for p in posts:
         "date": p["date"],
         "modified": p["modified"],
         "categories": display_cats,
-        "featuredImage": fm["url"] if fm else None,
+        "featuredImage": localize_media_urls(fm["url"]) if fm else None,
         "featuredImageAlt": fm["alt"] if fm else "",
         "html": html,
     })
@@ -155,7 +165,7 @@ for pg in pages:
         "slug": pg["slug"],
         "title": title,
         "subtitle": cleaned["subtitle"],
-        "html": cleaned["html"],
+        "html": localize_media_urls(cleaned["html"]),
     })
 
 with open("src/content-posts.json", "w") as f:
