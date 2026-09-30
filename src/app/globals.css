@@ -66,6 +66,15 @@ body {
      der sichtbare Viewport, sobald eine Scrollbar vorhanden ist - das
      erzeugt sonst horizontales Scrollen und verschiebt/kappt den Inhalt. */
   overflow-x: hidden;
+  /* overflow-wrap:break-word wird an alle Texte vererbt (h1-h4, p, li, ...)
+     und verhindert, dass lange zusammengesetzte deutsche Woerter (z.B.
+     "Dienstunfaehigkeitsversicherung") auf schmalen Displays ueber den
+     Viewport-Rand hinauslaufen. overflow-x:hidden allein blendet das nur
+     visuell aus, verhindert aber nicht, dass iOS/Safari durch das breite
+     Element trotzdem per Rubber-Band-Effekt seitlich wegscrollen laesst -
+     die eigentliche Ursache (zu breiter Inhalt) muss weg, nicht nur ihr
+     sichtbares Symptom. */
+  overflow-wrap: break-word;
 }
 
 /* Anker-Sprungziele (Inhaltsverzeichnis) duerfen nicht hinter dem fixierten

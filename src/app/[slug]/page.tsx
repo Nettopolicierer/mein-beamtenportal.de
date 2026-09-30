@@ -57,8 +57,10 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             ))}
             <span>{formatDate(post.date)}</span>
           </div>
-          <h1 className="font-heading mb-4 text-3xl font-bold text-white sm:text-4xl">{post.title}</h1>
-          {post.subtitle && <p className="mb-8 text-lg text-white/85">{post.subtitle}</p>}
+          <h1 className="font-heading mb-4 text-3xl font-bold break-words text-white sm:text-4xl">
+            {post.title}
+          </h1>
+          {post.subtitle && <p className="mb-8 text-lg break-words text-white/85">{post.subtitle}</p>}
           <div className="flex flex-wrap items-center justify-center gap-3">
             <Link
               href={BOOKING_LINK}
