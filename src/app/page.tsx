@@ -97,17 +97,17 @@ export default function Home() {
         </div>
 
         <div className="border-t border-mediumlight/40">
-          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-10 px-6 py-5 text-center text-sm text-mediumdark sm:justify-between">
+          <div className="mx-auto flex max-w-6xl flex-nowrap items-center justify-between gap-2 px-4 py-4 text-center text-[11px] text-mediumdark sm:gap-10 sm:px-6 sm:py-5 sm:text-sm">
             <div>
-              <span className="font-heading block text-xl font-bold text-primary">&gt;400</span>
+              <span className="font-heading block text-base font-bold text-primary sm:text-xl">&gt;400</span>
               Beamte beraten
             </div>
             <div>
-              <span className="font-heading block text-xl font-bold text-primary">&gt;5</span>
+              <span className="font-heading block text-base font-bold text-primary sm:text-xl">&gt;5</span>
               Jahre Erfahrung
             </div>
             <div>
-              <span className="font-heading block text-xl font-bold text-primary">4,9/5</span>
+              <span className="font-heading block text-base font-bold text-primary sm:text-xl">4,9/5</span>
               ProvenExpert
             </div>
           </div>
