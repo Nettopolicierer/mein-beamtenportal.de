@@ -41,6 +41,24 @@ const TESTIMONIALS = [
     quote:
       "Albert hat sich mit mehreren Online-Terminen sehr viel Zeit genommen, meine Situation zu verstehen und mir daraufhin verschiedene Möglichkeiten vorgestellt. Kosten und Provision wurden offen angesprochen.",
   },
+  {
+    name: "Imke N.",
+    role: "Lehramtsstudentin",
+    quote:
+      "Die Gespräche finden immer auf Augenhöhe statt und man fühlt sich definitiv gut beraten. Der Austausch ist immer locker und freundlich und Albert achtet immer darauf, Wünschen und Bedürfnissen gerecht zu werden.",
+  },
+  {
+    name: "David S.",
+    role: "Fachinformatiker im öffentlichen Dienst",
+    quote:
+      "Ich bin unkompliziert und auf Augenhöhe beraten worden. Albert hat mit mir im Gespräch meine persönlichen Wünsche und Ziele so herausgefiltert, dass er mir die Weichen für die Zukunft stellen konnte. Top Arbeit.",
+  },
+  {
+    name: "Anna L.",
+    role: "Studentin, Diplom-Finanzwirtin",
+    quote:
+      "Sehr netter und kompetenter Berater. Nimmt sich ausreichend Zeit für eine individuelle Beratung. Das war alles sehr aufschlussreich, interessant und mit einem geringen Zeitaufwand verbunden.",
+  },
 ];
 
 function TestimonialCard({ t }: { t: (typeof TESTIMONIALS)[number] }) {
