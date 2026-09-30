@@ -37,7 +37,7 @@ export default function Home() {
     <div>
       {/* Hero */}
       <section className="bg-base">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 px-6 py-16 sm:py-20 lg:grid-cols-2 lg:items-start lg:pt-20">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-6 pt-16 pb-6 sm:pt-20 sm:pb-8 lg:grid-cols-2">
           <div>
             <h1 className="font-hand text-6xl leading-none font-bold text-primary sm:text-7xl">
               Mein Beamtenportal
@@ -74,7 +74,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative mx-auto aspect-square w-full max-w-sm lg:max-w-none lg:max-h-[420px]">
+          <div className="relative mx-auto aspect-square w-full max-w-sm lg:max-w-none lg:max-h-[520px]">
             <Image
               src="/hero-illustration.png"
               alt="Mein Beamtenportal"
@@ -87,7 +87,7 @@ export default function Home() {
         </div>
 
         <div className="border-t border-mediumlight/40">
-          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-10 px-6 py-8 text-center text-sm text-mediumdark sm:justify-between">
+          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-10 px-6 py-5 text-center text-sm text-mediumdark sm:justify-between">
             <div>
               <span className="font-heading block text-xl font-bold text-primary">&gt;400</span>
               Beamte beraten
