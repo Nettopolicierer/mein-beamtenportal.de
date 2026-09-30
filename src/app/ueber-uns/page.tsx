@@ -5,7 +5,7 @@ import { BOOKING_LINK } from "@/lib/content";
 import { Reveal } from "@/components/Reveal";
 
 const STATS = [
-  { value: ">300", label: "Beamte beraten" },
+  { value: ">400", label: "Beamte beraten" },
   { value: "seit 2019", label: "im öffentlichen Dienst" },
   { value: "250+", label: "Partnergesellschaften" },
   { value: "4,9/5", label: "ProvenExpert" },
@@ -121,7 +121,7 @@ export default function UeberUnsPage() {
           Partnergesellschaften.
         </p>
         <p className="text-mediumdark">
-          Seit 2019 berate ich Menschen im öffentlichen Dienst und habe über 300 Beamtinnen,
+          Seit 2019 berate ich Menschen im öffentlichen Dienst und habe über 400 Beamtinnen,
           Beamte, Referendare und Anwärter begleitet – vom ersten Beihilfeantrag bis zur
           Pensionsplanung. Diese Erfahrung fließt in jedes Gespräch ein.
         </p>
