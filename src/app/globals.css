@@ -27,6 +27,35 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Testimonial-Marquee: endlos scrollende Karten-Reihe (Karten-Array ist im
+   Component bereits verdoppelt, -50% Transform landet dadurch nahtlos
+   wieder am Anfang). Pausiert bei Hover/Fokus, damit man in Ruhe lesen
+   kann, und respektiert prefers-reduced-motion. */
+@keyframes testimonial-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.testimonial-marquee {
+  animation: testimonial-marquee 45s linear infinite;
+}
+.testimonial-marquee:hover,
+.testimonial-marquee:focus-within {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-marquee {
+    animation: none;
+  }
+}
+.testimonial-mask {
+  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
