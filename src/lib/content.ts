@@ -1,4 +1,10 @@
 import posts from "@/content-posts.json";
+// Vom WordPress-Migrations-Skript (migration/build_content.py) generierte
+// Artikel. Neue Artikel des Blog-Autopiloten landen NICHT hier, sondern in
+// content-posts-new.json - dieses File wird bei jedem Migrations-Rerun
+// komplett überschrieben, ein Rerun würde sonst alle Autopilot-Artikel
+// löschen.
+import newPosts from "@/content-posts-new.json";
 import pages from "@/content-pages.json";
 
 export interface TocEntry {
@@ -27,7 +33,7 @@ export interface StaticPage {
   html: string;
 }
 
-export const ALL_POSTS = posts as Post[];
+export const ALL_POSTS = [...(posts as Post[]), ...(newPosts as Post[])];
 export const ALL_PAGES = pages as StaticPage[];
 
 export const SORTED_POSTS = [...ALL_POSTS].sort(

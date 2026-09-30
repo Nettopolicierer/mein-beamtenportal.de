@@ -1,0 +1,127 @@
+name: Blog Autopilot
+
+# Schreibt an jedem Werktag einen neuen Blogbeitrag und pusht ihn nach main.
+# Der Redaktionsbrief steht in .github/blog-autopilot.md — inhaltliche Änderungen
+# gehören dorthin, nicht in diese Datei.
+#
+# 05:50 UTC = 07:50 Berlin (Sommerzeit) bzw. 06:50 Berlin (Winterzeit).
+on:
+  schedule:
+    - cron: "50 5 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      thema:
+        description: "Thema oder Bundesland vorgeben (leer = Rotation entscheidet)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+  id-token: write
+
+# Nie zwei Läufe gleichzeitig — sonst kollidieren zwei Pushes auf main.
+concurrency:
+  group: blog-autopilot
+  cancel-in-progress: false
+
+jobs:
+  beitrag-schreiben:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      # Ohne Auth-Secret wird der Lauf übersprungen statt rot zu laufen.
+      # Es zählt entweder ANTHROPIC_API_KEY (läuft nicht ab, empfohlen) ODER
+      # CLAUDE_CODE_OAUTH_TOKEN (aus `claude setup-token`, läuft ab).
+      - name: Auth-Secret prüfen
+        id: auth
+        env:
+          API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: |
+          if [ -n "$API_KEY" ]; then
+            case "$API_KEY" in
+              sk-ant-api03-*) echo "ok=true" >> "$GITHUB_OUTPUT"; exit 0 ;;
+              *) echo "::error::ANTHROPIC_API_KEY hat nicht das erwartete Format (sk-ant-api03-…)."; exit 1 ;;
+            esac
+          fi
+          if [ -z "$OAUTH_TOKEN" ]; then
+            echo "::warning::Weder ANTHROPIC_API_KEY noch CLAUDE_CODE_OAUTH_TOKEN gesetzt – Lauf wird übersprungen. Secret unter Settings > Secrets and variables > Actions hinterlegen."
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # Formatprüfung: ein falsch eingefügtes Credential scheitert sonst erst in
+          # Claude selbst, mit einer schwer lesbaren Meldung nach ~85 ms.
+          case "$OAUTH_TOKEN" in
+            sk-ant-oat01-*)
+              echo "ok=true" >> "$GITHUB_OUTPUT" ;;
+            sk-ant-api03-*)
+              echo "::error::Im Secret CLAUDE_CODE_OAUTH_TOKEN liegt ein API-Key (sk-ant-api03-…). Lege ihn stattdessen als Secret ANTHROPIC_API_KEY an."
+              exit 1 ;;
+            *)
+              echo "::error::CLAUDE_CODE_OAUTH_TOKEN hat nicht das erwartete Format (erwartet: sk-ant-oat01-…). Wert mit 'claude setup-token' neu erzeugen und ohne Leerzeichen/Zeilenumbruch einfügen."
+              exit 1 ;;
+          esac
+
+      - uses: actions/checkout@v6
+        if: steps.auth.outputs.ok == 'true'
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v5
+        if: steps.auth.outputs.ok == 'true'
+        with:
+          node-version: 20
+          cache: npm
+
+      - uses: actions/setup-python@v5
+        if: steps.auth.outputs.ok == 'true'
+        with:
+          python-version: "3.12"
+
+      - run: npm ci
+        if: steps.auth.outputs.ok == 'true'
+
+      - name: Git-Identität für den Autopilot-Commit
+        if: steps.auth.outputs.ok == 'true'
+        run: |
+          git config user.name "Blog Autopilot"
+          git config user.email "kontakt@mein-beamtenportal.de"
+
+      - uses: anthropics/claude-code-action@v1
+        if: steps.auth.outputs.ok == 'true'
+        env:
+          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+        with:
+          # claude-code-action nutzt den API-Key, wenn gesetzt, sonst das OAuth-Token.
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          prompt: |
+            Du schreibst den heutigen Blogbeitrag für mein-beamtenportal.de und veröffentlichst ihn.
+
+            Lies zuerst .github/blog-autopilot.md vollständig und halte dich exakt daran.
+            Dieser Brief regelt Themen-Rotation (inkl. Bundesland-Rotation), Balance-Check,
+            Stilregeln, fachliche Festlegungen, die technische Artikel-Vorlage und den Commit.
+
+            Themenvorgabe für diesen Lauf (leer bedeutet: Rotation entscheidet):
+            "${{ github.event.inputs.thema }}"
+
+            Drei harte Bedingungen:
+            - `npm run build` muss vor dem Commit fehlerfrei durchlaufen. Wird der Build nicht
+              grün, committe nichts und beende den Lauf mit einer klaren Fehlermeldung.
+            - Neue Artikel gehören ausschließlich in src/content-posts-new.json (über
+              migration/add_new_post.py) — src/content-posts.json NIEMALS direkt bearbeiten,
+              das ist WordPress-Migrationsoutput.
+            - Der Beitrag geht direkt live. Es gibt kein Review. Veröffentliche keine
+              bundeslandspezifische Zahl (Beihilfesatz, Frist, Verordnung) und keine
+              rechtliche Aussage, die du nicht per WebSearch gegen eine amtliche Quelle
+              geprüft hast.
+
+            Wenn alles grün ist: `git add`, committen im vorgegebenen Format,
+            dann `git pull --rebase origin main` (falls inzwischen andere Commits
+            auf main liegen) und erst danach `git push origin HEAD:main`.
+          claude_args: |
+            --model claude-sonnet-5
+            --max-turns 120
+            --allowedTools "Read,Write,Edit,Glob,Grep,WebSearch,WebFetch,Bash(npm run build),Bash(npm run lint),Bash(python3 migration/add_new_post.py),Bash(python3 migration/fetch_autopilot_image.py:*),Bash(python3 scripts/seo_check.py),Bash(git add:*),Bash(git commit:*),Bash(git push:*),Bash(git pull:*),Bash(git status:*),Bash(git diff:*),Bash(git log:*),Bash(date:*),Bash(ls:*),Bash(wc:*),Bash(grep:*)"
