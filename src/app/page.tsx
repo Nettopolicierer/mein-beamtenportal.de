@@ -11,7 +11,7 @@ const LEISTUNGSVERSPRECHEN = [
   "Den passenden PKV-Tarif abgestimmt auf Beihilfesatz und Laufbahn",
   "Berechnung Ihrer voraussichtlichen Pension und möglicher Lücken (auch bei Beamten auf Widerruf/Probe)",
   "Unabhängige Beratung zu Dienstunfähigkeitsversicherung und Altersvorsorge",
-  "Verständliche Erklärungen statt Fachchinesisch",
+  "Antworten auf Ihre konkreten Fragen zu Bezügen, Fristen und Anträgen – so lange, bis es sitzt",
   "Persönliche Betreuung und schnelle Rückmeldung bei Fristen",
 ];
 
@@ -121,7 +121,7 @@ export default function Home() {
             Beratung
           </p>
           <h2 className="font-heading max-w-2xl text-2xl font-bold text-primary sm:text-3xl">
-            Mein Leistungsversprechen für <span className="font-hand text-3xl font-normal underline decoration-primary/40 sm:text-4xl">Ihre</span> Beihilfe und Vorsorge
+            Mein Leistungsversprechen für Ihre Beihilfe und Vorsorge
           </h2>
           <span className="mt-3 mb-10 block h-1 w-12 rounded-full bg-primary" />
           <ul className="grid gap-x-10 gap-y-4 sm:grid-cols-2">
