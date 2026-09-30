@@ -9,7 +9,7 @@ import { Star, Quote } from "lucide-react";
 const TESTIMONIALS = [
   {
     name: "Lisa G.",
-    role: "Lehrerin",
+    role: "Diplom-Verwaltungswirt/in",
     quote:
       "Herr Sibert hat eine sehr starke, lösungsorientierte und kompetente Kommunikation, die es sehr leicht macht, Sachverhalte zu verstehen. Ich fühle mich sehr gut beraten und freue mich auf die weitere Zusammenarbeit.",
   },
