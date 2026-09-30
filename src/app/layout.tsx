@@ -71,9 +71,16 @@ export default function RootLayout({
         <CookieConsentProvider>
         <ClarityTag />
         <header className="sticky top-0 z-40 border-b border-mediumlight/40 bg-white/95 backdrop-blur">
-          <div className="relative mx-auto flex max-w-6xl items-center justify-between gap-3 px-6 py-4">
+          <div className="relative mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 py-3 sm:gap-3 sm:px-6 sm:py-4">
             <Link href="/" className="shrink-0">
-              <Image src="/logo.svg" alt="Mein Beamtenportal" width={150} height={63} priority />
+              <Image
+                src="/logo.svg"
+                alt="Mein Beamtenportal"
+                width={150}
+                height={63}
+                priority
+                className="h-auto w-[104px] sm:w-[150px]"
+              />
             </Link>
             <nav className="hidden items-center gap-8 text-sm font-medium tracking-wide text-primary uppercase sm:flex">
               {NAV.map((item) => (
@@ -87,9 +94,10 @@ export default function RootLayout({
                 href={BOOKING_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-lg bg-primary px-3.5 py-2.5 text-xs font-semibold text-white hover:bg-primary/90 sm:px-5 sm:text-sm"
+                className="rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-white hover:bg-primary/90 sm:px-5 sm:py-2.5 sm:text-sm"
               >
-                Kostenfreies Erstgespräch
+                <span className="sm:hidden">Termin sichern</span>
+                <span className="hidden sm:inline">Kostenfreies Erstgespräch</span>
               </Link>
               <MobileNav />
             </div>
