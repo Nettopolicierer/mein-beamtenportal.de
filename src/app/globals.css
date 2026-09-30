@@ -76,8 +76,19 @@ body {
      sichtbares Symptom. */
   overflow-wrap: break-word;
   /* Sauberer Trennstrich statt mittendrin abgehacktem Wortbruch (html hat
-     lang="de", der Browser nutzt also die deutschen Trennregeln). */
+     lang="de", der Browser nutzt also die deutschen Trennregeln). Nur im
+     Fliesstext - bei Ueberschriften (siehe Regel unten) wirkt Trennung
+     schnell "kaputt", weil der Browser auch kurze, unproblematische Woerter
+     wie "Risiko" mitten im Wort trennt, um die Zeile optisch auszugleichen.
+     Silbentrennung ist eine Fliesstext-Konvention, keine Schlagzeilen-Regel. */
   hyphens: auto;
+}
+h1,
+h2,
+h3,
+h4,
+.font-heading {
+  hyphens: none;
 }
 
 /* Anker-Sprungziele (Inhaltsverzeichnis) duerfen nicht hinter dem fixierten
