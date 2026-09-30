@@ -72,12 +72,12 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-3xl lg:max-w-none">
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-sm lg:max-w-none">
             <Image
-              src="/albert-hero.jpg"
+              src="/albert-hero.png"
               alt="Albert Sibert, unabhängiger Finanzberater für Beamte"
               fill
-              className="object-cover"
+              className="object-contain object-bottom"
               unoptimized
               priority
             />
