@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Star, Quote } from "lucide-react";
+import { Reveal } from "@/components/Reveal";
 
 // Echte ProvenExpert-/HORBACH-Bewertungen (vom Nutzer bereitgestellt bzw.
 // vom Bewertungsprofil übernommen), anonymisiert mit Initialen der
@@ -53,33 +54,32 @@ export function TestimonialStrip() {
           <span className="text-sm text-mediumdark">4,9/5 · echte Kundenstimmen</span>
         </div>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {TESTIMONIALS.map((t) => (
-            <div
-              key={t.name}
-              className="flex flex-col gap-3 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-mediumlight/30"
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex gap-0.5">
-                  {Array.from({ length: 5 }).map((_, idx) => (
-                    <Star key={idx} className="size-3.5 fill-primary text-primary" />
-                  ))}
+          {TESTIMONIALS.map((t, i) => (
+            <Reveal key={t.name} delay={(i % 3) * 100} variant="fade-up">
+              <div className="flex h-full flex-col gap-3 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-mediumlight/30">
+                <div className="flex items-center justify-between">
+                  <div className="flex gap-0.5">
+                    {Array.from({ length: 5 }).map((_, idx) => (
+                      <Star key={idx} className="size-3.5 fill-primary text-primary" />
+                    ))}
+                  </div>
+                  <Quote className="size-5 text-mediumlight" />
                 </div>
-                <Quote className="size-5 text-mediumlight" />
+                <p className="text-sm leading-relaxed text-mediumdark">&ldquo;{t.quote}&rdquo;</p>
+                <div className="mt-auto flex items-center gap-3 pt-2">
+                  <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary">
+                    {t.name
+                      .split(" ")
+                      .map((part) => part[0])
+                      .join("")}
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-sm font-semibold text-primary">{t.name}</span>
+                    <span className="text-xs text-mediumdark">{t.role}</span>
+                  </div>
+                </div>
               </div>
-              <p className="text-sm leading-relaxed text-mediumdark">&ldquo;{t.quote}&rdquo;</p>
-              <div className="mt-auto flex items-center gap-3 pt-2">
-                <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary">
-                  {t.name
-                    .split(" ")
-                    .map((part) => part[0])
-                    .join("")}
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-sm font-semibold text-primary">{t.name}</span>
-                  <span className="text-xs text-mediumdark">{t.role}</span>
-                </div>
-              </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

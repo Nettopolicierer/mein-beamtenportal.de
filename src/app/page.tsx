@@ -2,6 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { SORTED_POSTS, formatDate, BOOKING_LINK } from "@/lib/content";
 import { TestimonialStrip } from "@/components/TestimonialStrip";
+import { PensionCalculator } from "@/components/PensionCalculator";
+import { Reveal } from "@/components/Reveal";
 
 const STATS = [
   { value: "Ø 66,7 %", label: "Ruhegehaltssatz bei der Beamtenpension – den Höchstsatz von 71,75 % erreichen nur wenige." },
@@ -11,20 +13,20 @@ const STATS = [
 
 const BENEFITS = [
   {
-    title: "Spezialisiert auf Beamte",
-    text: "Ich berate ausschließlich Beamtinnen, Beamte, Referendare und Anwärter – keine Konzepte von der Stange für den Privatmarkt.",
+    title: "250 Gesellschaften statt 5 Tarife",
+    text: "Die meisten Berater zeigen Ihnen das Portfolio ihres Arbeitgebers. Ich habe selbst bei einer auf den öffentlichen Dienst spezialisierten PKV gearbeitet – und mich bewusst gegen die Bindung an ein Portfolio entschieden.",
   },
   {
-    title: "Modern & Digital",
-    text: "Virtuelle Treffen, E-Signaturen und eine Finanz-App, in der Sie Ihre Verträge im Blick behalten – auf Wunsch auch persönliche Gespräche.",
+    title: `${SORTED_POSTS.length} Artikel, bevor Sie anrufen`,
+    text: "Sie müssen mir nicht blind vertrauen. Lesen Sie im Ratgeber nach, ob ich Ahnung von Ihrem Thema habe – Beihilfe, PKV, Pension oder Dienstunfähigkeit.",
   },
   {
-    title: "Marktübergreifend statt gebunden",
-    text: "Ich habe selbst bei einer auf den öffentlichen Dienst spezialisierten PKV gearbeitet und wollte mich nicht auf ein Portfolio beschränken – deshalb heute unabhängig.",
+    title: "Kein Callcenter, kein Sachbearbeiter",
+    text: "Sie schreiben oder rufen mich direkt an, nicht eine Hotline. Rückmeldung meist noch am selben Tag.",
   },
   {
-    title: "Alles aus einer Hand",
-    text: "Über 250 Partnergesellschaften von PKV über BU bis Altersvorsorge – ein Ansprechpartner für alles.",
+    title: "Digital, wenn's passt",
+    text: "Termine per Video, Vertragsunterschrift per E-Signatur, alles einsehbar in der Finanz-App – ohne dass Sie deshalb einen Termin vor Ort verlieren.",
   },
 ];
 
@@ -117,13 +119,22 @@ export default function Home() {
           wichtige Versorgungsansprüche.
         </p>
         <div className="grid gap-6 sm:grid-cols-3">
-          {STATS.map((s) => (
-            <div key={s.value} className="rounded-2xl bg-base p-6">
-              <p className="font-heading mb-2 text-3xl font-bold text-primary">{s.value}</p>
-              <p className="text-sm text-mediumdark">{s.label}</p>
-            </div>
+          {STATS.map((s, i) => (
+            <Reveal key={s.value} delay={i * 100}>
+              <div className="rounded-2xl bg-base p-6">
+                <p className="font-heading mb-2 text-3xl font-bold text-primary">{s.value}</p>
+                <p className="text-sm text-mediumdark">{s.label}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
+      </section>
+
+      {/* Pensions-Rechner */}
+      <section className="mx-auto max-w-5xl px-6 pb-20">
+        <Reveal variant="scale">
+          <PensionCalculator />
+        </Reveal>
       </section>
 
       {/* Benefits */}
@@ -136,11 +147,13 @@ export default function Home() {
             Was Mein Beamtenportal auszeichnet
           </h2>
           <div className="grid gap-8 sm:grid-cols-2">
-            {BENEFITS.map((b) => (
-              <div key={b.title}>
-                <h3 className="font-heading mb-2 text-lg font-semibold text-primary">{b.title}</h3>
-                <p className="text-sm text-mediumdark">{b.text}</p>
-              </div>
+            {BENEFITS.map((b, i) => (
+              <Reveal key={b.title} delay={i * 80} variant="fade-up">
+                <div>
+                  <h3 className="font-heading mb-2 text-lg font-semibold text-primary">{b.title}</h3>
+                  <p className="text-sm text-mediumdark">{b.text}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -155,21 +168,22 @@ export default function Home() {
           </Link>
         </div>
         <div className="grid gap-6 sm:grid-cols-3">
-          {latest.map((post) => (
-            <Link
-              key={post.slug}
-              href={`/${post.slug}`}
-              className="group flex flex-col gap-3 rounded-2xl border border-mediumlight/40 bg-white p-6 transition-colors hover:border-primary/30"
-            >
-              <div className="flex items-center gap-2 text-xs text-mediumdark">
-                <span>{post.categories[0] ?? "Ratgeber"}</span>
-                <span>·</span>
-                <span>{formatDate(post.date)}</span>
-              </div>
-              <h3 className="font-heading text-base leading-snug font-semibold text-primary group-hover:opacity-80">
-                {post.title}
-              </h3>
-            </Link>
+          {latest.map((post, i) => (
+            <Reveal key={post.slug} delay={i * 80}>
+              <Link
+                href={`/${post.slug}`}
+                className="group flex flex-col gap-3 rounded-2xl border border-mediumlight/40 bg-white p-6 transition-colors hover:border-primary/30"
+              >
+                <div className="flex items-center gap-2 text-xs text-mediumdark">
+                  <span>{post.categories[0] ?? "Ratgeber"}</span>
+                  <span>·</span>
+                  <span>{formatDate(post.date)}</span>
+                </div>
+                <h3 className="font-heading text-base leading-snug font-semibold text-primary group-hover:opacity-80">
+                  {post.title}
+                </h3>
+              </Link>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -206,8 +220,9 @@ export default function Home() {
           Bereit für Klarheit?
         </h2>
         <p className="mb-8 text-mediumdark">
-          Kein Verkaufsgespräch, keine Verpflichtung: Sie schildern Ihre Situation, ich sage Ihnen
-          ehrlich, wo Handlungsbedarf besteht – und wo nicht.
+          In 30 Minuten rechne ich Ihnen vor: Ihren Ruhegehaltssatz nach aktuellen Dienstjahren,
+          Ihre Beihilfe-Erstattungsquote und ob sich eine BU oder ein zusätzliches Depot für Sie
+          lohnt. Schwarz auf weiß, nicht auf Zuruf.
         </p>
         <Link
           href={BOOKING_LINK}
