@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Raleway, Mulish, Caveat } from "next/font/google";
 import Link from "next/link";
 import Image from "next/image";
@@ -41,6 +41,14 @@ export const metadata: Metadata = {
   description:
     "Beihilfe, Pension und PKV für Beamte verständlich erklärt. Unabhängige Beratung für Beamtinnen, Beamte, Referendare und Anwärter im öffentlichen Dienst.",
   alternates: { canonical: BASE_URL },
+};
+
+// maximumScale verhindert Pinch-Zoom, damit auf Mobile kein horizontaler
+// Leerraum durch Rauszoomen entsteht.
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 const NAV = [

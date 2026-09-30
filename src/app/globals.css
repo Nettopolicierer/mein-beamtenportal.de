@@ -25,6 +25,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 /* Testimonial-Marquee: endlos scrollende Karten-Reihe (Karten-Array ist im
