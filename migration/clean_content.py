@@ -249,9 +249,27 @@ def clean_html(raw_html: str, post_title: str = "") -> dict:
 
     # "Über uns" (Redaktionsteam-Textbaustein) auf "Über mich" personalisieren
     # mit 3 Highlights - Albert tritt als Einzelperson auf, nicht als
-    # anonymes Redaktionsteam.
-    ueber_uns_heading = soup.find(["h2", "h3"], id="u")
-    if ueber_uns_heading and ueber_uns_heading.get_text(strip=True) == "Über uns":
+    # anonymes Redaktionsteam. Manche Artikel hatten diesen Block in WP schon
+    # direkt als "Über den Autor" mit echtem Bio-Text angelegt - dort nur den
+    # Text belassen, aber trotzdem wrappen (sonst werden Ueberschrift + beide
+    # Absaetze zu 3 einzelnen Flex-Items der .team-box und die Spalten
+    # quetschen sich kaputt, siehe naechster Kommentarblock).
+    # Ueber die Rank-Math-ID laesst sich dieser Block nicht zuverlaessig
+    # finden: "u" ist nicht eindeutig (z.B. teilt sich eine "Jetzt
+    # herunterladen"-Ueberschrift in einer photo-cta-Box dieselbe ID), und
+    # bei einer zweiten Kollision im selben Artikel haengt Rank-Math sogar
+    # "-1" an ("u-1") - stattdessen robust ueber Text UND team-box-Vorfahre
+    # suchen.
+    ueber_uns_heading = next(
+        (
+            h for h in soup.find_all(["h2", "h3"])
+            if h.get_text(strip=True) in ("Über uns", "Über den Autor", "Über mich")
+            and h.find_parent("div", class_="team-box")
+        ),
+        None,
+    )
+    heading_text = ueber_uns_heading.get_text(strip=True) if ueber_uns_heading else None
+    if ueber_uns_heading and heading_text == "Über uns":
         byline = ueber_uns_heading.find_previous("h4")
         if byline:
             byline.string = "Albert Sibert"
@@ -300,6 +318,15 @@ def clean_html(raw_html: str, post_title: str = "") -> dict:
         content_wrap.append(ueber_uns_heading)
         content_wrap.append(intro)
         content_wrap.append(highlights_ul)
+    elif ueber_uns_heading and heading_text in ("Über den Autor", "Über mich"):
+        following_paras = ueber_uns_heading.find_next_siblings("p", limit=2)
+        content_wrap = soup.new_tag("div")
+        ueber_uns_heading.insert_before(content_wrap)
+        ueber_uns_heading.extract()
+        content_wrap.append(ueber_uns_heading)
+        for p in following_paras:
+            p.extract()
+            content_wrap.append(p)
 
     # Alle Attribute ausser href/src/alt entfernen, Tags auf Whitelist
     # reduzieren. id bleibt an Ueberschriften erhalten (Sprungmarken des
