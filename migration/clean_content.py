@@ -364,6 +364,48 @@ def clean_html(raw_html: str, post_title: str = "") -> dict:
         if prev and prev.name == "img" and prev.get("src") == img.get("src"):
             img.decompose()
 
+    # Freistehende Bilder (eigener Div-Wrapper ohne Begleittext, keine Icon-/
+    # Team-/Summary-/Photo-Box) in den naechsten Absatz mit Text einbetten.
+    # Grund: globals.css floatet ".prose img" nach rechts, damit Text daneben
+    # umbricht - steht danach aber nur noch eine Ueberschrift/Box (clear:both),
+    # bleibt links vom Bild eine leere Flaeche, weil nichts mehr umzubrechen
+    # hat. Das Bild als erstes Kind IN den Absatz zu haengen, statt als
+    # Geschwister davor/danach, macht den Umbruch immer bündig - unabhaengig
+    # davon, was im Originalartikel um das Bild herum stand.
+    STANDALONE_IMG_SKIP_CLASSES = {"icon-row", "team-box", "summary-box", "photo-cta", "profile-photo", "btn"}
+
+    def _find_text_p(tags):
+        for sib in tags:
+            if isinstance(sib, NavigableString):
+                continue
+            if sib.name == "p" and sib.get_text(strip=True):
+                return sib
+            if sib.name == "div":
+                found = sib.find("p")
+                if found and found.get_text(strip=True):
+                    return found
+            if sib.name in {"h1", "h2", "h3", "h4"}:
+                return None
+        return None
+
+    for img in soup.find_all("img"):
+        parent = img.parent
+        if parent is None or parent.name != "div":
+            continue
+        if set(parent.attrs.get("class", [])) & STANDALONE_IMG_SKIP_CLASSES:
+            continue
+        if parent.get_text(strip=True):
+            continue
+        target_p = _find_text_p(parent.find_previous_siblings())
+        if target_p is None:
+            target_p = _find_text_p(parent.find_next_siblings())
+        if target_p is None:
+            continue
+        img.extract()
+        target_p.insert(0, img)
+        if not parent.get_text(strip=True) and not parent.find("img"):
+            parent.decompose()
+
     # Freistehenden Text (durch unwrap() entstanden, z.B. Subtitle-Spans) in
     # <p> einpacken statt als nacktes Text-Fragment im HTML zu belassen.
     for node in list(soup.contents):
