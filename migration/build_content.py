@@ -38,12 +38,20 @@ def apply_title_override(slug: str, title: str, html: str) -> tuple[str, str]:
     return override, html
 
 
+DESCRIPTION_MAX = 155
+
+
 def make_description(post) -> str:
     excerpt = strip_tags(post["excerpt"]["rendered"]).strip()
     excerpt = re.sub(r"\s+", " ", excerpt)
-    if excerpt:
-        return excerpt[:300]
-    return ""
+    if not excerpt:
+        return ""
+    if len(excerpt) <= DESCRIPTION_MAX:
+        return excerpt
+    # An der letzten Wortgrenze vor dem Limit abschneiden (kein Wort
+    # mittendrin kappen), RankMath-Zielbereich ist 70-160 Zeichen.
+    truncated = excerpt[:DESCRIPTION_MAX].rsplit(" ", 1)[0]
+    return truncated.rstrip(".,;:–-") + "…"
 
 
 # WP-Kategorienamen sind uneinheitlich grossgeschrieben ("pkv" statt "PKV")
