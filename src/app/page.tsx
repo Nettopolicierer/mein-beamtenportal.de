@@ -12,19 +12,19 @@ const STATS = [
 const BENEFITS = [
   {
     title: "Spezialisiert auf Beamte",
-    text: "Ihr persönliches Konzept baut auf einer speziellen Auswahl geprüfter Produkte, um höchste Qualität zu gewährleisten.",
+    text: "Ich berate ausschließlich Beamtinnen, Beamte, Referendare und Anwärter – keine Konzepte von der Stange für den Privatmarkt.",
   },
   {
     title: "Modern & Digital",
-    text: "Virtuelle Treffen, E-Signaturen und eine benutzerfreundliche Finanz-App – auf Wunsch auch persönliche Gespräche.",
+    text: "Virtuelle Treffen, E-Signaturen und eine Finanz-App, in der Sie Ihre Verträge im Blick behalten – auf Wunsch auch persönliche Gespräche.",
   },
   {
-    title: "Nachhaltiges Wissen",
-    text: "Sie sollen eigenverantwortlich und selbstbewusst die besten finanziellen Entscheidungen treffen können.",
+    title: "Marktübergreifend statt gebunden",
+    text: "Ich habe selbst bei einer auf den öffentlichen Dienst spezialisierten PKV gearbeitet und wollte mich nicht auf ein Portfolio beschränken – deshalb heute unabhängig.",
   },
   {
     title: "Alles aus einer Hand",
-    text: "Eine vielfältige Palette an Versicherungsoptionen, damit Sie stets bestmöglich aufgestellt sind.",
+    text: "Über 250 Partnergesellschaften von PKV über BU bis Altersvorsorge – ein Ansprechpartner für alles.",
   },
 ];
 
@@ -186,7 +186,7 @@ export default function Home() {
           <p className="mb-6 text-lg text-white/90">Entscheidend ist, was Sie wirklich absichern.</p>
           <p className="mx-auto mb-8 max-w-xl text-white/70">
             Die meisten Beamten gehen davon aus, gut versorgt zu sein — bis sie sehen, welche
-            Lücken trotzdem bestehen. In 45 Minuten zeigen wir Ihnen, wo Handlungsbedarf besteht
+            Lücken trotzdem bestehen. In 45 Minuten zeige ich Ihnen, wo Handlungsbedarf besteht
             und was Sie konkret tun können.
           </p>
           <Link
@@ -206,8 +206,8 @@ export default function Home() {
           Bereit für Klarheit?
         </h2>
         <p className="mb-8 text-mediumdark">
-          Unser erstes Gespräch dient in erster Linie dazu, uns persönlich kennenzulernen und
-          Klarheit über Ihre Wünsche und Erwartungen zu schaffen.
+          Kein Verkaufsgespräch, keine Verpflichtung: Sie schildern Ihre Situation, ich sage Ihnen
+          ehrlich, wo Handlungsbedarf besteht – und wo nicht.
         </p>
         <Link
           href={BOOKING_LINK}

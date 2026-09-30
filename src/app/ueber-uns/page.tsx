@@ -51,10 +51,9 @@ export default function UeberUnsPage() {
             </div>
             <p className="text-mediumdark">
               Ich bin Albert Sibert, unabhängiger Finanzberater mit Schwerpunkt auf Beamte,
-              Referendare und Anwärter im öffentlichen Dienst. Ich kenne die Besonderheiten der
-              Beihilfe, der privaten Krankenversicherung und der Beamtenversorgung genau und
-              begleite Sie bei Beihilfe, PKV, Dienstunfähigkeit und Altersvorsorge – ohne
-              Fachjargon, ohne Druck.
+              Referendare und Anwärter im öffentlichen Dienst. Seit 2019 begleite ich Menschen im
+              öffentlichen Dienst bei Beihilfe, PKV, Dienstunfähigkeit und Altersvorsorge – mit
+              über 250 Partnergesellschaften zur Auswahl statt einem einzigen Produkt.
             </p>
           </div>
 
@@ -75,16 +74,24 @@ export default function UeberUnsPage() {
           Klarheit bei Beihilfe und Pension schaffen
         </h2>
         <p className="mb-4 text-mediumdark">
-          Mein Anspruch ist es, Beratung zu Beihilfe, Pension und PKV verständlich, transparent
-          und praxisnah zu gestalten. Statt Behördendeutsch und Fachbegriffe in den Vordergrund zu
-          stellen, erkläre ich Beamtinnen und Beamten ihre Versorgungsansprüche so, dass sie
-          nachvollziehbar und umsetzbar sind.
+          Die Beihilfevorschriften unterscheiden sich von Bundesland zu Bundesland, der
+          Bemessungssatz ändert sich mit jedem Kind und jeder Beförderung, und die Frist für die
+          PKV-Aufnahmeprüfung läuft bei vielen schon während des Referendariats. Ich erkläre genau,
+          welche Regel in Ihrem Bundesland und in Ihrer Situation gilt – nicht die allgemeine
+          Theorie aus dem Beamtenrecht.
+        </p>
+        <p className="mb-4 text-mediumdark">
+          Angefangen habe ich bei einer großen privaten Krankenversicherung, die auf den
+          öffentlichen Dienst spezialisiert war. Dort habe ich schnell gemerkt, dass ich mich
+          nicht auf die Produkte eines einzigen Anbieters beschränken will – meine Kundinnen und
+          Kunden sollen den wirklich besten Tarif bekommen, nicht nur den besten aus einem
+          Portfolio. Deshalb arbeite ich heute unabhängig und marktübergreifend mit über 250
+          Partnergesellschaften.
         </p>
         <p className="text-mediumdark">
-          Ich möchte Beamtinnen und Beamte befähigen, ihre Beihilfe, ihre Pension und ihre private
-          Krankenversicherung sicher einzuschätzen und fundierte Entscheidungen zu treffen, ohne
-          Unsicherheit oder Überforderung. Denn ich bin überzeugt: Jede Beamtin und jeder Beamte
-          verdient finanziellen Schutz und Klarheit über die eigene Versorgung.
+          Seit 2019 berate ich Menschen im öffentlichen Dienst und habe über 300 Beamtinnen,
+          Beamte, Referendare und Anwärter begleitet – vom ersten Beihilfeantrag bis zur
+          Pensionsplanung. Diese Erfahrung fließt in jedes Gespräch ein.
         </p>
       </div>
 
@@ -94,9 +101,9 @@ export default function UeberUnsPage() {
             Haben Sie Lust auf ein Kennenlernen?
           </h2>
           <p className="mb-8 text-white/80">
-            Unser erstes Gespräch dient in erster Linie dazu, uns persönlich kennenzulernen und
-            Klarheit über Ihre Wünsche und Erwartungen zu schaffen. Nur wenn auf beiden Seiten ein
-            gutes Gefühl herrscht, starten wir gemeinsam in die Zusammenarbeit.
+            Im kostenfreien Erstgespräch (ca. 30–45 Minuten, online oder persönlich) schauen wir
+            uns Ihre Situation an – Beihilfebemessungssatz, bestehende PKV oder Versorgungslücken
+            bei Dienstunfähigkeit. Danach wissen Sie, ob und wo sich etwas lohnt.
           </p>
           <Link
             href={BOOKING_LINK}

@@ -67,6 +67,16 @@ def fix_category_name(name: str) -> str:
     return CATEGORY_MERGES.get(name, name)
 
 
+# Vereinzelte WP-Fehlzuordnungen (per Audit gefunden: Themen-Kategorie passt
+# nicht zum Titel/Inhalt, z.B. "PKV" bei einem reinen DU-Artikel) manuell
+# korrigieren statt die falsche WP-Kategorie zu uebernehmen.
+CATEGORY_OVERRIDES = {
+    "dienstunfaehigkeit-bei-berufsanfaengern": ["DU", "Referendare"],
+    "dienstunfaehigkeit-berufsunfaehigkeit": ["DU", "BU", "Beamte"],
+    "altersvorsorge-referendare": ["Pension", "Referendare"],
+}
+
+
 out_posts = []
 skipped = []
 for p in posts:
@@ -86,6 +96,7 @@ for p in posts:
     # "Allgemein" ist WP-Standardkategorie ohne Aussagekraft, nur behalten wenn einzige.
     non_generic = [c for c in cats if c != "Allgemein"]
     display_cats = non_generic if non_generic else cats
+    display_cats = CATEGORY_OVERRIDES.get(slug, display_cats)
 
     fm = media.get(str(p["featured_media"]), None)
 

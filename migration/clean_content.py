@@ -230,10 +230,8 @@ def clean_html(raw_html: str, post_title: str = "") -> dict:
         if p_tag and p_tag.get_text(strip=True).startswith("Wir sind ein Team"):
             p_tag.string = (
                 "Ich bin Albert Sibert, unabhängiger Finanzberater mit Schwerpunkt auf Beamte, "
-                "Referendare und Anwärter. Ich weiß, wie überwältigend Versicherungs- und "
-                "Finanzthemen sein können – deshalb nehme ich mir die Zeit, die es braucht. Kein "
-                "Fachjargon, kein Druck – nur ehrliche, verständliche Beratung, damit Sie gute "
-                "Entscheidungen treffen können. Ob bei PKV, BU oder Vermögensaufbau."
+                "Referendare und Anwärter. Seit 2019 begleite ich Sie bei Beihilfe, PKV, BU und "
+                "Altersvorsorge – mit über 250 Partnergesellschaften statt nur einem Produkt."
             )
             # Diese Box hat im Original 2 <img> (Mobile-/Desktop-Variante der
             # Illustration) - nur eins zum echten Foto machen, das andere
@@ -278,8 +276,8 @@ def clean_html(raw_html: str, post_title: str = "") -> dict:
         intro = soup.new_tag("p")
         intro.string = (
             "Unabhängiger Finanzberater mit Schwerpunkt auf Beamte, Referendare und Anwärter im "
-            "öffentlichen Dienst. Ich begleite Sie bei Beihilfe, PKV, Dienstunfähigkeit und "
-            "Altersvorsorge – ohne Fachjargon, ohne Druck."
+            "öffentlichen Dienst. Seit 2019 begleite ich Sie bei Beihilfe, PKV, Dienstunfähigkeit "
+            "und Altersvorsorge – mit über 250 Partnergesellschaften zur Auswahl."
         )
         highlights_ul = soup.new_tag("ul")
         for lead, rest in [
