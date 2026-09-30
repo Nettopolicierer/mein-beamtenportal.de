@@ -338,6 +338,37 @@ def clean_html(raw_html: str, post_title: str = "") -> dict:
             p.extract()
             content_wrap.append(p)
 
+    # Die finale Buchungs-CTA-Box ("Kostenfreie, individuelle Beratung") hat
+    # in fast allen Artikeln dieselbe kaputte Flat-Struktur wie oben die
+    # Autoren-Box: h2, Button-Div und Absatz haengen als 3 einzelne Kinder
+    # direkt in der team-box statt in einem gemeinsamen Container. team-box
+    # ist ein nowrap-Flexrow, und h2 bekommt ohne eigenen Wrapper kein
+    # min-width:0 - dadurch laeuft die Zeile bei schmalen Bildschirmen
+    # seitlich ueber (Text wird abgeschnitten) statt sich anzupassen. Text
+    # (Ueberschrift + Kleingedrucktes) in einen Wrapper packen, Button bleibt
+    # als eigenes, nicht schrumpfendes Element daneben (a.btn hat bereits
+    # flex:none in globals.css).
+    cta_heading = next(
+        (
+            h for h in soup.find_all(["h2", "h3"])
+            if h.get_text(strip=True) == "Kostenfreie, individuelle Beratung"
+            and h.find_parent("div", class_="team-box")
+            and h.parent
+            and "team-box" in (h.parent.get("class") or [])
+        ),
+        None,
+    )
+    if cta_heading:
+        cta_box = cta_heading.parent
+        cta_p = cta_box.find("p")
+        cta_wrap = soup.new_tag("div")
+        cta_heading.insert_before(cta_wrap)
+        cta_heading.extract()
+        cta_wrap.append(cta_heading)
+        if cta_p:
+            cta_p.extract()
+            cta_wrap.append(cta_p)
+
     # Alle Attribute ausser href/src/alt entfernen, Tags auf Whitelist
     # reduzieren. id bleibt an Ueberschriften erhalten (Sprungmarken des
     # Inhaltsverzeichnisses funktionieren sonst nicht mehr). class bleibt nur

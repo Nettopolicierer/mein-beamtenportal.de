@@ -133,15 +133,15 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           )}
           {!post.html.includes("Kostenfreie, individuelle Beratung") && (
             <div className="team-box">
-              <h2>
-                <strong>Kostenfreie, individuelle Beratung</strong>
-              </h2>
               <div>
-                <a className="btn" href={BOOKING_LINK} target="_blank" rel="noopener noreferrer">
-                  Termin buchen
-                </a>
+                <h2>
+                  <strong>Kostenfreie, individuelle Beratung</strong>
+                </h2>
+                <p>100% kostenfrei &amp; unverbindlich</p>
               </div>
-              <p>100% kostenfrei &amp; unverbindlich</p>
+              <a className="btn" href={BOOKING_LINK} target="_blank" rel="noopener noreferrer">
+                Termin buchen
+              </a>
             </div>
           )}
         </div>
