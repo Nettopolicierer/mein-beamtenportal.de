@@ -221,9 +221,9 @@ export default function Home() {
           <span className="mx-auto mt-3 mb-4 block h-1 w-12 rounded-full bg-white/40" />
           <p className="mb-6 text-lg text-white/90">Entscheidend ist, was Sie wirklich absichern.</p>
           <p className="mx-auto mb-8 max-w-xl text-white/70">
-            Die meisten Beamten gehen davon aus, gut versorgt zu sein — bis sie sehen, welche
-            Lücken trotzdem bestehen. In 45 Minuten zeige ich Ihnen, wo Handlungsbedarf besteht
-            und was Sie konkret tun können.
+            Die Beihilfe zahlt nicht alles, die Pension deckt nicht Ihr gewohntes Einkommen, und
+            bei Dienstunfähigkeit zählt jeder Monat, den Sie zu spät handeln. In 45 Minuten sehen
+            Sie schwarz auf weiß, wo Ihre Lücken liegen – und was es kostet, sie zu schließen.
           </p>
           <Link
             href={BOOKING_LINK}
