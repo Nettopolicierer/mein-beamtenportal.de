@@ -60,15 +60,6 @@ export default function Home() {
               öffentlichen Dienst.
             </p>
 
-            <ul className="mt-6 flex flex-col gap-2.5">
-              {LEISTUNGSVERSPRECHEN.slice(0, 4).map((item) => (
-                <li key={item} className="flex items-start gap-2.5 text-sm text-mediumdark">
-                  <Check className="mt-0.5 size-4 shrink-0 text-primary" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link
                 href={BOOKING_LINK}
@@ -243,6 +234,27 @@ export default function Home() {
             Jetzt Termin sichern
           </Link>
         </div>
+      </section>
+
+      {/* Leistungsversprechen */}
+      <section className="mx-auto max-w-5xl px-6 py-20">
+        <Reveal>
+          <p className="mb-3 text-xs font-semibold tracking-widest text-primary uppercase">
+            Beratung
+          </p>
+          <h2 className="font-heading max-w-2xl text-2xl font-bold text-primary sm:text-3xl">
+            Mein Leistungsversprechen für Ihre Beihilfe und Vorsorge
+          </h2>
+          <span className="mt-3 mb-6 block h-1 w-12 rounded-full bg-primary" />
+          <ul className="grid gap-x-10 gap-y-4 sm:grid-cols-2">
+            {LEISTUNGSVERSPRECHEN.map((item) => (
+              <li key={item} className="flex items-start gap-3">
+                <Check className="mt-0.5 size-5 shrink-0 text-primary" />
+                <span className="text-mediumdark">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       </section>
 
       {/* Final CTA */}
