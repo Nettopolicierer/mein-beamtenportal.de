@@ -2,6 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { BOOKING_LINK } from "@/lib/content";
+import { Reveal } from "@/components/Reveal";
+
+const STATS = [
+  { value: ">300", label: "Beamte beraten" },
+  { value: "seit 2019", label: "im öffentlichen Dienst" },
+  { value: "250+", label: "Partnergesellschaften" },
+  { value: "4,9/5", label: "ProvenExpert" },
+];
 
 export const metadata: Metadata = {
   title: "Über mich",
@@ -39,30 +47,54 @@ export default function UeberUnsPage() {
 
       <div className="bg-base">
         <div className="mx-auto max-w-5xl px-6 py-16">
-          <div className="grid items-center gap-10 lg:grid-cols-[320px_1fr]">
-            <div className="relative mx-auto aspect-[4/5] w-full max-w-xs overflow-hidden rounded-3xl lg:mx-0 lg:max-w-none">
-              <Image
-                src="/albert-ueber-mich.jpg"
-                alt="Albert Sibert, unabhängiger Finanzberater für Beamte"
-                fill
-                className="object-cover"
-                unoptimized
-              />
-            </div>
-            <p className="text-mediumdark">
-              Ich bin Albert Sibert, unabhängiger Finanzberater mit Schwerpunkt auf Beamte,
-              Referendare und Anwärter im öffentlichen Dienst. Seit 2019 begleite ich Menschen im
-              öffentlichen Dienst bei Beihilfe, PKV, Dienstunfähigkeit und Altersvorsorge – mit
-              über 250 Partnergesellschaften zur Auswahl statt einem einzigen Produkt.
-            </p>
+          <div className="grid gap-10 lg:grid-cols-[320px_1fr] lg:items-stretch">
+            <Reveal variant="fade-right" className="lg:h-full">
+              <div className="relative mx-auto aspect-[4/5] w-full max-w-xs overflow-hidden rounded-3xl shadow-lg lg:mx-0 lg:h-full lg:max-w-none">
+                <Image
+                  src="/albert-ueber-mich.jpg"
+                  alt="Albert Sibert, unabhängiger Finanzberater für Beamte"
+                  fill
+                  className="object-cover"
+                  unoptimized
+                />
+              </div>
+            </Reveal>
+            <Reveal variant="fade-left" delay={100} className="flex flex-col justify-center">
+              <p className="text-lg leading-relaxed text-mediumdark">
+                Ich bin Albert Sibert, unabhängiger Finanzberater mit Schwerpunkt auf Beamte,
+                Referendare und Anwärter im öffentlichen Dienst. Seit 2019 begleite ich Menschen im
+                öffentlichen Dienst bei Beihilfe, PKV, Dienstunfähigkeit und Altersvorsorge – mit
+                über 250 Partnergesellschaften zur Auswahl statt einem einzigen Produkt.
+              </p>
+
+              <div className="mt-10 grid grid-cols-2 gap-6 border-t border-mediumlight/40 pt-8 sm:grid-cols-4">
+                {STATS.map((s) => (
+                  <div key={s.label}>
+                    <p className="font-heading text-2xl font-bold text-primary">{s.value}</p>
+                    <p className="text-xs text-mediumdark">{s.label}</p>
+                  </div>
+                ))}
+              </div>
+
+              <Link
+                href={BOOKING_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 inline-flex w-fit items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-white hover:bg-primary/90"
+              >
+                Kostenfreies Erstgespräch
+              </Link>
+            </Reveal>
           </div>
 
           <div className="mt-12 grid gap-6 sm:grid-cols-3">
-            {HIGHLIGHTS.map((h) => (
-              <div key={h.title} className="rounded-2xl bg-white p-6">
-                <h3 className="font-heading mb-2 text-base font-semibold text-primary">{h.title}</h3>
-                <p className="text-sm text-mediumdark">{h.text}</p>
-              </div>
+            {HIGHLIGHTS.map((h, i) => (
+              <Reveal key={h.title} delay={i * 100}>
+                <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-mediumlight/30">
+                  <h3 className="font-heading mb-2 text-base font-semibold text-primary">{h.title}</h3>
+                  <p className="text-sm text-mediumdark">{h.text}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
