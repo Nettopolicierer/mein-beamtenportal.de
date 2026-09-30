@@ -2,6 +2,7 @@
 bereit fuer generateStaticParams in Next.js. Nutzt clean-content.py fuer die
 HTML-Bereinigung.
 """
+import html
 import json
 import re
 import sys
@@ -29,11 +30,87 @@ def strip_tags(html: str) -> str:
     return re.sub(r"<[^>]+>", " ", html)
 
 
-# Titel gezielt auf das Beamten-Publikum zuschneiden: bei diesem Beitrag war
-# der Originaltitel generisch ("als Absolvent") formuliert, obwohl der Inhalt
-# (siehe Excerpt) sich klar an Referendare vor der Verbeamtung richtet.
+# WP liefert im REST-Export teils undekodierte numerische Entities (z.B.
+# "&#038;" statt "&", ein bekannter esc_html()-Effekt) und weiche Trennzeichen
+# (­, unsichtbar bis auf einen Zeilenumbruch an der Stelle) im Titel.
+# Beides sieht im Title-Tag/H1 kaputt bzw. unnoetig lang aus - bereinigen.
+def clean_text(text: str) -> str:
+    text = html.unescape(text)
+    text = text.replace("­", "")
+    return re.sub(r"\s+", " ", text).strip()
+
+
+# Titel gezielt auf das Beamten-Publikum zuschneiden bzw. auf SEO-taugliche
+# Laenge kuerzen (Google schneidet Title-Tags in den Suchergebnissen bei ca.
+# 55-60 Zeichen ab - alles danach wird nicht angezeigt). Bedeutung/Fokus-
+# Keyword bewusst erhalten, nur Fuellwoerter ("Was Sie wissen muessen", "Ihr
+# Ratgeber" etc.) gekuerzt.
 TITLE_OVERRIDES = {
-    "krankenversicherung-absolvent": "Krankenversicherung als Referendar: GKV oder PKV vor der Verbeamtung?",
+    "krankenversicherung-absolvent": "Krankenversicherung als Referendar: GKV oder PKV?",
+    "berufs-oder-dienstunfaehigkeitsversicherung": "Berufs- oder Dienstunfähigkeitsversicherung für Lehrer",
+    "dienstunfaehigkeit-bei-berufsanfaengern": "Dienstunfähigkeit bei Berufsanfängern: Das Risiko",
+    "finanzen-berufsstart-beamte": "Finanzen zum Berufsstart für Beamte: Die Checkliste",
+    "versicherung-fuer-lehramtsstudenten": "Versicherungen für Lehramtsstudenten im Überblick",
+    "private-krankenversicherung-wechseln-als-beamter": "Private Krankenversicherung wechseln als Beamter",
+    "pension-fuer-lehrer-in-bayern": "Pension für Lehrer in Bayern: So berechnet sie sich",
+    "freiwillig-gesetzlich-versicherter-beamter-beihilfe": "Freiwillig gesetzlich versicherter Beamter und Beihilfe",
+    "beihilfeversicherung-fuer-beamte": "Beihilfeversicherung für Beamte: So funktioniert sie",
+    "berufsunfaehigkeitsversicherung-fuer-beamte-lehrer-sinnvoll": "Berufsunfähigkeitsversicherung für Lehrer: Sinnvoll?",
+    "berufsunfaehigkeitsversicherung-steuerlich-absetzbar": "Berufsunfähigkeitsversicherung steuerlich absetzbar",
+    "oeffnungsklausel-in-der-pkv": "Öffnungsklausel in der PKV für Beamte",
+    "private-krankenversicherung-fuer-kinder-beamte": "Private Krankenversicherung für Kinder von Beamten",
+    "gehaltserhoehung-investieren": "Gehaltserhöhung investieren: So bauen Sie Vermögen auf",
+    "private-altersvorsorge-fuer-beamte": "Private Altersvorsorge für Beamte trotz Pension",
+    "ablehnung-der-pkv-als-beamter": "Ablehnung der PKV als Beamter: Was jetzt zählt",
+    "berufsunfaehigkeitsversicherung-beamte-2026": "Berufsunfähigkeitsversicherung für Beamte 2026",
+    "berufsunfaehigkeitsversicherung-lehramtsstudenten": "Berufsunfähigkeitsversicherung für Lehramtsstudenten",
+    "anwartschaft-student-private-krankenversicherung": "PKV-Anwartschaft für Studenten: So funktioniert sie",
+    "dienstunfaehigkeitsversicherung-mit-beitragsrueckerstattung-lohnt-sich-das": "DU-Versicherung mit Beitragsrückerstattung: Lohnt es?",
+    "beihilfe-beamte": "Beihilfe für Beamte 2026: Was wird erstattet?",
+    "altersvorsorge-referendare": "Altersvorsorge für Referendare 2026: Jetzt starten",
+    "kosten-dienstunfaehigkeitsversicherung-referendariat": "Kosten der DU-Versicherung im Referendariat",
+    "verbeamtung-finanzen": "Verbeamtung: Die Finanz-Checkliste für den Start",
+    "beihilfe-im-ausland": "Beihilfe im Ausland: Ansprüche und Regelungen",
+    "fondsgebundene-rentenversicherung-fuer-beamte": "Fondsgebundene Rentenversicherung für Beamte",
+    "dienstunfaehigkeit-berufsunfaehigkeit": "Unterschied zwischen Dienst- und Berufsunfähigkeit",
+    "dienstunfaehigkeit-bei-beamten": "Dienstunfähigkeit bei Beamten 2026: Der Überblick",
+    "haftpflichtversicherung-lehramtstudent": "Haftpflichtversicherung für Lehramtsstudenten",
+    "anwartschaft-im-lehramt": "Anwartschaft im Lehramt: Der Weg in die PKV",
+    "berufsunfaehigkeitsversicherung-fuer-studenten-was-sie-wissen-muessen": "Berufsunfähigkeitsversicherung für Studenten",
+    "kosten-private-krankenversicherung-fuer-beamte": "PKV für Beamte: Kosten und Einflussfaktoren",
+    "dienstunfaehigkeitsversicherung-fuer-lehrer": "Dienstunfähigkeitsversicherung für Lehrer",
+    "berufsunfaehigkeitsversicherung-fuer-lehrer-sinnvoll": "Berufsunfähigkeitsversicherung für Lehrer: Sinnvoll?",
+    "bu-versicherung-fuer-lehrer": "BU-Versicherung für Lehrer im Schuldienst",
+    "altersvorsorgedepot": "Altersvorsorgedepot 2027: Jetzt Förderung sichern",
+    "versicherung-referendariat-lehramt-niedersachsen": "Versicherung im Lehramtsreferendariat Niedersachsen",
+    "berufsunfaehigkeit-gruende": "Gründe für Berufsunfähigkeit bei Lehrern",
+    "pkv-fuer-lehrer": "Private Krankenversicherung (PKV) für Lehrer",
+    "pkv-fuer-beamte": "Private Krankenversicherung (PKV) für Beamte",
+    "pflegeversicherung-beamte": "Pflegeversicherung für Beamte: Beihilfe-Lücken",
+    "dienstunfaehigkeit-beamte-baden-wuerttemberg-was-sie-wissen-muessen": "Dienstunfähigkeit bei Beamten in Baden-Württemberg",
+    "beamte-wann-in-pension-gehen": "Wann können Beamte in Pension gehen?",
+    "oeffnungsaktion-pkv-fuer-beamte": "Öffnungsaktion in der PKV für Beamte",
+    "krankenversicherung-fuer-beamtenanwaerter": "Krankenversicherung für Beamtenanwärter",
+    "berufsunfaehigkeit-als-student-wie-sinnvoll-ist-die-absicherung": "Berufsunfähigkeit als Student: Wie sinnvoll ist sie?",
+    "riester-rente-beamte": "Riester-Rente für Beamte: Lohnt sie sich?",
+    "pkv-oeffnungsklausel-nachteile": "PKV-Öffnungsklausel: Diese Nachteile sollten Sie kennen",
+    "pkv-fuer-verbeamtete-bundeslaender": "PKV für Lehrer: Unterschiede nach Bundesland",
+    "verbeamtung-auf-probe-finanzfehler": "Verbeamtung auf Probe: Diese Finanzfehler vermeiden",
+    "pkv-beamte-vorteile": "PKV für Beamte 2026: Die wichtigsten Vorteile",
+    "private-krankenversicherung-im-referendariat-lehramt": "Private Krankenversicherung im Lehramtsreferendariat",
+    "dienstunfaehigkeitsversicherung-sinnvoll-so-sichern-sie-sich-ab": "Dienstunfähigkeitsversicherung: So sichern Sie sich ab",
+    "pension-fuer-lehrer-in-nrw": "Pension für Lehrer in NRW: Ihre Altersvorsorge",
+    "kosten-fuer-pensionierte-beamte": "PKV-Kosten für pensionierte Beamte",
+    "berufsunfaehigkeitsversicherung-beamte-sinnvoll": "Berufsunfähigkeitsversicherung für Beamte: Sinnvoll?",
+    "dienstunfaehigkeitsversicherung-mit-vorerkrankung-ihre-chancen": "DU-Versicherung mit Vorerkrankung: Ihre Chancen",
+    "pension-lehrer-in-baden-wuerttemberg": "Pension für Lehrer in Baden-Württemberg",
+    "ruhegehalt-bei-dienstunfaehigkeit-tabelle-ueberblick-fuer-beamte": "Ruhegehalt bei Dienstunfähigkeit: Tabelle für Beamte",
+    "altersvorsorge-verbeamte-lehrer": "Altersvorsorge für verbeamtete Lehrer",
+    "pension-beamte-baden-wuerttemberg": "Pension für Beamte in Baden-Württemberg",
+    "berufsunfaehigkeitsversicherung-fuer-lehrer-kosten": "BU-Versicherung für Lehrer: Kosten im Überblick",
+    "altersvorsorgedepot-fuer-referendare": "Altersvorsorgedepot 2027 für Referendare",
+    "abstrakte-verweisung-bu": "Abstrakte Verweisung bei der BU: Der Fallstrick",
+    "krankenversicherung-im-mutterschutz": "Krankenversicherung im Mutterschutz für Lehrerinnen",
 }
 
 
@@ -41,10 +118,14 @@ def apply_title_override(slug: str, title: str, html: str) -> tuple[str, str]:
     override = TITLE_OVERRIDES.get(slug)
     if not override:
         return title, html
-    # Erste Überschrift im Content (fasst meist den Titel noch einmal aus)
-    # ebenfalls anpassen, sonst widerspricht sie dem neuen Seitentitel.
-    html = re.sub(r"(<h2[^>]*>)[^<]*Absolvent[^<]*(</h2>)", r"\1" + override + r"\2", html, count=1)
-    html = html.replace("Krankenversicherung als Absolvent", "Krankenversicherung als Referendar")
+    if slug == "krankenversicherung-absolvent":
+        # Erste Überschrift im Content (fasst meist den Titel noch einmal
+        # zusammen) ebenfalls anpassen, sonst widerspricht sie dem neuen
+        # Seitentitel - gilt nur fuer diesen einen Sonderfall, bei den
+        # reinen Laengen-Kuerzungen der anderen Titel taucht der alte
+        # Titeltext im Content nicht wortgleich als Ueberschrift auf.
+        html = re.sub(r"(<h2[^>]*>)[^<]*Absolvent[^<]*(</h2>)", r"\1" + override + r"\2", html, count=1)
+        html = html.replace("Krankenversicherung als Absolvent", "Krankenversicherung als Referendar")
     return override, html
 
 
@@ -117,10 +198,10 @@ for p in posts:
     if slug in RESERVED_SLUGS:
         skipped.append(slug)
         continue
-    title = p["title"]["rendered"].strip()
+    title = clean_text(p["title"]["rendered"])
     cleaned = clean_html(p["content"]["rendered"], title)
-    html = localize_media_urls(cleaned["html"])
-    title, html = apply_title_override(slug, title, html)
+    body_html = localize_media_urls(cleaned["html"])
+    title, body_html = apply_title_override(slug, title, body_html)
     raw_cats = [fix_category_name(categories[cid]["name"]) for cid in p.get("categories", []) if cid in categories]
     # Nach Normalisierung/Zusammenlegung koennen Duplikate entstehen (z.B. ein
     # Post mit sowohl "PKV" als auch "Krankenversicherung") - deduplizieren,
@@ -136,15 +217,15 @@ for p in posts:
     out_posts.append({
         "slug": slug,
         "title": title,
-        "subtitle": cleaned["subtitle"],
+        "subtitle": clean_text(cleaned["subtitle"]) if cleaned["subtitle"] else cleaned["subtitle"],
         "toc": cleaned["toc"],
-        "description": make_description(p, html),
+        "description": clean_text(make_description(p, body_html)),
         "date": p["date"],
         "modified": p["modified"],
         "categories": display_cats,
         "featuredImage": localize_media_urls(fm["url"]) if fm else None,
         "featuredImageAlt": fm["alt"] if fm else "",
-        "html": html,
+        "html": body_html,
     })
 
 # Jeder Post traegt oft 2+ Kategorien in willkuerlicher WP-Reihenfolge - die
@@ -159,12 +240,12 @@ for post in out_posts:
 
 out_pages = []
 for pg in pages:
-    title = pg["title"]["rendered"].strip()
+    title = clean_text(pg["title"]["rendered"])
     cleaned = clean_html(pg["content"]["rendered"], title)
     out_pages.append({
         "slug": pg["slug"],
         "title": title,
-        "subtitle": cleaned["subtitle"],
+        "subtitle": clean_text(cleaned["subtitle"]) if cleaned["subtitle"] else cleaned["subtitle"],
         "html": localize_media_urls(cleaned["html"]),
     })
 
