@@ -109,9 +109,10 @@ export default function Home() {
         <p className="mb-3 text-xs font-semibold tracking-widest text-primary uppercase">
           Das Beihilfe-Problem
         </p>
-        <h2 className="font-heading mb-4 max-w-2xl text-2xl font-bold text-primary sm:text-3xl">
+        <h2 className="font-heading max-w-2xl text-2xl font-bold text-primary sm:text-3xl">
           Beihilfe, Pension und PKV für Beamte – was Ihnen wirklich zusteht
         </h2>
+        <span className="mt-3 mb-4 block h-1 w-12 rounded-full bg-primary" />
         <p className="mb-12 max-w-2xl text-mediumdark">
           Das Versorgungssystem für Beamte unterscheidet sich grundlegend von der gesetzlichen
           Rente. Wer die Regeln zur Beihilfe, zur privaten Krankenversicherung, zur
@@ -143,9 +144,10 @@ export default function Home() {
           <p className="mb-3 text-xs font-semibold tracking-widest text-primary uppercase">
             Ihre Vorteile
           </p>
-          <h2 className="font-heading mb-12 max-w-2xl text-2xl font-bold text-primary sm:text-3xl">
+          <h2 className="font-heading max-w-2xl text-2xl font-bold text-primary sm:text-3xl">
             Was Mein Beamtenportal auszeichnet
           </h2>
+          <span className="mt-3 mb-12 block h-1 w-12 rounded-full bg-primary" />
           <div className="grid gap-8 sm:grid-cols-2">
             {BENEFITS.map((b, i) => (
               <Reveal key={b.title} delay={i * 80} variant="fade-up">
@@ -161,8 +163,11 @@ export default function Home() {
 
       {/* Latest posts */}
       <section className="mx-auto max-w-5xl px-6 py-20">
-        <div className="mb-10 flex flex-wrap items-center justify-between gap-4">
-          <h2 className="font-heading text-2xl font-bold text-primary">Neueste Beiträge</h2>
+        <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h2 className="font-heading text-2xl font-bold text-primary">Neueste Beiträge</h2>
+            <span className="mt-3 block h-1 w-12 rounded-full bg-primary" />
+          </div>
           <Link href="/ratgeber" className="text-sm font-medium text-primary hover:underline">
             Alle Beiträge →
           </Link>
@@ -194,9 +199,10 @@ export default function Home() {
       {/* Absicherungs-CTA */}
       <section className="bg-primary">
         <div className="mx-auto max-w-3xl px-6 py-20 text-center">
-          <h2 className="font-heading mb-4 text-2xl font-bold text-white sm:text-3xl">
+          <h2 className="font-heading text-2xl font-bold text-white sm:text-3xl">
             Beihilfe und Pension allein reichen nicht.
           </h2>
+          <span className="mx-auto mt-3 mb-4 block h-1 w-12 rounded-full bg-white/40" />
           <p className="mb-6 text-lg text-white/90">Entscheidend ist, was Sie wirklich absichern.</p>
           <p className="mx-auto mb-8 max-w-xl text-white/70">
             Die meisten Beamten gehen davon aus, gut versorgt zu sein — bis sie sehen, welche
@@ -216,9 +222,10 @@ export default function Home() {
 
       {/* Final CTA */}
       <section className="mx-auto max-w-3xl px-6 py-20 text-center">
-        <h2 className="font-heading mb-4 text-2xl font-bold text-primary sm:text-3xl">
+        <h2 className="font-heading text-2xl font-bold text-primary sm:text-3xl">
           Bereit für Klarheit?
         </h2>
+        <span className="mx-auto mt-3 mb-4 block h-1 w-12 rounded-full bg-primary" />
         <p className="mb-8 text-mediumdark">
           In 30 Minuten schaue ich mir Ihre konkrete Situation an: wo bei Beihilfe, PKV oder im
           Ernstfall einer Dienstunfähigkeit Lücken bestehen – und was sich davon für Sie wirklich
