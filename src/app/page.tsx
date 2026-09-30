@@ -222,7 +222,7 @@ export default function Home() {
           <p className="mb-6 text-lg text-white/90">Entscheidend ist, was Sie wirklich absichern.</p>
           <p className="mx-auto mb-8 max-w-xl text-white/70">
             Die Beihilfe zahlt nicht alles, die Pension deckt nicht Ihr gewohntes Einkommen, und
-            bei Dienstunfähigkeit zählt jeder Monat, den Sie zu spät handeln. In 45 Minuten sehen
+            bei Dienstunfähigkeit zählt jeder Monat, den Sie zu spät handeln. In 30 Minuten sehen
             Sie schwarz auf weiß, wo Ihre Lücken liegen – und was es kostet, sie zu schließen.
           </p>
           <Link
