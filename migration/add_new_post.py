@@ -49,6 +49,12 @@ def main():
     if not (70 <= len(post["description"]) <= 160):
         fail(f"description sollte 70-160 Zeichen lang sein, ist {len(post['description'])}")
 
+    if len(post["title"]) > 60:
+        fail(
+            f"title ist {len(post['title'])} Zeichen lang, sollte max. 60 sein "
+            "(Google schneidet Title-Tags in den Suchergebnissen sonst ab)"
+        )
+
     existing = json.load(open(EXISTING_POSTS_PATH))
     new_posts = json.load(open(NEW_POSTS_PATH))
     all_slugs = {p["slug"] for p in existing} | {p["slug"] for p in new_posts}

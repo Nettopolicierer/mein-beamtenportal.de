@@ -125,6 +125,10 @@ nicht auf den WordPress-Altbestand) am weitesten zurückliegt.
   Landes-/Bundesstellen (Landesamt für Besoldung, Bezügestelle etc.) als Quelle.
 - Mindestens **eine Tabelle oder Checkliste** mit konkreten Prüfpunkten/Zahlen.
 - Fokus-Keyword in H1 (=`title`), erstem H2 und erstem Absatz.
+- **`title` max. 60 Zeichen** (inkl. Leerzeichen). Google schneidet Title-Tags in den
+  Suchergebnissen bei ca. 55-60 Zeichen ab ("…") — alles danach wird nicht angezeigt und
+  verschenkt Klickanreiz. Lieber ein knapperes, direktes Fokus-Keyword-Match als ein
+  Untertitel-artiger Bandwurmtitel mit Doppelpunkt-Anhängsel.
 - Mindestens **2 interne Links** auf thematisch passende bestehende Artikel (Slug aus
   `content-posts.json` suchen) plus ein Link zu `/ratgeber`.
 - Länge: **1.200–1.800 Wörter**.
@@ -139,7 +143,7 @@ Post-JSON-Objekt für `add_new_post.py` (Felder wie im `Post`-Interface in
 ```json
 {
   "slug": "pkv-referendare-bayern",
-  "title": "PKV für Referendare in Bayern: Tarife, Kosten und Beihilfe-Zusammenspiel",
+  "title": "PKV für Referendare in Bayern: Tarife & Kosten",
   "subtitle": "Was beim Wechsel von der GKV in die private Krankenversicherung während des Referendariats in Bayern zu beachten ist.",
   "toc": [
     { "href": "#kuerze", "text": "Das Wichtigste in Kürze" },
