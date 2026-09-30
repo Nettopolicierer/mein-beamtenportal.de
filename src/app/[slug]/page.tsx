@@ -94,10 +94,57 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         id="content-start"
         className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 py-16 lg:grid-cols-[1fr_260px]"
       >
-        <div
-          className="prose prose-sm max-w-none leading-normal prose-headings:font-heading prose-headings:text-primary prose-p:leading-relaxed prose-a:text-primary sm:prose-base"
-          dangerouslySetInnerHTML={{ __html: post.html }}
-        />
+        <div className="prose prose-sm max-w-none leading-normal prose-headings:font-heading prose-headings:text-primary prose-p:leading-relaxed prose-a:text-primary sm:prose-base">
+          <div dangerouslySetInnerHTML={{ __html: post.html }} />
+
+          {/* Die aus WordPress migrierten Artikel haben "Über den Autor" +
+              die Buchungs-CTA-Box schon fest im html eingebettet - neue
+              Autopilot-Artikel nicht zwingend (und die Sidebar-CTA ist auf
+              Mobile komplett unsichtbar, "hidden lg:block"). Ohne diese Box
+              fehlt auf kleinen Bildschirmen jeder Buchungs-CTA im Artikel.
+              Deshalb hier als Fallback ergaenzen, wenn der Artikeltext sie
+              nicht schon selbst enthaelt. */}
+          {!post.html.includes("Über den Autor") && !post.html.includes("Über mich") && (
+            <div className="team-box">
+              <div>
+                <img alt="Albert Sibert" className="profile-photo" src="/albert-portrait.webp" />
+                <div>
+                  <h4>Albert Sibert</h4>
+                  <p>Versicherungsexperte</p>
+                  <ul>
+                    <li>
+                      <a href="https://www.linkedin.com/in/albert-sibert-86225a231/">LinkedIn</a>
+                    </li>
+                    <li>
+                      <a href="https://wa.me/4917692609041">WhatsApp</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div>
+                <h2>Über mich</h2>
+                <p>
+                  Unabhängiger Finanzberater mit Schwerpunkt auf Beamte, Referendare und Anwärter im
+                  öffentlichen Dienst. Seit 2019 begleite ich Sie bei Beihilfe, PKV, Dienstunfähigkeit
+                  und Altersvorsorge – mit über 250 Partnergesellschaften zur Auswahl.
+                </p>
+              </div>
+            </div>
+          )}
+          {!post.html.includes("Kostenfreie, individuelle Beratung") && (
+            <div className="team-box">
+              <h2>
+                <strong>Kostenfreie, individuelle Beratung</strong>
+              </h2>
+              <div>
+                <a className="btn" href={BOOKING_LINK} target="_blank" rel="noopener noreferrer">
+                  Termin buchen
+                </a>
+              </div>
+              <p>100% kostenfrei &amp; unverbindlich</p>
+            </div>
+          )}
+        </div>
 
         <aside className="hidden lg:block">
           <div className="sticky top-24 z-10 flex flex-col gap-4">

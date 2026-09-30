@@ -182,7 +182,10 @@ die exakte Struktur):
 
 `ArticleLayout`-Äquivalent (`src/app/[slug]/page.tsx`) erzeugt Hero, Trust-Badge, Sidebar mit
 Inhaltsverzeichnis und Buchungs-CTA sowie „Verwandte Beiträge" automatisch aus `categories` —
-nichts davon im `html` duplizieren.
+nichts davon im `html` duplizieren. Ebenso rendert `[slug]/page.tsx` automatisch eine
+"Über mich"-Autorenbox und eine finale "Kostenfreie, individuelle Beratung"-CTA-Box direkt im
+Artikeltext ans Ende, falls das `html` diese Texte nicht bereits selbst enthält — im `html`
+also **nicht** noch eine eigene `team-box` mit Autoren-Bio oder Buchungs-CTA einbauen.
 
 ## Commit
 
