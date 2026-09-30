@@ -258,24 +258,26 @@ export default function Home() {
       </section>
 
       {/* Final CTA */}
-      <section className="mx-auto max-w-3xl px-6 py-20 text-center">
-        <h2 className="font-heading text-2xl font-bold text-primary sm:text-3xl">
-          Bereit für Klarheit?
-        </h2>
-        <span className="mx-auto mt-3 mb-4 block h-1 w-12 rounded-full bg-primary" />
-        <p className="mb-8 text-mediumdark">
-          In 30 Minuten schaue ich mir Ihre konkrete Situation an: wo bei Beihilfe, PKV oder im
-          Ernstfall einer Dienstunfähigkeit Lücken bestehen – und was sich davon für Sie wirklich
-          zu schließen lohnt.
-        </p>
-        <Link
-          href={BOOKING_LINK}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center rounded-lg bg-primary px-7 py-3.5 text-sm font-semibold text-white hover:bg-primary/90"
-        >
-          Kostenfreies Erstgespräch vereinbaren
-        </Link>
+      <section className="bg-base">
+        <div className="mx-auto max-w-3xl px-6 py-20 text-center">
+          <h2 className="font-heading text-2xl font-bold text-primary sm:text-3xl">
+            Bereit für Klarheit?
+          </h2>
+          <span className="mx-auto mt-3 mb-4 block h-1 w-12 rounded-full bg-primary" />
+          <p className="mb-8 text-mediumdark">
+            In 30 Minuten schaue ich mir Ihre konkrete Situation an: wo bei Beihilfe, PKV oder im
+            Ernstfall einer Dienstunfähigkeit Lücken bestehen – und was sich davon für Sie wirklich
+            zu schließen lohnt.
+          </p>
+          <Link
+            href={BOOKING_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-lg bg-primary px-7 py-3.5 text-sm font-semibold text-white hover:bg-primary/90"
+          >
+            Kostenfreies Erstgespräch vereinbaren
+          </Link>
+        </div>
       </section>
     </div>
   );
