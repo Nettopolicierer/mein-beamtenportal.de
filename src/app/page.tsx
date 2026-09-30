@@ -37,7 +37,7 @@ export default function Home() {
     <div>
       {/* Hero */}
       <section className="bg-base">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 px-6 pt-16 pb-6 sm:pt-20 sm:pb-8 lg:grid-cols-2">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-6 pt-16 pb-0 sm:pt-20 lg:grid-cols-2">
           <div>
             <h1 className="font-hand text-6xl leading-none font-bold text-primary sm:text-7xl">
               Mein Beamtenportal
@@ -220,9 +220,9 @@ export default function Home() {
           Bereit für Klarheit?
         </h2>
         <p className="mb-8 text-mediumdark">
-          In 30 Minuten rechne ich Ihnen vor: Ihren Ruhegehaltssatz nach aktuellen Dienstjahren,
-          Ihre Beihilfe-Erstattungsquote und ob sich eine BU oder ein zusätzliches Depot für Sie
-          lohnt. Schwarz auf weiß, nicht auf Zuruf.
+          In 30 Minuten schaue ich mir Ihre konkrete Situation an: wo bei Beihilfe, PKV oder im
+          Ernstfall einer Dienstunfähigkeit Lücken bestehen – und was sich davon für Sie wirklich
+          zu schließen lohnt.
         </p>
         <Link
           href={BOOKING_LINK}
