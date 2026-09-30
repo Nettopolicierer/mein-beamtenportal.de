@@ -25,7 +25,9 @@
 
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  /* KEIN overflow-x:hidden hier - bricht position:sticky in Safari/iOS
+     (bekannter Bug). body hat die Regel schon, das reicht als Schutz gegen
+     horizontales Scrollen. */
 }
 
 /* Testimonial-Marquee: endlos scrollende Karten-Reihe (Karten-Array ist im

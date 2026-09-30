@@ -32,6 +32,13 @@ Hauptwachstumshebel:
   Lexikon-Erklärung ohne Handlungsaufforderung)
 - Rentennahe Beamte kurz vor Pensionierung (das ist Pension-Cluster, aber nicht der
   Beratungs-Trigger — Fokus bleibt auf Berufseinstieg/Laufbahnentscheidungen)
+- **„Wie hoch wird genau meine Pension" / „Pensionshöhe berechnen" als reine
+  Zahlen-Frage.** Das zieht ältere Beamte an, die nur ihre exakte amtliche Zahl wollen
+  (nicht beratungsbedürftig, oft schon kurz vor Pensionierung) — dasselbe Problem wie beim
+  Pensions-Rechner auf der Startseite. Pension-Artikel behandeln stattdessen **Lücken und
+  Handlungsoptionen** (z. B. „Versorgungslücke bei Beamten auf Probe", „Warum der
+  Ruhegehaltssatz oft niedriger ausfällt als gedacht" mit Handlungsableitung), nie eine
+  reine Berechnungsanleitung ohne Beratungsbezug.
 
 ## Ablauf pro Lauf
 
@@ -75,10 +82,10 @@ Kategorie erscheint als Badge auf Artikelkarten).
 
 | Cluster | Zielanteil neuer Artikel | Inhalte |
 | --- | --- | --- |
-| **PKV + Referendare/Anwärter** (Schwerpunkt) | **~35 %** | PKV-Wechsel GKV→PKV beim Referendariat, PKV-Tarifvergleich für Berufseinsteiger, Beihilfe+PKV-Zusammenspiel, Gesundheitsfragen bei jungen Antragstellern, PKV nach Bundesland |
-| **Bundesland-Beihilfe** | **~30 %** | Beihilfebemessungssatz je Bundesland, Beihilfeverordnung-Besonderheiten, Beihilfeantrag stellen (je Bundesland unterschiedliche Stellen/Formulare) |
+| **PKV + Referendare/Anwärter** (Schwerpunkt) | **~40 %** | PKV-Wechsel GKV→PKV beim Referendariat, PKV-Tarifvergleich für Berufseinsteiger, Beihilfe+PKV-Zusammenspiel, Gesundheitsfragen bei jungen Antragstellern, PKV nach Bundesland |
+| **Bundesland-Beihilfe** | **~32 %** | Beihilfebemessungssatz je Bundesland, Beihilfeverordnung-Besonderheiten, Beihilfeantrag stellen (je Bundesland unterschiedliche Stellen/Formulare) |
 | **DU/BU bei Berufsanfängern** | **~20 %** | Dienstunfähigkeit in den ersten Dienstjahren, 5-Jahres-Hürde, private DU/BU für Referendare, Gesundheitsfragen-Fallen |
-| **Pension/Altersvorsorge** | **~15 %** | Ruhegehaltssatz-Grundlagen für Berufseinsteiger, Versorgungslücke früh erkennen, Pension bei Beamten auf Widerruf/Probe |
+| **Pension/Altersvorsorge** | **~8 %** (bewusst klein) | Ausschließlich mit Beratungsbezug für Berufseinsteiger: Versorgungslücke früh erkennen, Pension bei Beamten auf Widerruf/Probe. **Keine** Artikel im Stil „so berechnen Sie Ihre Pension" — das zieht die falsche Zielgruppe an (siehe „Nicht die Zielgruppe" oben). |
 
 `Allgemein` bekommt **keine neuen** Beiträge (Sammelkategorie für Altbestand).
 
