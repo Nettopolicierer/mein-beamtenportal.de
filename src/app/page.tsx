@@ -18,7 +18,7 @@ const BENEFITS = [
   },
   {
     title: `${SORTED_POSTS.length} Artikel, bevor Sie anrufen`,
-    text: "Sie müssen mir nicht blind vertrauen. Lesen Sie im Ratgeber nach, ob ich Ahnung von Ihrem Thema habe – Beihilfe, PKV, Pension oder Dienstunfähigkeit.",
+    text: "Werfen Sie vorher einen Blick in meinen Ratgeber: ausführliche Antworten zu Beihilfe, PKV, Pension und Dienstunfähigkeit – bevor Sie überhaupt mit mir sprechen.",
   },
   {
     title: "Kein Callcenter, kein Sachbearbeiter",
