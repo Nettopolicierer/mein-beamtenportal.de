@@ -43,14 +43,18 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       <div className="relative">
         {post.featuredImage && (
           <div
-            // bg-top statt bg-center: die meisten Titelbilder sind Portrait-
-            // artige Stockfotos (Gesicht im oberen Bilddrittel). Bei langen,
-            // mehrzeiligen Ueberschriften wird der Hero hoch und schmal -
-            // bg-center schneidet dann oben den Kopf ab, uebrig bleibt nur
-            // noch Oberkoerper/Schreibtisch. bg-top haelt den fuers Auge
-            // wichtigsten Bildbereich zuverlaessig im Rahmen.
-            className="absolute inset-0 bg-cover bg-top"
-            style={{ backgroundImage: `url(${post.featuredImage})` }}
+            // Eine einzige feste Position (center/top) fuer alle Titelbilder
+            // passt nie zu allen - je nachdem wo die Person im Foto steht,
+            // schneidet das den Kopf ab oder laesst zu viel Leerraum. Statt-
+            // dessen migration/detect_hero_focus.py: Gesichtserkennung pro
+            // Bild, "featuredImagePosition" ist der individuell berechnete
+            // CSS-Fokuspunkt (Augenhoehe der erkannten Gesichter). Bilder
+            // ohne Person fallen auf eine leicht obere Standardposition zurueck.
+            className="absolute inset-0 bg-cover"
+            style={{
+              backgroundImage: `url(${post.featuredImage})`,
+              backgroundPosition: post.featuredImagePosition || "50% 22%",
+            }}
           />
         )}
         <div className="absolute inset-0 bg-primary/80" />

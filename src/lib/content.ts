@@ -23,6 +23,7 @@ export interface Post {
   categories: string[];
   featuredImage: string | null;
   featuredImageAlt: string;
+  featuredImagePosition?: string;
   html: string;
 }
 
