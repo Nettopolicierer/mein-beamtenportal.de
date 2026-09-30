@@ -75,6 +75,9 @@ body {
      die eigentliche Ursache (zu breiter Inhalt) muss weg, nicht nur ihr
      sichtbares Symptom. */
   overflow-wrap: break-word;
+  /* Sauberer Trennstrich statt mittendrin abgehacktem Wortbruch (html hat
+     lang="de", der Browser nutzt also die deutschen Trennregeln). */
+  hyphens: auto;
 }
 
 /* Anker-Sprungziele (Inhaltsverzeichnis) duerfen nicht hinter dem fixierten
