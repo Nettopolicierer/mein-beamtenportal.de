@@ -122,7 +122,11 @@ body {
 .prose h3,
 .prose .icon-row,
 .prose .summary-box,
-.prose .team-box {
+.prose .team-box,
+.prose table,
+.prose ul,
+.prose ol,
+.prose .photo-cta {
   clear: both;
 }
 
