@@ -16,9 +16,9 @@ const LEISTUNGSVERSPRECHEN = [
 ];
 
 const STATS = [
-  { value: "Ø 66,7 %", label: "Ruhegehaltssatz bei der Beamtenpension – den Höchstsatz von 71,75 % erreichen nur wenige." },
-  { value: "50–90 %", label: "übernimmt die Beihilfe je Bundesland von den Krankheitskosten – der Rest läuft über die Krankenversicherung." },
-  { value: "1,79 %", label: "mehr Pension bringt jedes volle Dienstjahr nach dem Beamtenversorgungsgesetz." },
+  { value: "Ø 66,7 %", label: "Ruhegehaltssatz bei der Beamtenpension – den Höchstsatz von 71,75 % erreichen nur wenige.", source: 1 },
+  { value: "50–90 %", label: "übernimmt die Beihilfe je Bundesland von den Krankheitskosten – der Rest läuft über die Krankenversicherung.", source: 2 },
+  { value: "1,79 %", label: "mehr Pension bringt jedes volle Dienstjahr nach dem Beamtenversorgungsgesetz.", source: 1 },
 ];
 
 const BENEFITS = [
@@ -115,7 +115,7 @@ export default function Home() {
       </section>
 
       {/* Leistungsversprechen */}
-      <section className="mx-auto max-w-5xl px-6 py-20">
+      <section className="mx-auto max-w-5xl px-6 pt-10 pb-20">
         <Reveal>
           <p className="mb-3 text-xs font-semibold tracking-widest text-primary uppercase">
             Beratung
@@ -155,11 +155,17 @@ export default function Home() {
             <Reveal key={s.value} delay={i * 100}>
               <div className="rounded-2xl bg-base p-6">
                 <p className="font-heading mb-2 text-3xl font-bold text-primary">{s.value}</p>
-                <p className="text-sm text-mediumdark">{s.label}</p>
+                <p className="text-sm text-mediumdark">
+                  {s.label} <sup>({s.source})</sup>
+                </p>
               </div>
             </Reveal>
           ))}
         </div>
+        <p className="mt-4 text-xs text-mediumdark/70">
+          (1) Beamtenversorgungsgesetz (BeamtVG), § 14. (2) Bundesbeihilfeverordnung (BBhV) bzw.
+          jeweilige Landesbeihilfeverordnung.
+        </p>
       </section>
 
       {/* Pensions-Rechner */}
