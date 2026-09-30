@@ -6,7 +6,7 @@ import { Reveal } from "@/components/Reveal";
 
 const STATS = [
   { value: ">400", label: "Beamte beraten" },
-  { value: "seit 2019", label: "im öffentlichen Dienst" },
+  { value: "seit 2019", label: "als Berater aktiv" },
   { value: "250+", label: "Partnergesellschaften" },
   { value: "4,9/5", label: "ProvenExpert" },
 ];
@@ -16,21 +16,6 @@ export const metadata: Metadata = {
   description: "Albert Sibert – unabhängiger Finanzberater für Beamte, Referendare und Anwärter im öffentlichen Dienst.",
   alternates: { canonical: "/ueber-uns" },
 };
-
-const HIGHLIGHTS = [
-  {
-    title: "Über 250 Partnergesellschaften",
-    text: "Ich vergleiche unabhängig, statt nur ein Produkt zu verkaufen.",
-  },
-  {
-    title: "Spezialisiert auf den öffentlichen Dienst",
-    text: "Beihilfe, PKV und Beamtenversorgung kenne ich im Detail.",
-  },
-  {
-    title: "Persönliche Betreuung",
-    text: "Sie erreichen mich direkt, ohne Warteschleife oder Callcenter.",
-  },
-];
 
 export default function UeberUnsPage() {
   return (
@@ -85,17 +70,6 @@ export default function UeberUnsPage() {
                 Kostenfreies Erstgespräch
               </Link>
             </Reveal>
-          </div>
-
-          <div className="mt-12 grid gap-6 sm:grid-cols-3">
-            {HIGHLIGHTS.map((h, i) => (
-              <Reveal key={h.title} delay={i * 100}>
-                <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-mediumlight/30">
-                  <h3 className="font-heading mb-2 text-base font-semibold text-primary">{h.title}</h3>
-                  <p className="text-sm text-mediumdark">{h.text}</p>
-                </div>
-              </Reveal>
-            ))}
           </div>
         </div>
       </div>
