@@ -40,18 +40,33 @@ def apply_title_override(slug: str, title: str, html: str) -> tuple[str, str]:
 
 DESCRIPTION_MAX = 155
 
+# Dieser Excerpt-Text steckt unveraendert (Copy-Paste-Ueberbleibsel) in 7
+# WP-Posts mit voellig anderem Thema (Audit per SEO-Check aufgefallen: Titel
+# zu Dienstunfaehigkeit/Pension/Beihilfe, Excerpt zu "PKV fuer Referendare
+# in Berlin"). Wird ignoriert, Fallback ist dann der echte Artikeltext.
+BROKEN_EXCERPT = "Sie suchen die beste PKV für Referendare in Berlin für 2026?"
 
-def make_description(post) -> str:
+
+def truncate_at_word(text: str) -> str:
+    if len(text) <= DESCRIPTION_MAX:
+        return text
+    truncated = text[:DESCRIPTION_MAX].rsplit(" ", 1)[0]
+    return truncated.rstrip(".,;:–-") + "…"
+
+
+def make_description(post, html: str) -> str:
     excerpt = strip_tags(post["excerpt"]["rendered"]).strip()
     excerpt = re.sub(r"\s+", " ", excerpt)
-    if not excerpt:
-        return ""
-    if len(excerpt) <= DESCRIPTION_MAX:
-        return excerpt
-    # An der letzten Wortgrenze vor dem Limit abschneiden (kein Wort
-    # mittendrin kappen), RankMath-Zielbereich ist 70-160 Zeichen.
-    truncated = excerpt[:DESCRIPTION_MAX].rsplit(" ", 1)[0]
-    return truncated.rstrip(".,;:–-") + "…"
+    if excerpt and BROKEN_EXCERPT not in excerpt:
+        return truncate_at_word(excerpt)
+    # Kein (brauchbarer) Excerpt - ersten echten <p>-Absatz aus dem
+    # bereinigten Artikeltext als Fallback nehmen (nicht die vorangehende
+    # Zwischenüberschrift, sonst laufen Überschrift und Absatz ohne
+    # Satzzeichen ineinander).
+    first_p = re.search(r"<p[^>]*>(.*?)</p>", html, re.S)
+    body_text = strip_tags(first_p.group(1)) if first_p else strip_tags(html)
+    body_text = re.sub(r"\s+", " ", body_text).strip()
+    return truncate_at_word(body_text)
 
 
 # WP-Kategorienamen sind uneinheitlich grossgeschrieben ("pkv" statt "PKV")
@@ -113,7 +128,7 @@ for p in posts:
         "title": title,
         "subtitle": cleaned["subtitle"],
         "toc": cleaned["toc"],
-        "description": make_description(p),
+        "description": make_description(p, html),
         "date": p["date"],
         "modified": p["modified"],
         "categories": display_cats,
