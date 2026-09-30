@@ -18,7 +18,7 @@ const BESOLDUNG_BEISPIELE = [
 ];
 
 export function PensionCalculator() {
-  const [dienstjahre, setDienstjahre] = useState(25);
+  const [dienstjahre, setDienstjahre] = useState(15);
   const [besoldungIdx, setBesoldungIdx] = useState(1);
 
   const ruhegehaltssatz = Math.min(dienstjahre * PROZENT_PRO_DIENSTJAHR, HOECHSTSATZ);
@@ -38,8 +38,8 @@ export function PensionCalculator() {
           <p className="mb-6 text-white/75">
             Jedes volle Dienstjahr bringt {PROZENT_PRO_DIENSTJAHR.toString().replace(".", ",")} %
             Ruhegehaltssatz, bis zum Höchstsatz von {HOECHSTSATZ.toString().replace(".", ",")} %
-            nach {DIENSTJAHRE_FUER_HOECHSTSATZ} Dienstjahren. Bewegen Sie die Regler für eine grobe
-            Einordnung.
+            nach {DIENSTJAHRE_FUER_HOECHSTSATZ} Dienstjahren. Bewegen Sie den Regler für eine
+            grobe Einordnung Ihrer aktuellen bzw. geplanten Dienstzeit.
           </p>
 
           <label className="mb-1 flex items-center justify-between text-sm">
@@ -48,7 +48,7 @@ export function PensionCalculator() {
           </label>
           <input
             type="range"
-            min={5}
+            min={1}
             max={45}
             value={dienstjahre}
             onChange={(e) => setDienstjahre(Number(e.target.value))}
@@ -82,8 +82,9 @@ export function PensionCalculator() {
           <p className="mb-1 text-sm text-white/60">Geschätzte monatliche Pension (brutto)</p>
           <p className="font-heading mb-6 text-4xl font-bold">{monatlichePension.toLocaleString("de-DE")} €</p>
           <p className="mb-6 text-xs text-white/50">
-            Grobe Näherung auf Basis eines beispielhaften Endgehalts – Ihre tatsächliche Pension
-            hängt von Besoldungsgruppe, Stufe und Familienzuschlag ab.
+            Grobe Näherung auf Basis eines beispielhaften Endgehalts in heutiger Kaufkraft –
+            Inflation bis zum Renteneintritt ist nicht eingerechnet. Keine verbindliche
+            Berechnung; die amtliche Zahl erhalten Sie ausschließlich von Ihrer Bezügestelle.
           </p>
           <Link
             href={BOOKING_LINK}
@@ -91,7 +92,7 @@ export function PensionCalculator() {
             rel="noopener noreferrer"
             className="block rounded-lg bg-white px-5 py-3 text-sm font-semibold text-primary hover:bg-white/90"
           >
-            Genaue Berechnung im Erstgespräch
+            Versorgungslücke besprechen
           </Link>
         </div>
       </div>
