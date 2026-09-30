@@ -3,7 +3,9 @@ import { Star, Quote } from "lucide-react";
 
 // Echte ProvenExpert-/HORBACH-Bewertungen (vom Nutzer bereitgestellt bzw.
 // vom Bewertungsprofil übernommen), anonymisiert mit Initialen der
-// Mandant:innen - keine erfundenen Stimmen.
+// Mandant:innen - keine erfundenen Stimmen. Reihenfolge bewusst nach Rolle
+// durchmischt (nicht alle "Lehrerin" hintereinander), damit auch die ersten
+// paar sichtbaren Karten der Marquee schon eine gute Durchmischung zeigen.
 const TESTIMONIALS = [
   {
     name: "Lisa G.",
@@ -12,10 +14,28 @@ const TESTIMONIALS = [
       "Herr Sibert hat eine sehr starke, lösungsorientierte und kompetente Kommunikation, die es sehr leicht macht, Sachverhalte zu verstehen. Ich fühle mich sehr gut beraten und freue mich auf die weitere Zusammenarbeit.",
   },
   {
+    name: "Micha B.",
+    role: "Lehramtsstudent",
+    quote:
+      'Immer freundlich und stets bereit für Rückfragen. Auch das "Mit-rein-nehmen" in die Thematik und das gute Erklären hat mir gefallen.',
+  },
+  {
     name: "Johanna W.",
     role: "Lehrerin",
     quote:
       "Die Beratung durch Herrn Sibert war sehr angenehm, kompetent und zielführend. Er geht auf Wünsche individuell ein und nimmt sich während der Termine sehr viel Zeit.",
+  },
+  {
+    name: "Jana P.",
+    role: "Lehramtsstudentin",
+    quote:
+      "Albert hat sich mit mehreren Online-Terminen sehr viel Zeit genommen, meine Situation zu verstehen und mir daraufhin verschiedene Möglichkeiten vorgestellt. Kosten und Provision wurden offen angesprochen.",
+  },
+  {
+    name: "David S.",
+    role: "Fachinformatiker im öffentlichen Dienst",
+    quote:
+      "Ich bin unkompliziert und auf Augenhöhe beraten worden. Albert hat mit mir im Gespräch meine persönlichen Wünsche und Ziele so herausgefiltert, dass er mir die Weichen für die Zukunft stellen konnte. Top Arbeit.",
   },
   {
     name: "Nadine F.",
@@ -30,34 +50,16 @@ const TESTIMONIALS = [
       "Sympathisch kompetente Beratung – alle meine Fragen konnten geklärt werden. Auch die Flexibilität in der Terminfindung hat mir gut gefallen.",
   },
   {
-    name: "Micha B.",
-    role: "Lehramtsstudent",
+    name: "Anna L.",
+    role: "Studentin, Diplom-Finanzwirtin",
     quote:
-      'Immer freundlich und stets bereit für Rückfragen. Auch das "Mit-rein-nehmen" in die Thematik und das gute Erklären hat mir gefallen.',
-  },
-  {
-    name: "Jana P.",
-    role: "Lehramtsstudentin",
-    quote:
-      "Albert hat sich mit mehreren Online-Terminen sehr viel Zeit genommen, meine Situation zu verstehen und mir daraufhin verschiedene Möglichkeiten vorgestellt. Kosten und Provision wurden offen angesprochen.",
+      "Sehr netter und kompetenter Berater. Nimmt sich ausreichend Zeit für eine individuelle Beratung. Das war alles sehr aufschlussreich, interessant und mit einem geringen Zeitaufwand verbunden.",
   },
   {
     name: "Imke N.",
     role: "Lehramtsstudentin",
     quote:
       "Die Gespräche finden immer auf Augenhöhe statt und man fühlt sich definitiv gut beraten. Der Austausch ist immer locker und freundlich und Albert achtet immer darauf, Wünschen und Bedürfnissen gerecht zu werden.",
-  },
-  {
-    name: "David S.",
-    role: "Fachinformatiker im öffentlichen Dienst",
-    quote:
-      "Ich bin unkompliziert und auf Augenhöhe beraten worden. Albert hat mit mir im Gespräch meine persönlichen Wünsche und Ziele so herausgefiltert, dass er mir die Weichen für die Zukunft stellen konnte. Top Arbeit.",
-  },
-  {
-    name: "Anna L.",
-    role: "Studentin, Diplom-Finanzwirtin",
-    quote:
-      "Sehr netter und kompetenter Berater. Nimmt sich ausreichend Zeit für eine individuelle Beratung. Das war alles sehr aufschlussreich, interessant und mit einem geringen Zeitaufwand verbunden.",
   },
 ];
 
