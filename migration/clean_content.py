@@ -48,6 +48,33 @@ def clean_html(raw_html: str, post_title: str = "") -> dict:
     for img in soup.find_all("img", src=re.compile("BITTE_BILD_ID_EINTRAGEN")):
         img.decompose()
 
+    # Greyd-Accordion-Bloecke (FAQ-Bereiche) in echte <details>/<summary>
+    # umwandeln. WP-Rohformat: <div class="wp-block-greyd-accordion-item">
+    # <button><span>Frage</span><span class="icon">...</span></button>
+    # <div class="wp-block-greyd-accordion__content" hidden>Antwort</div></div>
+    # "button" steht nicht auf der KEEP_TAGS-Whitelist (wuerde weiter unten nur
+    # entpackt statt erhalten) und das "hidden"-Attribut des Antwort-Divs faellt
+    # beim Attribut-Trim ohnehin weg - uebrig bliebe eine kaputte, immer
+    # aufgeklappte Textwand ohne jede Formatierung oder Interaktivitaet.
+    for accordion in soup.find_all("div", class_="wp-block-greyd-accordion"):
+        for item in accordion.find_all("div", class_="wp-block-greyd-accordion-item"):
+            button = item.find("button")
+            content = item.find("div", class_="wp-block-greyd-accordion__content")
+            if not button or not content:
+                continue
+            question_span = button.find("span")
+            question = question_span.get_text(strip=True) if question_span else button.get_text(strip=True)
+            if not question:
+                continue
+            details = soup.new_tag("details")
+            summary = soup.new_tag("summary")
+            summary.string = question
+            details.append(summary)
+            for child in list(content.children):
+                details.append(child.extract())
+            item.replace_with(details)
+        accordion.unwrap()
+
     # Greyd-Theme "Dynamic Tags" (data-tag="date"/"categories" etc.) - werden
     # normalerweise serverseitig durch echte Werte ersetzt, stehen im rohen
     # API-Export aber nur als Platzhalter-Label da ("Beitragsdatum"). Muss vor

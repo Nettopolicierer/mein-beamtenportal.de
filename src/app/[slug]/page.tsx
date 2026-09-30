@@ -43,7 +43,13 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       <div className="relative">
         {post.featuredImage && (
           <div
-            className="absolute inset-0 bg-cover bg-center"
+            // bg-top statt bg-center: die meisten Titelbilder sind Portrait-
+            // artige Stockfotos (Gesicht im oberen Bilddrittel). Bei langen,
+            // mehrzeiligen Ueberschriften wird der Hero hoch und schmal -
+            // bg-center schneidet dann oben den Kopf ab, uebrig bleibt nur
+            // noch Oberkoerper/Schreibtisch. bg-top haelt den fuers Auge
+            // wichtigsten Bildbereich zuverlaessig im Rahmen.
+            className="absolute inset-0 bg-cover bg-top"
             style={{ backgroundImage: `url(${post.featuredImage})` }}
           />
         )}
