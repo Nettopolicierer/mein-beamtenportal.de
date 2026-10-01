@@ -43,7 +43,7 @@ export function generateMetadata(): Metadata {
 }
 
 const LERNZIELE = [
-  "Wie die Anwartschaftsversicherung funktioniert und warum ein früher Abschluss im Studium oder Referendariat bares Geld spart.",
+  "Wann eine Anwartschaftsversicherung wirklich Sinn ergibt (z.B. als Student vor der Verbeamtung oder mit Heilfürsorge bei Polizei/Feuerwehr) – und wann Sie direkt in Beihilfe und PKV wechseln können, ohne zu überbrücken.",
   "Welchen Beihilfesatz Sie in Ihrem Bundesland bekommen und was das für Ihre PKV-Tarifwahl bedeutet.",
   "Die häufigsten Fehler bei der Gesundheitsprüfung – und wie Sie sie vermeiden, bevor sie zum Problem werden.",
   "Warum eine Dienstunfähigkeitsversicherung gerade in den ersten Dienstjahren so wichtig ist und worauf es bei den Bedingungen ankommt.",
@@ -78,12 +78,12 @@ function buildFaq(dateDisplay: string, timeDisplay: string) {
     {
       question: "Ich bin noch Student bzw. Studentin – lohnt sich das Webinar für mich schon?",
       answer:
-        "Gerade dann. Die Anwartschaftsversicherung und die ersten Weichenstellungen bei Beihilfe und PKV lassen sich am günstigsten früh stellen, idealerweise schon während des Studiums oder zu Beginn des Referendariats.",
+        "Gerade dann. Wer schon als Student privat versichert ist, braucht beim Berufseinstieg oft eine Anwartschaft, um die Gesundheitskonditionen zu sichern – und die ersten Weichenstellungen bei Beihilfe und PKV lassen sich generell am günstigsten früh stellen.",
     },
     {
       question: "Was ist eine Anwartschaftsversicherung und brauche ich die wirklich?",
       answer:
-        "Sie sichert Ihnen die Konditionen der privaten Krankenversicherung zu einem frühen Zeitpunkt, ohne dass Sie zu diesem Zeitpunkt schon Beiträge in voller Höhe zahlen. Ob und welche Form für Sie sinnvoll ist, ordne ich im Webinar konkret ein.",
+        "Sie sichert Ihnen die Gesundheitskonditionen der privaten Krankenversicherung für einen späteren Eintritt, ohne dass Sie bis dahin volle Beiträge zahlen – relevant z.B. für Studierende vor dem Berufseinstieg oder für Polizei- und Feuerwehr-Anwärter mit Heilfürsorge. Referendare werden dagegen meist sofort Beamte auf Widerruf und können direkt in Beihilfe und PKV wechseln, ohne zu überbrücken. Ob und welche Form für Sie sinnvoll ist, ordne ich im Webinar konkret ein.",
     },
     {
       question: "Geht es im Webinar auch um meine Pension oder Pensionshöhe?",
