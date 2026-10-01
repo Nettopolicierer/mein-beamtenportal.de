@@ -53,7 +53,7 @@ export default function Home() {
               Mein Beamtenportal
             </h1>
             <p className="font-hand mt-3 text-4xl leading-tight text-balance text-primary sm:text-5xl">
-              Pension, Beihilfe und PKV verstehen.
+              Versicherungen für Beamte verstehen.
             </p>
             <p className="mt-6 max-w-md text-mediumdark">
               Ihr unabhängiges Informationsportal für Vorsorge, Beihilfe und Absicherung im
