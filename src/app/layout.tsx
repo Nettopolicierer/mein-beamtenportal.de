@@ -8,7 +8,7 @@ import { ClarityTag } from "@/components/ClarityTag";
 import { ScrollCtaPopup } from "@/components/ScrollCtaPopup";
 import { WebinarBanner } from "@/components/WebinarBanner";
 import { LogoLink } from "@/components/LogoLink";
-import { MobileNav } from "@/components/MobileNav";
+import { HeaderRight } from "@/components/HeaderRight";
 import "./globals.css";
 
 const raleway = Raleway({
@@ -82,25 +82,7 @@ export default function RootLayout({
               linkClassName="shrink-0"
               className="h-auto w-[104px] sm:w-[150px]"
             />
-            <nav className="hidden items-center gap-8 text-sm font-medium tracking-wide text-primary uppercase sm:flex">
-              {NAV.map((item) => (
-                <Link key={item.href} href={item.href} className="hover:opacity-70">
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
-            <div className="flex shrink-0 items-center gap-2">
-              <Link
-                href={BOOKING_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-white hover:bg-primary/90 sm:px-5 sm:py-2.5 sm:text-sm"
-              >
-                <span className="sm:hidden">Termin sichern</span>
-                <span className="hidden sm:inline">Kostenfreies Erstgespräch</span>
-              </Link>
-              <MobileNav />
-            </div>
+            <HeaderRight nav={NAV} bookingLink={BOOKING_LINK} />
           </div>
         </header>
 
