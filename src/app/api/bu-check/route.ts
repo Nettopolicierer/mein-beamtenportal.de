@@ -4,6 +4,25 @@ import { BOOKING_LINK } from "@/lib/content";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+// Einfache Missbrauchsbremse (pro Server-Instanz, im Speicher): begrenzt, wie oft
+// dieselbe IP bzw. dieselbe E-Mail-Adresse Mails ausloesen kann. Auf Vercel gilt
+// das je Instanz - hilft gegen Skripte und Wiederholungen, ersetzt aber kein
+// verteiltes Rate-Limit.
+const hits = new Map<string, number[]>();
+
+function tooMany(key: string, max: number, windowMs: number) {
+  const now = Date.now();
+  const recent = (hits.get(key) ?? []).filter((t) => now - t < windowMs);
+  if (recent.length >= max) {
+    hits.set(key, recent);
+    return true;
+  }
+  recent.push(now);
+  hits.set(key, recent);
+  if (hits.size > 5000) hits.clear();
+  return false;
+}
+
 function escapeHtml(value: string) {
   return value
     .replace(/&/g, "&amp;")
@@ -50,6 +69,14 @@ export async function POST(request: NextRequest) {
   }
   if (body.consent !== true) {
     return NextResponse.json({ error: "Bitte stimmen Sie der Kontaktaufnahme zu." }, { status: 400 });
+  }
+
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  if (tooMany(`ip:${ip}`, 5, 60 * 60 * 1000) || tooMany(`mail:${email.toLowerCase()}`, 2, 24 * 60 * 60 * 1000)) {
+    return NextResponse.json(
+      { error: "Zu viele Anfragen. Bitte versuchen Sie es später erneut." },
+      { status: 429 }
+    );
   }
 
   const apiKey = process.env.MAILJET_API_KEY;
