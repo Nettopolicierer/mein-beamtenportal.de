@@ -1,13 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { Raleway, Mulish, Caveat } from "next/font/google";
 import Link from "next/link";
-import Image from "next/image";
 import { Analytics } from "@vercel/analytics/next";
 import { BOOKING_LINK } from "@/lib/content";
 import { CookieConsentProvider } from "@/components/cookie-consent/CookieConsentProvider";
 import { ClarityTag } from "@/components/ClarityTag";
 import { ScrollCtaPopup } from "@/components/ScrollCtaPopup";
 import { WebinarBanner } from "@/components/WebinarBanner";
+import { LogoLink } from "@/components/LogoLink";
 import { MobileNav } from "@/components/MobileNav";
 import "./globals.css";
 
@@ -75,16 +75,13 @@ export default function RootLayout({
         <WebinarBanner />
         <header className="sticky top-0 z-40 border-b border-mediumlight/40 bg-white/95 backdrop-blur">
           <div className="relative mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 py-3 sm:gap-3 sm:px-6 sm:py-4">
-            <Link href="/" className="shrink-0">
-              <Image
-                src="/logo.svg"
-                alt="Mein Beamtenportal"
-                width={150}
-                height={63}
-                priority
-                className="h-auto w-[104px] sm:w-[150px]"
-              />
-            </Link>
+            <LogoLink
+              width={150}
+              height={63}
+              priority
+              linkClassName="shrink-0"
+              className="h-auto w-[104px] sm:w-[150px]"
+            />
             <nav className="hidden items-center gap-8 text-sm font-medium tracking-wide text-primary uppercase sm:flex">
               {NAV.map((item) => (
                 <Link key={item.href} href={item.href} className="hover:opacity-70">
@@ -113,7 +110,7 @@ export default function RootLayout({
           <div className="mx-auto max-w-6xl px-6 py-12">
             <div className="grid gap-10 sm:grid-cols-[2fr_1fr_1fr]">
               <div>
-                <Image src="/logo.svg" alt="Mein Beamtenportal" width={140} height={59} className="mb-4" />
+                <LogoLink width={140} height={59} linkClassName="mb-4 inline-block" />
                 <p className="max-w-sm text-sm text-mediumdark">
                   Ihr unabhängiges Informationsportal für Vorsorge, Beihilfe und Absicherung im
                   öffentlichen Dienst.
