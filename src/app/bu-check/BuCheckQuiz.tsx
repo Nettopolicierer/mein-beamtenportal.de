@@ -23,6 +23,14 @@ const STATUS_OPTIONS: { label: string; value: Status }[] = [
   { label: "Beamter/Beamtin auf Probe", value: "probe" },
   { label: "Beamter/Beamtin auf Lebenszeit", value: "lebenszeit" },
 ];
+// Grobe Richtwerte als Eingabehilfe fuer Studierende/Referendare ohne eigenes
+// Netto - bewusst gerundet, der Regler bleibt frei einstellbar.
+const NETTO_PRESETS = [
+  { label: "Referendariat ca. 1.500 €", value: 1500 },
+  { label: "Einstieg mittlerer/gehobener Dienst ca. 2.300 €", value: 2300 },
+  { label: "Einstieg Lehramt ca. 3.000 €", value: 3000 },
+];
+
 const BERUF_OPTIONS = ["Lehramt", "Polizei", "Feuerwehr / Justiz", "Verwaltung / Finanzamt", "Etwas anderes"];
 const VERTRAG_OPTIONS = ["Nein, noch nicht", "Ja, ich habe einen Vertrag", "Weiß ich nicht"];
 
@@ -346,9 +354,31 @@ export function BuCheckQuiz() {
       {current === "netto" && (
         <>
           <h3 className="font-heading text-xl font-bold text-primary">
-            Wie hoch ist Ihr monatliches Netto (ungefähr)?
+            {statusValue === "student"
+              ? "Mit welchem Netto rechnen Sie nach dem Berufseinstieg?"
+              : "Wie hoch ist Ihr monatliches Netto (ungefähr)?"}
           </h3>
-          <p className="-mt-3 text-sm text-mediumdark">Bei Berufseinstieg: das erwartete Netto. Ein grober Wert genügt.</p>
+          <p className="-mt-3 text-sm text-mediumdark">
+            {statusValue === "student"
+              ? "Wählen Sie eine Richtgröße oder stellen Sie den Regler ein. Ein grober Wert genügt, es sind nur Näherungswerte."
+              : "Ein grober Wert genügt."}
+          </p>
+          {(statusValue === "student" || statusValue === "widerruf") && (
+            <div className="flex flex-wrap gap-2">
+              {NETTO_PRESETS.map((p) => (
+                <button
+                  key={p.label}
+                  type="button"
+                  onClick={() => setNetto(p.value)}
+                  className={`rounded-full border px-3 py-1.5 text-sm ${
+                    netto === p.value ? "border-primary bg-primary text-white" : "border-mediumlight text-primary hover:border-primary"
+                  }`}
+                >
+                  {p.label}
+                </button>
+              ))}
+            </div>
+          )}
           <Slider value={netto} onChange={setNetto} min={1000} max={6000} step={100} format={(v) => eur(v)} />
           {nextButton}
         </>
