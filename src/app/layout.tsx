@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Analytics } from "@vercel/analytics/next";
 import { BOOKING_LINK } from "@/lib/content";
 import { CookieConsentProvider } from "@/components/cookie-consent/CookieConsentProvider";
+import { GoogleAdsTag } from "@/components/GoogleAdsTag";
 import { ClarityTag } from "@/components/ClarityTag";
 import { ScrollCtaPopup } from "@/components/ScrollCtaPopup";
 import { WebinarBanner } from "@/components/WebinarBanner";
@@ -72,6 +73,7 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col bg-white font-sans text-foreground">
         <CookieConsentProvider>
         <ClarityTag />
+        <GoogleAdsTag />
         <WebinarBanner />
         <header className="sticky top-0 z-40 border-b border-mediumlight/40 bg-white/95 backdrop-blur">
           <div className="relative mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 py-3 sm:gap-3 sm:px-6 sm:py-4">

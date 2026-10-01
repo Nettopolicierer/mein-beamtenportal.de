@@ -7,7 +7,7 @@ import { CookieBanner } from "./CookieBanner";
 interface CookieConsentContextValue {
   /** null = Nutzer hat noch nicht entschieden */
   consent: CookieConsent | null;
-  setConsent: (functional: boolean) => void;
+  setConsent: (functional: boolean, marketing?: boolean) => void;
 }
 
 const CookieConsentContext = createContext<CookieConsentContextValue | null>(null);
@@ -21,8 +21,8 @@ export function CookieConsentProvider({ children }: { children: React.ReactNode 
     setHydrated(true);
   }, []);
 
-  const setConsent = useCallback((functional: boolean) => {
-    const next: CookieConsent = { necessary: true, functional };
+  const setConsent = useCallback((functional: boolean, marketing = false) => {
+    const next: CookieConsent = { necessary: true, functional, marketing };
     setConsentState(next);
     writeStoredConsent(next);
   }, []);

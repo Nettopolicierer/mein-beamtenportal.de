@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
 import { BOOKING_LINK } from "@/lib/content";
+import { GOOGLE_ADS_ID, GOOGLE_ADS_LEAD_LABEL } from "@/lib/google-ads";
 import {
   BEITRAG_BEREICHE,
   RENTE_BEREICHE,
@@ -49,13 +50,20 @@ const AMPEL_STYLE: Record<Ampel, { dot: string; hoehe: string; vertrag: string }
 
 type StepId = "status" | "vertrag" | "beruf" | "alter" | "netto" | "dienstjahre" | "details" | "ergebnis";
 
-type DataLayerWindow = Window & { dataLayer?: Record<string, unknown>[] };
+type DataLayerWindow = Window & {
+  dataLayer?: Record<string, unknown>[];
+  gtag?: (...args: unknown[]) => void;
+};
 
 function track(event: string, params: Record<string, unknown> = {}) {
   try {
     const w = window as DataLayerWindow;
     w.dataLayer = w.dataLayer || [];
     w.dataLayer.push({ event, ...params });
+    // Google-Ads-Conversion nur, wenn der Tag (nach Marketing-Einwilligung) geladen ist.
+    if (event === "bu_check_lead" && w.gtag && GOOGLE_ADS_ID && GOOGLE_ADS_LEAD_LABEL) {
+      w.gtag("event", "conversion", { send_to: `${GOOGLE_ADS_ID}/${GOOGLE_ADS_LEAD_LABEL}` });
+    }
   } catch {
     // Tracking darf den Funnel nie blockieren.
   }

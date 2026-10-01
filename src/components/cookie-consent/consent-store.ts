@@ -1,6 +1,9 @@
+import { GOOGLE_ADS_ENABLED } from "@/lib/google-ads";
+
 export interface CookieConsent {
   necessary: true;
   functional: boolean;
+  marketing: boolean;
 }
 
 const STORAGE_KEY = "cookie-consent";
@@ -9,7 +12,11 @@ export function readStoredConsent(): CookieConsent | null {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
-    return JSON.parse(raw) as CookieConsent;
+    const parsed = JSON.parse(raw) as Partial<CookieConsent>;
+    // Aeltere Einwilligung ohne Marketing-Entscheidung: sobald Google Ads aktiv
+    // ist, muss neu gefragt werden - die alte Zustimmung deckt Marketing nicht ab.
+    if (GOOGLE_ADS_ENABLED && typeof parsed.marketing !== "boolean") return null;
+    return { necessary: true, functional: parsed.functional === true, marketing: parsed.marketing === true };
   } catch {
     return null;
   }
