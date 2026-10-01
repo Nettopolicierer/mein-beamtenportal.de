@@ -33,10 +33,10 @@ const TRI_ITEMS: { key: "klausel" | "laufzeit" | "nachversicherung"; label: stri
 ];
 const TRI_LABEL: Record<TriState, string> = { ja: "Ja", nein: "Nein", unklar: "Weiß nicht" };
 
-const AMPEL_STYLE: Record<Ampel, { dot: string; text: string }> = {
-  gruen: { dot: "bg-green-500", text: "Gut abgesichert" },
-  gelb: { dot: "bg-amber-400", text: "Nachbesserung wahrscheinlich" },
-  rot: { dot: "bg-red-500", text: "Deutliche Lücke" },
+const AMPEL_STYLE: Record<Ampel, { dot: string; hoehe: string; vertrag: string }> = {
+  gruen: { dot: "bg-green-500", hoehe: "Höhe der Absicherung: passt zu Ihrem Ziel", vertrag: "Vertragsbedingungen: wirken solide" },
+  gelb: { dot: "bg-amber-400", hoehe: "Höhe der Absicherung: teilweise Lücke", vertrag: "Vertragsbedingungen: teilweise unklar" },
+  rot: { dot: "bg-red-500", hoehe: "Höhe der Absicherung: deutliche Lücke", vertrag: "Vertragsbedingungen: Schwachstellen möglich" },
 };
 
 type StepId = "status" | "vertrag" | "beruf" | "alter" | "netto" | "dienstjahre" | "details" | "ergebnis";
@@ -152,11 +152,10 @@ export function BuCheckQuiz() {
     });
   }, [statusValue, alter, netto, dienstjahre, needsDienstjahre, hasContract, rente]);
 
-  const gesamtAmpel: Ampel | null = useMemo(() => {
-    if (!result) return null;
-    if (!hasContract) return result.ampel;
-    return worst(result.ampel, ...TRI_ITEMS.map((i) => triAmpel(tri[i.key])));
-  }, [result, hasContract, tri]);
+  const vertragsAmpel: Ampel | null = useMemo(
+    () => (hasContract ? worst(...TRI_ITEMS.map((i) => triAmpel(tri[i.key]))) : null),
+    [hasContract, tri],
+  );
 
   function next() {
     if (stepIndex === 0) track("bu_check_start");
@@ -182,7 +181,7 @@ export function BuCheckQuiz() {
       result.lueckeMin === result.lueckeMax
         ? `ca. ${eur(result.lueckeMax)}`
         : `ca. ${eur(result.lueckeMin)} bis ${eur(result.lueckeMax)}`;
-    return `Absicherungsziel ca. ${eur(result.ziel)}/Monat; geschätzte Lücke ${luecke}/Monat; Ampel: ${gesamtAmpel}`;
+    return `Absicherungsziel ca. ${eur(result.ziel)}/Monat; geschätzte Lücke ${luecke}/Monat; Höhe: ${result.ampel}${vertragsAmpel ? `; Vertragsbedingungen: ${vertragsAmpel}` : ""}`;
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -428,12 +427,12 @@ export function BuCheckQuiz() {
         </>
       )}
 
-      {current === "ergebnis" && result && gesamtAmpel && (
+      {current === "ergebnis" && result && (
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="rounded-xl bg-base p-4">
             <p className="flex items-center gap-2 text-sm font-semibold text-primary">
-              <span className={`inline-block size-3 rounded-full ${AMPEL_STYLE[gesamtAmpel].dot}`} />
-              {AMPEL_STYLE[gesamtAmpel].text}
+              <span className={`inline-block size-3 rounded-full ${AMPEL_STYLE[result.ampel].dot}`} />
+              {AMPEL_STYLE[result.ampel].hoehe}
             </p>
             <p className="mt-2 font-heading text-2xl font-bold text-primary">
               {result.lueckeMax === 0
@@ -458,6 +457,12 @@ export function BuCheckQuiz() {
             )}
             {hasContract && (
               <ul className="mt-3 flex flex-col gap-1.5 text-sm text-primary">
+                {vertragsAmpel && (
+                  <li className="flex items-center gap-2 font-semibold">
+                    <span className={`inline-block size-3 rounded-full ${AMPEL_STYLE[vertragsAmpel].dot}`} />
+                    {AMPEL_STYLE[vertragsAmpel].vertrag}
+                  </li>
+                )}
                 {TRI_ITEMS.map((item) => (
                   <li key={item.key} className="flex items-center gap-2">
                     <span className={`inline-block size-2.5 rounded-full ${AMPEL_STYLE[triAmpel(tri[item.key])].dot}`} />
