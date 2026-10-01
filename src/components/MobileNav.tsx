@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { BookOpen, UserRound, Mail, Menu, X } from "lucide-react";
+import { BookOpen, UserRound, Mail, Video, Menu, X } from "lucide-react";
 
 const NAV = [
   { href: "/ratgeber", label: "Ratgeber", icon: BookOpen },
+  { href: "/webinar", label: "Webinar", icon: Video },
   { href: "/ueber-uns", label: "Über Mich", icon: UserRound },
   { href: "/kontakt", label: "Kontakt", icon: Mail },
 ];

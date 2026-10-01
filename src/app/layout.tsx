@@ -7,6 +7,7 @@ import { BOOKING_LINK } from "@/lib/content";
 import { CookieConsentProvider } from "@/components/cookie-consent/CookieConsentProvider";
 import { ClarityTag } from "@/components/ClarityTag";
 import { ScrollCtaPopup } from "@/components/ScrollCtaPopup";
+import { WebinarBanner } from "@/components/WebinarBanner";
 import { MobileNav } from "@/components/MobileNav";
 import "./globals.css";
 
@@ -53,6 +54,7 @@ export const viewport: Viewport = {
 
 const NAV = [
   { href: "/ratgeber", label: "Ratgeber" },
+  { href: "/webinar", label: "Webinar" },
   { href: "/ueber-uns", label: "Über Mich" },
   { href: "/kontakt", label: "Kontakt" },
 ];
@@ -70,6 +72,7 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col bg-white font-sans text-foreground">
         <CookieConsentProvider>
         <ClarityTag />
+        <WebinarBanner />
         <header className="sticky top-0 z-40 border-b border-mediumlight/40 bg-white/95 backdrop-blur">
           <div className="relative mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 py-3 sm:gap-3 sm:px-6 sm:py-4">
             <Link href="/" className="shrink-0">
@@ -123,6 +126,9 @@ export default function RootLayout({
                 </Link>
                 <Link href="/ratgeber" className="text-mediumdark hover:text-primary">
                   Ratgeber
+                </Link>
+                <Link href="/webinar" className="text-mediumdark hover:text-primary">
+                  Webinar
                 </Link>
                 <Link href="/kontakt" className="text-mediumdark hover:text-primary">
                   Kontakt

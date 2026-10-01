@@ -1,0 +1,52 @@
+name: Webinar Reminders
+
+# Ruft stündlich api/webinar-reminder auf. Der Endpoint selbst entscheidet
+# anhand von REMINDER_STAGES (src/lib/webinar-config.ts), ob gerade eine
+# Erinnerungsstufe fällig ist, und verschickt in dem Fall über Mailjet an
+# alle Kontakte der Webinar-Kontaktliste.
+#
+# Läuft als GitHub Actions statt Vercel-Cron, weil der Vercel-Hobby-Plan nur
+# tägliche Crons erlaubt (gleicher Grund wie bei blog-autopilot.yml).
+on:
+  schedule:
+    - cron: "5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reminder-endpoint-aufrufen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      # Ohne Secret wird der Lauf übersprungen statt rot zu laufen — gleiches
+      # Prinzip wie beim Blog-Autopilot, damit ein fehlendes Secret nicht
+      # stündlich eine Fehlermail auslöst.
+      - name: CRON_SECRET prüfen und Endpoint aufrufen
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          if [ -z "$CRON_SECRET" ]; then
+            echo "::warning::CRON_SECRET ist nicht gesetzt – Lauf wird übersprungen. Secret unter Settings > Secrets and variables > Actions hinterlegen."
+            exit 0
+          fi
+
+          # Kanonische Domain direkt ansteuern: bei mein-beamtenportal.de ist
+          # die APEX-Domain kanonisch (www leitet per 308 auf Apex um), und
+          # curl reicht den Authorization-Header über einen Host-Wechsel
+          # nicht weiter.
+          http_code=$(curl -sS -o response.json -w "%{http_code}" \
+            "https://mein-beamtenportal.de/api/webinar-reminder" \
+            -H "Authorization: Bearer $CRON_SECRET")
+
+          echo "HTTP $http_code"
+          cat response.json
+
+          # Auch 3xx ist ein Fehler: eine Weiterleitung bedeutet, dass der
+          # Endpoint gar nicht erreicht wurde.
+          if [ "$http_code" -ge 300 ]; then
+            echo "::error::webinar-reminder Endpoint antwortete mit HTTP $http_code (erwartet: 200)"
+            exit 1
+          fi
