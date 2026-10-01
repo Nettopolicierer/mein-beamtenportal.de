@@ -54,7 +54,7 @@ function track(event: string, params: Record<string, unknown> = {}) {
 }
 
 const inputClass =
-  "h-12 w-full rounded-lg border border-mediumlight bg-white px-4 text-base outline-none focus-visible:border-primary";
+  "h-12 w-full rounded-lg border border-mediumlight bg-white px-4 text-base text-primary outline-none placeholder:text-mediumdark/70 focus-visible:border-primary";
 
 function Slider({
   value,
@@ -486,9 +486,15 @@ export function BuCheckQuiz() {
             Möchten Sie eine persönliche Einschätzung dazu? Dann sende ich Ihnen die Auswertung und prüfe die Zahlen
             genau, kostenfrei und unverbindlich.
           </p>
-          <input type="text" required autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Ihr Name" className={inputClass} />
-          <input type="email" required autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="ihre@email.de" className={inputClass} />
-          <input type="tel" autoComplete="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Telefon (optional, für schnellen Rückruf)" className={inputClass} />
+          <label className="flex flex-col gap-1.5 text-sm font-medium text-primary">Ihr Name
+            <input type="text" required autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Vor- und Nachname" className={inputClass} />
+          </label>
+          <label className="flex flex-col gap-1.5 text-sm font-medium text-primary">Ihre E-Mail-Adresse
+            <input type="email" required autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@beispiel.de" className={inputClass} />
+          </label>
+          <label className="flex flex-col gap-1.5 text-sm font-medium text-primary">Telefon (optional, für schnellen Rückruf)
+            <input type="tel" autoComplete="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="z. B. 0171 1234567" className={inputClass} />
+          </label>
           {/* Honeypot gegen Spam-Bots */}
           <input type="text" tabIndex={-1} autoComplete="off" aria-hidden="true" value={website} onChange={(e) => setWebsite(e.target.value)} className="absolute -left-[9999px] h-0 w-0 opacity-0" />
           <label className="flex items-start gap-2 text-xs text-mediumdark">
