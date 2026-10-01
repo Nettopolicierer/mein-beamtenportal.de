@@ -3,10 +3,9 @@ export const WEBINAR_TITLE = "Verbeamtung richtig absichern: Beihilfe, PKV & Die
 // Wiederkehrender Teams-Link (Serientermin), gilt für jeden Monatstermin.
 export const WEBINAR_TEAMS_LINK = "https://teams.microsoft.com/meet/338390673586942?p=A6BBApCPMLVmYfJamu";
 
-// TODO: In Mailjet eine NEUE, leere Kontaktliste für dieses Webinar anlegen
-// (nicht die albert-sibert.de-Liste mitbenutzen) und deren ID hier eintragen.
-// Wird automatisch befüllt bei jeder Anmeldung, siehe api/webinar-register/route.ts.
-export const WEBINAR_CONTACT_LIST_ID = 0;
+// Mailjet-Kontaktliste "Webinar_Beamtenportal_2026", befüllt automatisch
+// über die API bei jeder Anmeldung (siehe api/webinar-register/route.ts).
+export const WEBINAR_CONTACT_LIST_ID = 10635470;
 
 const WEBINAR_DURATION_MIN = 60;
 
