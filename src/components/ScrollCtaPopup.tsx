@@ -109,7 +109,8 @@ export function ScrollCtaPopup() {
           </h2>
           <p className="mb-5 text-sm text-mediumdark">
             Studierende, Referendare, Anwärter und Beamte in den ersten Dienstjahren: Anwartschaft,
-            Beihilfe, PKV und Dienstunfähigkeit verständlich erklärt – live und unverbindlich.
+            Beihilfe, PKV, Dienstunfähigkeit, Versorgungsansprüche und weitere wichtige Versicherungen
+            verständlich erklärt – live und unverbindlich.
           </p>
           <p className="mb-5 text-sm font-medium text-primary">
             {dateDisplay} · {timeDisplay} · 45 Min. · online
