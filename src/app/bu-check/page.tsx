@@ -6,7 +6,7 @@ import { BuCheckQuiz } from "./BuCheckQuiz";
 export const metadata: Metadata = {
   title: "BU-Check für Beamte: Wie gut sind Sie abgesichert?",
   description:
-    "Kostenfreier BU- und Dienstunfähigkeits-Check für Beamte, Referendare und Anwärter. In 1 Minute zur persönlichen Einschätzung, unabhängig und unverbindlich.",
+    "Kostenfreier BU- und Dienstunfähigkeits-Check für Beamte, Referendare und Anwärter. Sehen Sie in einer Minute, wie groß Ihre Versorgungslücke bei Dienstunfähigkeit ungefähr ist.",
   alternates: { canonical: "/bu-check" },
 };
 
@@ -39,15 +39,15 @@ const STEPS = [
   },
   {
     icon: MessageCircle,
-    title: "3. Kostenfreies Gespräch",
-    text: "Auf Wunsch besprechen wir die Optionen. Ohne Verkaufsdruck, auch wenn Sie nur vergleichen möchten.",
+    title: "3. Gespräch, wenn Sie möchten",
+    text: "Wir gehen Ihr Ergebnis Punkt für Punkt durch und sehen, was sich bei Ihnen konkret lohnt.",
   },
 ];
 
 const FAQ = [
   {
     question: "Was kostet der BU-Check?",
-    answer: "Nichts. Der Check und das Erstgespräch sind kostenfrei und unverbindlich.",
+    answer: "Nichts. Der Check und das Erstgespräch kosten Sie keinen Cent.",
   },
   {
     question: "Ist das eine BU oder eine Dienstunfähigkeitsversicherung?",
@@ -65,9 +65,9 @@ const FAQ = [
       "Hier im Check nicht. Gesundheitsfragen sind erst relevant, wenn Sie wirklich einen Antrag stellen möchten, und werden dann persönlich und anonym vorgeklärt.",
   },
   {
-    question: "Werden mir Verträge aufgedrängt?",
+    question: "Wie kommen die Zahlen zustande?",
     answer:
-      "Nein. Ich arbeite unabhängig und erkläre Ihnen die Optionen verständlich. Ob Sie etwas abschließen, entscheiden allein Sie.",
+      "Ich rechne mit den Regeln der Beamtenversorgung: 1,79375 % Ruhegehalt je Dienstjahr, mindestens 35 %, nach fünf Jahren Wartezeit. Beamte auf Probe und Widerruf haben bei Dienstunfähigkeit (außer bei Dienstunfall) keinen Ruhegehaltsanspruch. Als Ziel setze ich 80 % Ihres Nettos an. Die Länder weichen im Detail ab, deshalb ist das Ergebnis eine Spanne.",
   },
 ];
 
@@ -101,7 +101,7 @@ export default function BuCheckPage() {
             </h1>
             <p className="text-lg text-mediumdark">
               Beantworten Sie wenige kurze Fragen und sehen Sie sofort, wie groß Ihre Versorgungslücke bei
-              Dienstunfähigkeit ungefähr ist und ob Ihr Vertrag passt. Verständlich und ohne Verpflichtung.
+              Dienstunfähigkeit ungefähr ist und ob Ihr Vertrag passt. 
             </p>
             <div className="flex items-center gap-3">
               <Image src="/proven-expert.webp" alt="ProvenExpert" width={54} height={54} className="rounded-full" />
@@ -142,7 +142,7 @@ export default function BuCheckPage() {
           <div className="flex flex-col items-start gap-4">
             <Image
               src="/albert-portrait.webp"
-              alt="Albert Sibert, unabhängiger Berater für Beamte"
+              alt="Albert Sibert, Berater für Beamte"
               width={160}
               height={160}
               className="rounded-2xl"
@@ -150,7 +150,7 @@ export default function BuCheckPage() {
             <div>
               <h2 className="font-heading text-xl font-bold text-primary">Albert Sibert</h2>
               <p className="text-sm text-mediumdark">
-                Unabhängiger Berater für Beamte, Referendare und Anwärter. Mein Schwerpunkt: Dienstunfähigkeit,
+                Berater für Beamte, Referendare und Anwärter. Mein Schwerpunkt: Dienstunfähigkeit,
                 Beihilfe und PKV.
               </p>
             </div>

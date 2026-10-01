@@ -179,7 +179,7 @@ export function BuCheckQuiz() {
     if (result.ziel > 0 && result.lueckeMax / result.ziel > 0.5) p += 2;
     if (phone.trim()) p += 1;
     if (alter <= 35) p += 1;
-    if (beitrag === "Über 100 €") p += 1;
+    if (hasContract && beitrag === "Über 100 €") p += 1;
     return { score: p, label: p >= 5 ? "heiß" : p >= 3 ? "warm" : "kalt" };
   }
 
@@ -208,11 +208,11 @@ export function BuCheckQuiz() {
           netto: String(netto),
           dienstjahre: needsDienstjahre ? String(dienstjahre) : "",
           vertrag,
-          vertragsrente: rente?.label ?? "",
-          beitrag,
-          klausel: tri.klausel ? TRI_LABEL[tri.klausel] : "",
-          laufzeit: tri.laufzeit ? TRI_LABEL[tri.laufzeit] : "",
-          nachversicherung: tri.nachversicherung ? TRI_LABEL[tri.nachversicherung] : "",
+          vertragsrente: hasContract ? (rente?.label ?? "") : "",
+          beitrag: hasContract ? beitrag : "",
+          klausel: hasContract && tri.klausel ? TRI_LABEL[tri.klausel] : "",
+          laufzeit: hasContract && tri.laufzeit ? TRI_LABEL[tri.laufzeit] : "",
+          nachversicherung: hasContract && tri.nachversicherung ? TRI_LABEL[tri.nachversicherung] : "",
           ergebnis: ergebnisText(),
           score: `${label} (${score} Punkte)`,
           name,
@@ -513,8 +513,8 @@ export function BuCheckQuiz() {
           </div>
 
           <p className="text-sm font-semibold text-primary">
-            Möchten Sie eine persönliche Einschätzung dazu? Dann sende ich Ihnen die Auswertung und prüfe die Zahlen
-            genau, kostenfrei und unverbindlich.
+            Möchten Sie eine persönliche Einschätzung dazu? Dann sende ich Ihnen die Auswertung und rechne die Zahlen mit
+            Ihnen durch.
           </p>
           <label className="flex flex-col gap-1.5 text-sm font-medium text-primary">Ihr Name
             <input type="text" required autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Vor- und Nachname" className={inputClass} />

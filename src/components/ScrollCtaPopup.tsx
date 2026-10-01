@@ -47,6 +47,11 @@ export function ScrollCtaPopup() {
     // selbst, das Beratungs-Popup nicht auf der Kontaktseite selbst.
     if (pathname === "/webinar") shown.webinar = true;
     if (pathname === "/kontakt") shown.beratung = true;
+    // Werbe-Landingpage: keine Ablenkung vom Check.
+    if (pathname === "/bu-check") {
+      shown.webinar = true;
+      shown.beratung = true;
+    }
 
     function onScroll() {
       if (shown.webinar && shown.beratung) {
