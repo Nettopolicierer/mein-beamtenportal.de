@@ -23,7 +23,8 @@ export function LogoLink({
     <Link
       href="/"
       aria-label="Zur Startseite"
-      className={linkClassName}
+      draggable={false}
+      className={`select-none [-webkit-touch-callout:none] ${linkClassName ?? ""}`}
       onClick={() => {
         if (pathname === "/") window.scrollTo({ top: 0, behavior: "smooth" });
       }}
@@ -34,7 +35,8 @@ export function LogoLink({
         width={width}
         height={height}
         priority={priority}
-        className={className}
+        draggable={false}
+        className={`select-none pointer-events-none ${className ?? ""}`}
       />
     </Link>
   );

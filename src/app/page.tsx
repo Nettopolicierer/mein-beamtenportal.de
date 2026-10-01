@@ -49,7 +49,7 @@ export default function Home() {
       <section className="bg-base">
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-6 pt-16 pb-0 sm:pt-20 lg:grid-cols-2">
           <div>
-            <h1 className="font-hand text-6xl leading-none font-bold text-primary sm:text-7xl">
+            <h1 className="font-hand select-none text-6xl leading-none font-bold text-primary sm:text-7xl">
               Mein Beamtenportal
             </h1>
             <p className="font-hand mt-3 text-3xl text-balance text-primary sm:text-4xl">
