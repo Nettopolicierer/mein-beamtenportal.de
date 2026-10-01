@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { X } from "lucide-react";
 import { BOOKING_LINK } from "@/lib/content";
+import { getNextWebinar } from "@/lib/webinar-config";
 
 // Zwei Stufen statt einem einzelnen Popup: bei 30% Scroll-Tiefe (noch
 // unentschlossen) das niedrigschwellige Angebot - das kostenlose Webinar.
@@ -82,26 +83,41 @@ export function ScrollCtaPopup() {
   if (!stage) return null;
 
   if (stage === "webinar") {
+    const { dateDisplay, timeDisplay } = getNextWebinar();
     return (
-      <div className="fixed inset-x-4 bottom-4 z-50 sm:inset-x-auto sm:right-6 sm:bottom-6 sm:max-w-sm">
-        <div className="relative rounded-2xl bg-primary p-5 pr-10 text-white shadow-2xl shadow-primary/30">
+      <div
+        className="fixed inset-0 z-50 flex items-center justify-center bg-primary/70 p-4 backdrop-blur-sm"
+        onClick={dismiss}
+      >
+        <div
+          className="relative w-full max-w-md rounded-2xl bg-white p-7 text-center shadow-2xl"
+          onClick={(e) => e.stopPropagation()}
+        >
           <button
             type="button"
             onClick={dismiss}
             aria-label="Schließen"
-            className="absolute top-3 right-3 rounded-full p-1 text-white/70 hover:bg-white/10 hover:text-white"
+            className="absolute top-4 right-4 rounded-full p-1 text-mediumdark hover:bg-base hover:text-primary"
           >
-            <X className="size-4" />
+            <X className="size-5" />
           </button>
-          <p className="font-heading mb-1 text-base font-bold">Kostenfreies Live-Webinar</p>
-          <p className="mb-4 text-sm text-white/80">
-            Anwartschaft, Beihilfe, PKV und Dienstunfähigkeit verständlich erklärt – live und
-            unverbindlich.
+          <p className="mb-2 text-xs font-semibold tracking-widest text-primary uppercase">
+            Kostenfreies Live-Webinar
+          </p>
+          <h2 className="font-heading mb-3 text-2xl font-bold text-primary">
+            Für alle auf dem Weg in die Verbeamtung
+          </h2>
+          <p className="mb-5 text-sm text-mediumdark">
+            Studierende, Referendare, Anwärter und Beamte in den ersten Dienstjahren: Anwartschaft,
+            Beihilfe, PKV und Dienstunfähigkeit verständlich erklärt – live und unverbindlich.
+          </p>
+          <p className="mb-5 text-sm font-medium text-primary">
+            {dateDisplay} · {timeDisplay} · 45 Min. · online
           </p>
           <Link
             href="/webinar"
             onClick={dismiss}
-            className="block rounded-lg bg-white px-4 py-2.5 text-center text-sm font-semibold text-primary hover:bg-white/90"
+            className="block rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-white hover:bg-primary/90"
           >
             Jetzt kostenlos anmelden
           </Link>
