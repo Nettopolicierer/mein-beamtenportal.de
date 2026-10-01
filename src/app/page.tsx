@@ -52,7 +52,7 @@ export default function Home() {
             <h1 className="font-hand text-6xl leading-none font-bold text-primary sm:text-7xl">
               Mein Beamtenportal
             </h1>
-            <p className="font-hand mt-3 text-3xl text-primary sm:text-4xl">
+            <p className="font-hand mt-3 text-3xl text-balance text-primary sm:text-4xl">
               Pension, Beihilfe und PKV verstehen.
             </p>
             <p className="mt-6 max-w-md text-mediumdark">

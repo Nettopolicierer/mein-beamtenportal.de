@@ -81,6 +81,13 @@ body {
      schnell "kaputt", weil der Browser auch kurze, unproblematische Woerter
      wie "Risiko" mitten im Wort trennt, um die Zeile optisch auszugleichen.
      Silbentrennung ist eine Fliesstext-Konvention, keine Schlagzeilen-Regel. */
+  hyphens: manual;
+}
+/* Automatische Trennung nur im langen Artikeltext; die Browser-Woerterbuecher
+   trennen sonst auch in Teasern, Karten und Intros an falschen Stellen
+   ("Beihil-fesatz", "verste-hen"). */
+.prose p,
+.prose li {
   hyphens: auto;
 }
 h1,

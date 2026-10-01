@@ -20,8 +20,8 @@ export default function RatgeberPage() {
             <p className="mb-3 text-xs font-semibold tracking-widest text-primary uppercase">
               Mein Ratgeber
             </p>
-            <h1 className="font-heading mb-4 text-4xl font-bold tracking-tight text-primary">
-              Umfassendes Finanz-&nbsp;und Versicherungswissen.
+            <h1 className="font-heading mb-4 text-4xl font-bold tracking-tight text-balance text-primary">
+              Umfassendes Finanz- und Versicherungswissen.
             </h1>
             <p className="max-w-2xl text-mediumdark">
               {SORTED_POSTS.length} Beiträge für Beamtinnen, Beamte, Referendare und Anwärter im
