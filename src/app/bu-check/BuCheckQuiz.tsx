@@ -449,10 +449,14 @@ export function BuCheckQuiz() {
                   "."}
               {hasContract && rente?.mid ? ` Ihre bestehende Rente ist bereits eingerechnet.` : ""}
             </p>
-            {hasContract && beitrag === "Über 100 €" && (
+            {hasContract && (
               <p className="mt-3 rounded-lg bg-white p-3 text-sm text-primary">
-                Bei einem Beitrag von über 100 € im Monat lohnt sich ein Beitrags-Check: Oft lassen sich Leistung und
-                Preis mit einem Vergleich verbessern, ohne dass Sie etwas verlieren.
+                {beitrag === "Über 100 €"
+                  ? "Bei einem Beitrag von über 100 € im Monat lohnt sich ein Vertrags-Check besonders. "
+                  : "Ein Vertrags-Check lohnt sich bei jedem Beitrag. "}
+                Bedingungen und Preise am Markt ändern sich, und Ihre Situation seit Abschluss auch. Ich prüfe kostenfrei,
+                ob Ihr Vertrag noch passt. Ein Wechsel ist nicht immer sinnvoll, weil bei einem neuen Vertrag eine neue
+                Gesundheitsprüfung nötig ist. Das ordne ich vorher mit Ihnen ein.
               </p>
             )}
             {hasContract && (
