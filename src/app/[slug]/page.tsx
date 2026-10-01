@@ -4,18 +4,23 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ALL_POSTS, getPost, formatDate, getRelatedPosts, BOOKING_LINK } from "@/lib/content";
 
-// Pension-/BU-/DU-Leser sind Beamte mit Absicherungsinteresse: mittendrin im
-// Artikel ein Hinweis auf den BU-Check. Als HTML-String vor die 3. Zwischen-
-// ueberschrift gesetzt (statt den Artikel zu teilen), damit die verschachtelten
-// Wrapper-Divs der migrierten Artikel intakt bleiben.
+// Hinweis auf den BU-Check mitten im Artikel - nur bei Artikeln zu Pension, Dienst-
+// oder Berufsunfaehigkeit (Kategorie BU/DU/Pension oder Thema in Titel, Slug bzw.
+// Beschreibung). Als HTML-String vor die 3. Zwischenueberschrift gesetzt (statt
+// den Artikel zu teilen), damit die verschachtelten Wrapper-Divs der migrierten
+// Artikel intakt bleiben.
 const CTA_CATEGORIES = ["Pension", "BU", "DU"];
+const CTA_TOPIC = /dienstunf|berufsunf/i;
 
-function withBuCheckCta(html: string, slug: string, categories: string[]) {
-  if (!categories.some((c) => CTA_CATEGORIES.includes(c))) return html;
-  const box = `<div class="not-prose my-8 rounded-2xl border border-mediumlight/60 bg-base p-6"><p class="font-heading mb-1 text-lg font-bold text-primary">Und wenn Sie vor der Pension dienstunfähig werden?</p><p class="mb-4 text-sm text-mediumdark">Bei vorzeitiger Dienstunfähigkeit fällt die Versorgung oft deutlich niedriger aus. Machen Sie den kostenfreien BU-Check in einer Minute.</p><a href="/bu-check?src=${encodeURIComponent(slug)}" class="inline-block rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary/90">Kostenfreien BU-Check starten</a></div>`;
-  const headings = [...html.matchAll(/<h2[\s>]/g)];
+function withBuCheckCta(post: { slug: string; title: string; description?: string; categories: string[]; html: string }) {
+  const relevant =
+    post.categories.some((c) => CTA_CATEGORIES.includes(c)) ||
+    CTA_TOPIC.test(`${post.title} ${post.slug} ${post.description ?? ""}`);
+  if (!relevant) return post.html;
+  const box = `<div class="not-prose my-8 rounded-2xl border border-mediumlight/60 bg-base p-6"><p class="font-heading mb-1 text-lg font-bold text-primary">Und wenn Sie vor der Pension dienstunfähig werden?</p><p class="mb-4 text-sm text-mediumdark">Bei vorzeitiger Dienstunfähigkeit fällt die Versorgung oft deutlich niedriger aus. Machen Sie den kostenfreien BU-Check in einer Minute.</p><a href="/bu-check?src=${encodeURIComponent(post.slug)}" class="inline-block rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary/90">Kostenfreien BU-Check starten</a></div>`;
+  const headings = [...post.html.matchAll(/<h2[\s>]/g)];
   const at = headings[2]?.index;
-  return at === undefined ? html + box : html.slice(0, at) + box + html.slice(at);
+  return at === undefined ? post.html + box : post.html.slice(0, at) + box + post.html.slice(at);
 }
 
 export function generateStaticParams() {
@@ -121,7 +126,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 py-16 lg:grid-cols-[1fr_260px]"
       >
         <div className="prose prose-sm max-w-none leading-normal prose-headings:font-heading prose-headings:text-primary prose-p:leading-relaxed prose-a:text-primary sm:prose-base">
-          <div dangerouslySetInnerHTML={{ __html: withBuCheckCta(post.html, post.slug, post.categories) }} />
+          <div dangerouslySetInnerHTML={{ __html: withBuCheckCta(post) }} />
 
           {/* Die aus WordPress migrierten Artikel haben "Über den Autor" +
               die Buchungs-CTA-Box schon fest im html eingebettet - neue
