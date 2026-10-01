@@ -48,7 +48,8 @@ const LERNZIELE = [
   "Die häufigsten Fehler bei der Gesundheitsprüfung – und wie Sie sie vermeiden, bevor sie zum Problem werden.",
   "Warum eine Dienstunfähigkeitsversicherung gerade in den ersten Dienstjahren so wichtig ist und worauf es bei den Bedingungen ankommt.",
   "Was bei der Öffnungsaktion zu beachten ist und bis wann Sie sie nutzen können.",
-  "Wie Sie in 60 Minuten selbst einschätzen, wo bei Ihnen persönlich noch Lücken bestehen.",
+  "Worin sich PKV-Gesellschaften bei Beihilfe-konformen Tarifen, Alterungsrückstellungen und Beitragsentwicklung wirklich unterscheiden – und worauf Sie beim Vergleich achten sollten.",
+  "Wie Sie in 45 Minuten selbst einschätzen, wo bei Ihnen persönlich noch Lücken bestehen.",
 ];
 
 const FUER_WEN = [
@@ -172,16 +173,17 @@ export default function WebinarPage() {
           {WEBINAR_TITLE}
         </h1>
         <p className="text-lg text-mediumdark">
-          Für Studierende, Referendare, Anwärter und Beamte in den ersten Dienstjahren.
-          In 60 Minuten zeige ich Ihnen live, wie Anwartschaft, Beihilfe, PKV und
-          Dienstunfähigkeitsschutz zusammenspielen – und worauf Sie achten müssen,
-          bevor Sie etwas unterschreiben.
+          Für alle auf dem Weg in die Verbeamtung – vom Studium über das
+          Referendariat bis zu den ersten Dienstjahren. In 45 Minuten zeige ich
+          Ihnen live, wie Anwartschaft, Beihilfe, PKV und Dienstunfähigkeitsschutz
+          zusammenspielen – und worauf Sie achten müssen, bevor Sie etwas
+          unterschreiben.
         </p>
 
         <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-mediumdark">
           <span className="flex items-center gap-1.5 font-medium text-primary">
             <Clock className="size-4 text-primary" />
-            {dateDisplay} · {timeDisplay} · 60 Min.
+            {dateDisplay} · {timeDisplay} · 45 Min.
           </span>
           <span className="flex items-center gap-1.5">
             <Video className="size-4 text-primary" />

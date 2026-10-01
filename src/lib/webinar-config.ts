@@ -7,7 +7,7 @@ export const WEBINAR_TEAMS_LINK = "https://teams.microsoft.com/meet/338390673586
 // über die API bei jeder Anmeldung (siehe api/webinar-register/route.ts).
 export const WEBINAR_CONTACT_LIST_ID = 10635470;
 
-const WEBINAR_DURATION_MIN = 60;
+const WEBINAR_DURATION_MIN = 45;
 
 // Kommende Webinar-Termine als ISO-String mit korrektem CET/CEST-Offset.
 // Monatlicher Rhythmus (jeden ersten Mittwoch, 18 Uhr): neue Termine unten

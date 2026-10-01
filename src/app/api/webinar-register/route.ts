@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
     dateDisplay,
     timeDisplay,
   } = getNextWebinar();
-  const webinarDateDisplay = `${dateDisplay}, ${timeDisplay} (ca. 60 Minuten)`;
+  const webinarDateDisplay = `${dateDisplay}, ${timeDisplay} (ca. 45 Minuten)`;
 
   if (typeof name !== "string" || name.trim().length < 2) {
     return NextResponse.json({ error: "Bitte geben Sie Ihren Namen ein." }, { status: 400 });
