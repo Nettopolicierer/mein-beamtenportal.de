@@ -2,8 +2,10 @@ import { BOOKING_LINK } from "@/lib/content";
 
 const BASE_URL = "https://mein-beamtenportal.de";
 // Fest als eigene Konstante statt BASE_URL: Manche Mail-Clients folgen bei
-// <img> keinem Redirect (gebrochenes Bild), daher unabhängig fixiert.
-const LOGO_URL = "https://www.mein-beamtenportal.de/logo.svg";
+// <img> keinem Redirect (gebrochenes Bild), daher unabhängig fixiert. PNG
+// statt SVG: die meisten Mail-Clients (v.a. Outlook) stellen SVG in E-Mails
+// gar nicht oder kaputt dar.
+const LOGO_URL = "https://www.mein-beamtenportal.de/logo-signatur.png";
 
 export const EMAIL_SIGNATURE_TEXT = `Beste Grüße
 Albert vom Beamtenportal
