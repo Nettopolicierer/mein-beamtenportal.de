@@ -5,6 +5,6 @@ export const dynamic = "force-static";
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: { userAgent: "*", allow: "/" },
-    sitemap: "https://mein-beamtenportal.de/sitemap.xml",
+    sitemap: "https://www.mein-beamtenportal.de/sitemap.xml",
   };
 }

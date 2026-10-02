@@ -30,9 +30,10 @@ const caveat = Caveat({
   weight: ["600", "700"],
 });
 
-// Apex ist die kanonische Domain (www leitet per 301 auf Apex um) - siehe
-// migration-Notizen. Nicht mit dem www-Muster von albert-sibert.de verwechseln.
-const BASE_URL = "https://mein-beamtenportal.de";
+// www ist die kanonische Domain: mein-beamtenportal.de (Apex) leitet in Vercel per
+// 308 auf www um. Canonical, Sitemap und robots.txt müssen auf dieselbe Adresse
+// zeigen, sonst verweist Google auf eine weiterleitende URL.
+const BASE_URL = "https://www.mein-beamtenportal.de";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),

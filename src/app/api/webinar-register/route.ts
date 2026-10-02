@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
   const icsContent = buildWebinarIcs({
     uid: `webinar-${webinarStart.getTime()}-${email}@mein-beamtenportal.de`,
     title: WEBINAR_TITLE,
-    description: `Kostenfreies Live-Webinar mit Albert Sibert. Alle Details unter https://mein-beamtenportal.de/webinar`,
+    description: `Kostenfreies Live-Webinar mit Albert Sibert. Alle Details unter https://www.mein-beamtenportal.de/webinar`,
     start: webinarStart,
     end: webinarEnd,
     meetingLink: WEBINAR_TEAMS_LINK,

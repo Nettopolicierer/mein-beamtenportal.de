@@ -3,7 +3,7 @@ import { ALL_POSTS, ALL_PAGES } from "@/lib/content";
 
 export const dynamic = "force-static";
 
-const BASE_URL = "https://mein-beamtenportal.de";
+const BASE_URL = "https://www.mein-beamtenportal.de";
 
 const EXCLUDE_PAGE_SLUGS = new Set(["albert-sibert"]); // ist die Startseite (/)
 
