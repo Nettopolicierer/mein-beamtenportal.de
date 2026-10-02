@@ -33,12 +33,12 @@ jobs:
             exit 0
           fi
 
-          # Kanonische Domain direkt ansteuern: bei mein-beamtenportal.de ist
-          # die APEX-Domain kanonisch (www leitet per 308 auf Apex um), und
-          # curl reicht den Authorization-Header über einen Host-Wechsel
-          # nicht weiter.
+          # Kanonische Domain direkt ansteuern: mein-beamtenportal.de (ohne www)
+          # leitet per 308 auf www um, und curl reicht den Authorization-Header
+          # über einen Host-Wechsel nicht weiter. Falls die kanonische Domain
+          # in Vercel wieder geändert wird, hier mitziehen.
           http_code=$(curl -sS -o response.json -w "%{http_code}" \
-            "https://mein-beamtenportal.de/api/webinar-reminder" \
+            "https://www.mein-beamtenportal.de/api/webinar-reminder" \
             -H "Authorization: Bearer $CRON_SECRET")
 
           echo "HTTP $http_code"
