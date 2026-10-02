@@ -35,21 +35,54 @@ function stageIntro(stage: ReminderStage, dateDisplay: string, timeDisplay: stri
   }
 }
 
-// Ausgelöst von .github/workflows/webinar-reminders.yml, das stündlich läuft
-// (gleicher Grund wie beim Blog-Autopiloten: Vercel-Hobby erlaubt nur
-// taegliche Crons, siehe Kommentar in der Workflow-Datei). Ein Fenster von
-// einer Stunde deckt jeden stündlichen Durchlauf sicher ab, auch bei ein
-// paar Minuten Verspätung des Workflows.
-const CRON_INTERVAL_MS = 60 * 60 * 1000;
+// Ausgelöst von .github/workflows/webinar-reminders.yml (und optional von einem
+// externen Cron-Dienst, siehe Kommentar dort). GitHub startet geplante Läufe
+// unregelmäßig und teils erst nach mehreren Stunden. Darum gilt jede Stufe nicht
+// nur für ein enges Zeitfenster, sondern ab ihrem Sendezeitpunkt bis zu einer
+// Toleranz danach (nie nach Webinarbeginn). Doppelversand verhindert die
+// Mailjet-CustomID-Prüfung in alreadySent().
+const MIN = 60 * 1000;
+const HOUR = 60 * MIN;
+
+const STAGE_TOLERANCE_MS: Record<ReminderStage, number> = {
+  "1w": 12 * HOUR,
+  "3d": 12 * HOUR,
+  "1d": 6 * HOUR,
+  "6h": 3 * HOUR,
+  "1h": 30 * MIN,
+};
 
 function currentDueStage(now: number, start: Date): ReminderStage | null {
   for (const stage of REMINDER_STAGES) {
     const windowStart = reminderFireTime(stage, start).getTime();
-    if (now >= windowStart && now < windowStart + CRON_INTERVAL_MS) {
+    const windowEnd = Math.min(windowStart + STAGE_TOLERANCE_MS[stage], start.getTime() - 5 * MIN);
+    if (now >= windowStart && now < windowEnd) {
       return stage;
     }
   }
   return null;
+}
+
+function customIdFor(stage: ReminderStage, start: Date) {
+  return `webinar-reminder-${start.getTime()}-${stage}`;
+}
+
+// Prüft bei Mailjet, ob für diese Stufe und diesen Termin schon Mails mit der
+// CustomID verschickt wurden. Schlägt die Abfrage fehl, wird NICHT gesendet
+// (lieber ein sichtbarer Fehlerlauf als doppelte Mails an alle Teilnehmer).
+async function alreadySent(stage: ReminderStage, start: Date): Promise<boolean> {
+  const apiKey = process.env.MAILJET_API_KEY;
+  const secretKey = process.env.MAILJET_SECRET_KEY;
+  const res = await fetch(
+    `https://api.mailjet.com/v3/REST/message?CustomID=${encodeURIComponent(customIdFor(stage, start))}&Limit=1`,
+    { headers: { Authorization: `Basic ${Buffer.from(`${apiKey}:${secretKey}`).toString("base64")}` } }
+  );
+  if (!res.ok) throw new Error(`Mailjet message lookup failed: ${res.status}`);
+  const data = (await res.json()) as { Data?: { CustomID?: string }[] };
+  const customId = customIdFor(stage, start);
+  // Zaehlt nur Treffer, deren CustomID wirklich passt (falls die Abfrage den
+  // Filter einmal ignorieren sollte, darf das nicht jede Stufe blockieren).
+  return (data.Data ?? []).some((m) => m.CustomID === undefined || m.CustomID === customId);
 }
 
 interface MailjetContact {
@@ -97,7 +130,7 @@ async function sendStage(stage: ReminderStage) {
     return { ok: true as const, status: 200, body: { success: true, sent: 0, note: "Keine Kontakte in der Liste gefunden." } };
   }
 
-  const { dateDisplay, timeDisplay } = getNextWebinar();
+  const { dateDisplay, timeDisplay, start } = getNextWebinar();
   const intro = stageIntro(stage, dateDisplay, timeDisplay);
   const textPart = `Hallo,\n\n${intro}\n\nWebinar: "${WEBINAR_TITLE}"\nTeams-Link: ${WEBINAR_TEAMS_LINK}\n\nFalls Sie live nicht dabei sein können, melden Sie sich gerne bei mir – dann vereinbaren wir stattdessen ein kurzes persönliches Gespräch zu Ihren Fragen.\n\n${EMAIL_SIGNATURE_TEXT}`;
   const htmlPart = `<p>Hallo,</p><p>${intro}</p><p><strong>Webinar:</strong> &bdquo;${WEBINAR_TITLE}&ldquo;<br/><strong>Teams-Link:</strong> <a href="${WEBINAR_TEAMS_LINK}">${WEBINAR_TEAMS_LINK}</a></p><p>Falls Sie live nicht dabei sein können, melden Sie sich gerne bei mir – dann vereinbaren wir stattdessen ein kurzes persönliches Gespräch zu Ihren Fragen.</p>${EMAIL_SIGNATURE_HTML}`;
@@ -106,6 +139,7 @@ async function sendStage(stage: ReminderStage) {
     From: { Email: senderEmail, Name: "Albert vom Beamtenportal" },
     To: [{ Email: contact.Email }],
     Subject: STAGE_SUBJECT[stage],
+    CustomID: customIdFor(stage, start),
     TextPart: textPart,
     HTMLPart: htmlPart,
   }));
@@ -161,9 +195,22 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Nicht autorisiert." }, { status: 401 });
   }
 
-  const stage = currentDueStage(Date.now(), getNextWebinar().start);
+  const { start } = getNextWebinar();
+  const stage = currentDueStage(Date.now(), start);
   if (!stage) {
     return NextResponse.json({ success: true, skipped: true });
+  }
+
+  try {
+    if (await alreadySent(stage, start)) {
+      return NextResponse.json({ success: true, skipped: true, stage, note: "Stufe bereits versendet." });
+    }
+  } catch (err) {
+    console.error("Webinar-reminder dedupe check failed", err);
+    return NextResponse.json(
+      { error: "Prüfung auf bereits versendete Erinnerung fehlgeschlagen, es wurde nichts gesendet." },
+      { status: 502 }
+    );
   }
 
   const result = await sendStage(stage);

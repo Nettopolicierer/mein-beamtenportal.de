@@ -5,6 +5,14 @@ name: Webinar Reminders
 # Erinnerungsstufe fällig ist, und verschickt in dem Fall über Mailjet an
 # alle Kontakte der Webinar-Kontaktliste.
 #
+# Hinweis: GitHub startet geplante Läufe unregelmäßig (teils erst nach Stunden).
+# Der Endpoint toleriert das (Stufen gelten ab ihrem Zeitpunkt bis zu einer
+# Toleranz, Doppelversand wird per Mailjet-CustomID verhindert). Für die
+# Stufe "1 Stunde vorher" reicht das nur mit einem pünktlichen Takt - dafür
+# zusätzlich einen externen Cron-Dienst (z. B. cron-job.org, alle 10 Minuten)
+# auf https://www.mein-beamtenportal.de/api/webinar-reminder mit dem Header
+# "Authorization: Bearer <CRON_SECRET>" einrichten.
+#
 # Läuft als GitHub Actions statt Vercel-Cron, weil der Vercel-Hobby-Plan nur
 # tägliche Crons erlaubt (gleicher Grund wie bei blog-autopilot.yml).
 on:
