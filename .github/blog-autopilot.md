@@ -108,6 +108,13 @@ Handlungsaufforderung).
    Ergebnis (JSON mit `featuredImage`/`featuredImageAlt`) in den Post übernehmen. Liefert das
    Skript `featuredImage: null` (kein `UNSPLASH_ACCESS_KEY` hinterlegt oder kein Treffer),
    Artikel trotzdem **ohne** Hero-Bild veröffentlichen — kein Blocker.
+   **Bild prüfen, bevor es bleibt:** die heruntergeladene Datei mit dem Read-Tool ansehen. Zeigt sie
+   Personen in unvorteilhaften oder falschen Situationen (z. B. jemand, der Müll oder Kisten
+   durchsucht, Obdachlosigkeit, Krankheit, Gewalt), Straßenszenen, Markenlogos, erkennbare
+   Kennzeichen oder passt sie nicht zum Thema, die Datei löschen (`rm public/blog-media/<slug>.jpg`)
+   und den Artikel ohne Hero-Bild (`featuredImage: null`) veröffentlichen. Lieber kein Bild als ein
+   unpassendes. Suchbegriffe konkret und positiv wählen (z. B. „modern apartment living room",
+   „teacher classroom", „german home interior"), nicht abstrakt („moving", „household").
 6. Artikel als JSON-Objekt bauen (Struktur unten) und über
    `echo '<json>' | python3 migration/add_new_post.py` an `content-posts-new.json` anhängen.
    Das Skript validiert Slug-Eindeutigkeit, Pflichtfelder, Kategorien und Titel-/
