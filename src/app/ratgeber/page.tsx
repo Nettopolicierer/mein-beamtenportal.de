@@ -20,7 +20,7 @@ export default function RatgeberPage() {
             <p className="mb-3 text-xs font-semibold tracking-widest text-primary uppercase">
               Mein Ratgeber
             </p>
-            <h1 className="font-heading mb-4 text-4xl font-bold tracking-tight text-balance text-primary">
+            <h1 className="font-heading mb-4 text-3xl font-bold tracking-tight break-words text-balance text-primary sm:text-4xl">
               Umfassendes Finanz- und Versicherungswissen.
             </h1>
             <p className="max-w-2xl text-mediumdark">
