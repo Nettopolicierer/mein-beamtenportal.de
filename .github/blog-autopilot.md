@@ -111,10 +111,14 @@ Handlungsaufforderung).
    **Bild prüfen, bevor es bleibt:** die heruntergeladene Datei mit dem Read-Tool ansehen. Zeigt sie
    Personen in unvorteilhaften oder falschen Situationen (z. B. jemand, der Müll oder Kisten
    durchsucht, Obdachlosigkeit, Krankheit, Gewalt), Straßenszenen, Markenlogos, erkennbare
-   Kennzeichen oder passt sie nicht zum Thema, die Datei löschen (`rm public/blog-media/<slug>.jpg`)
-   und den Artikel ohne Hero-Bild (`featuredImage: null`) veröffentlichen. Lieber kein Bild als ein
-   unpassendes. Suchbegriffe konkret und positiv wählen (z. B. „modern apartment living room",
-   „teacher classroom", „german home interior"), nicht abstrakt („moving", „household").
+   Kennzeichen oder passt sie nicht zum Thema: **nicht** einfach weglassen, sondern bis zu dreimal
+   ein anderes Bild holen (`--skip=1`, dann `--skip=2` bzw. einen anderen, konkreteren Suchbegriff;
+   das Skript überspringt Fotos, die schon bei anderen Artikeln im Einsatz sind). Erst wenn
+   auch der dritte Versuch nicht passt, die Datei löschen (`rm public/blog-media/<slug>.jpg`) und
+   ohne Hero-Bild (`featuredImage: null`) veröffentlichen. Suchbegriffe konkret und positiv wählen
+   (z. B. „modern apartment living room", „teacher classroom", „german home interior"), nicht
+   abstrakt („moving", „household"). Ein fehlendes Hero-Bild ist die Ausnahme: im Commit-Text
+   kurz erwähnen, warum keines gesetzt wurde.
 6. Artikel als JSON-Objekt bauen (Struktur unten) und über
    `echo '<json>' | python3 migration/add_new_post.py` an `content-posts-new.json` anhängen.
    Das Skript validiert Slug-Eindeutigkeit, Pflichtfelder, Kategorien und Titel-/
