@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Raleway, Mulish, Caveat } from "next/font/google";
+import localFont from "next/font/local";
 import Link from "next/link";
 import { Analytics } from "@vercel/analytics/next";
 import { BOOKING_LINK } from "@/lib/content";
@@ -12,22 +12,38 @@ import { LogoLink } from "@/components/LogoLink";
 import { HeaderRight } from "@/components/HeaderRight";
 import "./globals.css";
 
-const raleway = Raleway({
+// Schriften liegen als Dateien im Projekt (src/app/fonts) statt von Google geladen zu
+// werden: Der Build haengt so nicht mehr von fonts.googleapis.com ab (mehrfach
+// "Module not found ... font/google" bei Vercel), und beim Besuch der Website
+// werden keine Daten an Google uebertragen. Schriftarten: Raleway, Mulish und
+// Caveat (SIL Open Font License), Latin-Zeichensatz inkl. Umlaute.
+const raleway = localFont({
   variable: "--font-raleway",
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  display: "swap",
+  src: [
+    { path: "./fonts/raleway-latin-500-normal.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/raleway-latin-600-normal.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/raleway-latin-700-normal.woff2", weight: "700", style: "normal" },
+  ],
 });
 
-const mulish = Mulish({
+const mulish = localFont({
   variable: "--font-mulish",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  display: "swap",
+  src: [
+    { path: "./fonts/mulish-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/mulish-latin-500-normal.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/mulish-latin-600-normal.woff2", weight: "600", style: "normal" },
+  ],
 });
 
-const caveat = Caveat({
+const caveat = localFont({
   variable: "--font-caveat",
-  subsets: ["latin"],
-  weight: ["600", "700"],
+  display: "swap",
+  src: [
+    { path: "./fonts/caveat-latin-600-normal.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/caveat-latin-700-normal.woff2", weight: "700", style: "normal" },
+  ],
 });
 
 // www ist die kanonische Domain: mein-beamtenportal.de (Apex) leitet in Vercel per
