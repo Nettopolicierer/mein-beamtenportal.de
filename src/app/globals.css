@@ -72,7 +72,7 @@ body {
   /* 100vw (siehe .blue-background weiter unten) ist immer etwas breiter als
      der sichtbare Viewport, sobald eine Scrollbar vorhanden ist - das
      erzeugt sonst horizontales Scrollen und verschiebt/kappt den Inhalt. */
-  overflow-x: hidden;
+  overflow-x: clip;
   /* overflow-wrap:break-word wird an alle Texte vererbt (h1-h4, p, li, ...)
      und verhindert, dass lange zusammengesetzte deutsche Woerter (z.B.
      "Dienstunfaehigkeitsversicherung") auf schmalen Displays ueber den
