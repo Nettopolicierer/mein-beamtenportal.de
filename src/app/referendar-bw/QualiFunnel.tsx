@@ -1,9 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowLeft, CalendarCheck, Mail } from "lucide-react";
+import Link from "next/link";
+import { ArrowLeft, CalendarCheck, CheckCircle2, MessageCircle, Mail } from "lucide-react";
 import { BOOKING_LINK } from "@/lib/content";
 import { GOOGLE_ADS_BOOKING_LABEL, GOOGLE_ADS_ID } from "@/lib/google-ads";
+
+const WHATSAPP_NUMBER = "4917692609041";
 
 const SCHULFORMEN = ["Gymnasium", "Grundschule", "Sekundarstufe I", "Berufsschule"];
 const STARTTERMINE = ["Januar 2027", "Februar 2027", "Später"];
@@ -44,6 +47,86 @@ function Chip({ active, onClick, children }: { active?: boolean; onClick: () => 
   );
 }
 
+
+const inputClass =
+  "h-12 w-full rounded-lg border border-mediumlight bg-white px-4 text-base text-primary outline-none placeholder:text-mediumdark/70 focus-visible:border-primary";
+
+function AnfrageForm({ schulform, start, jahrgang }: { schulform: string; start: string; jahrgang: string }) {
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [website, setWebsite] = useState("");
+  const [consent, setConsent] = useState(false);
+  const [state, setState] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [error, setError] = useState("");
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    setState("loading");
+    setError("");
+    try {
+      const res = await fetch("/api/referendar-anfrage", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, name, website, consent, schulform, start, jahrgang }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.error ?? "Etwas ist schiefgelaufen.");
+        setState("error");
+        return;
+      }
+      setState("success");
+    } catch {
+      setError("Etwas ist schiefgelaufen. Bitte versuche es erneut.");
+      setState("error");
+    }
+  }
+
+  if (state === "success") {
+    return (
+      <div className="flex items-start gap-2 rounded-xl bg-base p-4 text-sm font-medium text-primary">
+        <CheckCircle2 className="mt-0.5 size-5 shrink-0" />
+        Danke! Ich melde mich persönlich bei dir.
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={submit} className="flex flex-col gap-3">
+      <label className="flex flex-col gap-1.5 text-sm font-medium text-primary">
+        Vorname (optional)
+        <input type="text" autoComplete="given-name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Vorname" className={inputClass} />
+      </label>
+      <label className="flex flex-col gap-1.5 text-sm font-medium text-primary">
+        Deine E-Mail-Adresse
+        <input type="email" required autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@beispiel.de" className={inputClass} />
+      </label>
+      <input type="text" tabIndex={-1} autoComplete="off" aria-hidden="true" value={website} onChange={(e) => setWebsite(e.target.value)} className="absolute -left-[9999px] h-0 w-0 opacity-0" />
+      <label className="flex items-start gap-2 text-xs text-mediumdark">
+        <input type="checkbox" required checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5 size-4 shrink-0" />
+        <span>
+          Ich willige ausdrücklich ein, dass Albert Sibert mich per E-Mail kontaktiert und meine Angabe, dass
+          Vorerkrankungen oder laufende Behandlungen bestehen, dafür verarbeitet (Art. 9 Abs. 2 lit. a DSGVO). Die
+          Einwilligung kann ich jederzeit widerrufen. Details in der{" "}
+          <Link href="/datenschutz" className="underline">
+            Datenschutzerklärung
+          </Link>
+          .
+        </span>
+      </label>
+      <button
+        type="submit"
+        disabled={state === "loading"}
+        className="rounded-lg bg-primary px-6 py-4 text-center text-base font-semibold text-white hover:bg-primary/90 disabled:opacity-60"
+      >
+        {state === "loading" ? "Wird gesendet…" : "Persönliche Einordnung anfragen"}
+      </button>
+      {state === "error" && <p className="text-sm text-red-600">{error}</p>}
+      <p className="text-xs text-mediumdark">Bitte beschreibe deine Erkrankungen hier nicht. Die besprechen wir im Gespräch.</p>
+    </form>
+  );
+}
+
 export function QualiFunnel() {
   const [step, setStep] = useState(1);
   const [schulform, setSchulform] = useState("");
@@ -53,6 +136,9 @@ export function QualiFunnel() {
 
   const notes = `Profil aus dem Online-Check: ${schulform}, Start ${start}, Jahrgang ${jahrgang}`;
   const bookingHref = `${BOOKING_LINK}${BOOKING_LINK.includes("?") ? "&" : "?"}notes=${encodeURIComponent(notes)}`;
+
+  const whatsappText = `Hi Albert, ich starte mein Ref in BW und möchte meinen PKV-Vergleich (${schulform}, Start ${start}, Jahrgang ${jahrgang})`;
+  const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappText)}`;
 
   function goNext(to: number) {
     track("lp_step", { step: step });
@@ -123,11 +209,10 @@ export function QualiFunnel() {
 
       {step === 2 && (
         <div className="flex flex-col gap-4">
-          <h2 className="font-heading text-xl font-bold text-primary">Hast du Vorerkrankungen oder laufende Behandlungen?</h2>
+          <h2 className="font-heading text-xl font-bold text-primary">Wie steht es um deine Gesundheit?</h2>
           <p className="text-sm text-mediumdark">
-            Dazu zählen auch Therapien, Dauermedikation oder Operationen in den letzten Jahren. Bei der privaten
-            Krankenversicherung zählt der Gesundheitszustand beim Abschluss, deine Antwort zeigt, welcher Weg für dich
-            der richtige ist.
+            Bei der privaten Krankenversicherung zählt der Gesundheitszustand beim Abschluss, deine Antwort zeigt, welcher
+            Weg für dich der richtige ist. Unsicher? Wähle die zweite Antwort, wir klären das gemeinsam.
           </p>
           <div className="flex flex-col gap-2.5">
             <Chip
@@ -136,7 +221,7 @@ export function QualiFunnel() {
                 goNext(3);
               }}
             >
-              Nein, keine Vorerkrankungen
+              Keine Vorerkrankungen (letzte 5 Jahre beschwerdefrei)
             </Chip>
             <Chip
               onClick={() => {
@@ -144,7 +229,7 @@ export function QualiFunnel() {
                 goNext(3);
               }}
             >
-              Ja oder ich bin mir nicht sicher
+              Vorerkrankungen / laufende Behandlungen
             </Chip>
           </div>
           <p className="text-xs text-mediumdark">
@@ -175,9 +260,19 @@ export function QualiFunnel() {
           >
             Termin im Kalender wählen
           </a>
+          <a
+            href={whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => track("lp_whatsapp_click")}
+            className="inline-flex items-center justify-center gap-2 rounded-lg border border-primary px-6 py-4 text-center text-base font-semibold text-primary hover:bg-base"
+          >
+            <MessageCircle className="size-5" />
+            Ergebnis per WhatsApp anfordern
+          </a>
           <p className="text-xs text-mediumdark">
-            Schulform, Start und Geburtsjahr werden beim Klick an den Kalender übergeben, damit ich mich auf das
-            Gespräch vorbereiten kann. Deine Gesundheitsangabe wird nicht übergeben.
+            Schulform, Start und Geburtsjahr werden beim Klick an den Kalender bzw. in die WhatsApp-Nachricht
+            übernommen, damit ich mich auf das Gespräch vorbereiten kann. Deine Gesundheitsangabe wird nicht übergeben.
           </p>
           <button type="button" onClick={() => setStep(2)} className="inline-flex items-center gap-1.5 self-start text-sm text-mediumdark hover:text-primary">
             <ArrowLeft className="size-4" /> Zurück
@@ -197,15 +292,10 @@ export function QualiFunnel() {
             Antrag. Die Einzelheiten hängen vom Versicherer ab.
           </p>
           <p className="text-sm font-semibold text-primary">
-            Wichtig: Stell keinen eigenen Antrag, bevor du dich hast einordnen lassen. Schreib mir kurz eine E-Mail,
-            ohne Details zu deiner Gesundheit, die klären wir im Gespräch.
+            Wichtig: Stell keinen eigenen Antrag, bevor du dich hast einordnen lassen. Frag unten kurz eine persönliche
+            Einordnung an, ohne Details zu deiner Gesundheit, die klären wir im Gespräch.
           </p>
-          <a
-            href="mailto:kontakt@mein-beamtenportal.de?subject=Referendariat%20BW%3A%20pers%C3%B6nliche%20Einordnung%20PKV"
-            className="rounded-lg bg-primary px-6 py-4 text-center text-base font-semibold text-white hover:bg-primary/90"
-          >
-            E-Mail an Albert Sibert
-          </a>
+          <AnfrageForm schulform={schulform} start={start} jahrgang={jahrgang} />
           <button type="button" onClick={() => setStep(2)} className="inline-flex items-center gap-1.5 self-start text-sm text-mediumdark hover:text-primary">
             <ArrowLeft className="size-4" /> Zurück
           </button>
