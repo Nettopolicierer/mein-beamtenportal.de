@@ -125,8 +125,9 @@ export function QualiFunnel() {
         <div className="flex flex-col gap-4">
           <h2 className="font-heading text-xl font-bold text-primary">Hast du Vorerkrankungen oder laufende Behandlungen?</h2>
           <p className="text-sm text-mediumdark">
-            Bei der privaten Krankenversicherung zählt der Gesundheitszustand beim Abschluss. Deine Antwort zeigt, welcher
-            Weg für dich der richtige ist.
+            Dazu zählen auch Therapien, Dauermedikation oder Operationen in den letzten Jahren. Bei der privaten
+            Krankenversicherung zählt der Gesundheitszustand beim Abschluss, deine Antwort zeigt, welcher Weg für dich
+            der richtige ist.
           </p>
           <div className="flex flex-col gap-2.5">
             <Chip
@@ -135,7 +136,7 @@ export function QualiFunnel() {
                 goNext(3);
               }}
             >
-              Nein, alles top
+              Nein, keine Vorerkrankungen
             </Chip>
             <Chip
               onClick={() => {
@@ -143,7 +144,7 @@ export function QualiFunnel() {
                 goNext(3);
               }}
             >
-              Ja
+              Ja oder ich bin mir nicht sicher
             </Chip>
           </div>
           <p className="text-xs text-mediumdark">
