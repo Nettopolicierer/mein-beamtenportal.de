@@ -3,10 +3,6 @@ export const WEBINAR_TITLE = "Verbeamtung richtig absichern: Beihilfe, PKV & Die
 // Wiederkehrender Teams-Link (Serientermin), gilt für jeden Monatstermin.
 export const WEBINAR_TEAMS_LINK = "https://teams.microsoft.com/meet/338390673586942?p=A6BBApCPMLVmYfJamu";
 
-// Mailjet-Kontaktliste "Webinar_Beamtenportal_2026", befüllt automatisch
-// über die API bei jeder Anmeldung (siehe api/webinar-register/route.ts).
-export const WEBINAR_CONTACT_LIST_ID = 10635470;
-
 const WEBINAR_DURATION_MIN = 45;
 
 // Kommende Webinar-Termine als ISO-String mit korrektem CET/CEST-Offset.

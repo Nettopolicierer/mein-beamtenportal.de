@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
+import { findList, listRecipients } from "@/lib/mailjet";
+import { cleanupPastEventLists, eventListName } from "@/lib/webinar-lists";
 import { EMAIL_SIGNATURE_HTML, EMAIL_SIGNATURE_TEXT } from "@/lib/email-signature";
 import {
   WEBINAR_TITLE,
   WEBINAR_TEAMS_LINK,
-  WEBINAR_CONTACT_LIST_ID,
   REMINDER_STAGES,
   ReminderStage,
   reminderFireTime,
@@ -89,31 +90,11 @@ interface MailjetContact {
   Email: string;
 }
 
-async function fetchListContacts(apiKey: string, secretKey: string): Promise<MailjetContact[]> {
-  const auth = `Basic ${Buffer.from(`${apiKey}:${secretKey}`).toString("base64")}`;
-  const contacts: MailjetContact[] = [];
-  let offset = 0;
-  const limit = 200;
-
-  for (;;) {
-    const res = await fetch(
-      `https://api.mailjet.com/v3/REST/listrecipient?ContactsList=${WEBINAR_CONTACT_LIST_ID}&Limit=${limit}&Offset=${offset}`,
-      { headers: { Authorization: auth } }
-    );
-    if (!res.ok) break;
-    const data = await res.json();
-    const items: { ContactID: number; Email?: string; ContactAlt?: string }[] = data.Data ?? [];
-    if (items.length === 0) break;
-
-    for (const item of items) {
-      const email = item.Email || item.ContactAlt;
-      if (email) contacts.push({ Email: email });
-    }
-    if (items.length < limit) break;
-    offset += limit;
-  }
-
-  return contacts;
+async function fetchListContacts(): Promise<MailjetContact[]> {
+  // Nur die Liste des nächsten Termins: Erinnerungen gehen ausschließlich an dessen Angemeldete.
+  const list = await findList(eventListName(getNextWebinar().start));
+  if (!list) return [];
+  return (await listRecipients(list.ID)).map((r) => ({ Email: r.Email }));
 }
 
 async function sendStage(stage: ReminderStage) {
@@ -125,15 +106,15 @@ async function sendStage(stage: ReminderStage) {
     return { ok: false as const, status: 500, body: { error: "Der Versand ist aktuell nicht konfiguriert." } };
   }
 
-  const contacts = await fetchListContacts(apiKey, secretKey);
+  const contacts = await fetchListContacts();
   if (contacts.length === 0) {
     return { ok: true as const, status: 200, body: { success: true, sent: 0, note: "Keine Kontakte in der Liste gefunden." } };
   }
 
   const { dateDisplay, timeDisplay, start } = getNextWebinar();
   const intro = stageIntro(stage, dateDisplay, timeDisplay);
-  const textPart = `Hallo,\n\n${intro}\n\nWebinar: "${WEBINAR_TITLE}"\nTeams-Link: ${WEBINAR_TEAMS_LINK}\n\nFalls Sie live nicht dabei sein können, melden Sie sich gerne bei mir – dann vereinbaren wir stattdessen ein kurzes persönliches Gespräch zu Ihren Fragen.\n\n${EMAIL_SIGNATURE_TEXT}`;
-  const htmlPart = `<p>Hallo,</p><p>${intro}</p><p><strong>Webinar:</strong> &bdquo;${WEBINAR_TITLE}&ldquo;<br/><strong>Teams-Link:</strong> <a href="${WEBINAR_TEAMS_LINK}">${WEBINAR_TEAMS_LINK}</a></p><p>Falls Sie live nicht dabei sein können, melden Sie sich gerne bei mir – dann vereinbaren wir stattdessen ein kurzes persönliches Gespräch zu Ihren Fragen.</p>${EMAIL_SIGNATURE_HTML}`;
+  const textPart = `Hallo,\n\n${intro}\n\nWebinar: "${WEBINAR_TITLE}"\nTeams-Link: ${WEBINAR_TEAMS_LINK}\n\nFalls Sie live nicht dabei sein können, melden Sie sich gerne bei mir – dann vereinbaren wir stattdessen ein kurzes persönliches Gespräch zu Ihren Fragen.\n\nSie möchten keine weiteren Erinnerungen zu diesem Webinar? Antworten Sie einfach kurz auf diese E-Mail, dann nehme ich Sie aus der Liste.\n\n${EMAIL_SIGNATURE_TEXT}`;
+  const htmlPart = `<p>Hallo,</p><p>${intro}</p><p><strong>Webinar:</strong> &bdquo;${WEBINAR_TITLE}&ldquo;<br/><strong>Teams-Link:</strong> <a href="${WEBINAR_TEAMS_LINK}">${WEBINAR_TEAMS_LINK}</a></p><p>Falls Sie live nicht dabei sein können, melden Sie sich gerne bei mir – dann vereinbaren wir stattdessen ein kurzes persönliches Gespräch zu Ihren Fragen.</p><p>Sie möchten keine weiteren Erinnerungen zu diesem Webinar? Antworten Sie einfach kurz auf diese E-Mail, dann nehme ich Sie aus der Liste.</p>${EMAIL_SIGNATURE_HTML}`;
 
   const messages = contacts.map((contact) => ({
     From: { Email: senderEmail, Name: "Albert vom Beamtenportal" },
@@ -193,6 +174,13 @@ export async function GET(request: NextRequest) {
   const authHeader = request.headers.get("authorization");
   if (!process.env.CRON_SECRET || authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
     return NextResponse.json({ error: "Nicht autorisiert." }, { status: 401 });
+  }
+
+  // Listen vergangener Termine samt Kontakten löschen (Opt-in-Einladungsliste bleibt unberührt).
+  try {
+    await cleanupPastEventLists();
+  } catch (err) {
+    console.error("Webinar-Cleanup fehlgeschlagen", err);
   }
 
   const { start } = getNextWebinar();

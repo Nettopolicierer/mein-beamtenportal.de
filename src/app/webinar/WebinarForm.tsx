@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
 
 export function WebinarForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [optin, setOptin] = useState(false);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -18,7 +20,7 @@ export function WebinarForm() {
       const res = await fetch("/api/webinar-register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email }),
+        body: JSON.stringify({ name, email, optin }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -60,6 +62,18 @@ export function WebinarForm() {
         placeholder="ihre@email.de"
         className="h-11 w-full rounded-lg border border-mediumlight bg-white px-4 text-sm outline-none focus-visible:border-primary"
       />
+      <label className="flex items-start gap-2 text-xs text-mediumdark">
+        <input
+          type="checkbox"
+          checked={optin}
+          onChange={(e) => setOptin(e.target.checked)}
+          className="mt-0.5 size-4 shrink-0"
+        />
+        <span>
+          Optional: Ich möchte auch zu weiteren Webinaren und Themen für Beamte per E-Mail eingeladen werden. Zur
+          Bestätigung erhalte ich eine E-Mail mit einem Link. Ich kann mich jederzeit wieder abmelden.
+        </span>
+      </label>
       <button
         type="submit"
         disabled={status === "loading"}
@@ -68,7 +82,13 @@ export function WebinarForm() {
         {status === "loading" ? "Wird gesendet…" : "Unverbindlich vormerken lassen"}
       </button>
       {status === "error" && <p className="text-sm text-red-600">{errorMessage}</p>}
-      <p className="text-xs text-mediumdark">Kein Spam. Details dazu in der Datenschutzerklärung.</p>
+      <p className="text-xs text-mediumdark">
+        Ihre Angaben werden für diese Anmeldung und die Erinnerungen zum Webinar verwendet. Details in der{" "}
+        <Link href="/datenschutz" className="underline">
+          Datenschutzerklärung
+        </Link>
+        .
+      </p>
     </form>
   );
 }

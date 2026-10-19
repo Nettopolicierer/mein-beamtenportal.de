@@ -3,15 +3,20 @@ import { EMAIL_SIGNATURE_HTML, EMAIL_SIGNATURE_TEXT } from "@/lib/email-signatur
 import {
   WEBINAR_TITLE,
   WEBINAR_TEAMS_LINK,
-  WEBINAR_CONTACT_LIST_ID,
   getNextWebinar,
 } from "@/lib/webinar-config";
+import { addContactToList, findOrCreateList } from "@/lib/mailjet";
+import { eventListName } from "@/lib/webinar-lists";
+import { createOptinToken } from "@/lib/optin-token";
 import { buildWebinarIcs } from "@/lib/ics";
+
+const escapeHtml = (v: string) =>
+  v.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(request: NextRequest) {
-  const { name, email } = await request.json();
+  const { name, email, optin } = await request.json();
 
   const {
     start: webinarStart,
@@ -39,6 +44,33 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  // Eintrag in die Liste DIESES Termins (pro Termin eine eigene Liste, wird nach dem Webinar gelöscht).
+  // Nicht blockierend: Die Bestätigung geht auch dann raus, Albert bekommt dann einen Hinweis.
+  let listNote = "";
+  try {
+    const list = await findOrCreateList(eventListName(webinarStart));
+    await addContactToList(list.ID, email, name);
+  } catch (err) {
+    console.error("Webinar-Liste: Eintrag fehlgeschlagen", err);
+    listNote = "\n\nACHTUNG: Der Eintrag in die Mailjet-Liste für die Erinnerungen ist fehlgeschlagen. Bitte manuell nachtragen.";
+  }
+
+  // Optional: Einladungen zu weiteren Webinaren (Double-Opt-in per Bestätigungslink).
+  let optinUrl = "";
+  if (optin === true) {
+    try {
+      optinUrl = `https://www.mein-beamtenportal.de/api/webinar-optin?t=${createOptinToken(email)}`;
+    } catch (err) {
+      console.error("Webinar-Opt-in: Token konnte nicht erstellt werden", err);
+    }
+  }
+  const optinText = optinUrl
+    ? `\n\nSie möchten auch zu weiteren Webinaren und Themen für Beamte per E-Mail eingeladen werden? Bitte bestätigen Sie das mit einem Klick: ${optinUrl}\nWenn Sie das nicht angefordert haben, ignorieren Sie diesen Hinweis einfach, dann passiert nichts.`
+    : "";
+  const optinHtml = optinUrl
+    ? `<p>Sie möchten auch zu weiteren Webinaren und Themen für Beamte per E-Mail eingeladen werden? Bitte <a href="${optinUrl}">bestätigen Sie das mit einem Klick</a>. Wenn Sie das nicht angefordert haben, ignorieren Sie diesen Hinweis einfach, dann passiert nichts.</p>`
+    : "";
+
   const icsContent = buildWebinarIcs({
     uid: `webinar-${webinarStart.getTime()}-${email}@mein-beamtenportal.de`,
     title: WEBINAR_TITLE,
@@ -53,8 +85,8 @@ export async function POST(request: NextRequest) {
       From: { Email: senderEmail, Name: "Albert vom Beamtenportal" },
       To: [{ Email: email, Name: name }],
       Subject: `Ihre Anmeldung: Webinar "${WEBINAR_TITLE}"`,
-      TextPart: `Hallo ${name},\n\nschön, dass Sie sich die Zeit nehmen, Ihre Absicherung als Beamter oder angehender Beamter frühzeitig in die Hand zu nehmen. Vielen Dank für Ihre Anmeldung zum Webinar "${WEBINAR_TITLE}".\n\nTermin: ${webinarDateDisplay}\nTeams-Link: ${WEBINAR_TEAMS_LINK}\n\nDen Termin finden Sie als Anhang dieser E-Mail direkt zum Eintragen in Ihren Kalender. Kurz vor dem Termin erhalten Sie von mir noch mehrere Erinnerungen. Falls Sie live nicht dabei sein können, melden Sie sich gerne bei mir – dann vereinbaren wir stattdessen ein kurzes persönliches Gespräch zu Ihren Fragen.\n\n${EMAIL_SIGNATURE_TEXT}`,
-      HTMLPart: `<p>Hallo ${name},</p><p>schön, dass Sie sich die Zeit nehmen, Ihre Absicherung als Beamter oder angehender Beamter frühzeitig in die Hand zu nehmen. Vielen Dank für Ihre Anmeldung zum Webinar &bdquo;${WEBINAR_TITLE}&ldquo;.</p><p><strong>Termin:</strong> ${webinarDateDisplay}<br/><strong>Teams-Link:</strong> <a href="${WEBINAR_TEAMS_LINK}">${WEBINAR_TEAMS_LINK}</a></p><p>Den Termin finden Sie als Anhang dieser E-Mail direkt zum Eintragen in Ihren Kalender. Kurz vor dem Termin erhalten Sie von mir noch mehrere Erinnerungen. Falls Sie live nicht dabei sein können, melden Sie sich gerne bei mir – dann vereinbaren wir stattdessen ein kurzes persönliches Gespräch zu Ihren Fragen.</p>${EMAIL_SIGNATURE_HTML}`,
+      TextPart: `Hallo ${name},\n\nschön, dass Sie sich die Zeit nehmen, Ihre Absicherung als Beamter oder angehender Beamter frühzeitig in die Hand zu nehmen. Vielen Dank für Ihre Anmeldung zum Webinar "${WEBINAR_TITLE}".\n\nTermin: ${webinarDateDisplay}\nTeams-Link: ${WEBINAR_TEAMS_LINK}\n\nDen Termin finden Sie als Anhang dieser E-Mail direkt zum Eintragen in Ihren Kalender. Kurz vor dem Termin erhalten Sie von mir noch mehrere Erinnerungen. Falls Sie live nicht dabei sein können, melden Sie sich gerne bei mir – dann vereinbaren wir stattdessen ein kurzes persönliches Gespräch zu Ihren Fragen.${optinText}\n\n${EMAIL_SIGNATURE_TEXT}`,
+      HTMLPart: `<p>Hallo ${escapeHtml(name)},</p><p>schön, dass Sie sich die Zeit nehmen, Ihre Absicherung als Beamter oder angehender Beamter frühzeitig in die Hand zu nehmen. Vielen Dank für Ihre Anmeldung zum Webinar &bdquo;${WEBINAR_TITLE}&ldquo;.</p><p><strong>Termin:</strong> ${webinarDateDisplay}<br/><strong>Teams-Link:</strong> <a href="${WEBINAR_TEAMS_LINK}">${WEBINAR_TEAMS_LINK}</a></p><p>Den Termin finden Sie als Anhang dieser E-Mail direkt zum Eintragen in Ihren Kalender. Kurz vor dem Termin erhalten Sie von mir noch mehrere Erinnerungen. Falls Sie live nicht dabei sein können, melden Sie sich gerne bei mir – dann vereinbaren wir stattdessen ein kurzes persönliches Gespräch zu Ihren Fragen.</p>${optinHtml}${EMAIL_SIGNATURE_HTML}`,
       Attachments: [
         {
           ContentType: "text/calendar",
@@ -67,7 +99,7 @@ export async function POST(request: NextRequest) {
       From: { Email: senderEmail, Name: "Mein Beamtenportal Website" },
       To: [{ Email: senderEmail }],
       Subject: "Neue Webinar-Vormerkung über die Website",
-      TextPart: `Neue Vormerkung für das Webinar "${WEBINAR_TITLE}" von: ${name} (${email})`,
+      TextPart: `Neue Vormerkung für das Webinar "${WEBINAR_TITLE}" von: ${name} (${email})\nEinladungen zu weiteren Webinaren: ${optinUrl ? "angefordert (Bestätigung per Klick steht aus)" : "nein"}${listNote}`,
     },
   ];
 
@@ -84,30 +116,6 @@ export async function POST(request: NextRequest) {
     const errorBody = await response.text().catch(() => "");
     console.error("Mailjet webinar-register send failed", response.status, errorBody);
     return NextResponse.json({ error: "Der Versand ist fehlgeschlagen. Bitte versuchen Sie es erneut." }, { status: 502 });
-  }
-
-  // Zur Kontaktliste hinzufügen, damit spätere Erinnerungsmails alle Teilnehmer erreichen.
-  // Nicht blockierend: schlägt das fehl, hat der Nutzer trotzdem seine Bestätigung erhalten.
-  // fetch() wirft bei einer Fehlerantwort (4xx/5xx) KEINEN Error - response.ok muss explizit
-  // geprüft werden, sonst bleibt ein Mailjet-Fehler (z.B. falsche Listen-ID) unsichtbar.
-  try {
-    const listResponse = await fetch(
-      `https://api.mailjet.com/v3/REST/contactslist/${WEBINAR_CONTACT_LIST_ID}/managecontact`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Basic ${Buffer.from(`${apiKey}:${secretKey}`).toString("base64")}`,
-        },
-        body: JSON.stringify({ Email: email, Name: name, Action: "addforce" }),
-      }
-    );
-    if (!listResponse.ok) {
-      const listErrorBody = await listResponse.text().catch(() => "");
-      console.error("Mailjet webinar contact list add failed", listResponse.status, listErrorBody);
-    }
-  } catch (err) {
-    console.error("Mailjet webinar contact list add failed", err);
   }
 
   return NextResponse.json({ success: true });

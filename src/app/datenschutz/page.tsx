@@ -129,11 +129,21 @@ export default function DatenschutzPage() {
       <P>
         Wenn Sie sich zu einem Webinar vormerken lassen, verarbeiten wir Ihren Namen und Ihre E-Mail-Adresse, um Ihnen
         die Teilnahmedaten (Teams-Link, Termin als Kalenderdatei) und Erinnerungen zu diesem Webinar zu senden. Der
-        Versand erfolgt über Mailjet (siehe Ziffer 6), die Adresse wird dafür in einer Kontaktliste bei Mailjet
-        gespeichert. Das Webinar selbst findet über Microsoft Teams statt (siehe Ziffer 8). Rechtsgrundlage ist Art. 6
-        Abs. 1 lit. b DSGVO (Durchführung der von Ihnen gewünschten Anmeldung). Wir löschen Ihre Daten aus der Liste nach
-        dem Webinar, für das Sie sich angemeldet haben, sofern Sie nicht ausdrücklich in weitere Informationen
-        eingewilligt haben.
+        Versand erfolgt über Mailjet (siehe Ziffer 6); Ihre Adresse wird dafür in einer Kontaktliste bei Mailjet
+        gespeichert, die nur für diesen Termin angelegt wird. Das Webinar selbst findet über Microsoft Teams statt (siehe
+        Ziffer 8). Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Durchführung der von Ihnen gewünschten Anmeldung).
+        Nach dem Webinar löschen wir die Liste dieses Termins und Ihre darin gespeicherten Kontaktdaten, sofern Sie nicht
+        in weitere Einladungen eingewilligt haben (siehe unten). Wenn Sie keine Erinnerungen mehr möchten, genügt eine
+        kurze Antwort auf eine der E-Mails.
+      </P>
+      <H3>Einladungen zu weiteren Webinaren und Themen (optional)</H3>
+      <P>
+        Bei der Anmeldung können Sie freiwillig einwilligen, dass wir Sie auch zu weiteren Webinaren und Themen für Beamte
+        per E-Mail einladen. Die Einwilligung wird im Double-Opt-in-Verfahren bestätigt: Sie erhalten eine E-Mail mit einem
+        Bestätigungslink, erst mit dem Klick wird Ihre Adresse in die Einladungsliste bei Mailjet aufgenommen. Rechtsgrundlage
+        ist Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Sie können sie jederzeit widerrufen, über den Abmeldelink in jeder
+        dieser E-Mails oder formlos an kontakt@mein-beamtenportal.de. Ihre Adresse bleibt bis zu Ihrem Widerruf gespeichert
+        und wird danach gelöscht bzw. nur noch vorgehalten, um künftige E-Mails zu verhindern.
       </P>
       <H3>BU-Check und Rechner</H3>
       <P>
