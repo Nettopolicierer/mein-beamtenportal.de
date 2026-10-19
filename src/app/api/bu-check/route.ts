@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { EMAIL_SIGNATURE_HTML, EMAIL_SIGNATURE_TEXT } from "@/lib/email-signature";
+import { EMAIL_SIGNATURE_HTML, EMAIL_SIGNATURE_TEXT, SIGNATURE_INLINED_ATTACHMENTS } from "@/lib/email-signature";
 import { BOOKING_LINK } from "@/lib/content";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -111,6 +111,7 @@ export async function POST(request: NextRequest) {
       Subject: "Ihr BU-Check: nächster Schritt",
       TextPart: `Hallo ${name},\n\nvielen Dank für Ihre Angaben zum BU-Check. Ich schaue mir Ihre Situation an und melde mich persönlich bei Ihnen.\n\nWenn Sie nicht warten möchten, können Sie sich hier direkt einen Termin für das kostenfreie Erstgespräch aussuchen:\n${BOOKING_LINK}\n\n${EMAIL_SIGNATURE_TEXT}`,
       HTMLPart: `<p>Hallo ${safeName},</p><p>vielen Dank für Ihre Angaben zum BU-Check. Ich schaue mir Ihre Situation an und melde mich persönlich bei Ihnen.</p><p>Wenn Sie nicht warten möchten, können Sie sich hier direkt einen Termin für das kostenfreie Erstgespräch aussuchen:<br/><a href="${BOOKING_LINK}">${BOOKING_LINK}</a></p>${EMAIL_SIGNATURE_HTML}`,
+      InlinedAttachments: SIGNATURE_INLINED_ATTACHMENTS,
     },
   ];
 

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { EMAIL_SIGNATURE_HTML, EMAIL_SIGNATURE_TEXT } from "@/lib/email-signature";
+import { EMAIL_SIGNATURE_HTML, EMAIL_SIGNATURE_TEXT, SIGNATURE_INLINED_ATTACHMENTS } from "@/lib/email-signature";
 import {
   WEBINAR_TITLE,
   WEBINAR_TEAMS_LINK,
@@ -87,6 +87,7 @@ export async function POST(request: NextRequest) {
       Subject: `Ihre Anmeldung: Webinar "${WEBINAR_TITLE}"`,
       TextPart: `Hallo ${name},\n\nschön, dass Sie sich die Zeit nehmen, Ihre Absicherung als Beamter oder angehender Beamter frühzeitig in die Hand zu nehmen. Vielen Dank für Ihre Anmeldung zum Webinar "${WEBINAR_TITLE}".\n\nTermin: ${webinarDateDisplay}\nTeams-Link: ${WEBINAR_TEAMS_LINK}\n\nDen Termin finden Sie als Anhang dieser E-Mail direkt zum Eintragen in Ihren Kalender. Kurz vor dem Termin erhalten Sie von mir noch mehrere Erinnerungen. Falls Sie live nicht dabei sein können, melden Sie sich gerne bei mir – dann vereinbaren wir stattdessen ein kurzes persönliches Gespräch zu Ihren Fragen.${optinText}\n\n${EMAIL_SIGNATURE_TEXT}`,
       HTMLPart: `<p>Hallo ${escapeHtml(name)},</p><p>schön, dass Sie sich die Zeit nehmen, Ihre Absicherung als Beamter oder angehender Beamter frühzeitig in die Hand zu nehmen. Vielen Dank für Ihre Anmeldung zum Webinar &bdquo;${WEBINAR_TITLE}&ldquo;.</p><p><strong>Termin:</strong> ${webinarDateDisplay}<br/><strong>Teams-Link:</strong> <a href="${WEBINAR_TEAMS_LINK}">${WEBINAR_TEAMS_LINK}</a></p><p>Den Termin finden Sie als Anhang dieser E-Mail direkt zum Eintragen in Ihren Kalender. Kurz vor dem Termin erhalten Sie von mir noch mehrere Erinnerungen. Falls Sie live nicht dabei sein können, melden Sie sich gerne bei mir – dann vereinbaren wir stattdessen ein kurzes persönliches Gespräch zu Ihren Fragen.</p>${optinHtml}${EMAIL_SIGNATURE_HTML}`,
+      InlinedAttachments: SIGNATURE_INLINED_ATTACHMENTS,
       Attachments: [
         {
           ContentType: "text/calendar",

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { findList, listRecipients } from "@/lib/mailjet";
 import { cleanupPastEventLists, eventListName } from "@/lib/webinar-lists";
-import { EMAIL_SIGNATURE_HTML, EMAIL_SIGNATURE_TEXT } from "@/lib/email-signature";
+import { EMAIL_SIGNATURE_HTML, EMAIL_SIGNATURE_TEXT, SIGNATURE_INLINED_ATTACHMENTS } from "@/lib/email-signature";
 import {
   WEBINAR_TITLE,
   WEBINAR_TEAMS_LINK,
@@ -123,6 +123,7 @@ async function sendStage(stage: ReminderStage) {
     CustomID: customIdFor(stage, start),
     TextPart: textPart,
     HTMLPart: htmlPart,
+    InlinedAttachments: SIGNATURE_INLINED_ATTACHMENTS,
   }));
 
   // Mailjet v3.1/send erlaubt bis zu 50 Nachrichten pro Aufruf.

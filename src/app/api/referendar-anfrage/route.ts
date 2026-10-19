@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { EMAIL_SIGNATURE_HTML, EMAIL_SIGNATURE_TEXT } from "@/lib/email-signature";
+import { EMAIL_SIGNATURE_HTML, EMAIL_SIGNATURE_TEXT, SIGNATURE_INLINED_ATTACHMENTS } from "@/lib/email-signature";
 import { tooMany } from "@/lib/rate-limit";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -65,6 +65,7 @@ export async function POST(request: NextRequest) {
       Subject: "Deine Anfrage: PKV für dein Referendariat",
       TextPart: `Hallo${name ? ` ${name}` : ""},\n\nvielen Dank für deine Anfrage. Ich melde mich persönlich bei dir und wir klären gemeinsam, welcher Weg für dich passt.\n\n${EMAIL_SIGNATURE_TEXT}`,
       HTMLPart: `<p>Hallo${safeName ? ` ${safeName}` : ""},</p><p>vielen Dank für deine Anfrage. Ich melde mich persönlich bei dir und wir klären gemeinsam, welcher Weg für dich passt.</p>${EMAIL_SIGNATURE_HTML}`,
+      InlinedAttachments: SIGNATURE_INLINED_ATTACHMENTS,
     },
   ];
 
