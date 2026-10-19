@@ -39,7 +39,7 @@ const FAQ = [
   },
   {
     q: "Wie verdienst du dein Geld?",
-    a: "Wenn du über mich abschließt, erhalte ich eine Provision vom Versicherer. Sie ist im Beitrag einkalkuliert, zusätzliche Kosten entstehen dir dadurch nicht. Was ich bei welchem Tarif erhalte, nenne ich dir im Gespräch.",
+    a: "Wenn du über mich abschließt, erhalte ich eine Provision vom Versicherer. Sie ist im Beitrag einkalkuliert, zusätzliche Kosten entstehen dir dadurch nicht.",
   },
   {
     q: "Warum soll ich nicht einfach beim Anbieter bleiben, der im Seminar vorbeikommt?",
@@ -131,12 +131,10 @@ export default function ReferendarBwPage() {
 
       {/* Transparenz */}
       <section className="mx-auto max-w-3xl px-5 py-12">
-        <h2 className="font-heading mb-3 text-2xl font-bold text-primary">So arbeite ich, ganz transparent</h2>
+        <h2 className="font-heading mb-3 text-2xl font-bold text-primary">So arbeite ich</h2>
         <p className="text-mediumdark">
           Wenn du über mich abschließt, erhalte ich eine Provision vom Versicherer. Sie ist in deinem Beitrag enthalten,
-          zusätzliche Kosten entstehen dir nicht. Das sage ich dir offen und nenne dir im Gespräch, was ich bei welchem
-          Tarif bekomme. Der Vergleich dient dir dazu, selbst zu entscheiden, nicht mir dazu, dich zu einem Abschluss zu
-          drängen.
+          zusätzliche Kosten entstehen dir nicht. Der Vergleich soll dir helfen, selbst zu entscheiden.
         </p>
       </section>
 
