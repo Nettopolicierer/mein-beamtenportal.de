@@ -297,7 +297,7 @@ nehmen. Passt keines wirklich, lieber kein Testimonial als ein unpassendes einba
 
 ## CTA und Lead-Qualifizierung
 
-- Buchungslink ausschließlich `https://cal.eu/mein-beamtenportal/kostenfreie-erstberatung`
+- Buchungslink ausschließlich `https://cal.com/mein-beamtenportal/kostenfreie-erstberatung`
   (das ist `BOOKING_LINK` in `src/lib/content.ts`, nie Calendly, nie eine andere URL).
 - Im Fließtext **drei CTA-Momente**, jeweils anders formuliert und an den Abschnitt
   anknüpfend: kurz nach „Das Wichtigste in Kürze", kontextbezogen mittig im Artikel, ausführlich
@@ -408,7 +408,7 @@ committen:
 - Testimonial ist wörtlich aus der Bank übernommen und passt zum Einwand des Artikels
 - Mindestens 5 FAQ-Einträge, direkt beantwortet
 - Cross-Selling-Block vor dem finalen CTA vorhanden
-- Buchungslink ist exakt `https://cal.eu/mein-beamtenportal/kostenfreie-erstberatung`
+- Buchungslink ist exakt `https://cal.com/mein-beamtenportal/kostenfreie-erstberatung`
 - Fokus-Keyword konsistent in title/description/slug/erstem Absatz/Schlussabschnitt/Alt-Text
 - Disclaimer vorhanden (plus Steuerberater-Disclaimer bei Förderthemen)
 - Gendergerechte Sprache durchgehend

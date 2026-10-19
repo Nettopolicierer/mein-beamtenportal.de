@@ -118,8 +118,7 @@ export default function DatenschutzPage() {
       <H3>Terminbuchung über Cal</H3>
       <P>
         Für die Terminbuchung verlinken wir auf unseren Buchungskalender bei Cal.com (Anbieter: Cal.com, Inc., 2093
-        Philadelphia Pike #1227, Claymont, Delaware 19703, USA; für die Adresse cal.eu werden die Daten nach Angaben des
-        Anbieters in der EU gehostet). Beim Klick auf den Link wechseln Sie auf die Seite des Anbieters; dort geben Sie
+        Philadelphia Pike #1227, Claymont, Delaware 19703, USA). Beim Klick auf den Link wechseln Sie auf die Seite des Anbieters; dort geben Sie
         Name, E-Mail-Adresse und Wunschtermin ein. Die Daten werden zur Planung, Durchführung und Nachbereitung des
         Termins verwendet. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO. Auf unserer Landingpage für Referendare
         (Qualifizierungscheck) übergeben wir beim Klick auf die Terminbuchung zusätzlich Ihre Angaben zu Schulform,

@@ -25,7 +25,12 @@ export default function ErstinformationPage() {
         </section>
         <section>
           <h2 className="mb-2 text-base font-semibold text-primary">Beteiligungen</h2>
-          <p>[Angabe zu Beteiligungen von mehr als 10 % an Versicherungsunternehmen bzw. durch Versicherungsunternehmen wird ergänzt.]</p>
+          <p>
+            Ich halte keine direkte oder indirekte Beteiligung von mehr als 10 % der Stimmrechte oder des Kapitals an einem
+            Versicherungsunternehmen. Ebenso hält kein Versicherungsunternehmen und kein Mutterunternehmen eines
+            Versicherungsunternehmens eine direkte oder indirekte Beteiligung von mehr als 10 % der Stimmrechte oder des
+            Kapitals an meinem Unternehmen.
+          </p>
         </section>
         <section>
           <h2 className="mb-2 text-base font-semibold text-primary">Vergütung</h2>

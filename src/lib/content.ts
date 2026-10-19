@@ -76,4 +76,4 @@ export function formatDate(iso: string): string {
   }).format(new Date(iso));
 }
 
-export const BOOKING_LINK = "https://cal.eu/mein-beamtenportal/kostenfreie-erstberatung";
+export const BOOKING_LINK = "https://cal.com/mein-beamtenportal/kostenfreie-erstberatung";
