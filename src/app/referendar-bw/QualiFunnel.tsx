@@ -7,6 +7,8 @@ import { GOOGLE_ADS_BOOKING_LABEL, GOOGLE_ADS_ID } from "@/lib/google-ads";
 
 const SCHULFORMEN = ["Gymnasium", "Grundschule", "Sekundarstufe I", "Berufsschule"];
 const STARTTERMINE = ["Januar 2027", "Februar 2027", "Später"];
+// Geburtsjahr (beeinflusst den PKV-Beitrag), absteigend von 2006 bis 1980.
+const GEBURTSJAHRE = Array.from({ length: 27 }, (_, i) => String(2006 - i));
 
 type DataLayerWindow = Window & {
   dataLayer?: Record<string, unknown>[];
@@ -46,7 +48,11 @@ export function QualiFunnel() {
   const [step, setStep] = useState(1);
   const [schulform, setSchulform] = useState("");
   const [start, setStart] = useState("");
+  const [jahrgang, setJahrgang] = useState("");
   const [gesund, setGesund] = useState<boolean | null>(null);
+
+  const notes = `Profil aus dem Online-Check: ${schulform}, Start ${start}, Jahrgang ${jahrgang}`;
+  const bookingHref = `${BOOKING_LINK}${BOOKING_LINK.includes("?") ? "&" : "?"}notes=${encodeURIComponent(notes)}`;
 
   function goNext(to: number) {
     track("lp_step", { step: step });
@@ -86,9 +92,27 @@ export function QualiFunnel() {
               ))}
             </div>
           </div>
+          <div>
+            <label htmlFor="jahrgang" className="mb-2 block text-sm font-semibold text-primary">
+              Dein Geburtsjahr <span className="font-normal text-mediumdark">(beeinflusst den PKV-Beitrag)</span>
+            </label>
+            <select
+              id="jahrgang"
+              value={jahrgang}
+              onChange={(e) => setJahrgang(e.target.value)}
+              className="h-12 w-full rounded-xl border border-mediumlight bg-white px-4 text-base text-primary outline-none focus-visible:border-primary"
+            >
+              <option value="">Bitte wählen</option>
+              {GEBURTSJAHRE.map((y) => (
+                <option key={y} value={y}>
+                  {y}
+                </option>
+              ))}
+            </select>
+          </div>
           <button
             type="button"
-            disabled={!schulform || !start}
+            disabled={!schulform || !start || !jahrgang}
             onClick={() => goNext(2)}
             className="rounded-lg bg-primary px-6 py-3.5 text-base font-semibold text-white hover:bg-primary/90 disabled:opacity-40"
           >
@@ -99,10 +123,10 @@ export function QualiFunnel() {
 
       {step === 2 && (
         <div className="flex flex-col gap-4">
-          <h2 className="font-heading text-xl font-bold text-primary">Wie steht es um deine Gesundheit?</h2>
+          <h2 className="font-heading text-xl font-bold text-primary">Hast du Vorerkrankungen oder laufende Behandlungen?</h2>
           <p className="text-sm text-mediumdark">
-            Bei der privaten Krankenversicherung zählt der Gesundheitszustand beim Abschluss. Deine Antwort hilft mir,
-            den passenden Weg für dich zu wählen.
+            Bei der privaten Krankenversicherung zählt der Gesundheitszustand beim Abschluss. Deine Antwort zeigt, welcher
+            Weg für dich der richtige ist.
           </p>
           <div className="flex flex-col gap-2.5">
             <Chip
@@ -111,7 +135,7 @@ export function QualiFunnel() {
                 goNext(3);
               }}
             >
-              Keine bekannten Erkrankungen, ich bin topfit
+              Nein, alles top
             </Chip>
             <Chip
               onClick={() => {
@@ -119,7 +143,7 @@ export function QualiFunnel() {
                 goNext(3);
               }}
             >
-              Ich habe bestehende chronische Erkrankungen
+              Ja
             </Chip>
           </div>
           <p className="text-xs text-mediumdark">
@@ -137,11 +161,12 @@ export function QualiFunnel() {
           <CalendarCheck className="size-9 text-primary" />
           <h2 className="font-heading text-xl font-bold text-primary">Gut, dann passt der nächste Schritt.</h2>
           <p className="text-sm text-mediumdark">
-            Dein Profil: {schulform}, Start {start}. Such dir jetzt einen Termin für das kostenfreie Erstgespräch aus.
-            Ich vergleiche vorher die Beihilfetarife, die zu deiner Situation passen, und bespreche sie mit dir.
+            Dein Profil: {schulform}, Start {start}, Jahrgang {jahrgang}. Such dir jetzt einen Termin für das
+            kostenfreie Erstgespräch aus. Ich vergleiche vorher die Beihilfetarife, die zu deiner Situation passen,
+            und bespreche sie mit dir.
           </p>
           <a
-            href={BOOKING_LINK}
+            href={bookingHref}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => track("lp_booking_click")}
@@ -149,6 +174,10 @@ export function QualiFunnel() {
           >
             Termin im Kalender wählen
           </a>
+          <p className="text-xs text-mediumdark">
+            Schulform, Start und Geburtsjahr werden beim Klick an den Kalender übergeben, damit ich mich auf das
+            Gespräch vorbereiten kann. Deine Gesundheitsangabe wird nicht übergeben.
+          </p>
           <button type="button" onClick={() => setStep(2)} className="inline-flex items-center gap-1.5 self-start text-sm text-mediumdark hover:text-primary">
             <ArrowLeft className="size-4" /> Zurück
           </button>
@@ -160,10 +189,15 @@ export function QualiFunnel() {
           <Mail className="size-9 text-primary" />
           <h2 className="font-heading text-xl font-bold text-primary">Dann lohnt sich eine persönliche Einordnung.</h2>
           <p className="text-sm text-mediumdark">
-            Mit Vorerkrankungen ist die Aufnahme in die private Krankenversicherung oft schwieriger, aber nicht
-            ausgeschlossen. Für Beamtenanwärter gibt es in der Regel besondere Aufnahmeregeln (Öffnungsaktion) mit
-            festen Fristen. Welche Möglichkeiten und Fristen für dich gelten, ordne ich gern persönlich für dich ein.
-            Schreib mir dazu eine kurze E-Mail, ohne Details zu deiner Gesundheit, die klären wir im Gespräch.
+            Mit Vorerkrankungen ist die Aufnahme in die private Krankenversicherung oft schwieriger, aber für
+            Beamtenanwärter nicht ausgeschlossen: Viele Versicherer nehmen sie über die sogenannte Öffnungsaktion ohne
+            Gesundheitsprüfung und ohne Leistungsausschlüsse auf, dafür mit einem Risikozuschlag von höchstens 30 % auf
+            den Beitrag. Sie gilt nur innerhalb einer Frist (meist sechs Monate) und in der Regel nur beim ersten
+            Antrag. Die Einzelheiten hängen vom Versicherer ab.
+          </p>
+          <p className="text-sm font-semibold text-primary">
+            Wichtig: Stell keinen eigenen Antrag, bevor du dich hast einordnen lassen. Schreib mir kurz eine E-Mail,
+            ohne Details zu deiner Gesundheit, die klären wir im Gespräch.
           </p>
           <a
             href="mailto:kontakt@mein-beamtenportal.de?subject=Referendariat%20BW%3A%20pers%C3%B6nliche%20Einordnung%20PKV"

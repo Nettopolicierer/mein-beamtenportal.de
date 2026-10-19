@@ -100,7 +100,7 @@ export default function ReferendarBwPage() {
             <li className="flex items-start gap-2">
               <Star className="mt-0.5 size-5 shrink-0" />
               <span>
-                4,90 von 5 Sternen
+                4,90 von 5 Sternen bei über 80 Bewertungen
                 <span className="block text-xs text-mediumdark">Kundenbewertungen auf ProvenExpert</span>
               </span>
             </li>
