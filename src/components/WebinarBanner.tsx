@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { X } from "lucide-react";
+import { isLandingPath } from "@/lib/landing";
 import { getNextWebinar, WEBINAR_DATES_ISO, WEBINAR_TITLE } from "@/lib/webinar-config";
 
 const STORAGE_KEY = "webinar-banner-dismissed";
@@ -17,7 +18,7 @@ export function WebinarBanner() {
     const lastIso = WEBINAR_DATES_ISO[WEBINAR_DATES_ISO.length - 1];
     // Nichts mehr terminiert: Banner ausblenden, bis neue Termine ergänzt werden.
     if (Date.now() > new Date(lastIso).getTime()) return;
-    if (pathname === "/webinar" || pathname === "/bu-check") return;
+    if (pathname === "/webinar" || pathname === "/bu-check" || isLandingPath(pathname)) return;
     if (sessionStorage.getItem(STORAGE_KEY) === "1") return;
     const { dateDisplay, timeDisplay } = getNextWebinar();
     setLabel(`${dateDisplay}, ${timeDisplay}`);

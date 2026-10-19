@@ -9,6 +9,7 @@ import { ClarityTag } from "@/components/ClarityTag";
 import { ScrollCtaPopup } from "@/components/ScrollCtaPopup";
 import { WebinarBanner } from "@/components/WebinarBanner";
 import { LogoLink } from "@/components/LogoLink";
+import { ChromeGate } from "@/components/ChromeGate";
 import { HeaderRight } from "@/components/HeaderRight";
 import "./globals.css";
 
@@ -92,6 +93,7 @@ export default function RootLayout({
         <ClarityTag />
         <GoogleAdsTag />
         <WebinarBanner />
+        <ChromeGate>
         <header className="sticky top-0 z-40 border-b border-mediumlight/40 bg-white/95 backdrop-blur">
           <div className="relative mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 py-3 sm:gap-3 sm:px-6 sm:py-4">
             <LogoLink
@@ -104,9 +106,11 @@ export default function RootLayout({
             <HeaderRight nav={NAV} bookingLink={BOOKING_LINK} />
           </div>
         </header>
+        </ChromeGate>
 
         <main className="flex-1">{children}</main>
 
+        <ChromeGate>
         <footer className="border-t border-mediumlight/40 bg-base">
           <div className="mx-auto max-w-6xl px-6 py-12">
             <div className="grid gap-10 sm:grid-cols-[2fr_1fr_1fr]">
@@ -155,6 +159,7 @@ export default function RootLayout({
             </div>
           </div>
         </footer>
+        </ChromeGate>
         <ScrollCtaPopup />
         </CookieConsentProvider>
         <Analytics />

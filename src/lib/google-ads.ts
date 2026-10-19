@@ -4,3 +4,5 @@ export const GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID ?? "";
 // Conversion-Label der Lead-Conversion (aus Google Ads), z. B. "AbCdEfGhIjK".
 export const GOOGLE_ADS_LEAD_LABEL = process.env.NEXT_PUBLIC_GOOGLE_ADS_LEAD_LABEL ?? "";
 export const GOOGLE_ADS_ENABLED = GOOGLE_ADS_ID !== "";
+// Conversion-Label fuer die Terminbuchung ueber die Werbe-Landingpage (/referendar-bw).
+export const GOOGLE_ADS_BOOKING_LABEL = process.env.NEXT_PUBLIC_GOOGLE_ADS_BOOKING_LABEL ?? "";

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { X } from "lucide-react";
 import { BOOKING_LINK } from "@/lib/content";
+import { isLandingPath } from "@/lib/landing";
 import { getNextWebinar } from "@/lib/webinar-config";
 
 // Zwei Stufen statt einem einzelnen Popup: bei 30% Scroll-Tiefe (noch
@@ -48,7 +49,7 @@ export function ScrollCtaPopup() {
     if (pathname === "/webinar") shown.webinar = true;
     if (pathname === "/kontakt") shown.beratung = true;
     // Werbe-Landingpage: keine Ablenkung vom Check.
-    if (pathname === "/bu-check") {
+    if (pathname === "/bu-check" || isLandingPath(pathname)) {
       shown.webinar = true;
       shown.beratung = true;
     }
