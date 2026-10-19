@@ -34,6 +34,25 @@ html {
    Component bereits verdoppelt, -50% Transform landet dadurch nahtlos
    wieder am Anfang). Pausiert bei Hover/Fokus, damit man in Ruhe lesen
    kann, und respektiert prefers-reduced-motion. */
+@keyframes cookie-banner-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.cookie-banner-in {
+  animation: cookie-banner-in 0.4s ease-out 0.4s both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cookie-banner-in {
+    animation: none;
+  }
+}
+
 @keyframes testimonial-marquee {
   from {
     transform: translateX(0);
