@@ -13,8 +13,8 @@ const WEBINAR_DURATION_MIN = 45;
 // Monatlicher Rhythmus (jeden ersten Mittwoch, 18 Uhr): neue Termine unten
 // anhängen, vergangene können stehen bleiben. getNextWebinar() nimmt
 // automatisch den nächsten in der Zukunft.
+// Der Termin am 21.10.2026 ist entfallen (keine Anmeldungen) und wurde bewusst entfernt.
 export const WEBINAR_DATES_ISO = [
-  "2026-10-21T18:00:00+02:00",
   "2026-11-04T18:00:00+01:00",
   "2026-12-02T18:00:00+01:00",
   "2027-01-06T18:00:00+01:00",
