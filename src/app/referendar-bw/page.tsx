@@ -86,8 +86,8 @@ export default function ReferendarBwPage() {
             <li className="flex items-start gap-2">
               <BadgeCheck className="mt-0.5 size-5 shrink-0" />
               <span>
-                Erlaubnis nach § 34d GewO
-                <span className="block text-xs text-mediumdark">Reg.-Nr. D-4EHE-G249E-13</span>
+                Über 400 Beamte beraten
+                <span className="block text-xs text-mediumdark">Seit 2019 im öffentlichen Dienst</span>
               </span>
             </li>
             <li className="flex items-start gap-2">
