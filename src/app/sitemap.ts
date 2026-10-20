@@ -5,7 +5,7 @@ export const dynamic = "force-static";
 
 const BASE_URL = "https://www.mein-beamtenportal.de";
 
-const EXCLUDE_PAGE_SLUGS = new Set(["albert-sibert"]); // ist die Startseite (/)
+const EXCLUDE_PAGE_SLUGS = new Set(["albert-sibert", "cookie-richtlinie-eu"]); // Startseite bzw. Alt-Seite ohne eigene Route (leitet auf /datenschutz)
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
