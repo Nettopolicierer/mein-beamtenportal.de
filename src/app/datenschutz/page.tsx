@@ -154,6 +154,16 @@ export default function DatenschutzPage() {
         Gesundheitsdaten werden im BU-Check nicht abgefragt. Der Pensionsrechner auf der Startseite arbeitet vollständig
         in Ihrem Browser; die eingegebenen Werte werden nicht an uns übermittelt.
       </P>
+      <H3>Anfrageformular (Landingpage für Instagram)</H3>
+      <P>
+        Auf der Seite /anfrage können Sie Themen, einen bevorzugten Zeitraum für den Rückruf, Ihren Vornamen, Ihre
+        E-Mail-Adresse, optional Ihre Telefonnummer und eine Nachricht angeben. Wir verarbeiten diese Angaben, um Sie
+        zu den gewählten Themen zu kontaktieren und Ihnen eine Bestätigung zu senden. Rechtsgrundlage ist Ihre
+        Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), die Sie im Formular erteilen und jederzeit widerrufen können.
+        Gesundheitsdaten fragen wir nicht ab; bitte nennen Sie sie auch in der Nachricht nicht. Der Versand erfolgt über
+        Mailjet (siehe Ziffer 6). Die Angaben löschen wir, wenn die Anfrage erledigt ist und keine gesetzlichen
+        Aufbewahrungspflichten entgegenstehen.
+      </P>
       <H3>Landingpage für Referendare in Baden-Württemberg</H3>
       <P>
         Der dortige Qualifizierungscheck fragt Schulform, Starttermin, Geburtsjahr und Ihre Einschätzung zu

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 // Mobile Leiste unten: erscheint nach dem Hero und verschwindet, sobald der Check sichtbar ist.
-export function StickyCta() {
+export function StickyCta({ label = "Passende Anwärter-Tarife prüfen (60 Sek.)" }: { label?: string }) {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export function StickyCta() {
   return (
     <div className="fixed inset-x-0 bottom-0 z-30 border-t border-mediumlight/40 bg-white/95 p-3 shadow-lg backdrop-blur sm:hidden">
       <a href="#check" className="block rounded-lg bg-primary px-4 py-3 text-center text-sm font-semibold text-white">
-        Passende Anwärter-Tarife prüfen (60 Sek.)
+        {label}
       </a>
     </div>
   );
