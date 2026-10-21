@@ -10,7 +10,7 @@ const clean = (v: unknown, max = 120) => (typeof v === "string" ? v.trim().slice
 
 const THEMEN = ["Dienstunfähigkeit / BU", "PKV und Beihilfe", "Altersvorsorge", "Vertragscheck"];
 const ZEITEN = ["Vormittags (bis 12 Uhr)", "Mittags (12–14 Uhr)", "Nachmittags (14–17 Uhr)", "Abends (ab 17 Uhr)"];
-const STATUS = ["Anwärter / Referendar", "Beamter auf Probe", "Beamter auf Lebenszeit", "Sonstiges"];
+const STATUS = ["Anwärter / Referendar", "Student", "Beamter", "Sonstiges"];
 
 // Anfrage über die Instagram-Landingpage /anfrage. Es werden keine Gesundheitsdaten abgefragt;
 // Rechtsgrundlage ist die Einwilligung im Formular (Art. 6 Abs. 1 lit. a DSGVO).

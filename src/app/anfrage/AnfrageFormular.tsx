@@ -7,7 +7,7 @@ import { BOOKING_LINK } from "@/lib/content";
 
 const WHATSAPP_NUMBER = "4917692609041";
 const THEMEN = ["Dienstunfähigkeit / BU", "PKV und Beihilfe", "Altersvorsorge", "Vertragscheck"];
-const STATUS = ["Anwärter / Referendar", "Beamter auf Probe", "Beamter auf Lebenszeit", "Sonstiges"];
+const STATUS = ["Anwärter / Referendar", "Student", "Beamter", "Sonstiges"];
 const ZEITEN = ["Vormittags (bis 12 Uhr)", "Mittags (12–14 Uhr)", "Nachmittags (14–17 Uhr)", "Abends (ab 17 Uhr)"];
 
 const inputClass =
