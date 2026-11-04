@@ -133,26 +133,26 @@ export function PensionsLueckenRechner() {
           </label>
         </div>
 
-        <div className="mt-6 rounded-xl border border-[#C9DCF0] bg-[#EAF2FB] p-6 text-center sm:p-8">
-          <p className="text-sm font-semibold tracking-wide text-[#64748B] uppercase">Ihre Kaufkraft-Lücke im Ruhestand</p>
-          <p className="font-heading mt-2 text-6xl font-extrabold sm:text-7xl" style={{ color: PRIMARY }}>{eur(c.luecke)}</p>
-          <p className="mt-1 text-sm text-[#64748B]">
-            pro Monat · {c.lueckeProzent.toFixed(0)} % weniger als Ihr heutiges Netto von ca. {eur(c.nettoAktiv)}
-          </p>
-        </div>
-        <div className="mt-3 rounded-xl border border-[#E2E8F0] p-5">
-          <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-1">
-            <div>
-              <p className="text-sm font-medium text-[#64748B]">Voraussichtliche Netto-Pension</p>
-              <p className="font-heading text-3xl font-bold sm:text-4xl" style={{ color: PRIMARY }}>{eur(c.pensionNetto)}</p>
-            </div>
-            <p className="text-xs text-[#64748B]">
-              {eur(c.pensionBrutto)} brutto abzüglich Steuern, Pflege &amp; PKV (ca. {eur(c.pensionBrutto - c.pensionNetto)}) · Ruhegehaltssatz{" "}
-              {c.satz.toFixed(2).replace(".", ",")} %
-              {c.abschlag > 0 ? `, Abschlag ${(c.abschlag * 100).toFixed(1).replace(".", ",")} %` : ""}
+        <div className="mt-6 grid gap-3 sm:grid-cols-[1.25fr_1fr]">
+          <div className="rounded-xl border border-[#C9DCF0] bg-[#EAF2FB] p-5">
+            <p className="text-xs font-semibold tracking-wide text-[#64748B] uppercase">Ihre Kaufkraft-Lücke im Ruhestand</p>
+            <p className="font-heading mt-1 text-4xl font-extrabold sm:text-5xl" style={{ color: PRIMARY }}>{eur(c.luecke)}</p>
+            <p className="mt-1 text-xs text-[#64748B]">
+              pro Monat · {c.lueckeProzent.toFixed(0)} % weniger als Ihr heutiges Netto von ca. {eur(c.nettoAktiv)}
+            </p>
+          </div>
+          <div className="rounded-xl border border-[#E2E8F0] p-5">
+            <p className="text-xs font-semibold tracking-wide text-[#64748B] uppercase">Voraussichtliche Netto-Pension</p>
+            <p className="font-heading mt-1 text-3xl font-bold" style={{ color: PRIMARY }}>{eur(c.pensionNetto)}</p>
+            <p className="mt-1 text-xs text-[#64748B]">
+              {eur(c.pensionBrutto)} brutto abzüglich Steuern, Pflege &amp; PKV (ca. {eur(c.pensionBrutto - c.pensionNetto)})
             </p>
           </div>
         </div>
+        <p className="mt-2 text-xs text-[#64748B]">
+          Ruhegehaltssatz {c.satz.toFixed(2).replace(".", ",")} %
+          {c.abschlag > 0 ? `, Versorgungsabschlag ${(c.abschlag * 100).toFixed(1).replace(".", ",")} %` : ""}
+        </p>
 
         <a
           href="#pl-auswertung"
