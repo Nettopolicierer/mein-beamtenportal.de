@@ -8,6 +8,10 @@ import { BESOLDUNG, GRUPPEN, MODELL_RENDITE, calcPension, type Gruppe } from "@/
 const PRIMARY = "#002855";
 const ACCENT = "#1E5FA8";
 
+function pct(v: number, min: number, max: number) {
+  return `${((v - min) / (max - min)) * 100}%`;
+}
+
 const eur = (n: number) => `${Math.round(n).toLocaleString("de-DE")} €`;
 
 const fieldClass =
@@ -114,19 +118,19 @@ export function PensionsLueckenRechner() {
             <span>
               Ihr Alter heute: <span className="font-bold" style={{ color: ACCENT }}>{alter} Jahre</span>
             </span>
-            <input type="range" min={22} max={60} value={alter} onChange={(e) => setAlter(Number(e.target.value))} className="h-10 w-full accent-[#1E5FA8]" />
+            <input type="range" style={{ ["--pct" as string]: pct(alter, 22, 60) }} min={22} max={60} value={alter} onChange={(e) => setAlter(Number(e.target.value))} className="pl-range" />
           </label>
           <label className="flex flex-col gap-1.5 text-sm font-medium">
             <span>
               Geplantes Pensionsalter: <span className="font-bold" style={{ color: ACCENT }}>{pensionsalter} Jahre</span>
             </span>
-            <input type="range" min={63} max={67} value={pensionsalter} onChange={(e) => setPensionsalter(Number(e.target.value))} className="h-10 w-full accent-[#1E5FA8]" />
+            <input type="range" style={{ ["--pct" as string]: pct(pensionsalter, 63, 67) }} min={63} max={67} value={pensionsalter} onChange={(e) => setPensionsalter(Number(e.target.value))} className="pl-range" />
           </label>
           <label className="flex flex-col gap-1.5 text-sm font-medium sm:col-span-2">
             <span>
               Voraussichtliche Dienstjahre: <span className="font-bold" style={{ color: ACCENT }}>{dienstjahre}</span>
             </span>
-            <input type="range" min={10} max={40} value={dienstjahre} onChange={(e) => setDienstjahre(Number(e.target.value))} className="h-10 w-full accent-[#1E5FA8]" />
+            <input type="range" style={{ ["--pct" as string]: pct(dienstjahre, 10, 40) }} min={10} max={40} value={dienstjahre} onChange={(e) => setDienstjahre(Number(e.target.value))} className="pl-range" />
             <span className="text-xs font-normal text-[#64748B]">
               Inkl. anerkannter Vordienstzeiten ab dem {Math.max(pensionsalter - dienstjahre, 16)}. Lebensjahr
             </span>
@@ -172,7 +176,7 @@ export function PensionsLueckenRechner() {
             <span>
               Monatlicher Beitrag: <span className="font-bold" style={{ color: ACCENT }}>{eur(sparrate)}</span>
             </span>
-            <input type="range" min={50} max={500} step={25} value={sparrate} onChange={(e) => setSparrate(Number(e.target.value))} className="h-10 w-full accent-[#1E5FA8]" />
+            <input type="range" style={{ ["--pct" as string]: pct(sparrate, 50, 500) }} min={50} max={500} step={25} value={sparrate} onChange={(e) => setSparrate(Number(e.target.value))} className="pl-range" />
           </label>
           <div className="mt-3 grid gap-3 text-sm sm:grid-cols-3">
             <div className="rounded-lg bg-[#F8FAFC] p-3">
