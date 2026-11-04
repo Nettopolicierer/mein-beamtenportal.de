@@ -89,7 +89,7 @@ export async function POST(request: NextRequest) {
       TextPart: `Neue Anfrage über den Pensions-Lückenrechner\n\n${zeilen.join("\n")}\n\nEinwilligung zur Kontaktaufnahme im Formular erteilt (Art. 6 Abs. 1 lit. a DSGVO). Die PDF-Auswertung wurde an die Person gesendet.`,
     },
     {
-      From: { Email: senderEmail, Name: "Albert Sibert | Mein Beamtenportal" },
+      From: { Email: senderEmail, Name: "Mein Beamtenportal" },
       To: [{ Email: email }],
       Subject: pensionAnalysisSubject(mailVars),
       TextPart: pensionAnalysisText(mailVars),

@@ -181,7 +181,7 @@ export function AnfrageFormular() {
       <label className="flex items-start gap-2 text-xs text-mediumdark">
         <input type="checkbox" required checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5 size-4 shrink-0" />
         <span>
-          Ich willige ein, dass Albert Sibert mich zu den gewählten Themen per E-Mail oder Telefon kontaktiert und meine
+          Ich willige ein, dass Mein Beamtenportal mich zu den gewählten Themen per E-Mail oder Telefon kontaktiert und meine
           Angaben dafür verarbeitet (Art. 6 Abs. 1 lit. a DSGVO). Die Einwilligung kann ich jederzeit widerrufen. Details
           in der{" "}
           <Link href="/datenschutz" className="underline">

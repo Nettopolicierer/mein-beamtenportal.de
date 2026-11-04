@@ -92,12 +92,12 @@ function roundRect(page: PDFPage, x: number, yTop: number, w: number, h: number,
 
 function page(ctx: Ctx, nr: number, right: string) {
   const p = ctx.doc.addPage([W, H]);
-  text(p, ctx, "Mein Beamtenportal | Albert Sibert", M, H - 46, 13, { bold: true, color: BLUE });
+  text(p, ctx, "Mein Beamtenportal", M, H - 46, 13, { bold: true, color: BLUE });
   const rw = ctx.reg.widthOfTextAtSize(clean(right), 9.5);
   text(p, ctx, right, W - M - rw, H - 45, 9.5, { color: MUTED });
   p.drawLine({ start: { x: M, y: H - 58 }, end: { x: W - M, y: H - 58 }, thickness: 2.2, color: BLUE });
   p.drawLine({ start: { x: M, y: 48 }, end: { x: W - M, y: 48 }, thickness: 0.6, color: LINE });
-  text(p, ctx, "Mein Beamtenportal · Albert Sibert", M, 32, 8.5, { color: MUTED });
+  text(p, ctx, "Mein Beamtenportal · www.mein-beamtenportal.de", M, 32, 8.5, { color: MUTED });
   const pn = `Seite ${nr} von ${TOTAL}`;
   text(p, ctx, pn, W - M - ctx.reg.widthOfTextAtSize(pn, 8.5), 32, 8.5, { color: MUTED });
   return p;
@@ -132,7 +132,7 @@ export async function buildPensionPdf(input: PensionInput): Promise<Uint8Array> 
   const c = calcPension(input);
   const doc = await PDFDocument.create();
   doc.setTitle(`Pensionsanalyse ${input.gruppe}`);
-  doc.setAuthor("Albert Sibert, Mein Beamtenportal");
+  doc.setAuthor("Mein Beamtenportal");
   const ctx: Ctx = { doc, reg: await doc.embedFont(StandardFonts.Helvetica), bold: await doc.embedFont(StandardFonts.HelveticaBold) };
   const datum = new Intl.DateTimeFormat("de-DE", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Berlin" }).format(new Date());
   const jahre = c.jahreBisPension;
@@ -410,7 +410,7 @@ export async function buildPensionPdf(input: PensionInput): Promise<Uint8Array> 
 
     // Absender
     roundRect(p, M, y, CW, 64, 6, GREY, LINE);
-    text(p, ctx, "Albert Sibert", M + 16, y - 22, 12, { bold: true, color: TITLE });
+    text(p, ctx, "Mein Beamtenportal", M + 16, y - 22, 12, { bold: true, color: TITLE });
     text(p, ctx, "Unabhängiger Finanzberater & Versicherungsvertreter (§ 34d Abs. 1 GewO) · Spezialist für Beamte", M + 16, y - 38, 9, { bold: true, color: BLUE2 });
     text(p, ctx, "4,9 von 5 Sternen bei über 80 Bewertungen", M + 16, y - 53, 9, { color: TEXT });
     y -= 64 + 14;
@@ -418,7 +418,7 @@ export async function buildPensionPdf(input: PensionInput): Promise<Uint8Array> 
     text(p, ctx, "Impressum & Registerangaben:", M, y, 8.5, { bold: true, color: MUTED });
     y -= 13;
     [
-      "Albert Sibert · Gämsenbergstraße 22 · 71640 Ludwigsburg · Telefon +49 176 92609041",
+      "Inhaber: Albert Sibert · Gämsenbergstraße 22 · 71640 Ludwigsburg · Telefon +49 176 92609041",
       "E-Mail: kontakt@albert-sibert.de · Web: www.mein-beamtenportal.de",
       "Versicherungsvertreter mit Erlaubnis nach § 34d Abs. 1 GewO (Reg.-Nr. D-4EHE-G249E-13) und Finanzanlagenvermittler nach § 34f Abs. 1 GewO",
       "Registerabfrage: www.vermittlerregister.info · Zuständige Behörde: IHK Region Stuttgart, Jägerstraße 30, 70174 Stuttgart",

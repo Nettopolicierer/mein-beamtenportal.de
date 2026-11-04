@@ -47,6 +47,7 @@ const POINTS = [
 ];
 
 const FOOTER_LINES = [
+  "Mein Beamtenportal, Inhaber: Albert Sibert, Gämsenbergstraße 22, 71640 Ludwigsburg",
   "Zulassung als Versicherungsvertreter nach § 34d Abs. 1 GewO (Reg.-Nr. D-4EHE-G249E-13) und Finanzanlagenvermittler nach § 34f Abs. 1 GewO",
   "Zuständige Aufsichtsbehörde: IHK Region Stuttgart, Jägerstraße 30, 70174 Stuttgart",
   "Schlichtungsstelle: Versicherungsombudsmann e.V., Postfach 08 06 32, 10006 Berlin",
@@ -71,10 +72,10 @@ Wenn Sie Ihre individuellen Dienstjahre, Vordienstzeiten und das konkrete Steuer
 Termin vereinbaren: ${link}
 
 Mit freundlichen Grüßen
-Albert Sibert
+Mein Beamtenportal
 
 --
-Albert Sibert
+Mein Beamtenportal
 Unabhängiger Finanzberater & Versicherungsvertreter (§ 34d Abs. 1 GewO)
 Spezialist für Beamte & den öffentlichen Dienst
 Gämsenbergstraße 22, 71640 Ludwigsburg
@@ -131,9 +132,9 @@ export function pensionAnalysisHtml(v: PensionAnalysisMailVars = {}) {
           <a href="${link}" style="display:inline-block;padding:12px 22px;font-size:15px;font-weight:700;color:#FFFFFF;text-decoration:none;">Termin vereinbaren</a>
         </td>
       </tr></table>
-      ${p("Mit freundlichen Grüßen<br/>Albert Sibert", "margin-bottom:24px;")}
+      ${p("Mit freundlichen Grüßen<br/>Mein Beamtenportal", "margin-bottom:24px;")}
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="border-top:1px solid #E2E8F0;padding:16px 0 8px;font-size:13px;line-height:1.6;color:${NAVY};">
-        <strong>Albert Sibert</strong><br/>
+        <strong>Mein Beamtenportal</strong><br/>
         Unabhängiger Finanzberater &amp; Versicherungsvertreter (§ 34d Abs. 1 GewO)<br/>
         Spezialist für Beamte &amp; den öffentlichen Dienst<br/>
         Gämsenbergstraße 22, 71640 Ludwigsburg<br/>

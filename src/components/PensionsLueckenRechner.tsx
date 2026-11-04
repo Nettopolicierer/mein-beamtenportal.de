@@ -254,7 +254,7 @@ export function PensionsLueckenRechner() {
             <label className="flex items-start gap-2 text-xs text-white/80">
               <input type="checkbox" required checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5 size-4 shrink-0" />
               <span>
-                Ich willige ein, dass Albert Sibert mich per E-Mail kontaktiert und meine Angaben dafür verarbeitet
+                Ich willige ein, dass Mein Beamtenportal mich per E-Mail kontaktiert und meine Angaben dafür verarbeitet
                 (Art. 6 Abs. 1 lit. a DSGVO). Widerruf jederzeit möglich, siehe{" "}
                 <Link href="/datenschutz" className="underline">
                   Datenschutzerklärung
