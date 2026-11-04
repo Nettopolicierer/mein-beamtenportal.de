@@ -6,13 +6,13 @@ export const WEBINAR_TEAMS_LINK = "https://teams.microsoft.com/meet/338390673586
 const WEBINAR_DURATION_MIN = 45;
 
 // Kommende Webinar-Termine als ISO-String mit korrektem CET/CEST-Offset.
-// Monatlicher Rhythmus (jeden ersten Mittwoch, 18 Uhr): neue Termine unten
+// Monatlicher Rhythmus (18 Uhr, meist erster Mittwoch; Dezember ausnahmsweise Dienstag): neue Termine unten
 // anhängen, vergangene können stehen bleiben. getNextWebinar() nimmt
 // automatisch den nächsten in der Zukunft.
 // Die Termine am 21.10.2026 und 04.11.2026 sind entfallen und wurden bewusst entfernt,
 // damit keine Erinnerungen mehr dafür versendet werden.
 export const WEBINAR_DATES_ISO = [
-  "2026-12-02T18:00:00+01:00",
+  "2026-12-01T18:00:00+01:00",
   "2027-01-06T18:00:00+01:00",
 ];
 
