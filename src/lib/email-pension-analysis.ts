@@ -1,8 +1,7 @@
 import { BOOKING_LINK } from "@/lib/content";
 
 // Persönliches Anschreiben nach der Pensionsberechnung (Sie-Form), responsiv (max. 600 px).
-// Noch nicht an /api/lead-capture angebunden: Der Text verspricht eine PDF-Auswertung und den
-// 3-Töpfe-Fahrplan, beides wird bisher nicht automatisch erzeugt. Siehe `anhang` unten.
+// Wird von /api/lead-capture mit angehängter PDF-Auswertung (src/lib/pension-pdf.ts) versendet.
 
 export interface PensionAnalysisMailVars {
   anrede?: "Herr" | "Frau" | "";
@@ -16,7 +15,7 @@ export interface PensionAnalysisMailVars {
 }
 
 const NAVY = "#0F172A";
-const GOLD = "#C5A059";
+const GOLD = "#1E5FA8"; // Akzentblau (Name aus der ersten Version beibehalten)
 const MUTED = "#64748B";
 
 const esc = (v: string) =>
@@ -69,7 +68,7 @@ Drei Punkte, die im Ruhestand häufig unterschätzt werden:
 ${POINTS.map((p, i) => `${i + 1}. ${p.title}: ${p.text}`).join("\n\n")}
 ${v.anhang ? "\nIhre detaillierte PDF-Auswertung ist dieser Nachricht beigefügt.\n" : ""}
 Wenn Sie Ihre individuellen Dienstjahre, Vordienstzeiten und das konkrete Steuer-Einsparpotenzial einmal exakt berechnen lassen möchten, können Sie sich hier einen kurzen Termin reservieren:
-15-Minuten-Analyse vereinbaren: ${link}
+Termin vereinbaren: ${link}
 
 Mit freundlichen Grüßen
 Albert Sibert
@@ -78,7 +77,7 @@ Albert Sibert
 Albert Sibert
 Versicherungsvertreter (§ 34d Abs. 1 GewO)
 Spezialist für Beamte & den öffentlichen Dienst
-Bleyle Quartier | Martin-Luther-Straße 69, 71636 Ludwigsburg
+Gämsenbergstraße 22, 71640 Ludwigsburg
 Web: www.mein-beamtenportal.de | E-Mail: kontakt@albert-sibert.de
 
 ${FOOTER_LINES.join("\n")}
@@ -129,7 +128,7 @@ export function pensionAnalysisHtml(v: PensionAnalysisMailVars = {}) {
       ${p("Wenn Sie Ihre individuellen Dienstjahre, Vordienstzeiten und das konkrete Steuer-Einsparpotenzial einmal exakt berechnen lassen möchten, können Sie sich hier einen kurzen Termin reservieren:")}
       <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 24px;"><tr>
         <td style="background:${GOLD};border-radius:6px;">
-          <a href="${link}" style="display:inline-block;padding:12px 22px;font-size:15px;font-weight:700;color:${NAVY};text-decoration:none;">15-Minuten-Analyse vereinbaren</a>
+          <a href="${link}" style="display:inline-block;padding:12px 22px;font-size:15px;font-weight:700;color:#FFFFFF;text-decoration:none;">Termin vereinbaren</a>
         </td>
       </tr></table>
       ${p("Mit freundlichen Grüßen<br/>Albert Sibert", "margin-bottom:24px;")}
@@ -137,7 +136,7 @@ export function pensionAnalysisHtml(v: PensionAnalysisMailVars = {}) {
         <strong>Albert Sibert</strong><br/>
         Versicherungsvertreter (§ 34d Abs. 1 GewO)<br/>
         Spezialist für Beamte &amp; den öffentlichen Dienst<br/>
-        Bleyle Quartier | Martin-Luther-Straße 69, 71636 Ludwigsburg<br/>
+        Gämsenbergstraße 22, 71640 Ludwigsburg<br/>
         Web: <a href="https://www.mein-beamtenportal.de" style="color:${NAVY};">www.mein-beamtenportal.de</a> | E-Mail: <a href="mailto:kontakt@albert-sibert.de" style="color:${NAVY};">kontakt@albert-sibert.de</a>
       </td></tr></table>
     </td></tr>

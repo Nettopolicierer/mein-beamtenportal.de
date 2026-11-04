@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { EMAIL_SIGNATURE_HTML, EMAIL_SIGNATURE_TEXT, SIGNATURE_INLINED_ATTACHMENTS } from "@/lib/email-signature";
+import { pensionAnalysisHtml, pensionAnalysisSubject, pensionAnalysisText } from "@/lib/email-pension-analysis";
+import { GRUPPEN, calcPension, type Gruppe } from "@/lib/pension-calc";
+import { buildPensionPdf } from "@/lib/pension-pdf";
 import { tooMany } from "@/lib/rate-limit";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const GRUPPEN = ["A12", "A13", "A14", "A15"];
 
 const clean = (v: unknown, max = 120) => (typeof v === "string" ? v.trim().slice(0, max) : "");
 const num = (v: unknown, min: number, max: number) => {
@@ -18,19 +19,17 @@ export async function POST(request: NextRequest) {
   if (clean(body.website)) return NextResponse.json({ success: true }); // Honeypot
 
   const email = clean(body.email);
-  const gruppe = GRUPPEN.includes(body.besoldungsgruppe) ? (body.besoldungsgruppe as string) : "";
+  const gruppe = (GRUPPEN as string[]).includes(body.besoldungsgruppe) ? (body.besoldungsgruppe as Gruppe) : null;
   const alter = num(body.alter, 18, 70);
   const pensionsalter = num(body.pensionsalter, 60, 70);
   const dienstjahre = num(body.dienstjahre, 1, 45);
   const sparrate = num(body.sparrate, 0, 5000);
-  const nettoPension = num(body.nettoPension, 0, 20000);
-  const luecke = num(body.luecke, 0, 20000);
-  const steuervorteil = num(body.steuervorteilJahr, 0, 100000);
+  const eigenesBrutto = num(body.eigenesBrutto, 1500, 15000) ?? undefined;
 
   if (!EMAIL_REGEX.test(email)) {
     return NextResponse.json({ error: "Bitte gib eine gültige E-Mail-Adresse ein." }, { status: 400 });
   }
-  if (!gruppe || alter === null || pensionsalter === null || dienstjahre === null) {
+  if (!gruppe || alter === null || pensionsalter === null || dienstjahre === null || sparrate === null) {
     return NextResponse.json({ error: "Die Angaben aus dem Rechner sind unvollständig." }, { status: 400 });
   }
   if (body.consent !== true) {
@@ -52,33 +51,50 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  const c = calcPension({ gruppe, alter, pensionsalter, dienstjahre, sparrate, eigenesBrutto });
+  const ergebnis = {
+    nettoPension: Math.round(c.pensionNetto),
+    luecke: Math.round(c.luecke),
+    steuervorteilJahr: Math.round(c.steuervorteilJahr),
+  };
+
+  let pdfBase64 = "";
+  try {
+    const pdf = await buildPensionPdf({ gruppe, alter, pensionsalter, dienstjahre, sparrate, eigenesBrutto });
+    pdfBase64 = Buffer.from(pdf).toString("base64");
+  } catch (err) {
+    console.error("PDF-Erzeugung fehlgeschlagen", err);
+    return NextResponse.json({ error: "Die Auswertung konnte nicht erstellt werden. Bitte versuchen Sie es erneut." }, { status: 500 });
+  }
+
   const zeilen = [
     `E-Mail: ${email}`,
-    `Besoldungsgruppe: ${gruppe}`,
+    `Besoldungsgruppe: ${gruppe}${eigenesBrutto ? ` (eigene Bezüge: ${eigenesBrutto} € brutto)` : ""}`,
     `Alter heute: ${alter}`,
     `Geplantes Pensionsalter: ${pensionsalter}`,
     `Dienstjahre: ${dienstjahre}`,
-    sparrate !== null && `Beispiel-Beitrag Basisrente: ${sparrate} € / Monat`,
-    nettoPension !== null && `Netto-Pension (Richtwert): ${nettoPension} € / Monat`,
-    luecke !== null && `Lücke (Richtwert): ${luecke} € / Monat`,
-    steuervorteil !== null && `Steuervorteil (Richtwert): ${steuervorteil} € / Jahr`,
-  ].filter(Boolean) as string[];
+    `Beispiel-Beitrag: ${sparrate} € / Monat`,
+    `Netto-Pension (Richtwert): ${ergebnis.nettoPension} € / Monat`,
+    `Lücke (Richtwert): ${ergebnis.luecke} € / Monat`,
+    `Steuervorteil (Richtwert): ${ergebnis.steuervorteilJahr} € / Jahr`,
+  ];
 
+  const mailVars = { besoldungsgruppe: gruppe, anhang: true, ergebnis };
   const messages = [
     {
       From: { Email: senderEmail, Name: "Mein Beamtenportal Website" },
       To: [{ Email: senderEmail }],
       ReplyTo: { Email: email },
       Subject: `Neue Anfrage Pensions-Lückenrechner: ${gruppe}`,
-      TextPart: `Neue Anfrage über den Pensions-Lückenrechner\n\n${zeilen.join("\n")}\n\nEinwilligung zur Kontaktaufnahme im Formular erteilt (Art. 6 Abs. 1 lit. a DSGVO).`,
+      TextPart: `Neue Anfrage über den Pensions-Lückenrechner\n\n${zeilen.join("\n")}\n\nEinwilligung zur Kontaktaufnahme im Formular erteilt (Art. 6 Abs. 1 lit. a DSGVO). Die PDF-Auswertung wurde an die Person gesendet.`,
     },
     {
-      From: { Email: senderEmail, Name: "Albert vom Beamtenportal" },
+      From: { Email: senderEmail, Name: "Albert Sibert | Mein Beamtenportal" },
       To: [{ Email: email }],
-      Subject: "Deine Anfrage zur Pensionsberechnung",
-      TextPart: `Hallo,\n\nvielen Dank für deine Anfrage zur Pension bei ${gruppe}. Ich schaue mir deine Angaben an und melde mich persönlich bei dir.\n\n${EMAIL_SIGNATURE_TEXT}`,
-      HTMLPart: `<p>Hallo,</p><p>vielen Dank für deine Anfrage zur Pension bei ${gruppe}. Ich schaue mir deine Angaben an und melde mich persönlich bei dir.</p>${EMAIL_SIGNATURE_HTML}`,
-      InlinedAttachments: SIGNATURE_INLINED_ATTACHMENTS,
+      Subject: pensionAnalysisSubject(mailVars),
+      TextPart: pensionAnalysisText(mailVars),
+      HTMLPart: pensionAnalysisHtml(mailVars),
+      Attachments: [{ ContentType: "application/pdf", Filename: `Pensionsanalyse-${gruppe}.pdf`, Base64Content: pdfBase64 }],
     },
   ];
 
