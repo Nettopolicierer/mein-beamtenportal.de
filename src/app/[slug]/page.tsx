@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { PensionsLueckenRechner } from "@/components/PensionsLueckenRechner";
 import { ALL_POSTS, getPost, formatDate, getRelatedPosts, BOOKING_LINK } from "@/lib/content";
 
 // Hinweis auf den BU-Check mitten im Artikel - nur bei Artikeln zu Pension, Dienst-
@@ -127,6 +128,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       >
         <div className="prose prose-sm max-w-none leading-normal prose-headings:font-heading prose-headings:text-primary prose-p:leading-relaxed prose-a:text-primary sm:prose-base">
           <div dangerouslySetInnerHTML={{ __html: withBuCheckCta(post) }} />
+
+          {post.slug === "wie-hoch-ist-die-pension-bei-a13-netto" && <PensionsLueckenRechner />}
 
           {/* Die aus WordPress migrierten Artikel haben "Über den Autor" +
               die Buchungs-CTA-Box schon fest im html eingebettet - neue

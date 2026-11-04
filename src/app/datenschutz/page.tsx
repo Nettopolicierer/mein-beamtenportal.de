@@ -164,6 +164,16 @@ export default function DatenschutzPage() {
         Mailjet (siehe Ziffer 6). Die Angaben löschen wir, wenn die Anfrage erledigt ist und keine gesetzlichen
         Aufbewahrungspflichten entgegenstehen.
       </P>
+      <H3>Pensions-Lückenrechner</H3>
+      <P>
+        Im Pensions-Lückenrechner im Artikel zur Pension bei A13 geben Sie Besoldungsgruppe, Alter, geplantes
+        Pensionsalter, Dienstjahre und einen Beispiel-Beitrag ein. Die Berechnung erfolgt in Ihrem Browser. Erst wenn Sie
+        das Formular absenden, übermitteln wir diese Angaben, das Ergebnis und Ihre E-Mail-Adresse an uns und senden Ihnen
+        eine Bestätigung. Rechtsgrundlage ist Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), die Sie jederzeit
+        widerrufen können. Gesundheitsdaten werden nicht abgefragt. Der Versand erfolgt über Mailjet (siehe Ziffer 6).
+        Wir löschen die Angaben, wenn die Anfrage erledigt ist und keine gesetzlichen Aufbewahrungspflichten
+        entgegenstehen.
+      </P>
       <H3>Landingpage für Referendare in Baden-Württemberg</H3>
       <P>
         Der dortige Qualifizierungscheck fragt Schulform, Starttermin, Geburtsjahr und Ihre Einschätzung zu
