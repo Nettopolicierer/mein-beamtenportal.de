@@ -127,34 +127,43 @@ export function PensionsLueckenRechner() {
               Voraussichtliche Dienstjahre: <span className="font-bold" style={{ color: ACCENT }}>{dienstjahre}</span>
             </span>
             <input type="range" min={10} max={40} value={dienstjahre} onChange={(e) => setDienstjahre(Number(e.target.value))} className="h-10 w-full accent-[#1E5FA8]" />
+            <span className="text-xs font-normal text-[#64748B]">
+              Inkl. anerkannter Vordienstzeiten ab dem {Math.max(pensionsalter - dienstjahre, 16)}. Lebensjahr
+            </span>
           </label>
         </div>
 
-        <div className="mt-6 grid gap-4 sm:grid-cols-2">
-          <div className="rounded-xl border border-[#E2E8F0] p-5">
-            <p className="text-sm font-medium text-[#64748B]">Voraussichtliche Netto-Pension</p>
-            <p className="font-heading mt-1 text-4xl font-bold sm:text-5xl" style={{ color: PRIMARY }}>{eur(c.pensionNetto)}</p>
-            <p className="mt-1 text-xs text-[#64748B]">
-              pro Monat · Ruhegehaltssatz {c.satz.toFixed(2).replace(".", ",")} %
-              {c.abschlag > 0 ? `, Versorgungsabschlag ${(c.abschlag * 100).toFixed(1).replace(".", ",")} %` : ""}
-            </p>
-          </div>
-          <div className="rounded-xl border border-[#C9DCF0] bg-[#EAF2FB] p-5">
-            <p className="text-sm font-medium text-[#64748B]">Reale Kaufkraft-Lücke im Ruhestand</p>
-            <p className="font-heading mt-1 text-4xl font-bold sm:text-5xl" style={{ color: PRIMARY }}>{eur(c.luecke)}</p>
-            <p className="mt-1 text-xs text-[#64748B]">
-              pro Monat · {c.lueckeProzent.toFixed(0)} % weniger als Ihr heutiges Netto von ca. {eur(c.nettoAktiv)}
+        <div className="mt-6 rounded-xl border border-[#C9DCF0] bg-[#EAF2FB] p-6 text-center sm:p-8">
+          <p className="text-sm font-semibold tracking-wide text-[#64748B] uppercase">Ihre Kaufkraft-Lücke im Ruhestand</p>
+          <p className="font-heading mt-2 text-6xl font-extrabold sm:text-7xl" style={{ color: PRIMARY }}>{eur(c.luecke)}</p>
+          <p className="mt-1 text-sm text-[#64748B]">
+            pro Monat · {c.lueckeProzent.toFixed(0)} % weniger als Ihr heutiges Netto von ca. {eur(c.nettoAktiv)}
+          </p>
+        </div>
+        <div className="mt-3 rounded-xl border border-[#E2E8F0] p-5">
+          <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-1">
+            <div>
+              <p className="text-sm font-medium text-[#64748B]">Voraussichtliche Netto-Pension</p>
+              <p className="font-heading text-3xl font-bold sm:text-4xl" style={{ color: PRIMARY }}>{eur(c.pensionNetto)}</p>
+            </div>
+            <p className="text-xs text-[#64748B]">
+              {eur(c.pensionBrutto)} brutto abzüglich Steuern, Pflege &amp; PKV (ca. {eur(c.pensionBrutto - c.pensionNetto)}) · Ruhegehaltssatz{" "}
+              {c.satz.toFixed(2).replace(".", ",")} %
+              {c.abschlag > 0 ? `, Abschlag ${(c.abschlag * 100).toFixed(1).replace(".", ",")} %` : ""}
             </p>
           </div>
         </div>
 
         <a
           href="#pl-auswertung"
-          className="mt-4 flex items-center justify-center gap-2 rounded-xl px-6 py-4 text-center text-base font-semibold"
+          className="mt-5 flex flex-col items-center justify-center gap-0.5 rounded-xl px-6 py-5 text-center shadow-md"
           style={{ backgroundColor: ACCENT, color: "#FFFFFF" }}
         >
-          <FileText className="size-5" />
-          Meine persönliche Auswertung als PDF anfordern
+          <span className="flex items-center gap-2 text-lg font-bold">
+            <FileText className="size-5" />
+            Meine persönliche Auswertung als PDF anfordern
+          </span>
+          <span className="text-xs text-white/85">Kostenlos · 4 Seiten mit Rechenweg und 3-Töpfe-Fahrplan · per E-Mail</span>
         </a>
 
         <div className="mt-6 rounded-xl border border-[#E2E8F0] p-5">
