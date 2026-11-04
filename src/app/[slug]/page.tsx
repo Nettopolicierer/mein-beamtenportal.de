@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { DarkArticle } from "@/components/DarkArticle";
+import { PensionsLueckenRechner } from "@/components/PensionsLueckenRechner";
 import { ALL_POSTS, getPost, formatDate, getRelatedPosts, BOOKING_LINK } from "@/lib/content";
 
 // Hinweis auf den BU-Check mitten im Artikel - nur bei Artikeln zu Pension, Dienst-
@@ -56,8 +56,6 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   if (!post) notFound();
 
   const related = getRelatedPosts(post);
-
-  if (post.layout === "dark") return <DarkArticle post={post} related={related} />;
 
   return (
     <article>
@@ -129,7 +127,21 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 py-16 lg:grid-cols-[1fr_260px]"
       >
         <div className="prose prose-sm max-w-none leading-normal prose-headings:font-heading prose-headings:text-primary prose-p:leading-relaxed prose-a:text-primary sm:prose-base">
-          <div dangerouslySetInnerHTML={{ __html: withBuCheckCta(post) }} />
+          {(() => {
+            // Marker <!--LEAD--> im Artikeltext: hier sitzt der Pensions-Lückenrechner.
+            const [before, after] = withBuCheckCta(post).split("<!--LEAD-->");
+            return (
+              <>
+                <div dangerouslySetInnerHTML={{ __html: before }} />
+                {after !== undefined && (
+                  <>
+                    <PensionsLueckenRechner />
+                    <div dangerouslySetInnerHTML={{ __html: after }} />
+                  </>
+                )}
+              </>
+            );
+          })()}
 
           {/* Die aus WordPress migrierten Artikel haben "Über den Autor" +
               die Buchungs-CTA-Box schon fest im html eingebettet - neue
