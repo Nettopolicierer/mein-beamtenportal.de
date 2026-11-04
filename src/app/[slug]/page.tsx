@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PensionsLueckenRechner } from "@/components/PensionsLueckenRechner";
+import { GRUPPEN, type Gruppe } from "@/lib/pension-calc";
 import { ALL_POSTS, getPost, formatDate, getRelatedPosts, BOOKING_LINK } from "@/lib/content";
 
 // Hinweis auf den BU-Check mitten im Artikel - nur bei Artikeln zu Pension, Dienst-
@@ -13,11 +14,19 @@ import { ALL_POSTS, getPost, formatDate, getRelatedPosts, BOOKING_LINK } from "@
 const CTA_CATEGORIES = ["Pension", "BU", "DU"];
 const CTA_TOPIC = /dienstunf|berufsunf/i;
 
-// Artikel ohne BU-Check-Hinweis (eigener, ruhiger Lead-Pfad über den Rechner im Text).
-const NO_BU_CTA_SLUGS = new Set(["wie-hoch-ist-die-pension-bei-a13-netto"]);
+// Artikel mit Pensions-Lückenrechner (Marker <!--LEAD-->) bekommen keinen BU-Check-Hinweis:
+// Der Rechner ist dort der einzige Lead-Pfad.
+const LEAD_MARKER = "<!--LEAD-->";
+
+// Standard-Besoldungsgruppe des Rechners aus dem Artikel-Slug ("...pension-bei-a9" -> A9), sonst A13.
+function defaultGruppeFor(slug: string): Gruppe {
+  const m = /pension-bei-a(\d+)/.exec(slug);
+  const g = m ? (`A${m[1]}` as Gruppe) : "A13";
+  return (GRUPPEN as string[]).includes(g) ? g : "A13";
+}
 
 function withBuCheckCta(post: { slug: string; title: string; description?: string; categories: string[]; html: string }) {
-  if (NO_BU_CTA_SLUGS.has(post.slug)) return post.html;
+  if (post.html.includes(LEAD_MARKER)) return post.html;
   const relevant =
     post.categories.some((c) => CTA_CATEGORIES.includes(c)) ||
     CTA_TOPIC.test(`${post.title} ${post.slug} ${post.description ?? ""}`);
@@ -133,13 +142,13 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         <div className="prose prose-sm max-w-none leading-normal prose-headings:font-heading prose-headings:text-primary prose-p:leading-relaxed prose-a:text-primary sm:prose-base">
           {(() => {
             // Marker <!--LEAD--> im Artikeltext: hier sitzt der Pensions-Lückenrechner.
-            const [before, after] = withBuCheckCta(post).split("<!--LEAD-->");
+            const [before, after] = withBuCheckCta(post).split(LEAD_MARKER);
             return (
               <>
                 <div dangerouslySetInnerHTML={{ __html: before }} />
                 {after !== undefined && (
                   <>
-                    <PensionsLueckenRechner />
+                    <PensionsLueckenRechner defaultGruppe={defaultGruppeFor(post.slug)} />
                     <div dangerouslySetInnerHTML={{ __html: after }} />
                   </>
                 )}

@@ -166,7 +166,7 @@ export default function DatenschutzPage() {
       </P>
       <H3>Pensions-Lückenrechner</H3>
       <P>
-        Im Pensions-Lückenrechner im Artikel zur Pension bei A13 geben Sie Besoldungsgruppe, Alter, geplantes
+        Im Pensions-Lückenrechner in unseren Artikeln zur Pension und zur Versorgungslücke geben Sie Besoldungsgruppe, Alter, geplantes
         Pensionsalter, Dienstjahre und einen Beispiel-Beitrag ein. Die Berechnung erfolgt in Ihrem Browser. Erst wenn Sie
         das Formular absenden, übermitteln wir diese Angaben, das Ergebnis und Ihre E-Mail-Adresse an uns und senden Ihnen
         eine Bestätigung. Rechtsgrundlage ist Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), die Sie jederzeit

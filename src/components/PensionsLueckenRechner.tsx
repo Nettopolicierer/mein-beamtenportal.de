@@ -17,8 +17,8 @@ const eur = (n: number) => `${Math.round(n).toLocaleString("de-DE")} €`;
 const fieldClass =
   "h-12 w-full rounded-xl border border-[#E2E8F0] bg-white px-4 text-base outline-none placeholder:text-[#64748B] focus-visible:border-[#1E5FA8]";
 
-export function PensionsLueckenRechner() {
-  const [gruppe, setGruppe] = useState<Gruppe>("A13");
+export function PensionsLueckenRechner({ defaultGruppe = "A13" }: { defaultGruppe?: Gruppe }) {
+  const [gruppe, setGruppe] = useState<Gruppe>(defaultGruppe);
   const [eigenes, setEigenes] = useState("");
   const [alter, setAlter] = useState(35);
   const [pensionsalter, setPensionsalter] = useState(67);
