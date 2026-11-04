@@ -24,6 +24,7 @@ export interface Post {
   featuredImage: string | null;
   featuredImageAlt: string;
   featuredImagePosition?: string;
+  layout?: "dark";
   html: string;
 }
 

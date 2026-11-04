@@ -9,7 +9,7 @@ import { CheckCircle2 } from "lucide-react";
 // Bezügestelle, die steuerliche Wirkung vom Finanzamt bzw. Steuerberater.
 const BESOLDUNG = {
   A12: { label: "A12", brutto: 5600, grenzsteuersatz: 0.35 },
-  A13: { label: "A13", brutto: 6300, grenzsteuersatz: 0.38 },
+  A13: { label: "A13", brutto: 6100, grenzsteuersatz: 0.38 },
   A14: { label: "A14", brutto: 6900, grenzsteuersatz: 0.4 },
   A15: { label: "A15", brutto: 7700, grenzsteuersatz: 0.42 },
 } as const;
@@ -32,7 +32,7 @@ export function PensionsLueckenRechner() {
   const [gruppe, setGruppe] = useState<Gruppe>("A13");
   const [alter, setAlter] = useState(35);
   const [pensionsalter, setPensionsalter] = useState(67);
-  const [dienstjahre, setDienstjahre] = useState(35);
+  const [dienstjahre, setDienstjahre] = useState(40);
   const [sparrate, setSparrate] = useState(250);
 
   const [email, setEmail] = useState("");
@@ -182,7 +182,7 @@ export function PensionsLueckenRechner() {
       ) : (
         <form onSubmit={submit} className="mt-6 flex flex-col gap-3 rounded-xl border border-[#cbd5e1]/20 bg-[#0f172a] p-5">
           <p className="font-heading text-lg font-bold text-white">
-            Individuelle Pensionsberechnung + 3-Töpfe-Fahrplan für deine Besoldungsgruppe anfordern
+            3-Töpfe-Fahrplan &amp; Steueroptimierung für Beamte: Auswertung für deine Besoldungsgruppe anfordern
           </p>
           <input
             type="email"
