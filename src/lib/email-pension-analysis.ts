@@ -75,7 +75,7 @@ Albert Sibert
 
 --
 Albert Sibert
-Versicherungsvertreter (§ 34d Abs. 1 GewO)
+Unabhängiger Finanzberater & Versicherungsvertreter (§ 34d Abs. 1 GewO)
 Spezialist für Beamte & den öffentlichen Dienst
 Gämsenbergstraße 22, 71640 Ludwigsburg
 Web: www.mein-beamtenportal.de | E-Mail: kontakt@albert-sibert.de
@@ -134,7 +134,7 @@ export function pensionAnalysisHtml(v: PensionAnalysisMailVars = {}) {
       ${p("Mit freundlichen Grüßen<br/>Albert Sibert", "margin-bottom:24px;")}
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="border-top:1px solid #E2E8F0;padding:16px 0 8px;font-size:13px;line-height:1.6;color:${NAVY};">
         <strong>Albert Sibert</strong><br/>
-        Versicherungsvertreter (§ 34d Abs. 1 GewO)<br/>
+        Unabhängiger Finanzberater &amp; Versicherungsvertreter (§ 34d Abs. 1 GewO)<br/>
         Spezialist für Beamte &amp; den öffentlichen Dienst<br/>
         Gämsenbergstraße 22, 71640 Ludwigsburg<br/>
         Web: <a href="https://www.mein-beamtenportal.de" style="color:${NAVY};">www.mein-beamtenportal.de</a> | E-Mail: <a href="mailto:kontakt@albert-sibert.de" style="color:${NAVY};">kontakt@albert-sibert.de</a>
