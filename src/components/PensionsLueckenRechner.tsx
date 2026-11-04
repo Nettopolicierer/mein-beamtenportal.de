@@ -26,7 +26,7 @@ const NETTO_FAKTOR_PENSION = 0.75; // grob: Netto-Anteil der Pension (nach Steue
 const eur = (n: number) => `${Math.round(n).toLocaleString("de-DE")} €`;
 
 const inputClass =
-  "h-12 w-full rounded-xl border border-[#cbd5e1]/20 bg-[#0a1128] px-4 text-base text-white outline-none focus-visible:border-[#eab308]";
+  "h-12 w-full rounded-xl border border-[#E2E8F0] bg-white px-4 text-base text-[#0F172A] outline-none placeholder:text-[#64748B] focus-visible:border-[#C5A059]";
 
 export function PensionsLueckenRechner() {
   const [gruppe, setGruppe] = useState<Gruppe>("A13");
@@ -93,18 +93,18 @@ export function PensionsLueckenRechner() {
   return (
     <section
       aria-labelledby="pl-title"
-      className="not-prose my-12 hyphens-manual overflow-hidden rounded-2xl border border-[#cbd5e1]/20 bg-gradient-to-b from-[#0a1128] to-[#0f172a] p-5 text-white sm:p-8"
+      className="not-prose my-12 overflow-hidden rounded-2xl border border-[#E2E8F0] bg-white p-5 text-[#0F172A] shadow-sm sm:p-8"
     >
-      <p className="text-xs font-semibold tracking-widest text-[#eab308] uppercase">Pensions-Lückenrechner</p>
-      <h2 id="pl-title" className="font-heading mt-1 text-2xl font-bold text-white sm:text-3xl">
+      <p className="text-xs font-semibold tracking-widest text-[#D97706] uppercase">Pensions-Lückenrechner</p>
+      <h2 id="pl-title" className="font-heading mt-1 text-2xl font-bold text-[#0F172A] sm:text-3xl">
         Wie groß ist deine Lücke im Ruhestand?
       </h2>
-      <p className="mt-2 text-sm text-[#cbd5e1]">
+      <p className="mt-2 text-sm text-[#64748B]">
         Bewege die Regler. Alle Werte sind Richtwerte in heutiger Kaufkraft, monatlich.
       </p>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
-        <label className="flex flex-col gap-1.5 text-sm font-medium text-white">
+        <label className="flex flex-col gap-1.5 text-sm font-medium text-[#0F172A]">
           Besoldungsgruppe
           <select value={gruppe} onChange={(e) => setGruppe(e.target.value as Gruppe)} className={inputClass}>
             {(Object.keys(BESOLDUNG) as Gruppe[]).map((g) => (
@@ -114,54 +114,61 @@ export function PensionsLueckenRechner() {
             ))}
           </select>
         </label>
-        <label className="flex flex-col gap-1.5 text-sm font-medium text-white">
-          Dein Alter heute: {alter} Jahre
-          <input type="range" min={22} max={60} value={alter} onChange={(e) => setAlter(Number(e.target.value))} className="h-12 w-full accent-[#eab308]" />
+        <label className="flex flex-col gap-1.5 text-sm font-medium text-[#0F172A]">
+          <span>
+            Dein Alter heute: <span className="font-bold text-[#D97706]">{alter} Jahre</span>
+          </span>
+          <input type="range" min={22} max={60} value={alter} onChange={(e) => setAlter(Number(e.target.value))} className="h-12 w-full accent-[#C5A059]" />
         </label>
-        <label className="flex flex-col gap-1.5 text-sm font-medium text-white">
-          Geplantes Eintrittsalter in die Pension: {pensionsalter} Jahre
-          <input type="range" min={63} max={67} value={pensionsalter} onChange={(e) => setPensionsalter(Number(e.target.value))} className="h-12 w-full accent-[#eab308]" />
+        <label className="flex flex-col gap-1.5 text-sm font-medium text-[#0F172A]">
+          <span>
+            Geplantes Eintrittsalter in die Pension: <span className="font-bold text-[#D97706]">{pensionsalter} Jahre</span>
+          </span>
+          <input type="range" min={63} max={67} value={pensionsalter} onChange={(e) => setPensionsalter(Number(e.target.value))} className="h-12 w-full accent-[#C5A059]" />
         </label>
-        <label className="flex flex-col gap-1.5 text-sm font-medium text-white">
-          Voraussichtliche Dienstjahre: {dienstjahre}
-          <input type="range" min={20} max={40} value={dienstjahre} onChange={(e) => setDienstjahre(Number(e.target.value))} className="h-12 w-full accent-[#eab308]" />
+        <label className="flex flex-col gap-1.5 text-sm font-medium text-[#0F172A]">
+          <span>
+            Voraussichtliche Dienstjahre: <span className="font-bold text-[#D97706]">{dienstjahre}</span>
+          </span>
+          <input type="range" min={20} max={40} value={dienstjahre} onChange={(e) => setDienstjahre(Number(e.target.value))} className="h-12 w-full accent-[#C5A059]" />
         </label>
       </div>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
-        <div className="rounded-xl border border-[#cbd5e1]/20 bg-[#0f172a] p-5">
-          <p className="text-sm text-[#cbd5e1]">Voraussichtliche Netto-Pension</p>
-          <p className="font-heading mt-1 text-3xl font-bold text-white">{eur(pensionNetto)}</p>
-          <p className="mt-1 text-xs text-[#cbd5e1]">
-            Ruhegehaltssatz {satz.toFixed(1).replace(".", ",")} %
+        <div className="rounded-xl border border-[#E2E8F0] bg-white p-5">
+          <p className="text-sm font-medium text-[#64748B]">Voraussichtliche Netto-Pension</p>
+          <p className="font-heading mt-1 text-4xl font-bold text-[#0F172A] sm:text-5xl">{eur(pensionNetto)}</p>
+          <p className="mt-1 text-xs text-[#64748B]">
+            pro Monat · Ruhegehaltssatz {satz.toFixed(2).replace(".", ",")} %
             {abschlag > 0 ? `, Versorgungsabschlag ${(abschlag * 100).toFixed(1).replace(".", ",")} %` : ""}
           </p>
         </div>
-        <div className="rounded-xl border border-[#eab308]/60 bg-[#0f172a] p-5">
-          <p className="text-sm text-[#cbd5e1]">Reale Kaufkraft-Lücke im Ruhestand</p>
-          <p className="font-heading mt-1 text-3xl font-bold text-[#eab308]">{eur(luecke)} / Monat</p>
-          <p className="mt-1 text-xs text-[#cbd5e1]">
-            {lueckeProzent.toFixed(0)} % weniger als dein heutiges Netto von ca. {eur(nettoAktiv)}
+        <div className="rounded-xl border border-[#E2E8F0] bg-[#F1F5F9] p-5">
+          <p className="text-sm font-medium text-[#64748B]">Reale Kaufkraft-Lücke im Ruhestand</p>
+          <p className="font-heading mt-1 text-4xl font-bold text-[#0F172A] sm:text-5xl">{eur(luecke)}</p>
+          <p className="mt-1 text-xs text-[#64748B]">
+            pro Monat · {lueckeProzent.toFixed(0)} % weniger als dein heutiges Netto von ca. {eur(nettoAktiv)}
             {jahreBisPension > 0 ? `, in ${jahreBisPension} Jahren` : ""}
           </p>
         </div>
       </div>
 
-      <div className="mt-4 rounded-xl border border-[#cbd5e1]/20 bg-[#0f172a] p-5">
-        <p className="text-sm font-semibold text-white">Der Hebel: Steuervorteil durch eine Basisrente (§ 10 EStG)</p>
-        <label className="mt-3 flex flex-col gap-1.5 text-sm text-[#cbd5e1]">
-          Monatlicher Beitrag: {eur(sparrate)}
-          <input type="range" min={50} max={500} step={25} value={sparrate} onChange={(e) => setSparrate(Number(e.target.value))} className="h-10 w-full accent-[#eab308]" />
+      <div className="mt-4 rounded-xl border border-[#E2E8F0] bg-white p-5">
+        <p className="text-sm font-semibold text-[#0F172A]">Der Hebel: Steuervorteil durch eine Basisrente (§ 10 EStG)</p>
+        <label className="mt-3 flex flex-col gap-1.5 text-sm text-[#64748B]">
+          <span>
+            Monatlicher Beitrag: <span className="font-bold text-[#D97706]">{eur(sparrate)}</span>
+          </span>
+          <input type="range" min={50} max={500} step={25} value={sparrate} onChange={(e) => setSparrate(Number(e.target.value))} className="h-10 w-full accent-[#C5A059]" />
         </label>
-        <p className="mt-2 text-sm text-[#cbd5e1]">
-          Möglicher Steuervorteil pro Jahr:{" "}
-          <span className="font-heading text-xl font-bold text-[#eab308]">{eur(steuervorteilJahr)}</span>
-          <span className="block text-xs">
+        <p className="mt-2 text-sm text-[#0F172A]">
+          Möglicher Steuervorteil pro Jahr: <span className="font-heading text-xl font-bold text-[#D97706]">{eur(steuervorteilJahr)}</span>
+          <span className="block text-xs text-[#64748B]">
             Dein Beitrag kostet dich netto dadurch nur etwa {eur(nettoKostenMonat)} im Monat (bei einem geschätzten
             Grenzsteuersatz von {Math.round(b.grenzsteuersatz * 100)} %).
           </span>
         </p>
-        <p className="mt-3 text-xs text-[#cbd5e1]">
+        <p className="mt-3 text-xs text-[#64748B]">
           Beiträge sind steuerlich absetzbar, die spätere Rente wird dafür nachgelagert besteuert. Die Basisrente ist
           nicht vererbbar, nicht beleihbar und zahlt nur als lebenslange Rente aus. Für Beamte wird der Höchstbetrag
           gekürzt, bei den hier einstellbaren Beiträgen ist er in der Regel nicht ausgeschöpft. Das Ergebnis ist eine
@@ -170,19 +177,22 @@ export function PensionsLueckenRechner() {
       </div>
 
       {state === "success" ? (
-        <div className="mt-6 flex items-start gap-3 rounded-xl border border-[#eab308]/60 bg-[#0f172a] p-5">
-          <CheckCircle2 className="mt-0.5 size-6 shrink-0 text-[#eab308]" />
+        <div className="mt-6 flex items-start gap-3 rounded-xl border border-[#C5A059] bg-[#F8FAFC] p-5">
+          <CheckCircle2 className="mt-0.5 size-6 shrink-0 text-[#C5A059]" />
           <div>
-            <p className="font-heading text-lg font-bold text-white">Danke, deine Anfrage ist da.</p>
-            <p className="mt-1 text-sm text-[#cbd5e1]">
+            <p className="font-heading text-lg font-bold text-[#0F172A]">Danke, deine Anfrage ist da.</p>
+            <p className="mt-1 text-sm text-[#64748B]">
               Ich melde mich persönlich bei dir per E-Mail. Eine Bestätigung ist schon unterwegs.
             </p>
           </div>
         </div>
       ) : (
-        <form onSubmit={submit} className="mt-6 flex flex-col gap-3 rounded-xl border border-[#cbd5e1]/20 bg-[#0f172a] p-5">
-          <p className="font-heading text-lg font-bold text-white">
-            3-Töpfe-Fahrplan &amp; Steueroptimierung für Beamte: Auswertung für deine Besoldungsgruppe anfordern
+        <form onSubmit={submit} className="mt-6 flex flex-col gap-3 border-t border-[#E2E8F0] pt-6">
+          <p className="font-heading text-lg font-bold text-[#0F172A]">
+            Deine Werte als Auswertung: 3-Töpfe-Fahrplan &amp; Steueroptimierung für Beamte
+          </p>
+          <p className="text-sm text-[#64748B]">
+            Ich bekomme deine Rechnerwerte mit und melde mich persönlich bei dir, kostenfrei und unverbindlich.
           </p>
           <input
             type="email"
@@ -195,11 +205,11 @@ export function PensionsLueckenRechner() {
             className={inputClass}
           />
           <input type="text" tabIndex={-1} autoComplete="off" aria-hidden="true" value={website} onChange={(e) => setWebsite(e.target.value)} className="absolute -left-[9999px] h-0 w-0 opacity-0" />
-          <label className="flex items-start gap-2 text-xs text-[#cbd5e1]">
-            <input type="checkbox" required checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5 size-4 shrink-0 accent-[#eab308]" />
+          <label className="flex items-start gap-2 text-xs text-[#64748B]">
+            <input type="checkbox" required checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5 size-4 shrink-0 accent-[#C5A059]" />
             <span>
-              Ich willige ein, dass Albert Sibert mich per E-Mail kontaktiert und meine Angaben aus dem Rechner dafür
-              verarbeitet (Art. 6 Abs. 1 lit. a DSGVO). Die Einwilligung kann ich jederzeit widerrufen. Details in der{" "}
+              Ich willige ein, dass Albert Sibert mich per E-Mail kontaktiert und meine Angaben dafür verarbeitet
+              (Art. 6 Abs. 1 lit. a DSGVO). Widerruf jederzeit möglich, siehe{" "}
               <Link href="/datenschutz" className="underline">
                 Datenschutzerklärung
               </Link>
@@ -209,21 +219,21 @@ export function PensionsLueckenRechner() {
           <button
             type="submit"
             disabled={state === "loading"}
-            style={{ color: "#0a1128" }}
-            className="rounded-xl bg-[#eab308] px-6 py-4 text-center text-base font-semibold transition hover:bg-[#ca8a04] disabled:opacity-60"
+            style={{ backgroundColor: "#0F172A", color: "#FFFFFF" }}
+            className="rounded-xl px-6 py-4 text-center text-base font-semibold transition hover:opacity-90 disabled:opacity-60"
           >
             {state === "loading" ? "Wird gesendet…" : "Auswertung kostenlos anfordern"}
           </button>
           {state === "error" && (
-            <p role="alert" className="text-sm font-medium text-[#eab308]">
+            <p role="alert" className="text-sm font-medium text-[#D97706]">
               {error}
             </p>
           )}
-          <p className="text-xs text-[#cbd5e1]">Über 80 Bewertungen mit durchschnittlich 4,9 von 5 Sternen.</p>
+          <p className="text-xs text-[#64748B]">Über 80 Bewertungen mit durchschnittlich 4,9 von 5 Sternen.</p>
         </form>
       )}
 
-      <p className="mt-4 text-xs text-[#cbd5e1]/80">
+      <p className="mt-4 text-xs text-[#64748B]">
         Grobe Näherung mit gerundeten Endgrundgehältern (A12 {eur(BESOLDUNG.A12.brutto)}, A13 {eur(BESOLDUNG.A13.brutto)}, A14 {eur(BESOLDUNG.A14.brutto)}, A15 {eur(BESOLDUNG.A15.brutto)} brutto),
         pauschalen Netto-Faktoren und ohne Familienzuschläge. Die Besoldung steigt in der Regel mit den Preisen, deshalb sind alle Werte
         in heutiger Kaufkraft angegeben. Die amtliche Zahl erhältst du ausschließlich von deiner Bezügestelle.

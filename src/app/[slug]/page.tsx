@@ -13,7 +13,11 @@ import { ALL_POSTS, getPost, formatDate, getRelatedPosts, BOOKING_LINK } from "@
 const CTA_CATEGORIES = ["Pension", "BU", "DU"];
 const CTA_TOPIC = /dienstunf|berufsunf/i;
 
+// Artikel ohne BU-Check-Hinweis (eigener, ruhiger Lead-Pfad über den Rechner im Text).
+const NO_BU_CTA_SLUGS = new Set(["wie-hoch-ist-die-pension-bei-a13-netto"]);
+
 function withBuCheckCta(post: { slug: string; title: string; description?: string; categories: string[]; html: string }) {
+  if (NO_BU_CTA_SLUGS.has(post.slug)) return post.html;
   const relevant =
     post.categories.some((c) => CTA_CATEGORIES.includes(c)) ||
     CTA_TOPIC.test(`${post.title} ${post.slug} ${post.description ?? ""}`);

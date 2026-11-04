@@ -14,7 +14,7 @@ const DIENSTJAHRE_FUER_HOECHSTSATZ = Math.round(HOECHSTSATZ / PROZENT_PRO_DIENST
 const BESOLDUNG_BEISPIELE = [
   { label: "A9 (z.B. Polizeimeister:in)", endgehalt: 4200 },
   { label: "A12 (z.B. Studienrat/-rätin)", endgehalt: 5600 },
-  { label: "A13 (z.B. Regierungsrat/-rätin)", endgehalt: 6300 },
+  { label: "A13 (z.B. Regierungsrat/-rätin)", endgehalt: 6100 },
 ];
 
 export function PensionCalculator() {
