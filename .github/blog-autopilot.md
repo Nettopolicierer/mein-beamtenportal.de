@@ -255,9 +255,8 @@ nehmen. Passt keines wirklich, lieber kein Testimonial als ein unpassendes einba
   Anlageberatung im Artikel.
 - Albert Sibert ist rechtlich **Versicherungsvertreter** nach § 34d GewO, keine
   Honorarberatung — nie „Versicherungsmakler" oder „Honorarberater". Im Marketing
-  „Finanzberater". Das Wort „unabhängig" (auch „Unabhängigkeit") nie verwenden, auch nicht in
-  der Autorenbox. Zulässig: „kann marktübergreifend Produkte mehrerer Gesellschaften anbieten".
-  Keine Steigerungen wie „neutral", „objektiv" oder „provisionsfrei".
+  „Finanzberater". „Unabhängig" nur in der Autorenbox-Formulierung, keine Steigerungen wie
+  „neutral" oder „provisionsfrei".
 - Was nicht verifiziert werden kann: nicht behaupten.
 
 ## Stilregeln (verbindlich)
@@ -356,7 +355,7 @@ Tabellen/Box-Syntax):
    `icon-row`/`<img>` davor einbauen — die kleinen SVG-Icons stammen aus dem WordPress-
    Altbestand, für neue Artikel gibt es keine passenden Icon-Dateien.)
    Direkt danach der **erste CTA-Moment** als kurzer Satz (kein Button, siehe CTA-Regeln oben).
-3. `<div class="team-box"><img alt="Albert Sibert" class="profile-photo" src="/albert-portrait.webp"/><div><p>Ich bin Albert Sibert, Versicherungsvertreter mit Schwerpunkt auf Beamte, Referendare und Anwärter. Seit 2019 begleite ich Sie bei Beihilfe, PKV, BU und Altersvorsorge und kann marktübergreifend Produkte von über 250 Partnergesellschaften anbieten.</p></div></div>`
+3. `<div class="team-box"><img alt="Albert Sibert" class="profile-photo" src="/albert-portrait.webp"/><div><p>Ich bin Albert Sibert, unabhängiger Finanzberater mit Schwerpunkt auf Beamte, Referendare und Anwärter. Seit 2019 begleite ich Sie bei Beihilfe, PKV, BU und Altersvorsorge – mit über 250 Partnergesellschaften statt nur einem Produkt.</p></div></div>`
    — wortgleich übernehmen, nicht umformulieren.
 4. **5–7 `<h2 class="blue-background" id="abschnitt-N">`-Abschnitte** mit
    `<p>`/`<ul>`/`<table>`-Inhalt, `id` fortlaufend `abschnitt-1`, `abschnitt-2` usw.: Problem →

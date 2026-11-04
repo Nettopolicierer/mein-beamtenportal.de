@@ -98,7 +98,7 @@ function buildFaq(dateDisplay: string, timeDisplay: string) {
     {
       question: "Wird im Webinar ein bestimmtes Produkt verkauft?",
       answer:
-        "Nein. Das Webinar ordnet die typischen Fallstricke rund um Beihilfe, PKV und Dienstunfähigkeit sachlich ein, ohne Empfehlung eines bestimmten Anbieters. Individuelle Fragen zu Ihrer Situation lassen sich im Anschluss in einem kostenfreien Erstgespräch klären.",
+        "Nein. Das Webinar ordnet die typischen Fallstricke rund um Beihilfe, PKV und Dienstunfähigkeit unabhängig ein, ohne Empfehlung eines bestimmten Anbieters. Individuelle Fragen zu Ihrer Situation lassen sich im Anschluss in einem kostenfreien Erstgespräch klären.",
     },
     {
       question: "Gibt es nach dem Vortrag die Möglichkeit für individuelle Fragen?",

@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     template: "%s | Mein Beamtenportal",
   },
   description:
-    "Beihilfe, Pension und PKV für Beamte verständlich erklärt. Beratung für Beamtinnen, Beamte, Referendare und Anwärter im öffentlichen Dienst.",
+    "Beihilfe, Pension und PKV für Beamte verständlich erklärt. Unabhängige Beratung für Beamtinnen, Beamte, Referendare und Anwärter im öffentlichen Dienst.",
   alternates: { canonical: BASE_URL },
 };
 
@@ -117,7 +117,7 @@ export default function RootLayout({
               <div>
                 <LogoLink width={140} height={59} linkClassName="mb-4 inline-block" />
                 <p className="max-w-sm text-sm text-mediumdark">
-                  Ihr Informationsportal für Vorsorge, Beihilfe und Absicherung im
+                  Ihr unabhängiges Informationsportal für Vorsorge, Beihilfe und Absicherung im
                   öffentlichen Dienst.
                 </p>
               </div>

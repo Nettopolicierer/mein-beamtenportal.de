@@ -13,7 +13,7 @@ const STATS = [
 
 export const metadata: Metadata = {
   title: "Über mich",
-  description: "Albert Sibert – Versicherungsvertreter für Beamte, Referendare und Anwärter im öffentlichen Dienst.",
+  description: "Albert Sibert – unabhängiger Finanzberater für Beamte, Referendare und Anwärter im öffentlichen Dienst.",
   alternates: { canonical: "/ueber-uns" },
 };
 
@@ -26,7 +26,7 @@ export default function UeberUnsPage() {
           Albert Sibert
         </h1>
         <p className="text-lg text-mediumdark">
-          Versicherungsvertreter für Beamte, Referendare und Anwärter im öffentlichen Dienst.
+          Unabhängiger Finanzberater für Beamte, Referendare und Anwärter im öffentlichen Dienst.
         </p>
       </div>
 
@@ -37,7 +37,7 @@ export default function UeberUnsPage() {
               <div className="relative mx-auto aspect-[4/5] w-full max-w-xs overflow-hidden rounded-3xl shadow-lg lg:mx-0 lg:h-full lg:max-w-none">
                 <Image
                   src="/albert-ueber-mich.jpg"
-                  alt="Albert Sibert, Versicherungsvertreter für Beamte"
+                  alt="Albert Sibert, unabhängiger Finanzberater für Beamte"
                   fill
                   className="object-cover"
                   unoptimized
@@ -46,7 +46,7 @@ export default function UeberUnsPage() {
             </Reveal>
             <Reveal variant="fade-left" delay={100} className="flex flex-col justify-center">
               <p className="text-lg leading-relaxed text-mediumdark">
-                Ich bin Albert Sibert, Versicherungsvertreter mit Schwerpunkt auf Beamte,
+                Ich bin Albert Sibert, unabhängiger Finanzberater mit Schwerpunkt auf Beamte,
                 Referendare und Anwärter im öffentlichen Dienst. Seit 2019 begleite ich Menschen im
                 öffentlichen Dienst bei Beihilfe, PKV, Dienstunfähigkeit und Altersvorsorge – mit
                 über 250 Partnergesellschaften zur Auswahl statt einem einzigen Produkt.
@@ -91,7 +91,7 @@ export default function UeberUnsPage() {
           öffentlichen Dienst spezialisiert war. Dort habe ich schnell gemerkt, dass ich mich
           nicht auf die Produkte eines einzigen Anbieters beschränken will – meine Kundinnen und
           Kunden sollen den wirklich besten Tarif bekommen, nicht nur den besten aus einem
-          Portfolio. Deshalb arbeite ich heute marktübergreifend mit über 250
+          Portfolio. Deshalb arbeite ich heute unabhängig und marktübergreifend mit über 250
           Partnergesellschaften.
         </p>
         <p className="text-mediumdark">

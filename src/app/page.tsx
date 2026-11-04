@@ -10,7 +10,7 @@ const LEISTUNGSVERSPRECHEN = [
   "Eine umfassende Analyse Ihrer aktuellen Absicherung",
   "Den passenden PKV-Tarif abgestimmt auf Beihilfesatz und Laufbahn",
   "Berechnung Ihrer voraussichtlichen Pension und möglicher Lücken (auch bei Beamten auf Widerruf/Probe)",
-  "Beratung zu Dienstunfähigkeitsversicherung und Altersvorsorge",
+  "Unabhängige Beratung zu Dienstunfähigkeitsversicherung und Altersvorsorge",
   "Antworten auf Ihre konkreten Fragen zu Bezügen, Fristen und Anträgen",
   "Persönliche Betreuung und schnelle Rückmeldung bei Fristen",
 ];
@@ -56,7 +56,7 @@ export default function Home() {
               Pension, Beihilfe und PKV verstehen.
             </p>
             <p className="mt-6 max-w-md text-mediumdark">
-              Ihr Informationsportal für Vorsorge, Beihilfe und Absicherung im
+              Ihr unabhängiges Informationsportal für Vorsorge, Beihilfe und Absicherung im
               öffentlichen Dienst.
             </p>
 

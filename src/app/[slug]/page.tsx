@@ -174,9 +174,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
               <div>
                 <h2>Über mich</h2>
                 <p>
-                  Versicherungsvertreter mit Schwerpunkt auf Beamte, Referendare und Anwärter im
+                  Unabhängiger Finanzberater mit Schwerpunkt auf Beamte, Referendare und Anwärter im
                   öffentlichen Dienst. Seit 2019 begleite ich Sie bei Beihilfe, PKV, Dienstunfähigkeit
-                  und Altersvorsorge und kann marktübergreifend Produkte von über 250 Partnergesellschaften anbieten.
+                  und Altersvorsorge – mit über 250 Partnergesellschaften zur Auswahl.
                 </p>
               </div>
             </div>
