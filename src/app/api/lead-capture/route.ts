@@ -2,7 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { pensionAnalysisHtml, pensionAnalysisSubject, pensionAnalysisText } from "@/lib/email-pension-analysis";
 import { GRUPPEN, calcPension, type Gruppe } from "@/lib/pension-calc";
 import { buildPensionPdf } from "@/lib/pension-pdf";
+import { nurtureAdd } from "@/lib/nurture";
 import { tooMany } from "@/lib/rate-limit";
+import { redisConfigured } from "@/lib/redis";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -109,6 +111,15 @@ export async function POST(request: NextRequest) {
   if (!response.ok) {
     console.error("Mailjet lead-capture send failed", response.status, await response.text().catch(() => ""));
     return NextResponse.json({ error: "Der Versand ist fehlgeschlagen. Bitte versuche es erneut." }, { status: 502 });
+  }
+
+  // Folgemails nur mit separater, optionaler Einwilligung. Ein Fehler hier darf den Versand nicht kippen.
+  if (body.nurtureConsent === true && redisConfigured()) {
+    try {
+      await nurtureAdd({ email, gruppe, luecke: ergebnis.luecke, nettoPension: ergebnis.nettoPension });
+    } catch (err) {
+      console.error("Nurture-Eintrag fehlgeschlagen", err);
+    }
   }
   return NextResponse.json({ success: true });
 }

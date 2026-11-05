@@ -174,6 +174,14 @@ export default function DatenschutzPage() {
         Wir löschen die Angaben, wenn die Anfrage erledigt ist und keine gesetzlichen Aufbewahrungspflichten
         entgegenstehen.
       </P>
+      <P>
+        Wenn Sie zusätzlich das optionale Kästchen für Folgemails ankreuzen, senden wir Ihnen im Abstand von etwa zwei,
+        vier und sechs Tagen nach Ihrer Anfrage bis zu drei Informationsmails zur Pensionsplanung. Dafür speichern wir
+        Ihre E-Mail-Adresse, Besoldungsgruppe, Richtwerte aus dem Rechner und den Zeitpunkt Ihrer Einwilligung bei
+        unserem Hosting-Dienstleister Upstash (Redis-Datenbank, über Vercel). Rechtsgrundlage ist Ihre Einwilligung
+        (Art. 6 Abs. 1 lit. a DSGVO). Jede Mail enthält einen Abmelde-Link; mit der Abmeldung oder nach der dritten Mail
+        löschen wir diese Daten. Die Einwilligung für die PDF-Auswertung ist davon unabhängig.
+      </P>
       <H3>Landingpage für Referendare in Baden-Württemberg</H3>
       <P>
         Der dortige Qualifizierungscheck fragt Schulform, Starttermin, Geburtsjahr und Ihre Einschätzung zu

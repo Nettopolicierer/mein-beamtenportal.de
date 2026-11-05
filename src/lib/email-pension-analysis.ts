@@ -46,11 +46,15 @@ const POINTS = [
   },
 ];
 
-const FOOTER_LINES = [
+export const LEGAL_FOOTER_LINES = [
   "Mein Beamtenportal, Inhaber: Albert Sibert, Gämsenbergstraße 22, 71640 Ludwigsburg",
   "Zulassung als Versicherungsvertreter nach § 34d Abs. 1 GewO (Reg.-Nr. D-4EHE-G249E-13) und Finanzanlagenvermittler nach § 34f Abs. 1 GewO",
   "Zuständige Aufsichtsbehörde: IHK Region Stuttgart, Jägerstraße 30, 70174 Stuttgart",
   "Schlichtungsstelle: Versicherungsombudsmann e.V., Postfach 08 06 32, 10006 Berlin",
+];
+
+const FOOTER_LINES = [
+  ...LEGAL_FOOTER_LINES,
   "Sie erhalten diese Nachricht, weil Sie auf mein-beamtenportal.de eine Auswertung angefordert haben.",
 ];
 

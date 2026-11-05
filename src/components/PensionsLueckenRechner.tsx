@@ -28,6 +28,7 @@ export function PensionsLueckenRechner({ defaultGruppe = "A13" }: { defaultGrupp
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState("");
   const [consent, setConsent] = useState(false);
+  const [nurtureConsent, setNurtureConsent] = useState(false);
   const [state, setState] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [error, setError] = useState("");
 
@@ -52,6 +53,7 @@ export function PensionsLueckenRechner({ defaultGruppe = "A13" }: { defaultGrupp
           sparrate,
           email,
           consent,
+          nurtureConsent,
           website,
         }),
       });
@@ -264,6 +266,13 @@ export function PensionsLueckenRechner({ defaultGruppe = "A13" }: { defaultGrupp
                   Datenschutzerklärung
                 </Link>
                 .
+              </span>
+            </label>
+            <label className="flex items-start gap-2 text-xs text-white/80">
+              <input type="checkbox" checked={nurtureConsent} onChange={(e) => setNurtureConsent(e.target.checked)} className="mt-0.5 size-4 shrink-0" />
+              <span>
+                Optional: Ich möchte in den nächsten Tagen bis zu drei weitere Informationsmails zur Pensionsplanung von Mein
+                Beamtenportal erhalten (Art. 6 Abs. 1 lit. a DSGVO). Abmeldung jederzeit über den Link in jeder Mail.
               </span>
             </label>
             {state === "error" && (
