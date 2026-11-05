@@ -72,6 +72,8 @@ export function PensionsLueckenRechner({ defaultGruppe = "A13" }: { defaultGrupp
 
   return (
     <section
+      id="pl-rechner"
+      style={{ scrollMarginTop: 96 }}
       aria-labelledby="pl-title"
       className="not-prose my-12 overflow-hidden rounded-2xl border border-[#E2E8F0] bg-white text-[#002855] shadow-sm"
     >

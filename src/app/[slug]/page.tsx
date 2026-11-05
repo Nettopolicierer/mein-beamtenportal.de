@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PensionsLueckenRechner } from "@/components/PensionsLueckenRechner";
+import { RechnerStickyBar } from "@/components/RechnerStickyBar";
 import { GRUPPEN, type Gruppe } from "@/lib/pension-calc";
 import { ALL_POSTS, getPost, formatDate, getRelatedPosts, BOOKING_LINK } from "@/lib/content";
 
@@ -37,6 +38,15 @@ function withBuCheckCta(post: { slug: string; title: string; description?: strin
   return at === undefined ? post.html + box : post.html.slice(0, at) + box + post.html.slice(at);
 }
 
+// Hinweiskarte zum Pensionsrechner vor der 2. Zwischenüberschrift (als HTML-String wie der BU-Check-Hinweis,
+// damit verschachtelte Wrapper-Divs der migrierten Artikel intakt bleiben). Artikel mit eingebettetem Rechner
+// verlinken per Anker auf ihn, alle anderen auf die Seite /pensionsrechner.
+function withRechnerCard(html: string, href: string) {
+  const card = `<div class="not-prose my-8 rounded-2xl border p-6" style="border-color:#C9DCF0;background:#EAF2FB"><p class="font-heading mb-1 text-lg font-bold" style="color:#002855">Wie groß ist Ihre Pensionslücke?</p><p class="mb-4 text-sm" style="color:#334155">Berechnen Sie in einer Minute, was Ihnen im Ruhestand netto fehlt. Kostenlos, auf Wunsch mit PDF-Auswertung.</p><a href="${href}" class="inline-block rounded-lg px-5 py-2.5 text-sm font-semibold" style="background:#1E5FA8;color:#FFFFFF;text-decoration:none">Pensionslücke berechnen</a></div>`;
+  const at = [...html.matchAll(/<h2[\s>]/g)][1]?.index;
+  return at === undefined ? html : html.slice(0, at) + card + html.slice(at);
+}
+
 export function generateStaticParams() {
   return ALL_POSTS.map((post) => ({ slug: post.slug }));
 }
@@ -69,9 +79,11 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   if (!post) notFound();
 
   const related = getRelatedPosts(post);
+  const hasWidget = post.html.includes(LEAD_MARKER);
 
   return (
-    <article>
+    <article data-rechner-bar>
+      <RechnerStickyBar href={hasWidget ? "#pl-rechner" : "/pensionsrechner"} hasWidget={hasWidget} />
       {/* Hero: Hintergrundbild + Titel + Untertitel + CTAs, wie im Original */}
       <div className="relative">
         {post.featuredImage && (
@@ -142,7 +154,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         <div className="prose prose-sm max-w-none leading-normal prose-headings:font-heading prose-headings:text-primary prose-p:leading-relaxed prose-a:text-primary sm:prose-base">
           {(() => {
             // Marker <!--LEAD--> im Artikeltext: hier sitzt der Pensions-Lückenrechner.
-            const [before, after] = withBuCheckCta(post).split(LEAD_MARKER);
+            const [before, after] = withRechnerCard(withBuCheckCta(post), hasWidget ? "#pl-rechner" : "/pensionsrechner").split(LEAD_MARKER);
             return (
               <>
                 <div dangerouslySetInnerHTML={{ __html: before }} />

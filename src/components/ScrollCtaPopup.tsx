@@ -55,6 +55,8 @@ export function ScrollCtaPopup() {
     }
 
     function onScroll() {
+      // Artikel mit Rechner-Leiste: nur eine Aufforderung gleichzeitig.
+      if (document.querySelector("[data-rechner-bar]")) return;
       if (shown.webinar && shown.beratung) {
         window.removeEventListener("scroll", onScroll);
         return;
