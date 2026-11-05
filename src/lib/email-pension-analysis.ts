@@ -62,7 +62,7 @@ export function pensionAnalysisText(v: PensionAnalysisMailVars = {}) {
   const gruppe = v.besoldungsgruppe || "A13";
   const link = v.terminLink || BOOKING_LINK;
   const ergebnis = v.ergebnis
-    ? `\nIhre Werte aus dem Rechner (Richtwerte, heutige Kaufkraft):\n- Voraussichtliche Netto-Pension: ${eur(v.ergebnis.nettoPension)} pro Monat\n- Lücke zum heutigen Netto: ${eur(v.ergebnis.luecke)} pro Monat\n- Möglicher Steuervorteil bei Ihrem Beispiel-Beitrag: ${eur(v.ergebnis.steuervorteilJahr)} pro Jahr\n`
+    ? `\nIhre Werte aus dem Rechner (Richtwerte, heutige Kaufkraft):\n- Voraussichtliche Netto-Pension: ${eur(v.ergebnis.nettoPension)} pro Monat\n- Lücke zum heutigen Netto: ${eur(v.ergebnis.luecke)} pro Monat\n- Möglicher Steuervorteil (Schätzung, bis ca.) bei Ihrem Beispiel-Beitrag: ${eur(v.ergebnis.steuervorteilJahr)} pro Jahr\n`
     : "";
   return `${greeting(v)}
 
@@ -100,7 +100,7 @@ export function pensionAnalysisHtml(v: PensionAnalysisMailVars = {}) {
           <strong>Ihre Werte aus dem Rechner</strong> <span style="color:${MUTED};">(Richtwerte, heutige Kaufkraft)</span><br/>
           Voraussichtliche Netto-Pension: <strong>${eur(v.ergebnis.nettoPension)}</strong> pro Monat<br/>
           Lücke zum heutigen Netto: <strong>${eur(v.ergebnis.luecke)}</strong> pro Monat<br/>
-          Möglicher Steuervorteil bei Ihrem Beispiel-Beitrag: <strong>${eur(v.ergebnis.steuervorteilJahr)}</strong> pro Jahr
+          Möglicher Steuervorteil (Schätzung, bis ca.) bei Ihrem Beispiel-Beitrag: <strong>${eur(v.ergebnis.steuervorteilJahr)}</strong> pro Jahr
         </td></tr></table>`
     : "";
 

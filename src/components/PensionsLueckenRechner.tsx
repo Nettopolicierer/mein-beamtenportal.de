@@ -182,9 +182,9 @@ export function PensionsLueckenRechner({ defaultGruppe = "A13" }: { defaultGrupp
           </label>
           <div className="mt-3 grid gap-3 text-sm sm:grid-cols-3">
             <div className="rounded-lg bg-[#F8FAFC] p-3">
-              <p className="text-xs text-[#64748B]">Steuervorteil pro Jahr</p>
+              <p className="text-xs text-[#64748B]">Steuervorteil pro Jahr (bis ca.)</p>
               <p className="font-heading text-xl font-bold" style={{ color: ACCENT }}>{eur(c.steuervorteilJahr)}</p>
-              <p className="text-xs text-[#64748B]">netto kostet der Beitrag etwa {eur(c.nettoKostenMonat)} im Monat</p>
+              <p className="text-xs text-[#64748B]">Schätzung, netto kostet der Beitrag dann etwa {eur(c.nettoKostenMonat)} im Monat</p>
             </div>
             <div className="rounded-lg bg-[#F8FAFC] p-3">
               <p className="text-xs text-[#64748B]">Kapital bei Pensionsbeginn</p>
@@ -198,9 +198,11 @@ export function PensionsLueckenRechner({ defaultGruppe = "A13" }: { defaultGrupp
             </div>
           </div>
           <p className="mt-3 text-xs text-[#64748B]">
-            Beiträge sind steuerlich absetzbar, die spätere Rente wird nachgelagert besteuert. Die Basisrente ist nicht
-            vererbbar, nicht beleihbar und zahlt nur als lebenslange Rente aus. Für Beamte wird der Höchstbetrag gekürzt.
-            Modellrechnung ohne Kosten und Steuern auf Erträge, keine Prognose und keine Steuerberatung.
+            Alle Werte sind Richtwerte einer vereinfachten Modellrechnung, keine Prognose und keine Zusage. Der Steuervorteil
+            ist eine Schätzung und hängt von Ihrem persönlichen Steuersatz sowie vom für Beamte gekürzten Höchstbetrag ab.
+            Die spätere Rente wird nachgelagert besteuert. Die Basisrente ist nicht vererbbar, nicht beleihbar und zahlt nur
+            als lebenslange Rente aus. Kosten und Steuern auf Erträge sind nicht berücksichtigt. Dies ist keine Steuer- oder
+            Rechtsberatung; für Ihre persönliche Situation fragen Sie bitte Ihren Steuerberater.
           </p>
         </div>
       </div>

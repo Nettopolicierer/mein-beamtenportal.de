@@ -293,7 +293,7 @@ export async function buildPensionPdf(input: PensionInput): Promise<Uint8Array> 
         soft: true,
         bullets: [
           ["Für Beamte:", "Sie zahlen keine Pflichtbeiträge in die gesetzliche Rente. Der abziehbare Höchstbetrag wird für Beamte allerdings gekürzt."],
-          ["Steuer-Effekt:", `Ihr Beispiel-Beitrag von ${eur(input.sparrate)} pro Monat bringt einen Steuervorteil von etwa ${eur(c.steuervorteilJahr)} pro Jahr. Netto kostet er etwa ${eur(c.nettoKostenMonat)} im Monat.`],
+          ["Steuer-Effekt:", `Ihr Beispiel-Beitrag von ${eur(input.sparrate)} pro Monat bringt einen Steuervorteil von bis zu etwa ${eur(c.steuervorteilJahr)} pro Jahr (Schätzung, abhängig von Ihrem persönlichen Steuersatz und dem für Beamte gekürzten Höchstbetrag). Netto kostet er dann etwa ${eur(c.nettoKostenMonat)} im Monat.`],
           ["Form:", "Lebenslange Rente, nicht vererbbar und nicht beleihbar, auch fondsgebunden möglich. Die spätere Rente wird nachgelagert besteuert."],
         ],
       },
