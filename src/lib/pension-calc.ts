@@ -27,7 +27,7 @@ export const NETTO_FAKTOR_AKTIV = 0.78; // grob: Netto-Anteil der Besoldung im a
 
 // Modellannahmen für den Beispiel-Sparplan (keine Prognose).
 export const MODELL_RENDITE = 0.05;
-export const ENTNAHMERATE = 0.03;
+export const ENTNAHMERATE = 0.04;
 /** Annahme für den Kaufkraft-Abzug der Zusatzrente (keine Prognose). */
 export const INFLATION = 0.02;
 
