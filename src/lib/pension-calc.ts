@@ -28,6 +28,8 @@ export const NETTO_FAKTOR_AKTIV = 0.78; // grob: Netto-Anteil der Besoldung im a
 // Modellannahmen für den Beispiel-Sparplan (keine Prognose).
 export const MODELL_RENDITE = 0.05;
 export const ENTNAHMERATE = 0.03;
+/** Annahme für den Kaufkraft-Abzug der Zusatzrente (keine Prognose). */
+export const INFLATION = 0.02;
 
 export interface PensionInput {
   gruppe: Gruppe;
@@ -67,7 +69,9 @@ export function calcPension(i: PensionInput) {
 
   // Beispiel-Sparplan bis zur Pension: Kapital (Modellrendite), daraus Entnahme (Entnahmerate).
   const sparKapital = kapitalAus(i.sparrate, jahreBisPension, MODELL_RENDITE);
-  const zusatzRente = (sparKapital * ENTNAHMERATE) / 12;
+  const zusatzRenteNominal = (sparKapital * ENTNAHMERATE) / 12;
+  // Vergleich mit der Lücke nur in heutiger Kaufkraft (die Lücke ist in heutigen Euro gerechnet).
+  const zusatzRente = zusatzRenteNominal / Math.pow(1 + INFLATION, jahreBisPension);
   const lueckeGeschlossenProzent = luecke > 0 ? Math.min((zusatzRente / luecke) * 100, 100) : 0;
 
   return {
@@ -86,6 +90,7 @@ export function calcPension(i: PensionInput) {
     nettoKostenMonat,
     sparKapital,
     zusatzRente,
+    zusatzRenteNominal,
     lueckeGeschlossenProzent,
   };
 }

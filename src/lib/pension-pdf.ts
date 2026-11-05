@@ -363,7 +363,7 @@ export async function buildPensionPdf(input: PensionInput): Promise<Uint8Array> 
         y -= 24;
       });
     }
-    y = text(p, ctx, `Ihr Beispiel-Beitrag: ${eur(input.sparrate)} pro Monat über ${jahre} Jahre ergibt bei ${Math.round(MODELL_RENDITE * 100)} % Modellrendite etwa ${eur(c.sparKapital)} Kapital, bei ${Math.round(ENTNAHMERATE * 100)} % Entnahme rund ${eur(c.zusatzRente)} pro Monat (ca. ${c.lueckeGeschlossenProzent.toFixed(0)} % Ihrer Lücke).`, M, y - 16, 9.5, { maxW: CW, lead: 13.5, bold: true, color: TITLE });
+    y = text(p, ctx, `Ihr Beispiel-Beitrag: ${eur(input.sparrate)} pro Monat über ${jahre} Jahre ergibt bei ${Math.round(MODELL_RENDITE * 100)} % Modellrendite etwa ${eur(c.sparKapital)} Kapital, bei ${Math.round(ENTNAHMERATE * 100)} % Entnahme rund ${eur(c.zusatzRenteNominal)} pro Monat, das entspricht bei 2 % Inflation heute etwa ${eur(c.zusatzRente)} (ca. ${c.lueckeGeschlossenProzent.toFixed(0)} % Ihrer Lücke).`, M, y - 16, 9.5, { maxW: CW, lead: 13.5, bold: true, color: TITLE });
     text(p, ctx, "Modellrechnung, keine Prognose: Renditen sind nicht garantiert. Kosten, Steuern auf Erträge und Inflation sind nicht eingerechnet. Als Basisrente wird später eine lebenslange Rente gezahlt, keine Kapitalentnahme.", M, y - 4, 8, { maxW: CW, lead: 11, color: MUTED });
   }
 

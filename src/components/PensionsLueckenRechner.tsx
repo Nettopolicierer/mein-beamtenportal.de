@@ -194,7 +194,7 @@ export function PensionsLueckenRechner({ defaultGruppe = "A13" }: { defaultGrupp
             <div className="rounded-lg bg-[#F8FAFC] p-3">
               <p className="text-xs text-[#64748B]">Zusatzrente pro Monat</p>
               <p className="font-heading text-xl font-bold" style={{ color: PRIMARY }}>{eur(c.zusatzRente)}</p>
-              <p className="text-xs text-[#64748B]">schließt {c.lueckeGeschlossenProzent.toFixed(0)} % Ihrer Lücke</p>
+              <p className="text-xs text-[#64748B]">in heutiger Kaufkraft · deckt {c.lueckeGeschlossenProzent.toFixed(0)} % Ihrer Lücke</p>
             </div>
           </div>
           <p className="mt-3 text-xs text-[#64748B]">
