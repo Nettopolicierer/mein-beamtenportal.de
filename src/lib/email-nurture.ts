@@ -25,23 +25,25 @@ interface Mail {
 }
 
 function mail(stage: number, v: NurtureMailVars): Mail {
+  const abschlagMonat = eur(v.nettoPension * 0.036);
   if (stage === 0) {
     return {
-      subject: "Ihre Versorgungslücke: 3 Stellschrauben, die Sie sofort nutzen können",
+      subject: "Ihre Pensionslücke: Was 3 Stellschrauben in Euro ausmachen",
       paragraphs: [
         "Guten Tag,",
-        `vor zwei Tagen haben Sie Ihre Pensionsauswertung für ${v.gruppe} erhalten. Ist die PDF bei Ihnen gut angekommen? Die Richtwerte lagen bei einer Netto-Pension von rund ${eur(v.nettoPension)} und einer Lücke von rund ${eur(v.luecke)} pro Monat zum heutigen Netto.`,
-        "Die gute Nachricht: Diese Lücke ist keine feste Größe. Viele Beamte wissen nicht, wie stark ihre spätere Pension von Entscheidungen abhängt, die sie heute treffen. Auf diese drei Stellschrauben haben Sie schon jetzt Einfluss:",
+        `vor zwei Tagen haben Sie Ihre Pensionsauswertung für ${v.gruppe} erhalten: Netto-Pension rund ${eur(v.nettoPension)}, Lücke rund ${eur(v.luecke)} pro Monat. Ist die PDF gut angekommen?`,
+        "Das Entscheidende: Diese Lücke steht nicht fest. Viele Beamte erfahren erst kurz vor dem Ruhestand, wie stark ihre Pension von Entscheidungen abhängt, die Jahre vorher fallen. Drei Beispiele, was dahintersteckt:",
       ],
       list: [
-        "Teilzeit: Teilzeitjahre zählen beim Ruhegehalt nur anteilig. Wer zum Beispiel fünf Jahre mit halber Stelle arbeitet, erwirbt in dieser Zeit auch nur etwa die Hälfte der ruhegehaltfähigen Dienstzeit. Das wirkt wie ein dauerhafter Abschlag auf die Pension. Wer in Teilzeit geht, sollte die Auswirkung vorher kennen und gegebenenfalls gezielt ausgleichen.",
-        "Dienstjahre und Vordienstzeiten: Je nach Fall können Zeiten wie Wehr- oder Zivildienst oder frühere Tätigkeiten im öffentlichen Dienst anerkannt werden. Das wird oft nie beantragt oder nie geprüft. Ein Blick in den Bescheid Ihrer Versorgungsstelle zeigt, welche Zeiten bereits berücksichtigt sind.",
-        "Zeitpunkt des Ruhestands: Bei vorzeitigem Ruhestand kann ein Versorgungsabschlag von bis zu 3,6 % je Jahr anfallen, höchstens 10,8 %. Dieser Abschlag gilt lebenslang. Ein Jahr länger zu arbeiten, kann sich deshalb mehr lohnen, als es zunächst aussieht.",
+        `Zeitpunkt des Ruhestands: Bei vorzeitigem Ruhestand kann ein Versorgungsabschlag von 3,6 % je Jahr anfallen (höchstens 10,8 %), und zwar lebenslang. Bei Ihrer Netto-Pension von ${eur(v.nettoPension)} wären 3,6 % etwa ${abschlagMonat} weniger pro Monat, für jedes Jahr früher.`,
+        "Teilzeit: Teilzeitjahre zählen nur anteilig. Fünf Jahre mit halber Stelle bedeuten rund 2,5 Dienstjahre weniger und damit knapp 4,5 Prozentpunkte beim Ruhegehaltssatz. Das merkt man jeden Monat bis ans Lebensende.",
+        "Vordienstzeiten: Je nach Fall können Wehr- oder Zivildienst oder frühere Tätigkeiten im öffentlichen Dienst anerkannt werden. Jedes anerkannte Jahr erhöht den Ruhegehaltssatz um etwa 1,8 Prozentpunkte. Genau das wird oft nie geprüft.",
       ],
       closing: [
-        "Welche dieser drei Punkte bei Ihnen am meisten ins Gewicht fällt, hängt von Ihrer Dienstzeit und Ihren Plänen ab. Ein erster Schritt, der nichts kostet: Fordern Sie bei Ihrer Versorgungsstelle eine Auskunft über Ihre bisher anerkannten ruhegehaltfähigen Dienstzeiten an. Damit wird jede Berechnung deutlich genauer.",
-        "In zwei Tagen schreibe ich Ihnen zum häufigsten Fehler bei der Pensionsplanung.",
+        "Ein erster Schritt, der nichts kostet: Fragen Sie bei Ihrer Versorgungsstelle nach Ihren bisher anerkannten ruhegehaltfähigen Dienstzeiten.",
+        "Wenn Sie wissen möchten, welche der drei Punkte bei Ihnen am meisten ausmachen, schauen wir gemeinsam darauf, kostenlos und unverbindlich:",
       ],
+      cta: { label: "Kurz besprechen", url: BOOKING_LINK },
     };
   }
   if (stage === 1) {
@@ -49,35 +51,35 @@ function mail(stage: number, v: NurtureMailVars): Mail {
       subject: "Der häufigste Fehler bei der Pensionsplanung von Beamten",
       paragraphs: [
         "Guten Tag,",
-        "in Gesprächen mit Beamten begegnet mir ein Fehler immer wieder: Die Pension wird mit dem heutigen Bruttogehalt verglichen oder mit dem Bruttobetrag auf dem Pensionsbescheid. Entscheidend ist aber, was nach Steuern und Krankenversicherung tatsächlich auf dem Konto bleibt.",
+        "in Gesprächen mit Beamten begegnet mir ein Fehler immer wieder: Die Pension wird mit dem Brutto verglichen. Auf dem Bescheid steht eine Zahl, die gut aussieht. Entscheidend ist aber, was nach Steuern und Krankenversicherung auf dem Konto bleibt.",
         "Drei Dinge werden dabei regelmäßig unterschätzt:",
       ],
       list: [
-        "Steuern: Beamtenpensionen werden als Versorgungsbezüge nach § 19 EStG besteuert. Der Versorgungsfreibetrag mindert die Steuer, wird aber für spätere Pensionsjahrgänge schrittweise abgeschmolzen. Wer erst in einigen Jahren in Pension geht, hat weniger davon als heutige Ruheständler.",
-        "Krankenversicherung: Die private Krankenversicherung läuft lebenslang weiter. Die Beihilfe steigt im Ruhestand in der Regel auf 70 %, den Rest und den Beitrag zahlen Sie aber aus den Versorgungsbezügen. Das ist ein fester Posten, der sich im Alter nicht verkleinert.",
-        "Kaufkraft: Eine Pension, die heute ausreicht, ist in 25 oder 30 Jahren deutlich weniger wert. Anpassungen der Versorgung gleichen die Inflation nur teilweise aus, und die Lebenshaltungskosten steigen im Alter durch Gesundheit und Pflege eher.",
+        "Steuern: Pensionen werden als Versorgungsbezüge nach § 19 EStG besteuert. Der Versorgungsfreibetrag schmilzt für spätere Pensionsjahrgänge Schritt für Schritt ab. Wer später in Pension geht, behält davon weniger als die heutigen Ruheständler.",
+        "Krankenversicherung: Die PKV läuft lebenslang weiter. Die Beihilfe steigt meist auf 70 %, den Rest und den Beitrag zahlen Sie aus der Pension, ein fester Posten, der sich nicht verkleinert.",
+        "Kaufkraft: Eine Pension, die heute reicht, ist in 25 bis 30 Jahren deutlich weniger wert. Die Lebenshaltungskosten steigen im Alter durch Gesundheit und Pflege eher.",
       ],
       closing: [
-        `Bei Ihrem Beispiel (${v.gruppe}) lag die Lücke bei rund ${eur(v.luecke)} pro Monat. Wer diese Zahl erst kurz vor dem Ruhestand erfährt, hat kaum noch Zeit, sie zu schließen. Jedes Jahr früher hilft, weil der Zeitraum für den Vermögensaufbau länger ist und Beiträge zu einer Basisrente in der Ansparphase steuerlich absetzbar sein können.`,
-        "Welche Schritte für Ihre Situation sinnvoll sind, hängt von Dienstzeit, Familienstand, Krankenversicherung und Steuersatz ab. Darüber schreibe ich Ihnen in der nächsten Mail noch einmal.",
+        `Bei Ihrem Beispiel (${v.gruppe}) lag die Lücke bei rund ${eur(v.luecke)} pro Monat. Je früher sie bekannt ist, desto leichter lässt sie sich schließen, denn jedes Jahr früher bedeutet mehr Zeit für den Vermögensaufbau und steuerlich geförderte Beiträge.`,
+        "Wie groß die Lücke bei Ihnen wirklich ist, hängt von Dienstzeit, Familienstand, Krankenversicherung und Steuersatz ab. Das lässt sich in einem kurzen Gespräch klären:",
       ],
+      cta: { label: "Meine Lücke klären", url: BOOKING_LINK },
     };
   }
   return {
     subject: "Individuelle Berechnung: Passt Ihr 3-Töpfe-Plan?",
     paragraphs: [
       "Guten Tag,",
-      `in der PDF habe ich Ihnen den 3-Töpfe-Fahrplan vorgestellt. Ob er für Sie passt, hängt von Ihren echten Zahlen ab. Der Rechner liefert nur Richtwerte (bei Ihnen zuletzt: Lücke rund ${eur(v.luecke)} pro Monat), die Realität kann nach oben oder unten abweichen.`,
-      "Gern rechne ich das in einem kostenlosen, unverbindlichen Gespräch individuell für Sie durch. Das Gespräch dauert etwa 30 Minuten. Dabei besprechen wir:",
+      `in der PDF habe ich Ihnen den 3-Töpfe-Fahrplan vorgestellt. Ob er für Sie passt, hängt von Ihren echten Zahlen ab. Der Rechner liefert nur Richtwerte (bei Ihnen zuletzt: Lücke rund ${eur(v.luecke)} pro Monat). Mit Ihren tatsächlichen Daten wird daraus eine belastbare Zahl.`,
+      "Dafür biete ich Ihnen ein kostenloses, unverbindliches Gespräch an (etwa 30 Minuten). Sie gehen danach mit diesen Antworten raus:",
     ],
     list: [
-      "Ihre tatsächliche Pension auf Basis Ihrer Dienstjahre, Vordienstzeiten und Ihrer Besoldung, soweit Sie die Daten zur Hand haben.",
-      "Wie hoch Ihre Lücke nach Steuern und Krankenversicherung wirklich ist, und welchen Teil davon welcher Topf abdecken kann.",
-      "Welcher Beitrag zu Ihrer Situation passt, und welche Auswirkungen er steuerlich haben kann. Eine Steuerberatung ersetzt das nicht.",
+      "Wie hoch Ihre Pension auf Basis von Dienstjahren, Vordienstzeiten und Besoldung tatsächlich ausfällt, und wie groß Ihre Lücke nach Steuern und Krankenversicherung wirklich ist.",
+      "Welche Stellschrauben (Ruhestandszeitpunkt, Teilzeit, Vordienstzeiten) bei Ihnen den größten Unterschied machen.",
+      "Welche Töpfe und welcher Beitrag zu Ihrer Situation passen, mit einem konkreten Vorschlag, den Sie in Ruhe prüfen können (keine Steuerberatung).",
     ],
     closing: [
-      "Hilfreich wäre ein aktueller Bescheid Ihrer Versorgungsstelle, falls vorhanden, und Ihre letzte Besoldungsmitteilung. Es geht aber auch ohne, dann arbeiten wir mit Richtwerten.",
-      "Sie wählen den Termin selbst im Kalender:",
+      "Es gibt keine Verpflichtung. Hilfreich, aber nicht nötig: Ihr letzter Bescheid der Versorgungsstelle und Ihre Besoldungsmitteilung. Den Termin wählen Sie selbst:",
     ],
     cta: { label: "Termin wählen", url: BOOKING_LINK },
   };
