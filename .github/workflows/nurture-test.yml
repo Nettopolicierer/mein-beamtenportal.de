@@ -1,0 +1,27 @@
+name: Nurture Testmails
+
+# Manuell auslösbar: schickt die drei Folgemails mit Beispielwerten an die angegebene Adresse.
+on:
+  workflow_dispatch:
+    inputs:
+      email:
+        description: "Empfängeradresse für die Testmails"
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  testmails:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Testmails auslösen
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          TO: ${{ inputs.email }}
+        run: |
+          if [ -z "$CRON_SECRET" ]; then echo "::error::CRON_SECRET fehlt"; exit 1; fi
+          curl -fsS -G "https://www.mein-beamtenportal.de/api/nurture-run" \
+            --data-urlencode "test=$TO" \
+            -H "Authorization: Bearer $CRON_SECRET"
