@@ -42,8 +42,10 @@ function withBuCheckCta(post: { slug: string; title: string; description?: strin
 // Hinweiskarte zum Pensionsrechner vor der 2. Zwischenüberschrift (als HTML-String wie der BU-Check-Hinweis,
 // damit verschachtelte Wrapper-Divs der migrierten Artikel intakt bleiben). Artikel mit eingebettetem Rechner
 // verlinken per Anker auf ihn, alle anderen auf die Seite /pensionsrechner.
-// Einsteiger-Artikel (Referendare, Anwärter, Berufsanfänger, junge Beamte): dort steht die Checkliste im Vordergrund.
-const EINSTEIGER = /referendar|anw(ä|ae)rter|berufsanf|berufseinsteig|einsteiger|junge[nr]? beamte|studenten|studium|verbeamtung/i;
+// Artikel, bei denen die Checkliste im Vordergrund steht: Einsteiger (Referendare, Anwärter, Berufsanfänger, junge Beamte)
+// sowie Themen Dienstunfähigkeit, Berufsunfähigkeit, Beihilfe, PKV und Krankheit.
+const EINSTEIGER =
+  /referendar|anw(ä|ae)rter|berufsanf|berufseinsteig|einsteiger|junge[nr]? beamte|studenten|studium|verbeamtung|dienstunf|berufsunf|bu-|du-|beihilfe|pkv|krankenversicherung|krankheit/i;
 function isEinsteiger(post: { slug: string; title: string; categories: string[] }) {
   return post.categories.includes("Referendare") || EINSTEIGER.test(`${post.slug} ${post.title}`);
 }
@@ -172,7 +174,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         <div className="prose prose-sm max-w-none leading-normal prose-headings:font-heading prose-headings:text-primary prose-p:leading-relaxed prose-a:text-primary sm:prose-base">
           {(() => {
             // Marker <!--LEAD--> im Artikeltext: hier sitzt der Pensions-Lückenrechner.
-            const [before, after] = withHinweisCard(withBuCheckCta(post), einsteiger ? "checkliste" : "rechner", hasWidget ? "#pl-rechner" : "/pensionsrechner").split(LEAD_MARKER);
+            const body = hasWidget ? withBuCheckCta(post) : withHinweisCard(withBuCheckCta(post), einsteiger ? "checkliste" : "rechner", "/pensionsrechner");
+            const [before, after] = body.split(LEAD_MARKER);
             return (
               <>
                 <div dangerouslySetInnerHTML={{ __html: before }} />
