@@ -4,6 +4,8 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PensionsLueckenRechner } from "@/components/PensionsLueckenRechner";
 import { articleJsonLd, jsonLdString } from "@/lib/jsonld";
+import { KURZANTWORTEN } from "@/lib/kurzantworten";
+import { quellenFor } from "@/lib/quellen";
 import { RechnerStickyBar } from "@/components/RechnerStickyBar";
 import { GRUPPEN, type Gruppe } from "@/lib/pension-calc";
 import { ALL_POSTS, getPost, formatDate, getRelatedPosts, BOOKING_LINK } from "@/lib/content";
@@ -172,6 +174,15 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 py-16 lg:grid-cols-[1fr_260px]"
       >
         <div className="prose prose-sm max-w-none leading-normal prose-headings:font-heading prose-headings:text-primary prose-p:leading-relaxed prose-a:text-primary sm:prose-base">
+          <p className="not-prose mb-5 text-sm text-mediumdark">
+            Von <Link href="/ueber-uns" className="font-semibold text-primary underline-offset-2 hover:underline">Albert Sibert</Link>, Versicherungsvertreter (§ 34d GewO) · Zuletzt aktualisiert am {formatDate(post.modified)}
+          </p>
+          {KURZANTWORTEN[post.slug] && (
+            <div className="not-prose mb-6 rounded-xl border border-[#C9DCF0] bg-[#EAF2FB] p-4">
+              <p className="mb-1 text-xs font-semibold tracking-widest text-[#1E5FA8] uppercase">Kurz beantwortet</p>
+              <p className="text-sm text-[#0F172A]">{KURZANTWORTEN[post.slug]}</p>
+            </div>
+          )}
           {(() => {
             // Marker <!--LEAD--> im Artikeltext: hier sitzt der Pensions-Lückenrechner.
             const body = hasWidget ? withBuCheckCta(post) : withHinweisCard(withBuCheckCta(post), einsteiger ? "checkliste" : "rechner", "/pensionsrechner");
@@ -188,6 +199,21 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
               </>
             );
           })()}
+
+          {quellenFor(post).length > 0 && (
+            <div className="not-prose mt-8 rounded-xl bg-base p-4 text-sm text-mediumdark">
+              <p className="mb-1 font-semibold text-primary">Rechtsgrundlagen (Bundesrecht, zur Orientierung)</p>
+              <p>
+                {quellenFor(post).map((q, i) => (
+                  <span key={q.url}>
+                    {i > 0 && " · "}
+                    <a href={q.url} target="_blank" rel="noopener noreferrer" className="text-primary underline-offset-2 hover:underline">{q.label}</a>
+                  </span>
+                ))}
+              </p>
+              <p className="mt-1 text-xs">In den Ländern gelten teils abweichende Regelungen. Keine individuelle Rechts- oder Steuerberatung.</p>
+            </div>
+          )}
 
           {/* Die aus WordPress migrierten Artikel haben "Über den Autor" +
               die Buchungs-CTA-Box schon fest im html eingebettet - neue

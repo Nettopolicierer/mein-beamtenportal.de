@@ -74,6 +74,29 @@ export default function UeberUnsPage() {
         </div>
       </div>
 
+      <div className="mx-auto max-w-4xl px-6 pt-16">
+        <p className="mb-3 text-xs font-semibold tracking-widest text-primary uppercase">Qualifikation und Zulassung</p>
+        <h2 className="font-heading mb-4 text-2xl font-bold text-primary">Wer hinter den Inhalten steht</h2>
+        <ul className="flex flex-col gap-2 text-mediumdark">
+          <li>Erlaubnis als Versicherungsvertreter nach § 34d Abs. 1 GewO, Registernummer D-4EHE-G249E-13</li>
+          <li>Finanzanlagenvermittler nach § 34f Abs. 1 GewO</li>
+          <li>
+            Eintrag im{" "}
+            <a href="https://www.vermittlerregister.info" target="_blank" rel="noopener noreferrer" className="text-primary underline">
+              Vermittlerregister
+            </a>{" "}
+            prüfbar. Zuständige Aufsicht: IHK Region Stuttgart. Schlichtungsstelle: Versicherungsombudsmann e.V.
+          </li>
+          <li>Seit 2019 in der Finanzbranche, Schwerpunkt Beamte, Referendare und Anwärter</li>
+          <li>
+            Kundenbewertungen auf{" "}
+            <a href="https://www.provenexpert.com/de-de/albert-sibert/" target="_blank" rel="noopener noreferrer" className="text-primary underline">
+              ProvenExpert
+            </a>
+          </li>
+        </ul>
+      </div>
+
       <div className="mx-auto max-w-4xl px-6 py-16">
         <p className="mb-3 text-xs font-semibold tracking-widest text-primary uppercase">Vision</p>
         <h2 className="font-heading mb-4 text-2xl font-bold text-primary">

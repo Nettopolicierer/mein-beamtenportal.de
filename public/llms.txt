@@ -1,0 +1,21 @@
+# Mein Beamtenportal
+
+> Informations- und Beratungsangebot für Beamte, Referendare und Anwärter: Pension, Beihilfe, private Krankenversicherung, Dienstunfähigkeit und Altersvorsorge. Betrieben von Albert Sibert, Versicherungsvertreter (§ 34d Abs. 1 GewO, Reg.-Nr. D-4EHE-G249E-13) und Finanzanlagenvermittler (§ 34f Abs. 1 GewO), Ludwigsburg.
+
+Alle Zahlen sind Richtwerte nach Bundesrecht (BeamtVG, BBhV, BeamtStG, EStG). Die Regeln der Länder weichen teilweise ab. Keine individuelle Rechts- oder Steuerberatung.
+
+## Kernthemen
+- [Pensionsrechner](https://www.mein-beamtenportal.de/pensionsrechner): Netto-Pension und Versorgungslücke nach Besoldungsgruppe (A7 bis A15), mit Ruhegehaltssatz 1,79375 % je Dienstjahr (höchstens 71,75 %) und Versorgungsabschlag 3,6 % je Jahr (höchstens 10,8 %).
+- [Beamten-Versorgungs-Checkliste](https://www.mein-beamtenportal.de/checkliste): Beihilfe, PKV, Dienstunfähigkeit, Pension, Steuern und Familie auf zwei Seiten.
+- [Ratgeber](https://www.mein-beamtenportal.de/ratgeber): über 170 Artikel zu Pension (nach Besoldungsgruppe und Bundesland), Beihilfe, PKV, Anwartschaft, Dienstunfähigkeit und Berufsunfähigkeit.
+- [Webinar](https://www.mein-beamtenportal.de/webinar): Einführung in Beihilfe, Pension und Absicherung.
+
+## Methodik
+- Pension: Ruhegehaltsfähige Dienstbezüge x Ruhegehaltssatz, danach Abzug von Steuern, Pflege- und Krankenversicherung. Pension in heutiger Kaufkraft, Zusatzrente mit Modellrendite 5 % und 2 % Inflation (keine Prognose).
+- Rechtsgrundlagen: BeamtVG, BBhV, BeamtStG, § 19 und § 10 EStG, VVG. Länderrecht kann abweichen.
+
+## Autor
+- [Albert Sibert](https://www.mein-beamtenportal.de/ueber-uns): Finanzberater für Beamte, Referendare und Anwärter, seit 2019 in der Finanzbranche. Erlaubnis nach § 34d Abs. 1 GewO, Registerabfrage: https://www.vermittlerregister.info. Aufsicht: IHK Region Stuttgart. Schlichtung: Versicherungsombudsmann e.V.
+
+## Kontakt
+- kontakt@albert-sibert.de, Gämsenbergstraße 22, 71640 Ludwigsburg

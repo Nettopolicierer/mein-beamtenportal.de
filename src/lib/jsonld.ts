@@ -1,3 +1,5 @@
+import { KURZANTWORTEN } from "@/lib/kurzantworten";
+
 // Strukturierte Daten (schema.org, JSON-LD) für Artikelseiten: Artikel, Autor, Unternehmen, Brotkrumen und FAQ.
 // Die FAQ werden nur aus den sichtbaren <details>-Blöcken des Artikels übernommen, nie erfunden.
 
@@ -70,6 +72,7 @@ export function articleJsonLd(post: PostLike) {
       "@id": `${url}#artikel`,
       headline: post.title,
       description: post.description || undefined,
+      abstract: KURZANTWORTEN[post.slug],
       image: abs(post.featuredImage),
       datePublished: post.date,
       dateModified: post.modified || post.date,
