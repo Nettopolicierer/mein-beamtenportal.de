@@ -182,6 +182,13 @@ export default function DatenschutzPage() {
         (Art. 6 Abs. 1 lit. a DSGVO). Jede Mail enthält einen Abmelde-Link; mit der Abmeldung oder nach der dritten Mail
         löschen wir diese Daten. Die Einwilligung für die PDF-Auswertung ist davon unabhängig.
       </P>
+      <H3>Beamten-Versorgungs-Checkliste</H3>
+      <P>
+        Wenn Sie auf der Seite „Checkliste“ Ihren Vornamen und Ihre E-Mail-Adresse eingeben, senden wir Ihnen die Checkliste als PDF per
+        E-Mail (Mailjet, siehe Ziffer 6) und informieren uns über Ihre Anfrage. Rechtsgrundlage ist Ihre Einwilligung
+        (Art. 6 Abs. 1 lit. a DSGVO), die Sie jederzeit widerrufen können. Gesundheitsdaten werden nicht abgefragt. Mit dem optionalen
+        Kästchen für Folgemails gelten die Angaben zu Upstash und zum Abmelde-Link wie beim Pensions-Lückenrechner.
+      </P>
       <H3>Landingpage für Referendare in Baden-Württemberg</H3>
       <P>
         Der dortige Qualifizierungscheck fragt Schulform, Starttermin, Geburtsjahr und Ihre Einschätzung zu

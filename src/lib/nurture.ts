@@ -12,9 +12,10 @@ const TTL_SECONDS = 30 * 24 * 60 * 60;
 export interface NurtureLead {
   email: string;
   vorname?: string;
-  gruppe: string;
-  luecke: number;
-  nettoPension: number;
+  quelle?: "checkliste";
+  gruppe?: string;
+  luecke?: number;
+  nettoPension?: number;
   createdAt: number;
   next: number; // Index der nächsten Mail (0..2)
 }

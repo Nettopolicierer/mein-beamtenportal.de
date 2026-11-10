@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { CheckCircle2, FileText } from "lucide-react";
+import { track } from "@/lib/track";
 import { BESOLDUNG, GRUPPEN, MODELL_RENDITE, calcPension, type Gruppe } from "@/lib/pension-calc";
 
 const PRIMARY = "#002855";
@@ -37,6 +38,20 @@ export function PensionsLueckenRechner({ defaultGruppe = "A13", gated = false }:
   const eigenesOk = eigenesBrutto >= 1500 && eigenesBrutto <= 15000;
   const c = calcPension({ gruppe, alter, pensionsalter, dienstjahre, sparrate, eigenesBrutto: eigenesOk ? eigenesBrutto : undefined });
 
+  // Erste Bedienung des Rechners melden (einmal pro Seitenaufruf), ohne die eingegebenen Werte.
+  const started = useRef(false);
+  const first = useRef(true);
+  useEffect(() => {
+    if (first.current) {
+      first.current = false;
+      return;
+    }
+    if (!started.current) {
+      started.current = true;
+      track("rechner_start", { gated });
+    }
+  }, [gruppe, alter, pensionsalter, dienstjahre, sparrate, gated]);
+
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     setState("loading");
@@ -66,6 +81,7 @@ export function PensionsLueckenRechner({ defaultGruppe = "A13", gated = false }:
         return;
       }
       setState("success");
+      track("rechner_lead", { gated, folgemails: nurtureConsent }, "lead");
     } catch {
       setError("Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.");
       setState("error");

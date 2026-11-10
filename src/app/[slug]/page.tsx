@@ -42,7 +42,7 @@ function withBuCheckCta(post: { slug: string; title: string; description?: strin
 // damit verschachtelte Wrapper-Divs der migrierten Artikel intakt bleiben). Artikel mit eingebettetem Rechner
 // verlinken per Anker auf ihn, alle anderen auf die Seite /pensionsrechner.
 function withRechnerCard(html: string, href: string) {
-  const card = `<div class="not-prose my-8 rounded-2xl border p-6" style="border-color:#C9DCF0;background:#EAF2FB"><p class="font-heading mb-1 text-lg font-bold" style="color:#002855">Wie groß ist Ihre Pensionslücke?</p><p class="mb-4 text-sm" style="color:#334155">Berechnen Sie in einer Minute, was Ihnen im Ruhestand netto fehlt. Kostenlos, auf Wunsch mit PDF-Auswertung.</p><a href="${href}" class="inline-block rounded-lg px-5 py-2.5 text-sm font-semibold" style="background:#1E5FA8;color:#FFFFFF;text-decoration:none">Pensionslücke berechnen</a></div>`;
+  const card = `<div class="not-prose my-8 rounded-2xl border p-6" style="border-color:#C9DCF0;background:#EAF2FB"><p class="font-heading mb-1 text-lg font-bold" style="color:#002855">Wie groß ist Ihre Pensionslücke?</p><p class="mb-4 text-sm" style="color:#334155">Berechnen Sie in einer Minute, was Ihnen im Ruhestand netto fehlt. Kostenlos, auf Wunsch mit PDF-Auswertung.</p><a href="${href}" class="inline-block rounded-lg px-5 py-2.5 text-sm font-semibold" style="background:#1E5FA8;color:#FFFFFF;text-decoration:none">Pensionslücke berechnen</a><a href="/checkliste" class="ml-4 inline-block py-2.5 text-sm font-semibold underline" style="color:#1E5FA8">Oder: kostenlose Checkliste für Beamte</a></div>`;
   const at = [...html.matchAll(/<h2[\s>]/g)][1]?.index;
   return at === undefined ? html : html.slice(0, at) + card + html.slice(at);
 }

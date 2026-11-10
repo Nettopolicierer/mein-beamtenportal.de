@@ -1,5 +1,6 @@
 "use client";
 
+import { track } from "@/lib/track";
 import { useState } from "react";
 import Link from "next/link";
 import { CalendarCheck, CheckCircle2, MessageCircle } from "lucide-react";
@@ -65,6 +66,7 @@ export function AnfrageFormular() {
         return;
       }
       setState("success");
+      track("anfrage_lead", {}, "lead");
     } catch {
       setError("Etwas ist schiefgelaufen. Bitte versuche es erneut.");
       setState("error");

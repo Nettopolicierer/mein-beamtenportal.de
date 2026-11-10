@@ -5,9 +5,10 @@ import { LEGAL_FOOTER_LINES } from "@/lib/email-pension-analysis";
 
 export interface NurtureMailVars {
   vorname?: string;
-  gruppe: string;
-  luecke: number;
-  nettoPension: number;
+  quelle?: "checkliste";
+  gruppe?: string;
+  luecke?: number;
+  nettoPension?: number;
   unsubscribeUrl: string;
 }
 
@@ -28,17 +29,21 @@ interface Mail {
 const greet = (v: NurtureMailVars) => (v.vorname ? `Guten Tag ${v.vorname},` : "Guten Tag,");
 
 function mail(stage: number, v: NurtureMailVars): Mail {
-  const abschlagMonat = eur(v.nettoPension * 0.036);
+  if (v.quelle === "checkliste") return checklisteMail(stage, v);
+  const gruppe = v.gruppe ?? "A13";
+  const luecke = v.luecke ?? 0;
+  const nettoPension = v.nettoPension ?? 0;
+  const abschlagMonat = eur(nettoPension * 0.036);
   if (stage === 0) {
     return {
       subject: "Ihre Pensionslücke: Was 3 Stellschrauben in Euro ausmachen",
       paragraphs: [
         greet(v),
-        `vor zwei Tagen haben Sie Ihre Pensionsauswertung für ${v.gruppe} erhalten: Netto-Pension rund ${eur(v.nettoPension)}, Lücke rund ${eur(v.luecke)} pro Monat. Ist die PDF gut angekommen?`,
+        `vor zwei Tagen haben Sie Ihre Pensionsauswertung für ${gruppe} erhalten: Netto-Pension rund ${eur(nettoPension)}, Lücke rund ${eur(luecke)} pro Monat. Ist die PDF gut angekommen?`,
         "Das Entscheidende: Diese Lücke steht nicht fest. Viele Beamte erfahren erst kurz vor dem Ruhestand, wie stark ihre Pension von Entscheidungen abhängt, die Jahre vorher fallen. Drei Beispiele, was dahintersteckt:",
       ],
       list: [
-        `Zeitpunkt des Ruhestands: Bei vorzeitigem Ruhestand kann ein Versorgungsabschlag von 3,6 % je Jahr anfallen (höchstens 10,8 %), und zwar lebenslang. Bei Ihrer Netto-Pension von ${eur(v.nettoPension)} wären 3,6 % etwa ${abschlagMonat} weniger pro Monat, für jedes Jahr früher.`,
+        `Zeitpunkt des Ruhestands: Bei vorzeitigem Ruhestand kann ein Versorgungsabschlag von 3,6 % je Jahr anfallen (höchstens 10,8 %), und zwar lebenslang. Bei Ihrer Netto-Pension von ${eur(nettoPension)} wären 3,6 % etwa ${abschlagMonat} weniger pro Monat, für jedes Jahr früher.`,
         "Teilzeit: Teilzeitjahre zählen nur anteilig. Fünf Jahre mit halber Stelle bedeuten rund 2,5 Dienstjahre weniger und damit knapp 4,5 Prozentpunkte beim Ruhegehaltssatz. Das merkt man jeden Monat bis ans Lebensende.",
         "Vordienstzeiten: Je nach Fall können Wehr- oder Zivildienst oder frühere Tätigkeiten im öffentlichen Dienst anerkannt werden. Jedes anerkannte Jahr erhöht den Ruhegehaltssatz um etwa 1,8 Prozentpunkte. Genau das wird oft nie geprüft.",
       ],
@@ -63,7 +68,7 @@ function mail(stage: number, v: NurtureMailVars): Mail {
         "Kaufkraft: Eine Pension, die heute reicht, ist in 25 bis 30 Jahren deutlich weniger wert. Die Lebenshaltungskosten steigen im Alter durch Gesundheit und Pflege eher.",
       ],
       closing: [
-        `Bei Ihrem Beispiel (${v.gruppe}) lag die Lücke bei rund ${eur(v.luecke)} pro Monat. Je früher sie bekannt ist, desto leichter lässt sie sich schließen, denn jedes Jahr früher bedeutet mehr Zeit für den Vermögensaufbau und steuerlich geförderte Beiträge.`,
+        `Bei Ihrem Beispiel (${gruppe}) lag die Lücke bei rund ${eur(luecke)} pro Monat. Je früher sie bekannt ist, desto leichter lässt sie sich schließen, denn jedes Jahr früher bedeutet mehr Zeit für den Vermögensaufbau und steuerlich geförderte Beiträge.`,
         "Wie groß die Lücke bei Ihnen wirklich ist, hängt von Dienstzeit, Familienstand, Krankenversicherung und Steuersatz ab. Das lässt sich in einem kurzen Gespräch klären:",
       ],
       cta: { label: "Meine Lücke klären", url: BOOKING_LINK },
@@ -73,7 +78,7 @@ function mail(stage: number, v: NurtureMailVars): Mail {
     subject: "Individuelle Berechnung: Passt Ihr 3-Töpfe-Plan?",
     paragraphs: [
       greet(v),
-      `in der PDF habe ich Ihnen den 3-Töpfe-Fahrplan vorgestellt. Ob er für Sie passt, hängt von Ihren echten Zahlen ab. Der Rechner liefert nur Richtwerte (bei Ihnen zuletzt: Lücke rund ${eur(v.luecke)} pro Monat). Mit Ihren tatsächlichen Daten wird daraus eine belastbare Zahl.`,
+      `in der PDF habe ich Ihnen den 3-Töpfe-Fahrplan vorgestellt. Ob er für Sie passt, hängt von Ihren echten Zahlen ab. Der Rechner liefert nur Richtwerte (bei Ihnen zuletzt: Lücke rund ${eur(luecke)} pro Monat). Mit Ihren tatsächlichen Daten wird daraus eine belastbare Zahl.`,
       "Dafür biete ich Ihnen ein kostenloses, unverbindliches Gespräch an (etwa 30 Minuten). Sie gehen danach mit diesen Antworten raus:",
     ],
     list: [
@@ -88,10 +93,63 @@ function mail(stage: number, v: NurtureMailVars): Mail {
   };
 }
 
+const greetC = greet;
+
+function checklisteMail(stage: number, v: NurtureMailVars): Mail {
+  if (stage === 0) {
+    return {
+      subject: "Welche Punkte der Checkliste sind bei Ihnen noch offen?",
+      paragraphs: [
+        greetC(v),
+        "vor zwei Tagen haben Sie die Beamten-Versorgungs-Checkliste erhalten. Konnten Sie schon einige Punkte abhaken?",
+        "Eine kurze Frage an Sie: Wo stehen Sie gerade, im Studium oder Referendariat, auf Probe oder bereits auf Lebenszeit verbeamtet? Antworten Sie einfach kurz auf diese Mail. Je nachdem sind andere Punkte besonders wichtig:",
+      ],
+      list: [
+        "Referendariat oder Studium: Anwartschaft in der PKV und die Absicherung bei Dienstunfähigkeit, solange Sie noch gesund und jung sind.",
+        "Beamte auf Probe: Öffnungsaktion der PKV prüfen, Status bei Dienstunfähigkeit klären und die Wartezeit von fünf Dienstjahren im Blick behalten.",
+        "Beamte auf Lebenszeit: Pensionslücke berechnen, Vordienstzeiten prüfen lassen und die Altersvorsorge steuerlich sinnvoll aufstellen.",
+      ],
+      closing: ["Gerade beim letzten Punkt hilft ein Zahlenbeispiel. Dazu schreibe ich Ihnen in zwei Tagen."],
+    };
+  }
+  if (stage === 1) {
+    return {
+      subject: "Rechenbeispiel: Was einem Beamten im Ruhestand netto fehlt",
+      paragraphs: [
+        greetC(v),
+        "ein Zahlenbeispiel zur Pensionslücke (fiktiv, kein Einzelfall): Besoldungsgruppe A13, 35 Jahre alt, 40 Dienstjahre, Ruhestand mit 67.",
+      ],
+      list: [
+        "Heutiges Netto: rund 4.758 € im Monat.",
+        "Voraussichtliche Netto-Pension: rund 3.283 € im Monat, nach Steuern, Pflege und Krankenversicherung.",
+        "Lücke: rund 1.475 € im Monat in heutiger Kaufkraft. Das sind etwa 31 % weniger Netto als im Dienst.",
+      ],
+      closing: [
+        "Alle Werte sind Richtwerte einer vereinfachten Modellrechnung und keine Zusage. Wie es bei Ihnen aussieht, rechnet der Pensionsrechner in einer Minute aus. Auf Wunsch erhalten Sie die Auswertung als PDF:",
+      ],
+      cta: { label: "Meine Pensionslücke berechnen", url: "https://www.mein-beamtenportal.de/pensionsrechner" },
+    };
+  }
+  return {
+    subject: "Checkliste gemeinsam durchgehen: 30 Minuten, kostenlos",
+    paragraphs: [
+      greetC(v),
+      "die Checkliste zeigt, was zu prüfen ist. Was davon für Sie wirklich wichtig ist, hängt von Ihrem Status, Ihrer Familie und Ihren Plänen ab.",
+      "Gern gehe ich die offenen Punkte in einem kostenlosen, unverbindlichen Gespräch (etwa 30 Minuten) mit Ihnen durch. Danach wissen Sie, welche zwei oder drei Punkte bei Ihnen Vorrang haben und was als Nächstes sinnvoll ist. Den Termin wählen Sie selbst:",
+    ],
+    cta: { label: "Termin wählen", url: BOOKING_LINK },
+  };
+}
+
 export const nurtureSubject = (stage: number, v: NurtureMailVars) => mail(stage, v).subject;
 
-export function nurtureText(stage: number, v: NurtureMailVars) {
-  const m = mail(stage, v);
+export const nurtureText = (stage: number, v: NurtureMailVars) => renderText(mail(stage, v), v);
+export const nurtureHtml = (stage: number, v: NurtureMailVars) => renderHtml(mail(stage, v), v);
+
+const REASON_FOLLOW = "Sie erhalten diese Nachricht, weil Sie bei Ihrer Anforderung den Folgemails zugestimmt haben.";
+const REASON_DELIVERY = "Sie erhalten diese Nachricht, weil Sie auf mein-beamtenportal.de die Checkliste angefordert haben.";
+
+function renderText(m: Mail, v: NurtureMailVars, delivery = false) {
   return `${m.paragraphs.join("\n\n")}
 ${m.list ? "\n" + m.list.map((l, i) => `${i + 1}. ${l}`).join("\n\n") + "\n" : ""}${m.closing ? "\n" + m.closing.join("\n\n") + "\n" : ""}${m.cta ? `\n${m.cta.label}: ${m.cta.url}\n` : ""}
 Mit freundlichen Grüßen
@@ -100,13 +158,11 @@ Unabhängiger Finanzberater & Versicherungsvertreter (§ 34d Abs. 1 GewO)
 
 --
 ${LEGAL_FOOTER_LINES.join("\n")}
-Sie erhalten diese Nachricht, weil Sie bei der Auswertungsanforderung den Folgemails zugestimmt haben.
-Abmelden: ${v.unsubscribeUrl}
+${delivery ? REASON_DELIVERY : REASON_FOLLOW + "\nAbmelden: " + v.unsubscribeUrl}
 Impressum: https://www.mein-beamtenportal.de/impressum | Datenschutz: https://www.mein-beamtenportal.de/datenschutz`;
 }
 
-export function nurtureHtml(stage: number, v: NurtureMailVars) {
-  const m = mail(stage, v);
+function renderHtml(m: Mail, v: NurtureMailVars, delivery = false) {
   const p = (t: string) => `<p style="margin:0 0 16px;font-size:16px;line-height:1.6;color:${NAVY};">${esc(t)}</p>`;
   const list = m.list
     ? `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${m.list
@@ -136,10 +192,23 @@ export function nurtureHtml(stage: number, v: NurtureMailVars) {
     </td></tr>
     <tr><td style="padding:16px 32px 28px;border-top:1px solid #E2E8F0;font-size:11px;line-height:1.6;color:${MUTED};">
       ${LEGAL_FOOTER_LINES.map(esc).join("<br/>")}<br/>
-      Sie erhalten diese Nachricht, weil Sie bei der Auswertungsanforderung den Folgemails zugestimmt haben.<br/>
-      <a href="${esc(v.unsubscribeUrl)}" style="color:${MUTED};">Abmelden</a> | <a href="https://www.mein-beamtenportal.de/impressum" style="color:${MUTED};">Impressum</a> | <a href="https://www.mein-beamtenportal.de/datenschutz" style="color:${MUTED};">Datenschutz</a>
+      ${delivery ? REASON_DELIVERY : REASON_FOLLOW}<br/>
+      ${delivery ? "" : `<a href="${esc(v.unsubscribeUrl)}" style="color:${MUTED};">Abmelden</a> | `}<a href="https://www.mein-beamtenportal.de/impressum" style="color:${MUTED};">Impressum</a> | <a href="https://www.mein-beamtenportal.de/datenschutz" style="color:${MUTED};">Datenschutz</a>
     </td></tr>
   </table>
 </td></tr></table>
 </body></html>`;
 }
+
+// Mail mit der angehängten Checkliste (sofort nach der Anforderung, keine Werbung, kein Abmelde-Link nötig).
+const deliveryMail = (v: NurtureMailVars): Mail => ({
+  subject: "Ihre Beamten-Versorgungs-Checkliste 2026",
+  paragraphs: [
+    greet(v),
+    "im Anhang finden Sie Ihre Beamten-Versorgungs-Checkliste als PDF. Sie führt Sie durch Krankenversicherung und Beihilfe, Dienstunfähigkeit, Pension und Steuern sowie die Absicherung der Familie.",
+    "Haken Sie ab, was bei Ihnen schon geklärt ist. Was offen bleibt, schauen Sie sich zuerst an. Bei Fragen antworten Sie einfach auf diese Mail.",
+  ],
+});
+export const checklisteDeliverySubject = (v: NurtureMailVars) => deliveryMail(v).subject;
+export const checklisteDeliveryText = (v: NurtureMailVars) => renderText(deliveryMail(v), v, true);
+export const checklisteDeliveryHtml = (v: NurtureMailVars) => renderHtml(deliveryMail(v), v, true);

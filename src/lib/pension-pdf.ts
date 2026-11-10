@@ -14,25 +14,25 @@ import {
 // Persönliche PDF-Auswertung zur Pensionsberechnung (A4, 4 Seiten, Sie-Form).
 // Läuft serverseitig (reines JS, keine Dateizugriffe). Alle Beträge sind gerundete Richtwerte.
 
-const TITLE = rgb(0.059, 0.09, 0.165); // #0F172A
-const BLUE = rgb(0.118, 0.251, 0.686); // #1E40AF
+export const TITLE = rgb(0.059, 0.09, 0.165); // #0F172A
+export const BLUE = rgb(0.118, 0.251, 0.686); // #1E40AF
 const BLUE2 = rgb(0.145, 0.388, 0.922); // #2563EB
-const TEXT = rgb(0.2, 0.255, 0.333); // #334155
-const MUTED = rgb(0.392, 0.455, 0.545); // #64748B
-const SOFT = rgb(0.937, 0.965, 1); // #EFF6FF
-const SOFT_BORDER = rgb(0.749, 0.859, 0.996); // #BFDBFE
-const GREY = rgb(0.973, 0.98, 0.988); // #F8FAFC
-const LINE = rgb(0.886, 0.91, 0.941); // #E2E8F0
-const WHITE = rgb(1, 1, 1);
+export const TEXT = rgb(0.2, 0.255, 0.333); // #334155
+export const MUTED = rgb(0.392, 0.455, 0.545); // #64748B
+export const SOFT = rgb(0.937, 0.965, 1); // #EFF6FF
+export const SOFT_BORDER = rgb(0.749, 0.859, 0.996); // #BFDBFE
+export const GREY = rgb(0.973, 0.98, 0.988); // #F8FAFC
+export const LINE = rgb(0.886, 0.91, 0.941); // #E2E8F0
+export const WHITE = rgb(1, 1, 1);
 
-const W = 595.28;
-const H = 841.89;
-const M = 48;
-const CW = W - 2 * M;
+export const W = 595.28;
+export const H = 841.89;
+export const M = 48;
+export const CW = W - 2 * M;
 const TOTAL = 4;
 
 // Helvetica (WinAnsi) kennt nicht jedes Zeichen: unbekannte durch Ersatz ersetzen.
-const clean = (t: string) =>
+export const clean = (t: string) =>
   t
     .replace(/[−]/g, "-")
     .replace(/→/g, "->")
@@ -43,13 +43,13 @@ const clean = (t: string) =>
 const eur = (n: number) => `${Math.round(n).toLocaleString("de-DE")} €`;
 const pct = (n: number, d = 1) => `${n.toFixed(d).replace(".", ",")} %`;
 
-interface Ctx {
+export interface Ctx {
   doc: PDFDocument;
   reg: PDFFont;
   bold: PDFFont;
 }
 
-function wrap(font: PDFFont, t: string, size: number, maxW: number): string[] {
+export function wrap(font: PDFFont, t: string, size: number, maxW: number): string[] {
   const out: string[] = [];
   for (const para of clean(t).split("\n")) {
     let line = "";
@@ -73,7 +73,7 @@ interface TextOpts {
 }
 
 /** Zeichnet Text, gibt die neue y-Position unterhalb des Textes zurück. */
-function text(page: PDFPage, ctx: Ctx, t: string, x: number, y: number, size: number, o: TextOpts = {}) {
+export function text(page: PDFPage, ctx: Ctx, t: string, x: number, y: number, size: number, o: TextOpts = {}) {
   const font = o.bold ? ctx.bold : ctx.reg;
   const lead = o.lead ?? size * 1.5;
   const lines = o.maxW ? wrap(font, t, size, o.maxW) : [clean(t)];
@@ -81,16 +81,16 @@ function text(page: PDFPage, ctx: Ctx, t: string, x: number, y: number, size: nu
   return y - lines.length * lead;
 }
 
-function height(ctx: Ctx, t: string, size: number, maxW: number, bold = false, lead?: number) {
+export function height(ctx: Ctx, t: string, size: number, maxW: number, bold = false, lead?: number) {
   return wrap(bold ? ctx.bold : ctx.reg, t, size, maxW).length * (lead ?? size * 1.5);
 }
 
-function roundRect(page: PDFPage, x: number, yTop: number, w: number, h: number, r: number, fill: ReturnType<typeof rgb>, border?: ReturnType<typeof rgb>, bw = 1) {
+export function roundRect(page: PDFPage, x: number, yTop: number, w: number, h: number, r: number, fill: ReturnType<typeof rgb>, border?: ReturnType<typeof rgb>, bw = 1) {
   const path = `M ${r} 0 H ${w - r} A ${r} ${r} 0 0 1 ${w} ${r} V ${h - r} A ${r} ${r} 0 0 1 ${w - r} ${h} H ${r} A ${r} ${r} 0 0 1 0 ${h - r} V ${r} A ${r} ${r} 0 0 1 ${r} 0 Z`;
   page.drawSvgPath(path, { x, y: yTop, color: fill, borderColor: border, borderWidth: border ? bw : 0 });
 }
 
-function page(ctx: Ctx, nr: number, right: string) {
+export function page(ctx: Ctx, nr: number, right: string, total = TOTAL) {
   const p = ctx.doc.addPage([W, H]);
   text(p, ctx, "Mein Beamtenportal", M, H - 46, 13, { bold: true, color: BLUE });
   const rw = ctx.reg.widthOfTextAtSize(clean(right), 9.5);
@@ -98,12 +98,12 @@ function page(ctx: Ctx, nr: number, right: string) {
   p.drawLine({ start: { x: M, y: H - 58 }, end: { x: W - M, y: H - 58 }, thickness: 2.2, color: BLUE });
   p.drawLine({ start: { x: M, y: 48 }, end: { x: W - M, y: 48 }, thickness: 0.6, color: LINE });
   text(p, ctx, "Mein Beamtenportal · www.mein-beamtenportal.de", M, 32, 8.5, { color: MUTED });
-  const pn = `Seite ${nr} von ${TOTAL}`;
+  const pn = `Seite ${nr} von ${total}`;
   text(p, ctx, pn, W - M - ctx.reg.widthOfTextAtSize(pn, 8.5), 32, 8.5, { color: MUTED });
   return p;
 }
 
-function heading(p: PDFPage, ctx: Ctx, t: string, y: number) {
+export function heading(p: PDFPage, ctx: Ctx, t: string, y: number) {
   text(p, ctx, t, M, y, 15, { bold: true, color: BLUE });
   p.drawLine({ start: { x: M, y: y - 8 }, end: { x: W - M, y: y - 8 }, thickness: 0.6, color: LINE });
   return y - 30;
@@ -115,7 +115,7 @@ function numberDot(p: PDFPage, ctx: Ctx, n: string, cx: number, cy: number) {
   p.drawText(n, { x: cx - w / 2, y: cy - 3.2, size: 9, font: ctx.bold, color: WHITE });
 }
 
-function checkDot(p: PDFPage, cx: number, cy: number) {
+export function checkDot(p: PDFPage, cx: number, cy: number) {
   p.drawCircle({ x: cx, y: cy, size: 8.5, color: BLUE });
   p.drawLine({ start: { x: cx - 3.6, y: cy - 0.2 }, end: { x: cx - 1, y: cy - 2.9 }, thickness: 1.6, color: WHITE });
   p.drawLine({ start: { x: cx - 1, y: cy - 2.9 }, end: { x: cx + 3.8, y: cy + 3 }, thickness: 1.6, color: WHITE });

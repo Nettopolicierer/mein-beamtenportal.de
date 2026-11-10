@@ -6,6 +6,7 @@ import { BOOKING_LINK } from "@/lib/content";
 import { CookieConsentProvider } from "@/components/cookie-consent/CookieConsentProvider";
 import { GoogleAdsTag } from "@/components/GoogleAdsTag";
 import { ClarityTag } from "@/components/ClarityTag";
+import { ClickTracker } from "@/components/ClickTracker";
 import { ScrollCtaPopup } from "@/components/ScrollCtaPopup";
 import { WebinarBanner } from "@/components/WebinarBanner";
 import { LogoLink } from "@/components/LogoLink";
@@ -92,6 +93,7 @@ export default function RootLayout({
         <CookieConsentProvider>
         <ClarityTag />
         <GoogleAdsTag />
+        <ClickTracker />
         <WebinarBanner />
         <ChromeGate>
         <header className="sticky top-0 z-40 border-b border-mediumlight/40 bg-white/95 backdrop-blur">
