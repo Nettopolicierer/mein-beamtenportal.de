@@ -41,8 +41,23 @@ function withBuCheckCta(post: { slug: string; title: string; description?: strin
 // Hinweiskarte zum Pensionsrechner vor der 2. Zwischenüberschrift (als HTML-String wie der BU-Check-Hinweis,
 // damit verschachtelte Wrapper-Divs der migrierten Artikel intakt bleiben). Artikel mit eingebettetem Rechner
 // verlinken per Anker auf ihn, alle anderen auf die Seite /pensionsrechner.
-function withRechnerCard(html: string, href: string) {
-  const card = `<div class="not-prose my-8 rounded-2xl border p-6" style="border-color:#C9DCF0;background:#EAF2FB"><p class="font-heading mb-1 text-lg font-bold" style="color:#002855">Wie groß ist Ihre Pensionslücke?</p><p class="mb-4 text-sm" style="color:#334155">Berechnen Sie in einer Minute, was Ihnen im Ruhestand netto fehlt. Kostenlos, auf Wunsch mit PDF-Auswertung.</p><a href="${href}" class="inline-block rounded-lg px-5 py-2.5 text-sm font-semibold" style="background:#1E5FA8;color:#FFFFFF;text-decoration:none">Pensionslücke berechnen</a><a href="/checkliste" class="ml-4 inline-block py-2.5 text-sm font-semibold underline" style="color:#1E5FA8">Oder: kostenlose Checkliste für Beamte</a></div>`;
+// Einsteiger-Artikel (Referendare, Anwärter, Berufsanfänger, junge Beamte): dort steht die Checkliste im Vordergrund.
+const EINSTEIGER = /referendar|anw(ä|ae)rter|berufsanf|berufseinsteig|einsteiger|junge[nr]? beamte|studenten|studium|verbeamtung/i;
+function isEinsteiger(post: { slug: string; title: string; categories: string[] }) {
+  return post.categories.includes("Referendare") || EINSTEIGER.test(`${post.slug} ${post.title}`);
+}
+
+// Hinweiskarte vor der 2. Zwischenüberschrift (als HTML-String wie der BU-Check-Hinweis, damit verschachtelte
+// Wrapper-Divs der migrierten Artikel intakt bleiben). Einsteiger-Artikel führen zur Checkliste, alle anderen zum
+// Pensionsrechner (Artikel mit eingebettetem Rechner per Anker, sonst Seite /pensionsrechner).
+function withHinweisCard(html: string, mode: "checkliste" | "rechner", rechnerHref: string) {
+  const btn = (href: string, label: string) =>
+    `<a href="${href}" class="inline-block rounded-lg px-5 py-2.5 text-sm font-semibold" style="background:#1E5FA8;color:#FFFFFF;text-decoration:none">${label}</a>`;
+  const head =
+    mode === "checkliste"
+      ? { h: "Gut abgesichert in den Dienst starten", t: "Die 360°-Beamten-Versorgungs-Checkliste: Beihilfe, PKV, Dienstunfähigkeit und Vorsorge auf zwei Seiten. Kostenlos als PDF.", b: btn("/checkliste", "Kostenlose Checkliste anfordern") }
+      : { h: "Wie groß ist Ihre Pensionslücke?", t: "Berechnen Sie in einer Minute, was Ihnen im Ruhestand netto fehlt. Kostenlos, auf Wunsch mit PDF-Auswertung.", b: btn(rechnerHref, "Pensionslücke berechnen") };
+  const card = `<div class="not-prose my-8 rounded-2xl border p-6" style="border-color:#C9DCF0;background:#EAF2FB"><p class="font-heading mb-1 text-lg font-bold" style="color:#002855">${head.h}</p><p class="mb-4 text-sm" style="color:#334155">${head.t}</p>${head.b}</div>`;
   const at = [...html.matchAll(/<h2[\s>]/g)][1]?.index;
   return at === undefined ? html : html.slice(0, at) + card + html.slice(at);
 }
@@ -80,10 +95,11 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
   const related = getRelatedPosts(post);
   const hasWidget = post.html.includes(LEAD_MARKER);
+  const einsteiger = !hasWidget && isEinsteiger(post);
 
   return (
     <article data-rechner-bar>
-      <RechnerStickyBar href={hasWidget ? "#pl-rechner" : "/pensionsrechner"} hasWidget={hasWidget} />
+      <RechnerStickyBar href={einsteiger ? "/checkliste" : hasWidget ? "#pl-rechner" : "/pensionsrechner"} label={einsteiger ? "Kostenlose Checkliste anfordern" : "Pensionslücke berechnen"} hasWidget={hasWidget} />
       {/* Hero: Hintergrundbild + Titel + Untertitel + CTAs, wie im Original */}
       <div className="relative">
         {post.featuredImage && (
@@ -154,7 +170,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         <div className="prose prose-sm max-w-none leading-normal prose-headings:font-heading prose-headings:text-primary prose-p:leading-relaxed prose-a:text-primary sm:prose-base">
           {(() => {
             // Marker <!--LEAD--> im Artikeltext: hier sitzt der Pensions-Lückenrechner.
-            const [before, after] = withRechnerCard(withBuCheckCta(post), hasWidget ? "#pl-rechner" : "/pensionsrechner").split(LEAD_MARKER);
+            const [before, after] = withHinweisCard(withBuCheckCta(post), einsteiger ? "checkliste" : "rechner", hasWidget ? "#pl-rechner" : "/pensionsrechner").split(LEAD_MARKER);
             return (
               <>
                 <div dangerouslySetInnerHTML={{ __html: before }} />

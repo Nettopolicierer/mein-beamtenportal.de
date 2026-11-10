@@ -5,7 +5,7 @@ import Link from "next/link";
 
 // Schwebende Leiste (nur Handy) auf Artikeln: erscheint nach ca. 30 % Scrollen und
 // verschwindet, sobald der Rechner im Artikel im Bild ist.
-export function RechnerStickyBar({ href, hasWidget }: { href: string; hasWidget: boolean }) {
+export function RechnerStickyBar({ href, label, hasWidget }: { href: string; label: string; hasWidget: boolean }) {
   const [scrolled, setScrolled] = useState(false);
   const [widgetVisible, setWidgetVisible] = useState(false);
 
@@ -35,7 +35,7 @@ export function RechnerStickyBar({ href, hasWidget }: { href: string; hasWidget:
         style={{ backgroundColor: "#1E5FA8", color: "#FFFFFF" }}
         className="block rounded-xl px-4 py-3 text-center text-base font-bold"
       >
-        Pensionslücke berechnen
+        {label}
       </Link>
     </div>
   );
