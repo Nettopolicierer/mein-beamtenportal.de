@@ -151,7 +151,7 @@ export default function ReferendarBwPage() {
           <div>
             <h2 className="font-heading text-xl font-bold text-primary">Albert Sibert</h2>
             <p className="mt-2 text-sm text-mediumdark">
-              Ich bin Versicherungsvertreter mit Erlaubnis nach § 34d GewO und spezialisiert auf Beamte, Referendare und
+              Ich bin Finanzberater (Versicherungsvertreter mit Erlaubnis nach § 34d GewO) und spezialisiert auf Beamte, Referendare und
               Anwärter. Seit 2019 begleite ich Menschen im öffentlichen Dienst bei Beihilfe, privater Krankenversicherung,
               Dienstunfähigkeit und Altersvorsorge. Auf meinem Fachportal mein-beamtenportal.de erkläre ich diese Themen
               in über 150 Ratgeber-Beiträgen.

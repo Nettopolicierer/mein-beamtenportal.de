@@ -175,7 +175,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       >
         <div className="prose prose-sm max-w-none leading-normal prose-headings:font-heading prose-headings:text-primary prose-p:leading-relaxed prose-a:text-primary sm:prose-base">
           <p className="not-prose mb-5 text-sm text-mediumdark">
-            Von <Link href="/ueber-uns" className="font-semibold text-primary underline-offset-2 hover:underline">Albert Sibert</Link>, Versicherungsvertreter (§ 34d GewO) · Zuletzt aktualisiert am {formatDate(post.modified)}
+            Von <Link href="/ueber-uns" className="font-semibold text-primary underline-offset-2 hover:underline">Albert Sibert</Link>, Finanzberater (§ 34d / § 34f GewO) · Zuletzt aktualisiert am {formatDate(post.modified)}
           </p>
           {KURZANTWORTEN[post.slug] && (
             <div className="not-prose mb-6 rounded-xl border border-[#C9DCF0] bg-[#EAF2FB] p-4">

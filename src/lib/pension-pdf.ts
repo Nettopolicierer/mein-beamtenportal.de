@@ -411,7 +411,7 @@ export async function buildPensionPdf(input: PensionInput): Promise<Uint8Array> 
     // Absender
     roundRect(p, M, y, CW, 64, 6, GREY, LINE);
     text(p, ctx, "Mein Beamtenportal", M + 16, y - 22, 12, { bold: true, color: TITLE });
-    text(p, ctx, "Unabhängiger Finanzberater & Versicherungsvertreter (§ 34d Abs. 1 GewO) · Spezialist für Beamte", M + 16, y - 38, 9, { bold: true, color: BLUE2 });
+    text(p, ctx, "Unabhängiger Finanzberater (§ 34d / § 34f GewO) · Spezialist für Beamte", M + 16, y - 38, 9, { bold: true, color: BLUE2 });
     text(p, ctx, "4,9 von 5 Sternen bei über 80 Bewertungen", M + 16, y - 53, 9, { color: TEXT });
     y -= 64 + 14;
 

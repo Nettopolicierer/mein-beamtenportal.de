@@ -61,7 +61,7 @@ export function articleJsonLd(post: PostLike) {
       "@type": "Person",
       "@id": PERSON_ID,
       name: "Albert Sibert",
-      jobTitle: "Unabhängiger Finanzberater und Versicherungsvertreter (§ 34d Abs. 1 GewO)",
+      jobTitle: "Unabhängiger Finanzberater (§ 34d Abs. 1 / § 34f Abs. 1 GewO)",
       worksFor: { "@id": ORG_ID },
       url: `${BASE}/ueber-uns`,
       sameAs: ["https://www.linkedin.com/in/albert-sibert-86225a231/"],

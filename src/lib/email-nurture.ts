@@ -154,7 +154,7 @@ function renderText(m: Mail, v: NurtureMailVars, delivery = false) {
 ${m.list ? "\n" + m.list.map((l, i) => `${i + 1}. ${l}`).join("\n\n") + "\n" : ""}${m.closing ? "\n" + m.closing.join("\n\n") + "\n" : ""}${m.cta ? `\n${m.cta.label}: ${m.cta.url}\n` : ""}
 Mit freundlichen Grüßen
 Mein Beamtenportal
-Unabhängiger Finanzberater & Versicherungsvertreter (§ 34d Abs. 1 GewO)
+Unabhängiger Finanzberater (§ 34d / § 34f GewO)
 
 --
 ${LEGAL_FOOTER_LINES.join("\n")}
@@ -187,7 +187,7 @@ function renderHtml(m: Mail, v: NurtureMailVars, delivery = false) {
       ${cta}
       <p style="margin:0 0 24px;font-size:16px;line-height:1.6;color:${NAVY};">Mit freundlichen Grüßen<br/>Mein Beamtenportal</p>
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="border-top:1px solid #E2E8F0;padding:16px 0 8px;font-size:13px;line-height:1.6;color:${NAVY};">
-        <strong>Mein Beamtenportal</strong><br/>Unabhängiger Finanzberater &amp; Versicherungsvertreter (§ 34d Abs. 1 GewO)<br/>Spezialist für Beamte &amp; den öffentlichen Dienst<br/>Gämsenbergstraße 22, 71640 Ludwigsburg
+        <strong>Mein Beamtenportal</strong><br/>Unabhängiger Finanzberater (§ 34d / § 34f GewO)<br/>Spezialist für Beamte &amp; den öffentlichen Dienst<br/>Gämsenbergstraße 22, 71640 Ludwigsburg
       </td></tr></table>
     </td></tr>
     <tr><td style="padding:16px 32px 28px;border-top:1px solid #E2E8F0;font-size:11px;line-height:1.6;color:${MUTED};">
