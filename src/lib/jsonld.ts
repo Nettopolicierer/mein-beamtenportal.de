@@ -51,6 +51,7 @@ export function articleJsonLd(post: PostLike) {
       email: "kontakt@albert-sibert.de",
       telephone: "+49 176 92609041",
       address: { "@type": "PostalAddress", streetAddress: "Gämsenbergstraße 22", postalCode: "71640", addressLocality: "Ludwigsburg", addressCountry: "DE" },
+      sameAs: ["https://www.provenexpert.com/de-de/albert-sibert/", "https://www.linkedin.com/in/albert-sibert-86225a231/"],
       founder: { "@id": PERSON_ID },
       identifier: { "@type": "PropertyValue", name: "Vermittlerregister-Nr. (§ 34d Abs. 1 GewO)", value: "D-4EHE-G249E-13" },
     },
