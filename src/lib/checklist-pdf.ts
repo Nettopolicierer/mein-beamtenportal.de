@@ -1,4 +1,5 @@
 import { PDFDocument, PDFFont, PDFPage, StandardFonts } from "pdf-lib";
+import { EMOJI_OK, EMOJI_STOP, EMOJI_WARN } from "@/lib/pdf-emoji";
 import { BLUE, CW, GREY, H, LINE, M, MUTED, SOFT, SOFT_BORDER, TEXT, TITLE, WHITE, clean, page, roundRect, text, wrap, type Ctx } from "@/lib/pension-pdf";
 
 // Beamten-Versorgungs-Checkliste (A4, 2 Seiten, Sie-Form). Allgemeine Information, keine individuelle Beratung.
@@ -74,7 +75,7 @@ const SECTIONS: Section[] = [
       },
       {
         t: "Zusätzliche Vorsorge gestartet, Basisrente geprüft?",
-        warum: "Beamte zahlen nicht in die gesetzliche Rentenversicherung ein. Beiträge zu einer Basisrente können nach § 10 EStG absetzbar sein, für Beamte mit gekürztem Höchstbetrag. Die spätere Rente wird nachgelagert besteuert.",
+        warum: "Beamte zahlen nicht in die gesetzliche Rentenversicherung ein. Beiträge zu einer Basisrente können nach § 10 EStG absetzbar sein, für Beamte mit gekürztem Höchstbetrag. Die Basisrente kann auch fondsgebunden, zum Beispiel auf ETF-Basis, geführt werden. Die spätere Rente wird nachgelagert besteuert.",
         empf: "Steuerliche Wirkung und passende Bausteine für die eigene Situation prüfen lassen.",
       },
     ],
@@ -130,7 +131,7 @@ export async function buildChecklistPdf(): Promise<Uint8Array> {
   let p = page(ctx, nr, RIGHT, TOTAL);
   let y = H - 92;
 
-  text(p, ctx, "Die Beamten-Versorgungs-Checkliste 2026", M, y, 20, { bold: true, color: TITLE });
+  text(p, ctx, "Die 360°-Beamten-Versorgungs-Checkliste 2026", M, y, 20, { bold: true, color: TITLE });
   y -= 20;
   text(p, ctx, "Selbstanalyse zu Beihilfe, Dienstunfähigkeit, Pension und Vorsorge", M, y, 10.5, { bold: true, color: BLUE });
   y -= 16;
@@ -192,20 +193,21 @@ export async function buildChecklistPdf(): Promise<Uint8Array> {
   }
 
   // Auswertungs-Schlüssel
-  const rows: [string, string][] = [
-    ["10 bis 12 Haken:", "Gut vorbereitet. Ihre Versorgung steht auf einem soliden Fundament."],
-    ["7 bis 9 Haken:", "Gute Basis, aber einige Stellschrauben sind noch offen."],
-    ["Unter 7 Haken:", "Ein genauer Blick lohnt sich, besonders bei PKV, Dienstunfähigkeit und Pension."],
+  const rows: [string, string, string][] = [
+    [EMOJI_OK, "10 bis 12 Haken:", "Gut vorbereitet. Ihre Versorgung steht auf einem soliden Fundament."],
+    [EMOJI_WARN, "7 bis 9 Haken:", "Gute Basis, aber einige Stellschrauben sind noch offen."],
+    [EMOJI_STOP, "Unter 7 Haken:", "Ein genauer Blick lohnt sich, besonders bei PKV, Dienstunfähigkeit und Pension."],
   ];
   const keyH = 22 + rows.length * 14 + 6;
   if (y - keyH - 92 - 80 < 52) newPage();
   roundRect(p, M, y, CW, keyH, 6, SOFT, SOFT_BORDER);
   text(p, ctx, "Ihr Auswertungs-Schlüssel", M + 14, y - 17, 10.5, { bold: true, color: BLUE });
-  rows.forEach(([a, b], i) => {
-    const ry = y - 34 - i * 15;
-    p.drawCircle({ x: M + 18, y: ry + 3, size: 3, color: BLUE });
-    p.drawText(a, { x: M + 28, y: ry, size: 9, font: ctx.bold, color: BLUE });
-    p.drawText(clean(b), { x: M + 28 + ctx.bold.widthOfTextAtSize(a, 9) + 6, y: ry, size: 9, font: ctx.reg, color: TEXT });
+  const imgs = await Promise.all(rows.map(([e]) => doc.embedPng(Buffer.from(e, "base64"))));
+  rows.forEach(([, a, b], i) => {
+    const ry = y - 34 - i * 14;
+    p.drawImage(imgs[i], { x: M + 14, y: ry - 2, width: 11, height: 11 });
+    p.drawText(a, { x: M + 30, y: ry, size: 9, font: ctx.bold, color: BLUE });
+    p.drawText(clean(b), { x: M + 30 + ctx.bold.widthOfTextAtSize(a, 9) + 6, y: ry, size: 9, font: ctx.reg, color: TEXT });
   });
   y -= keyH + 12;
 
@@ -216,13 +218,13 @@ export async function buildChecklistPdf(): Promise<Uint8Array> {
     const f = bold ? ctx.bold : ctx.reg;
     p.drawText(clean(t), { x: M + (CW - f.widthOfTextAtSize(clean(t), size)) / 2, y: yy, size, font: f, color });
   };
-  c("Nächster Schritt: Ihre offenen Punkte in 30 Minuten", 12.5, y - 24, true, TITLE);
-  c("Offene Punkte oder Unsicherheiten? Wir gehen sie in einem kostenfreien Gespräch per Video oder Telefon gemeinsam durch.", 8.8, y - 40);
+  c("Nächster Schritt: Ihr kostenfreies 15-Minuten-Erstgespräch", 12.5, y - 24, true, TITLE);
+  c("Offene Punkte oder Unsicherheiten? Wir gehen sie kostenfrei per Video oder Telefon gemeinsam durch.", 8.8, y - 40);
   const label = "Termin buchen: cal.com/mein-beamtenportal/kostenfreie-erstberatung";
   const bw = ctx.bold.widthOfTextAtSize(label, 9.5) + 32;
   roundRect(p, M + (CW - bw) / 2, y - 50, bw, 22, 5, BLUE);
   p.drawText(label, { x: M + (CW - bw) / 2 + 16, y: y - 64, size: 9.5, font: ctx.bold, color: WHITE });
-  c("Spezialisiert auf Beamte  ·  Unverbindlich und digital  ·  Kostenfrei", 8.5, y - 82, true, BLUE);
+  c("100 % unabhängig  ·  Spezialisiert auf Beamte  ·  Unverbindlich und digital", 8.5, y - 82, true, BLUE);
   y -= gh + 12;
 
   text(p, ctx, "Impressum und Registerangaben:", M, y, 8, { bold: true, color: MUTED });

@@ -79,7 +79,7 @@ function mail(stage: number, v: NurtureMailVars): Mail {
     paragraphs: [
       greet(v),
       `in der PDF habe ich Ihnen den 3-Töpfe-Fahrplan vorgestellt. Ob er für Sie passt, hängt von Ihren echten Zahlen ab. Der Rechner liefert nur Richtwerte (bei Ihnen zuletzt: Lücke rund ${eur(luecke)} pro Monat). Mit Ihren tatsächlichen Daten wird daraus eine belastbare Zahl.`,
-      "Dafür biete ich Ihnen ein kostenloses, unverbindliches Gespräch an (etwa 30 Minuten). Sie gehen danach mit diesen Antworten raus:",
+      "Dafür biete ich Ihnen ein kostenloses, unverbindliches Gespräch an (etwa 15 Minuten). Sie gehen danach mit diesen Antworten raus:",
     ],
     list: [
       "Wie hoch Ihre Pension auf Basis von Dienstjahren, Vordienstzeiten und Besoldung tatsächlich ausfällt, und wie groß Ihre Lücke nach Steuern und Krankenversicherung wirklich ist.",
@@ -131,11 +131,11 @@ function checklisteMail(stage: number, v: NurtureMailVars): Mail {
     };
   }
   return {
-    subject: "Checkliste gemeinsam durchgehen: 30 Minuten, kostenlos",
+    subject: "Checkliste gemeinsam durchgehen: 15 Minuten, kostenlos",
     paragraphs: [
       greetC(v),
       "die Checkliste zeigt, was zu prüfen ist. Was davon für Sie wirklich wichtig ist, hängt von Ihrem Status, Ihrer Familie und Ihren Plänen ab.",
-      "Gern gehe ich die offenen Punkte in einem kostenlosen, unverbindlichen Gespräch (etwa 30 Minuten) mit Ihnen durch. Danach wissen Sie, welche zwei oder drei Punkte bei Ihnen Vorrang haben und was als Nächstes sinnvoll ist. Den Termin wählen Sie selbst:",
+      "Gern gehe ich die offenen Punkte in einem kostenlosen, unverbindlichen Gespräch (etwa 15 Minuten) mit Ihnen durch. Danach wissen Sie, welche zwei oder drei Punkte bei Ihnen Vorrang haben und was als Nächstes sinnvoll ist. Den Termin wählen Sie selbst:",
     ],
     cta: { label: "Termin wählen", url: BOOKING_LINK },
   };
