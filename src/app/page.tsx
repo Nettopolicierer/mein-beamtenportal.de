@@ -222,7 +222,7 @@ export default function Home() {
           <p className="mb-6 text-lg text-white/90">Entscheidend ist, was Sie wirklich absichern.</p>
           <p className="mx-auto mb-8 max-w-xl text-white/70">
             Die Beihilfe zahlt nicht alles, die Pension deckt nicht Ihr gewohntes Einkommen, und
-            bei Dienstunfähigkeit zählt jeder Monat, den Sie zu spät handeln. In 30 Minuten sehen
+            bei Dienstunfähigkeit zählt jeder Monat, den Sie zu spät handeln. In 15 Minuten sehen
             Sie schwarz auf weiß, wo Ihre Lücken liegen – und was es kostet, sie zu schließen.
           </p>
           <Link
@@ -265,7 +265,7 @@ export default function Home() {
           </h2>
           <span className="mx-auto mt-3 mb-4 block h-1 w-12 rounded-full bg-primary" />
           <p className="mb-8 text-mediumdark">
-            In 30 Minuten schaue ich mir Ihre konkrete Situation an: wo bei Beihilfe, PKV oder im
+            In 15 Minuten schaue ich mir Ihre konkrete Situation an: wo bei Beihilfe, PKV oder im
             Ernstfall einer Dienstunfähigkeit Lücken bestehen – und was sich davon für Sie wirklich
             zu schließen lohnt.
           </p>
