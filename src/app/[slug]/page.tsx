@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PensionsLueckenRechner } from "@/components/PensionsLueckenRechner";
+import { articleJsonLd, jsonLdString } from "@/lib/jsonld";
 import { RechnerStickyBar } from "@/components/RechnerStickyBar";
 import { GRUPPEN, type Gruppe } from "@/lib/pension-calc";
 import { ALL_POSTS, getPost, formatDate, getRelatedPosts, BOOKING_LINK } from "@/lib/content";
@@ -99,6 +100,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
   return (
     <article data-rechner-bar>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(articleJsonLd(post)) }} />
       <RechnerStickyBar href={einsteiger ? "/checkliste" : hasWidget ? "#pl-rechner" : "/pensionsrechner"} label={einsteiger ? "Kostenlose Checkliste anfordern" : "Pensionslücke berechnen"} hasWidget={hasWidget} />
       {/* Hero: Hintergrundbild + Titel + Untertitel + CTAs, wie im Original */}
       <div className="relative">
