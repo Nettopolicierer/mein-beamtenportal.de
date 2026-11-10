@@ -4,6 +4,7 @@ import { LEGAL_FOOTER_LINES } from "@/lib/email-pension-analysis";
 // Folgemails 1–3 nach der Pensions-PDF (Sie-Form). Jede Mail enthält den Abmelde-Link.
 
 export interface NurtureMailVars {
+  vorname?: string;
   gruppe: string;
   luecke: number;
   nettoPension: number;
@@ -24,13 +25,15 @@ interface Mail {
   cta?: { label: string; url: string };
 }
 
+const greet = (v: NurtureMailVars) => (v.vorname ? `Guten Tag ${v.vorname},` : "Guten Tag,");
+
 function mail(stage: number, v: NurtureMailVars): Mail {
   const abschlagMonat = eur(v.nettoPension * 0.036);
   if (stage === 0) {
     return {
       subject: "Ihre Pensionslücke: Was 3 Stellschrauben in Euro ausmachen",
       paragraphs: [
-        "Guten Tag,",
+        greet(v),
         `vor zwei Tagen haben Sie Ihre Pensionsauswertung für ${v.gruppe} erhalten: Netto-Pension rund ${eur(v.nettoPension)}, Lücke rund ${eur(v.luecke)} pro Monat. Ist die PDF gut angekommen?`,
         "Das Entscheidende: Diese Lücke steht nicht fest. Viele Beamte erfahren erst kurz vor dem Ruhestand, wie stark ihre Pension von Entscheidungen abhängt, die Jahre vorher fallen. Drei Beispiele, was dahintersteckt:",
       ],
@@ -50,7 +53,7 @@ function mail(stage: number, v: NurtureMailVars): Mail {
     return {
       subject: "Der häufigste Fehler bei der Pensionsplanung von Beamten",
       paragraphs: [
-        "Guten Tag,",
+        greet(v),
         "in Gesprächen mit Beamten begegnet mir ein Fehler immer wieder: Die Pension wird mit dem Brutto verglichen. Auf dem Bescheid steht eine Zahl, die gut aussieht. Entscheidend ist aber, was nach Steuern und Krankenversicherung auf dem Konto bleibt.",
         "Drei Dinge werden dabei regelmäßig unterschätzt:",
       ],
@@ -69,7 +72,7 @@ function mail(stage: number, v: NurtureMailVars): Mail {
   return {
     subject: "Individuelle Berechnung: Passt Ihr 3-Töpfe-Plan?",
     paragraphs: [
-      "Guten Tag,",
+      greet(v),
       `in der PDF habe ich Ihnen den 3-Töpfe-Fahrplan vorgestellt. Ob er für Sie passt, hängt von Ihren echten Zahlen ab. Der Rechner liefert nur Richtwerte (bei Ihnen zuletzt: Lücke rund ${eur(v.luecke)} pro Monat). Mit Ihren tatsächlichen Daten wird daraus eine belastbare Zahl.`,
       "Dafür biete ich Ihnen ein kostenloses, unverbindliches Gespräch an (etwa 30 Minuten). Sie gehen danach mit diesen Antworten raus:",
     ],

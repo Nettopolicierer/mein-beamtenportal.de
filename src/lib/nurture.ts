@@ -11,6 +11,7 @@ const TTL_SECONDS = 30 * 24 * 60 * 60;
 
 export interface NurtureLead {
   email: string;
+  vorname?: string;
   gruppe: string;
   luecke: number;
   nettoPension: number;

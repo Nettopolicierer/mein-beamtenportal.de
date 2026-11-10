@@ -52,7 +52,7 @@ export async function GET(request: NextRequest) {
     if (Date.now() - lead.createdAt < NURTURE_DAYS[lead.next] * DAY) continue;
 
     const url = unsubscribeUrl(lead.email);
-    const vars = { gruppe: lead.gruppe, luecke: lead.luecke, nettoPension: lead.nettoPension, unsubscribeUrl: url };
+    const vars = { vorname: lead.vorname, gruppe: lead.gruppe, luecke: lead.luecke, nettoPension: lead.nettoPension, unsubscribeUrl: url };
     const res = await fetch("https://api.mailjet.com/v3.1/send", {
       method: "POST",
       headers: {

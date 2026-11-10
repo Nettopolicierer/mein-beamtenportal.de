@@ -16,7 +16,7 @@ export default function PensionsrechnerPage() {
         Wie viel Pension bleibt Ihnen netto, und wie groß ist die Lücke zu Ihrem heutigen Netto? Geben Sie Besoldungsgruppe,
         Alter und Dienstjahre ein und sehen Sie das Ergebnis sofort. Auf Wunsch erhalten Sie eine PDF-Auswertung per E-Mail.
       </p>
-      <PensionsLueckenRechner />
+      <PensionsLueckenRechner gated />
       <h2 className="font-heading mt-12 mb-3 text-2xl font-bold text-primary">So wird gerechnet</h2>
       <p className="text-mediumdark">
         Der Rechner nutzt den Ruhegehaltssatz von 1,79375 % je Dienstjahr (höchstens 71,75 %), berücksichtigt einen möglichen

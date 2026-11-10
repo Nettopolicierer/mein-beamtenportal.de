@@ -17,7 +17,7 @@ const eur = (n: number) => `${Math.round(n).toLocaleString("de-DE")} €`;
 const fieldClass =
   "h-12 w-full rounded-xl border border-[#E2E8F0] bg-white px-4 text-base outline-none placeholder:text-[#64748B] focus-visible:border-[#1E5FA8]";
 
-export function PensionsLueckenRechner({ defaultGruppe = "A13" }: { defaultGruppe?: Gruppe }) {
+export function PensionsLueckenRechner({ defaultGruppe = "A13", gated = false }: { defaultGruppe?: Gruppe; gated?: boolean }) {
   const [gruppe, setGruppe] = useState<Gruppe>(defaultGruppe);
   const [eigenes, setEigenes] = useState("");
   const [alter, setAlter] = useState(35);
@@ -25,6 +25,7 @@ export function PensionsLueckenRechner({ defaultGruppe = "A13" }: { defaultGrupp
   const [dienstjahre, setDienstjahre] = useState(40);
   const [sparrate, setSparrate] = useState(250);
 
+  const [vorname, setVorname] = useState("");
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState("");
   const [consent, setConsent] = useState(false);
@@ -51,6 +52,7 @@ export function PensionsLueckenRechner({ defaultGruppe = "A13" }: { defaultGrupp
           pensionsalter,
           dienstjahre,
           sparrate,
+          vorname: vorname.trim() || undefined,
           email,
           consent,
           nurtureConsent,
@@ -182,6 +184,7 @@ export function PensionsLueckenRechner({ defaultGruppe = "A13" }: { defaultGrupp
             </span>
             <input type="range" style={{ ["--pct" as string]: pct(sparrate, 50, 500) }} min={50} max={500} step={25} value={sparrate} onChange={(e) => setSparrate(Number(e.target.value))} className="pl-range" />
           </label>
+          {!gated && (
           <div className="mt-3 grid gap-3 text-sm sm:grid-cols-3">
             <div className="rounded-lg bg-[#F8FAFC] p-3">
               <p className="text-xs text-[#64748B]">Steuervorteil pro Jahr (bis ca.)</p>
@@ -199,6 +202,7 @@ export function PensionsLueckenRechner({ defaultGruppe = "A13" }: { defaultGrupp
               <p className="text-xs text-[#64748B]">in heutiger Kaufkraft · deckt {c.lueckeGeschlossenProzent.toFixed(0)} % Ihrer Lücke</p>
             </div>
           </div>
+          )}
           <p className="mt-3 text-xs text-[#64748B]">
             Alle Werte sind Richtwerte einer vereinfachten Modellrechnung, keine Prognose und keine Zusage. Der Steuervorteil
             ist eine Schätzung und hängt von Ihrem persönlichen Steuersatz sowie vom für Beamte gekürzten Höchstbetrag ab.
@@ -206,11 +210,43 @@ export function PensionsLueckenRechner({ defaultGruppe = "A13" }: { defaultGrupp
             als lebenslange Rente aus. Kosten und Steuern auf Erträge sind nicht berücksichtigt. Dies ist keine Steuer- oder
             Rechtsberatung; für Ihre persönliche Situation fragen Sie bitte Ihren Steuerberater.
           </p>
+          {gated && (
+          <div
+            aria-hidden={state !== "success"}
+            className={`mt-4 flex flex-col gap-3 text-sm transition ${state === "success" ? "" : "pointer-events-none select-none"}`}
+            style={state === "success" ? undefined : { filter: "blur(6px)" }}
+          >
+            <div className="rounded-lg bg-[#F8FAFC] p-4">
+              <p className="font-semibold" style={{ color: PRIMARY }}>Topf 1: Basisrente (Schicht 1), Steuerhebel nach § 10 EStG</p>
+              <p className="mt-1 text-[#334155]">
+                Beispiel-Beitrag {eur(sparrate)} pro Monat: Steuervorteil bis ca. {eur(c.steuervorteilJahr)} pro Jahr (Schätzung), netto etwa {eur(c.nettoKostenMonat)} im
+                Monat. Kapital bei Pensionsbeginn rund {eur(c.sparKapital)}, Zusatzrente rund {eur(c.zusatzRente)} pro Monat in heutiger Kaufkraft
+                (deckt {c.lueckeGeschlossenProzent.toFixed(0)} % Ihrer Lücke).
+              </p>
+            </div>
+            <div className="rounded-lg bg-[#F8FAFC] p-4">
+              <p className="font-semibold" style={{ color: PRIMARY }}>Topf 2: Altersvorsorgedepot (Schicht 2)</p>
+              <p className="mt-1 text-[#334155]">
+                Ein kostengünstiges, breit gestreutes Depot kann die Basisrente ergänzen. Ob und in welcher Höhe eine staatliche Förderung für Sie gilt,
+                hängt von den dann geltenden gesetzlichen Regeln und Ihrer persönlichen Situation ab und sollte vor einer Entscheidung geprüft werden.
+                Hier rechnen wir bewusst keinen Betrag.
+              </p>
+            </div>
+            <div className="rounded-lg bg-[#F8FAFC] p-4">
+              <p className="font-semibold" style={{ color: PRIMARY }}>Topf 3: Freies Depot (flexibler Puffer)</p>
+              <p className="mt-1 text-[#334155]">
+                Jederzeit verfügbar, zum Beispiel für einen früheren Ruhestand oder unerwartete Ausgaben. Erträge unterliegen der Kapitalertragsteuer,
+                der Wert kann schwanken und auch fallen. Eine Verteilung auf die drei Töpfe richtet sich nach Ihrer Lage und Ihren Zielen.
+                Hier rechnen wir bewusst keinen Betrag.
+              </p>
+            </div>
+          </div>
+          )}
         </div>
       </div>
 
       {/* Lead-Bereich: bewusst groß und farbig abgesetzt */}
-      <div id="pl-auswertung" className="scroll-mt-24 px-5 py-8 sm:px-8" style={{ background: `linear-gradient(135deg, ${PRIMARY}, #0B4A8F)` }}>
+      <div id="pl-auswertung" className={`scroll-mt-24 px-5 py-8 sm:px-8 ${gated && state !== "success" ? "relative z-10 mx-3 -mt-40 rounded-2xl shadow-2xl sm:mx-8" : ""}`} style={{ background: `linear-gradient(135deg, ${PRIMARY}, #0B4A8F)` }}>
         {state === "success" ? (
           <div className="flex items-start gap-3 text-white">
             <CheckCircle2 className="mt-0.5 size-7 shrink-0" />
@@ -226,9 +262,12 @@ export function PensionsLueckenRechner({ defaultGruppe = "A13" }: { defaultGrupp
           <form onSubmit={submit} className="mx-auto flex max-w-xl flex-col gap-4 text-white">
             <p className="text-xs font-semibold tracking-widest uppercase text-white/70">Kostenlos · als PDF per E-Mail</p>
             <h3 className="font-heading text-2xl font-bold sm:text-3xl">
-              Ihre Werte als Auswertung: 3-Töpfe-Fahrplan &amp; Steueroptimierung für Beamte
+              {gated ? "Gesamte Auswertung & Fahrplan freischalten" : "Ihre Werte als Auswertung: 3-Töpfe-Fahrplan & Steueroptimierung für Beamte"}
             </h3>
-            <ul className="flex flex-col gap-2 text-sm text-white/90">
+            {gated && (
+              <p className="text-sm text-white/90">Erhalten Sie Ihre 4-seitige PDF-Analyse mit Ihrer persönlichen Verteilung per E-Mail.</p>
+            )}
+            <ul className={`flex flex-col gap-2 text-sm text-white/90 ${gated ? "hidden" : ""}`}>
               {[
                 "Ihre persönliche Netto-Pension und Lücke, Schritt für Schritt erklärt",
                 "3-Töpfe-Fahrplan: Basisrente, flexibler Kapitalaufbau, Sicherheitsreserve",
@@ -241,6 +280,20 @@ export function PensionsLueckenRechner({ defaultGruppe = "A13" }: { defaultGrupp
                 </li>
               ))}
             </ul>
+            {gated && (
+              <input
+                type="text"
+                required
+                autoComplete="given-name"
+                maxLength={40}
+                aria-label="Vorname"
+                placeholder="Ihr Vorname"
+                value={vorname}
+                onChange={(e) => setVorname(e.target.value)}
+                className="h-14 w-full rounded-xl border-0 bg-white px-4 text-base outline-none placeholder:text-[#64748B]"
+                style={{ color: PRIMARY }}
+              />
+            )}
             <input
               type="email"
               required
@@ -259,7 +312,7 @@ export function PensionsLueckenRechner({ defaultGruppe = "A13" }: { defaultGrupp
               style={{ backgroundColor: "#FFFFFF", color: PRIMARY }}
               className="rounded-xl px-6 py-4 text-center text-lg font-bold shadow-lg transition hover:opacity-90 disabled:opacity-60"
             >
-              {state === "loading" ? "Wird gesendet…" : "Auswertung kostenlos anfordern"}
+              {state === "loading" ? "Wird gesendet…" : gated ? "Auswertung jetzt freischalten" : "Auswertung kostenlos anfordern"}
             </button>
             <label className="flex items-start gap-2 text-xs text-white/80">
               <input type="checkbox" required checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5 size-4 shrink-0" />

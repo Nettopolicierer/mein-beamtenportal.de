@@ -4,6 +4,7 @@ import { BOOKING_LINK } from "@/lib/content";
 // Wird von /api/lead-capture mit angehängter PDF-Auswertung (src/lib/pension-pdf.ts) versendet.
 
 export interface PensionAnalysisMailVars {
+  vorname?: string;
   anrede?: "Herr" | "Frau" | "";
   nachname?: string;
   besoldungsgruppe?: string; // z. B. "A13"
@@ -24,7 +25,8 @@ const eur = (n: number) => `${Math.round(n).toLocaleString("de-DE")} €`;
 
 function greeting(v: PensionAnalysisMailVars) {
   const name = (v.nachname ?? "").trim();
-  return v.anrede && name ? `Guten Tag ${v.anrede} ${name},` : "Guten Tag,";
+  if (v.anrede && name) return `Guten Tag ${v.anrede} ${name},`;
+  return v.vorname ? `Guten Tag ${v.vorname},` : "Guten Tag,";
 }
 
 export function pensionAnalysisSubject(v: PensionAnalysisMailVars = {}) {

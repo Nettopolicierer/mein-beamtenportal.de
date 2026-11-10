@@ -21,6 +21,7 @@ export async function POST(request: NextRequest) {
   if (clean(body.website)) return NextResponse.json({ success: true }); // Honeypot
 
   const email = clean(body.email);
+  const vorname = clean(body.vorname, 40).replace(/[^\p{L}\s'-]/gu, "").trim();
   const gruppe = (GRUPPEN as string[]).includes(body.besoldungsgruppe) ? (body.besoldungsgruppe as Gruppe) : null;
   const alter = num(body.alter, 18, 70);
   const pensionsalter = num(body.pensionsalter, 60, 70);
@@ -70,6 +71,7 @@ export async function POST(request: NextRequest) {
   }
 
   const zeilen = [
+    `Vorname: ${vorname || "-"}`,
     `E-Mail: ${email}`,
     `Besoldungsgruppe: ${gruppe}${eigenesBrutto ? ` (eigene Bezüge: ${eigenesBrutto} € brutto)` : ""}`,
     `Alter heute: ${alter}`,
@@ -81,7 +83,7 @@ export async function POST(request: NextRequest) {
     `Steuervorteil (Richtwert): ${ergebnis.steuervorteilJahr} € / Jahr`,
   ];
 
-  const mailVars = { besoldungsgruppe: gruppe, anhang: true, ergebnis };
+  const mailVars = { vorname, besoldungsgruppe: gruppe, anhang: true, ergebnis };
   const messages = [
     {
       From: { Email: senderEmail, Name: "Mein Beamtenportal Website" },
@@ -116,7 +118,7 @@ export async function POST(request: NextRequest) {
   // Folgemails nur mit separater, optionaler Einwilligung. Ein Fehler hier darf den Versand nicht kippen.
   if (body.nurtureConsent === true && redisConfigured()) {
     try {
-      await nurtureAdd({ email, gruppe, luecke: ergebnis.luecke, nettoPension: ergebnis.nettoPension });
+      await nurtureAdd({ email, vorname, gruppe, luecke: ergebnis.luecke, nettoPension: ergebnis.nettoPension });
     } catch (err) {
       console.error("Nurture-Eintrag fehlgeschlagen", err);
     }
