@@ -56,6 +56,7 @@ export function PostList({ posts }: { posts: Post[] }) {
           <Link
             key={post.slug}
             href={`/${post.slug}`}
+            prefetch={false}
             className="group flex flex-col gap-3 rounded-2xl border border-mediumlight/40 bg-base p-6 transition-all hover:border-primary/30"
           >
             <div className="flex items-center gap-2 text-xs text-mediumdark">

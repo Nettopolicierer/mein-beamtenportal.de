@@ -322,6 +322,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                 <Link
                   key={r.slug}
                   href={`/${r.slug}`}
+                  prefetch={false}
                   className="group flex flex-col gap-3 rounded-2xl border border-mediumlight/40 bg-white p-6 transition-colors hover:border-primary/30"
                 >
                   <span className="text-xs text-mediumdark">{formatDate(r.date)}</span>

@@ -193,6 +193,7 @@ export default function Home() {
             <Reveal key={post.slug} delay={i * 80}>
               <Link
                 href={`/${post.slug}`}
+                prefetch={false}
                 className="group flex flex-col gap-3 rounded-2xl border border-mediumlight/40 bg-white p-6 transition-colors hover:border-primary/30"
               >
                 <div className="flex items-center gap-2 text-xs text-mediumdark">
