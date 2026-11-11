@@ -185,11 +185,13 @@ export function PensionsLueckenRechner({ defaultGruppe = "A13", gated = false }:
           className="mt-5 flex flex-col items-center justify-center gap-0.5 rounded-xl px-6 py-5 text-center shadow-md"
           style={{ backgroundColor: ACCENT, color: "#FFFFFF" }}
         >
-          <span className="flex items-center gap-2 text-lg font-bold">
-            <FileText className="size-5" />
-            Meine persönliche Auswertung als PDF anfordern
+          <span className="text-lg leading-snug font-bold sm:text-xl">
+            <FileText className="mr-2 inline size-5 align-[-3px]" />
+            Meine Auswertung als PDF anfordern
           </span>
-          <span className="text-xs text-white/85">Kostenlos · 4 Seiten mit Rechenweg und 3-Töpfe-Fahrplan · per E-Mail</span>
+          <span className="text-xs text-white/85">
+            Kostenlos · 4 Seiten<span className="hidden sm:inline"> mit Rechenweg und 3-Töpfe-Fahrplan</span> · per E-Mail
+          </span>
         </a>
 
         <div className="mt-6 rounded-xl border border-[#E2E8F0] p-5">
