@@ -20,7 +20,7 @@ export function LogoLink({
   const pathname = usePathname();
 
   return (
-    <Link
+    <Link prefetch={false}
       href="/"
       aria-label="Zur Startseite"
       draggable={false}

@@ -125,25 +125,25 @@ export default function RootLayout({
               </div>
               <div className="flex flex-col gap-2 text-sm">
                 <p className="mb-1 font-semibold text-primary">Navigation</p>
-                <Link href="/ueber-uns" className="text-mediumdark hover:text-primary">
+                <Link prefetch={false} href="/ueber-uns" className="text-mediumdark hover:text-primary">
                   Über Mich
                 </Link>
-                <Link href="/ratgeber" className="text-mediumdark hover:text-primary">
+                <Link prefetch={false} href="/ratgeber" className="text-mediumdark hover:text-primary">
                   Ratgeber
                 </Link>
-                <Link href="/webinar" className="text-mediumdark hover:text-primary">
+                <Link prefetch={false} href="/webinar" className="text-mediumdark hover:text-primary">
                   Webinar
                 </Link>
-                <Link href="/kontakt" className="text-mediumdark hover:text-primary">
+                <Link prefetch={false} href="/kontakt" className="text-mediumdark hover:text-primary">
                   Kontakt
                 </Link>
               </div>
               <div className="flex flex-col gap-2 text-sm">
                 <p className="mb-1 font-semibold text-primary">Kontakt</p>
-                <Link href="mailto:kontakt@mein-beamtenportal.de" className="text-mediumdark hover:text-primary">
+                <Link prefetch={false} href="mailto:kontakt@mein-beamtenportal.de" className="text-mediumdark hover:text-primary">
                   kontakt@mein-beamtenportal.de
                 </Link>
-                <Link href="tel:+4917692609041" className="text-mediumdark hover:text-primary">
+                <Link prefetch={false} href="tel:+4917692609041" className="text-mediumdark hover:text-primary">
                   +49 176 92609041
                 </Link>
               </div>
@@ -151,10 +151,10 @@ export default function RootLayout({
             <div className="mt-10 flex flex-col gap-4 border-t border-mediumlight/40 pt-6 text-sm text-mediumdark sm:flex-row sm:items-center sm:justify-between">
               <p>© {new Date().getFullYear()} Mein Beamtenportal</p>
               <div className="flex gap-5">
-                <Link href="/impressum" className="hover:text-primary">
+                <Link prefetch={false} href="/impressum" className="hover:text-primary">
                   Impressum
                 </Link>
-                <Link href="/datenschutz" className="hover:text-primary">
+                <Link prefetch={false} href="/datenschutz" className="hover:text-primary">
                   Datenschutz
                 </Link>
               </div>

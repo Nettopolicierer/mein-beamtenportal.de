@@ -29,13 +29,13 @@ export function HeaderRight({
     <>
       <nav className="hidden items-center gap-8 text-sm font-medium tracking-wide text-primary uppercase sm:flex">
         {nav.map((item) => (
-          <Link key={item.href} href={item.href} className="hover:opacity-70">
+          <Link prefetch={false} key={item.href} href={item.href} className="hover:opacity-70">
             {item.label}
           </Link>
         ))}
       </nav>
       <div className="flex shrink-0 items-center gap-2">
-        <Link
+        <Link prefetch={false}
           href={bookingLink}
           target="_blank"
           rel="noopener noreferrer"

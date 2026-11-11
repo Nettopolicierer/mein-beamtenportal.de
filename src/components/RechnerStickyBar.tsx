@@ -30,7 +30,7 @@ export function RechnerStickyBar({ href, label, hasWidget }: { href: string; lab
   if (!scrolled || widgetVisible) return null;
   return (
     <div data-rechner-bar-el className="fixed inset-x-0 bottom-0 z-40 border-t border-[#C9DCF0] bg-white/95 px-4 py-3 shadow-[0_-4px_16px_rgba(15,23,42,0.08)] backdrop-blur md:hidden">
-      <Link
+      <Link prefetch={false}
         href={href}
         style={{ backgroundColor: "#1E5FA8", color: "#FFFFFF" }}
         className="block rounded-xl px-4 py-3 text-center text-base font-bold"

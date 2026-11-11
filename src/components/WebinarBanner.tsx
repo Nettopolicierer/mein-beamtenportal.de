@@ -29,7 +29,7 @@ export function WebinarBanner() {
 
   return (
     <div className="relative flex w-full items-center justify-center bg-primary px-10 py-2 text-center text-sm text-white">
-      <Link href="/webinar" className="group flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1">
+      <Link prefetch={false} href="/webinar" className="group flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1">
         <span className="font-medium">
           Kostenfreies Live-Webinar: {WEBINAR_TITLE} · {label}
         </span>

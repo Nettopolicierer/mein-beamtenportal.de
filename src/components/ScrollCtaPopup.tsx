@@ -123,7 +123,7 @@ export function ScrollCtaPopup() {
           <p className="mb-5 text-sm font-medium text-primary">
             {dateDisplay} · {timeDisplay} · 45 Min. · online
           </p>
-          <Link
+          <Link prefetch={false}
             href="/webinar"
             onClick={dismiss}
             className="block rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-white hover:bg-primary/90"
@@ -150,7 +150,7 @@ export function ScrollCtaPopup() {
         <p className="mb-4 text-sm text-white/80">
           In einem kostenfreien Erstgespräch klären wir, wo Sie stehen und was sich lohnt.
         </p>
-        <Link
+        <Link prefetch={false}
           href={BOOKING_LINK}
           target="_blank"
           rel="noopener noreferrer"

@@ -36,7 +36,7 @@ export function MobileNav() {
           <div className="absolute inset-x-3 top-[calc(100%+0.5rem)] z-40 overflow-hidden rounded-2xl border border-mediumlight/40 bg-white shadow-xl shadow-primary/10 sm:hidden">
             <nav className="flex flex-col divide-y divide-mediumlight/30 py-2">
               {NAV.map((item) => (
-                <Link
+                <Link prefetch={false}
                   key={item.href}
                   href={item.href}
                   onClick={() => setOpen(false)}
