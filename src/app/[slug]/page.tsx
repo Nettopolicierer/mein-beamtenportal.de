@@ -192,7 +192,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                 <div dangerouslySetInnerHTML={{ __html: before }} />
                 {after !== undefined && (
                   <>
-                    <PensionsLueckenRechner defaultGruppe={defaultGruppeFor(post.slug)} />
+                    <PensionsLueckenRechner defaultGruppe={defaultGruppeFor(post.slug)} gated />
                     <div dangerouslySetInnerHTML={{ __html: after }} />
                   </>
                 )}
