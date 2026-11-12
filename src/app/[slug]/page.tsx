@@ -53,6 +53,33 @@ function isEinsteiger(post: { slug: string; title: string; categories: string[] 
 // Hinweiskarte vor der 2. Zwischenüberschrift (als HTML-String wie der BU-Check-Hinweis, damit verschachtelte
 // Wrapper-Divs der migrierten Artikel intakt bleiben). Einsteiger-Artikel führen zur Checkliste, alle anderen zum
 // Pensionsrechner (Artikel mit eingebettetem Rechner per Anker, sonst Seite /pensionsrechner).
+// Gleicht die <div>-Tags eines migrierten Artikels aus (überzählige Schließer entfernen, offene am Ende schließen).
+// Unausgeglichenes HTML lässt den Browser Geschwister-Elemente von React in den Artikeltext "einsaugen" (Hydration-Fehler).
+function fixDivs(html: string) {
+  let depth = 0;
+  const out = html.replace(/<div[^>]*>|<\/div>/g, (m) => {
+    if (m === "</div>") return depth > 0 ? (depth--, m) : "";
+    depth++;
+    return m;
+  });
+  return out + "</div>".repeat(depth);
+}
+
+// Teilt den Artikeltext am Marker und gleicht dabei offene <div>-Wrapper aus (vorne schließen, hinten wieder öffnen).
+// Sonst "verschluckt" der HTML-Parser den Rechner als Kind eines offenen Wrappers, und React meldet einen Hydration-Fehler.
+function splitBalanced(html: string, marker: string): [string, string | undefined] {
+  const i = html.indexOf(marker);
+  if (i < 0) return [html, undefined];
+  const before = html.slice(0, i);
+  const after = html.slice(i + marker.length);
+  const open: string[] = [];
+  for (const m of before.matchAll(/<div[^>]*>|<\/div>/g)) {
+    if (m[0] === "</div>") open.pop();
+    else open.push(m[0]);
+  }
+  return [before + "</div>".repeat(open.length), open.join("") + after];
+}
+
 // Setzt `snippet` vor die erste Zwischenüberschrift ab Index `from`, vor der kein gestalteter Wrapper (div mit class,
 // z. B. "summary-box" oder "icon-row") offen ist; sonst würde der Block mitten in einem Layout-Block landen.
 function insertBeforeSafeH2(html: string, snippet: string, from: number) {
@@ -198,8 +225,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           )}
           {(() => {
             // Marker <!--LEAD--> im Artikeltext: hier sitzt der Pensions-Lückenrechner.
-            const body = hasWidget ? withBuCheckCta(post) : withHinweisCard(withBuCheckCta(post), einsteiger ? "checkliste" : "rechner", "/pensionsrechner");
-            const [before, after] = body.split(LEAD_MARKER);
+            const body = fixDivs(hasWidget ? withBuCheckCta(post) : withHinweisCard(withBuCheckCta(post), einsteiger ? "checkliste" : "rechner", "/pensionsrechner"));
+            const [before, after] = splitBalanced(body, LEAD_MARKER);
             return (
               <>
                 <div dangerouslySetInnerHTML={{ __html: before }} />
