@@ -62,6 +62,8 @@ export const metadata: Metadata = {
   description:
     "Beihilfe, Pension und PKV für Beamte verständlich erklärt. Unabhängige Beratung für Beamtinnen, Beamte, Referendare und Anwärter im öffentlichen Dienst.",
   alternates: { canonical: BASE_URL },
+  // Google Search Console: Bestätigung der Inhaberschaft per Meta-Tag
+  verification: { google: "krCOJxhHszVfsdcxxTF5o3RlMP2kG98jgxRr1VhHX2Y" },
 };
 
 // maximumScale verhindert Pinch-Zoom, damit auf Mobile kein horizontaler
