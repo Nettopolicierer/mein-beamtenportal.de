@@ -36,9 +36,7 @@ function withBuCheckCta(post: { slug: string; title: string; description?: strin
     CTA_TOPIC.test(`${post.title} ${post.slug} ${post.description ?? ""}`);
   if (!relevant) return post.html;
   const box = `<div class="not-prose my-8 rounded-2xl border border-mediumlight/60 bg-base p-6"><p class="font-heading mb-1 text-lg font-bold text-primary">Und wenn Sie vor der Pension dienstunfähig werden?</p><p class="mb-4 text-sm text-mediumdark">Bei vorzeitiger Dienstunfähigkeit fällt die Versorgung oft deutlich niedriger aus. Machen Sie den kostenfreien BU-Check in einer Minute.</p><a href="/bu-check?src=${encodeURIComponent(post.slug)}" class="inline-block rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary/90">Kostenfreien BU-Check starten</a></div>`;
-  const headings = [...post.html.matchAll(/<h2[\s>]/g)];
-  const at = headings[2]?.index;
-  return at === undefined ? post.html + box : post.html.slice(0, at) + box + post.html.slice(at);
+  return insertBeforeSafeH2(post.html, box, 2) ?? post.html + box;
 }
 
 // Hinweiskarte zum Pensionsrechner vor der 2. Zwischenüberschrift (als HTML-String wie der BU-Check-Hinweis,
@@ -55,6 +53,22 @@ function isEinsteiger(post: { slug: string; title: string; categories: string[] 
 // Hinweiskarte vor der 2. Zwischenüberschrift (als HTML-String wie der BU-Check-Hinweis, damit verschachtelte
 // Wrapper-Divs der migrierten Artikel intakt bleiben). Einsteiger-Artikel führen zur Checkliste, alle anderen zum
 // Pensionsrechner (Artikel mit eingebettetem Rechner per Anker, sonst Seite /pensionsrechner).
+// Setzt `snippet` vor die erste Zwischenüberschrift ab Index `from`, vor der kein gestalteter Wrapper (div mit class,
+// z. B. "summary-box" oder "icon-row") offen ist; sonst würde der Block mitten in einem Layout-Block landen.
+function insertBeforeSafeH2(html: string, snippet: string, from: number) {
+  const tag = /<div([^>]*)>|<\/div>/g;
+  const heads = [...html.matchAll(/<h2[\s>]/g)].slice(from, from + 7);
+  for (const h of heads) {
+    const open: boolean[] = [];
+    for (const m of html.slice(0, h.index).matchAll(tag)) {
+      if (m[0] === "</div>") open.pop();
+      else open.push(/class\s*=/.test(m[1]));
+    }
+    if (!open.some(Boolean)) return html.slice(0, h.index) + snippet + html.slice(h.index);
+  }
+  return null;
+}
+
 function withHinweisCard(html: string, mode: "checkliste" | "rechner", rechnerHref: string) {
   const btn = (href: string, label: string) =>
     `<a href="${href}" class="inline-block rounded-lg px-5 py-2.5 text-sm font-semibold" style="background:#1E5FA8;color:#FFFFFF;text-decoration:none">${label}</a>`;
@@ -63,8 +77,7 @@ function withHinweisCard(html: string, mode: "checkliste" | "rechner", rechnerHr
       ? { h: "Gut abgesichert in den Dienst starten", t: "Die 360°-Beamten-Versorgungs-Checkliste: Beihilfe, PKV, Dienstunfähigkeit und Vorsorge auf zwei Seiten. Kostenlos als PDF.", b: btn("/checkliste", "Kostenlose Checkliste anfordern") }
       : { h: "Wie groß ist Ihre Pensionslücke?", t: "Berechnen Sie in einer Minute, was Ihnen im Ruhestand netto fehlt. Kostenlos, auf Wunsch mit PDF-Auswertung.", b: btn(rechnerHref, "Pensionslücke berechnen") };
   const card = `<div class="not-prose my-8 rounded-2xl border p-6" style="border-color:#C9DCF0;background:#EAF2FB"><p class="font-heading mb-1 text-lg font-bold" style="color:#002855">${head.h}</p><p class="mb-4 text-sm" style="color:#334155">${head.t}</p>${head.b}</div>`;
-  const at = [...html.matchAll(/<h2[\s>]/g)][1]?.index;
-  return at === undefined ? html : html.slice(0, at) + card + html.slice(at);
+  return insertBeforeSafeH2(html, card, 1) ?? html;
 }
 
 export function generateStaticParams() {
