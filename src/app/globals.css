@@ -302,7 +302,7 @@ h4,
   z-index: -1;
 }
 
-/* "Team"-Box ("Wir sind ein Team unabhängiger Finanzberater..."): im
+/* "Team"-Box ("Wir sind ein Team ungebundener Finanzberater..."): im
    Original ein Navy-Kasten mit Bild links, Text rechts. */
 .prose .team-box {
   display: flex;

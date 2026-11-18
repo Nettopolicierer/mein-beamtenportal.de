@@ -282,7 +282,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
               <div>
                 <h2>Über mich</h2>
                 <p>
-                  Unabhängiger Finanzberater mit Schwerpunkt auf Beamte, Referendare und Anwärter im
+                  Ungebundener Finanzberater mit Schwerpunkt auf Beamte, Referendare und Anwärter im
                   öffentlichen Dienst. Seit 2019 begleite ich Sie bei Beihilfe, PKV, Dienstunfähigkeit
                   und Altersvorsorge – mit über 250 Partnergesellschaften zur Auswahl.
                 </p>

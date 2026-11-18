@@ -224,14 +224,14 @@ export async function buildChecklistPdf(): Promise<Uint8Array> {
   const bw = ctx.bold.widthOfTextAtSize(label, 9.5) + 32;
   roundRect(p, M + (CW - bw) / 2, y - 50, bw, 22, 5, BLUE);
   p.drawText(label, { x: M + (CW - bw) / 2 + 16, y: y - 64, size: 9.5, font: ctx.bold, color: WHITE });
-  c("100 % unabhängig  ·  Spezialisiert auf Beamte  ·  Unverbindlich und digital", 8.5, y - 82, true, BLUE);
+  c("Ungebunden  ·  Spezialisiert auf Beamte  ·  Unverbindlich und digital", 8.5, y - 82, true, BLUE);
   y -= gh + 12;
 
   text(p, ctx, "Impressum und Registerangaben:", M, y, 8, { bold: true, color: MUTED });
   y -= 11;
   [
     "Mein Beamtenportal, Inhaber: Albert Sibert · Gämsenbergstraße 22 · 71640 Ludwigsburg · kontakt@albert-sibert.de · www.mein-beamtenportal.de",
-    "Unabhängiger Finanzberater und Versicherungsvertreter mit Erlaubnis nach § 34d Abs. 1 GewO (Reg.-Nr. D-4EHE-G249E-13) und Finanzanlagenvermittler nach § 34f Abs. 1 GewO · Aufsicht: IHK Region Stuttgart · Schlichtung: Versicherungsombudsmann e.V.",
+    "Ungebundener Finanzberater und Versicherungsvertreter mit Erlaubnis nach § 34d Abs. 1 GewO (Reg.-Nr. D-4EHE-G249E-13) und Finanzanlagenvermittler nach § 34f Abs. 1 GewO · Aufsicht: IHK Region Stuttgart · Schlichtung: Versicherungsombudsmann e.V.",
     "Diese Checkliste dient der allgemeinen Information und ersetzt keine individuelle Beratung. Regelungen können je nach Dienstherr abweichen.",
   ].forEach((l) => {
     y = text(p, ctx, l, M, y, 7.5, { maxW: CW, color: MUTED, lead: 10 });

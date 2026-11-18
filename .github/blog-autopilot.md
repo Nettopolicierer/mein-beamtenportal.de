@@ -355,7 +355,7 @@ Tabellen/Box-Syntax):
    `icon-row`/`<img>` davor einbauen — die kleinen SVG-Icons stammen aus dem WordPress-
    Altbestand, für neue Artikel gibt es keine passenden Icon-Dateien.)
    Direkt danach der **erste CTA-Moment** als kurzer Satz (kein Button, siehe CTA-Regeln oben).
-3. `<div class="team-box"><img alt="Albert Sibert" class="profile-photo" src="/albert-portrait.webp"/><div><p>Ich bin Albert Sibert, unabhängiger Finanzberater mit Schwerpunkt auf Beamte, Referendare und Anwärter. Seit 2019 begleite ich Sie bei Beihilfe, PKV, BU und Altersvorsorge – mit über 250 Partnergesellschaften statt nur einem Produkt.</p></div></div>`
+3. `<div class="team-box"><img alt="Albert Sibert" class="profile-photo" src="/albert-portrait.webp"/><div><p>Ich bin Albert Sibert, ungebundener Finanzberater mit Schwerpunkt auf Beamte, Referendare und Anwärter. Seit 2019 begleite ich Sie bei Beihilfe, PKV, BU und Altersvorsorge – mit über 250 Partnergesellschaften statt nur einem Produkt.</p></div></div>`
    — wortgleich übernehmen, nicht umformulieren.
 4. **5–7 `<h2 class="blue-background" id="abschnitt-N">`-Abschnitte** mit
    `<p>`/`<ul>`/`<table>`-Inhalt, `id` fortlaufend `abschnitt-1`, `abschnitt-2` usw.: Problem →
