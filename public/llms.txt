@@ -10,6 +10,14 @@ Alle Zahlen sind Richtwerte nach Bundesrecht (BeamtVG, BBhV, BeamtStG, EStG). Di
 - [Ratgeber](https://www.mein-beamtenportal.de/ratgeber): über 170 Artikel zu Pension (nach Besoldungsgruppe und Bundesland), Beihilfe, PKV, Anwartschaft, Dienstunfähigkeit und Berufsunfähigkeit.
 - [Webinar](https://www.mein-beamtenportal.de/webinar): Einführung in Beihilfe, Pension und Absicherung.
 
+## Schwerpunktthemen
+- [Dienstunfähigkeitsversicherung für Beamte](https://www.mein-beamtenportal.de/dienstunfaehigkeitsversicherung): Leitfaden zu echter Dienstunfähigkeitsklausel, Kosten, Anwärtern und Beamten auf Probe.
+- [Echte Dienstunfähigkeitsklausel](https://www.mein-beamtenportal.de/echte-dienstunfaehigkeitsklausel): Unterschied zwischen echter und unechter Klausel.
+- [Private Krankenversicherung für Beamte](https://www.mein-beamtenportal.de/pkv-fuer-beamte): Beihilfe, Tarifkriterien, Voraussetzungen.
+- [Pauschale Beihilfe](https://www.mein-beamtenportal.de/pauschale-beihilfe): GKV oder PKV bei der Verbeamtung, Länderübersicht.
+- [Heilfürsorge Polizei](https://www.mein-beamtenportal.de/heilfuersorge-polizei) und [Polizeidienstunfähigkeit](https://www.mein-beamtenportal.de/polizeidienstunfaehigkeit).
+- [PKV für Referendare](https://www.mein-beamtenportal.de/pkv-fuer-referendare) und [Übersicht nach Bundesland](https://www.mein-beamtenportal.de/pkv-referendare-bundeslaender).
+
 ## Methodik
 - Pension: Ruhegehaltsfähige Dienstbezüge x Ruhegehaltssatz, danach Abzug von Steuern, Pflege- und Krankenversicherung. Pension in heutiger Kaufkraft, Zusatzrente mit Modellrendite 5 % und 2 % Inflation (keine Prognose).
 - Rechtsgrundlagen: BeamtVG, BBhV, BeamtStG, § 19 und § 10 EStG, VVG. Länderrecht kann abweichen.

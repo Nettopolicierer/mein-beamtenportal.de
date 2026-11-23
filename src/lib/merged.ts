@@ -22,4 +22,5 @@ export const MERGED: Record<string, string> = {
   "beste-pkv-fuer-referendare-niedersachen": "beihilfe-fuer-anwaerter-niedersachsen",
   "beste-pkv-fuer-referendare-nrw": "pkv-referendare-nordrhein-westfalen",
   "beste-pkv-fuer-referendare-brandenburg-fuer-2026-ihr-test": "pkv-fuer-referendare",
+  "krankenversicherung-fuer-beamtenanwaerter": "pkv-fuer-beamtenanwaerter",
 };

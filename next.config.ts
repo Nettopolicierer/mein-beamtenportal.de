@@ -17,7 +17,7 @@ const nextConfig: NextConfig = {
       { source: "/verbeamtung-auf-probe-finanzen", destination: "/verbeamtung-auf-probe-finanzfehler", permanent: true },
       { source: "/ratgeber/bu/berufsunfaehigkeitsversicherung-fuer-beamte-sinnvoll", destination: "/bu-fuer-beamte", permanent: true },
       { source: "/ratgeber/beamte/abzuege-pension-beamte", destination: "/wie-hoch-ist-die-pension-bei-a13-netto", permanent: true },
-      { source: "/ratgeber/pkv/beihilfe-einkommensgrenze-brutto-oder-netto", destination: "/beihilfe-fuer-ehepartner", permanent: true },
+      { source: "/ratgeber/pkv/beihilfe-einkommensgrenze-brutto-oder-netto", destination: "/beihilfe-beamte", permanent: true },
       { source: "/nettovorteil-beamte", destination: "/ratgeber", permanent: true },
       // Zusammengelegte Artikel (siehe src/lib/merged.ts).
       ...Object.entries(MERGED).map(([source, destination]) => ({ source: `/${source}`, destination: `/${destination}`, permanent: true })),
