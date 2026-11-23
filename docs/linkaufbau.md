@@ -33,3 +33,52 @@ Freundliche Grüße
 ## Weitere Schritte (manuell)
 - Bing Webmaster Tools: Domain bestätigen und Sitemap einreichen (Voraussetzung für Zitate in Bing/Copilot).
 - Google-Unternehmensprofil anlegen und Bewertungen aus ProvenExpert vorsichtig auf Google lenken.
+
+---
+
+## Konkrete Startliste (Stand 23.11.2026)
+
+### Welle 1: dbb-Landesbünde (Quelle: https://www.dbb.de/der-dbb/landesbuende.html)
+Kontaktdaten stehen auf den jeweiligen Seiten (Impressum oder Kontakt). Beginne mit den Ländern, für die du schon Länderseiten hast.
+
+| Land | Website | Passende Seite von dir |
+|---|---|---|
+| Nordrhein-Westfalen | www.dbb-nrw.de | /pkv-referendare-nordrhein-westfalen |
+| Baden-Württemberg | www.bbw.dbb.de | /pkv-referendare-baden-wuerttemberg |
+| Bayern | www.bbb-bayern.de | /beihilfe-fuer-anwaerter-bayern |
+| Hessen | www.dbb-hessen.de | /beihilfe-fuer-anwaerter-hessen |
+| Niedersachsen | www.dbb-niedersachsen.de | /beihilfe-fuer-anwaerter-niedersachsen |
+| Rheinland-Pfalz | www.dbb-rlp.de | /beihilfe-fuer-anwaerter-rheinland-pfalz |
+| Sachsen | www.sbb.de | /pkv-referendare-sachsen |
+| Hamburg | www.dbb-hamburg.de | /pkv-referendare-hamburg |
+| Berlin | www.dbb.berlin | /pkv-referendare-berlin |
+| Saarland | www.dbb-saar.de | /pkv-referendare-saarland |
+| Schleswig-Holstein | www.dbb-sh.de | /pkv-referendare-schleswig-holstein |
+| Sachsen-Anhalt | www.sachsen-anhalt.dbb.de | /pkv-referendare-sachsen-anhalt |
+| Thüringen | www.thueringer-beamtenbund.de | /pkv-referendare-thueringen |
+| Mecklenburg-Vorpommern | www.dbb-mv.de | /beihilfe-fuer-anwaerter-mecklenburg-vorpommern |
+| Bremen | www.dbb-bremen.de | /pkv-referendare-bremen |
+| Brandenburg | www.dbb-brandenburg.de | /pkv-fuer-referendare |
+
+Tipp: Zuerst den Landesbund anschreiben, für den du eine eigene Länderseite hast. Dort lässt sich der Link am besten begründen ("Rechtsgrundlagen für Ihr Land").
+
+### Welle 2: Lehrerbildung und Hochschulen
+- Zentren für Lehrerbildung und Prüfungsämter, die Infoblätter zu Versicherungen im Referendariat veröffentlichen (Beispiel: Universität Münster). Biete an, auf eine neutrale Länderübersicht zu verweisen.
+- Fachschaften Lehramt und Studienseminare: Kontakt über die Websites der Hochschulen bzw. Seminare.
+
+### Welle 3: Gewerkschaften und Fachverbände
+- GEW-Landesverbände, Philologenverband, VBE, DPolG-Landesverbände (für /heilfuersorge-polizei und /polizeidienstunfaehigkeit).
+- Gewerkschaften haben teils Kooperationen mit Versicherern. Rechne mit Absagen und frage dann nach einem reinen Informationslink.
+
+### Community (nur nach Regeln)
+- Finanztip-Forum "Kranken & Pflege" und Expertenforen: nur beantworten, wo du fachlich helfen kannst. Links dort sind oft nofollow und Werbung ist meist nicht erlaubt. Wirkung eher gering.
+
+## Tracking (Tabelle selbst pflegen)
+| Datum | Empfänger | Angebot | Antwort | Link gesetzt (URL) |
+|---|---|---|---|---|
+
+## Wochenplan
+- **Woche 1:** Google-Unternehmensprofil anlegen, Bing Webmaster Tools (Import aus Search Console), 5 Landesbünde anschreiben (NRW, BW, Bayern, Hessen, Niedersachsen).
+- **Woche 2:** weitere 5 Landesbünde, 3 Zentren für Lehrerbildung.
+- **Woche 3:** Nachfassen bei Nicht-Antworten, GEW und Philologenverband.
+- **Danach:** pro Monat 1 Gastbeitrag oder Interview.
