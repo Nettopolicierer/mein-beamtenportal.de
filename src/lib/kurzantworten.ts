@@ -1,5 +1,15 @@
 // Kurze Direktantworten (ca. 50 Wörter) für ausgewählte Artikel. Nur geprüfte Allgemeinaussagen nach Bundesrecht.
 export const KURZANTWORTEN: Record<string, string> = {
+  "dienstunfaehigkeitsversicherung":
+    "Die Dienstunfähigkeitsversicherung zahlt Beamten eine vereinbarte Monatsrente, wenn der Dienstherr sie wegen Dienstunfähigkeit (§ 26 BeamtStG) in den Ruhestand versetzt oder entlässt. Sie schließt die Lücke zur Versorgung, die im Bund vor fünf Dienstjahren meist fehlt und danach deutlich unter dem Gehalt liegt.",
+  "echte-dienstunfaehigkeitsklausel":
+    "Bei einer echten Dienstunfähigkeitsklausel erkennt der Versicherer die Entscheidung des Dienstherrn über die Dienstunfähigkeit an, ohne die Berufsunfähigkeit selbst zu prüfen. Unechte Klauseln enthalten oft Einschränkungen. Maßgeblich ist der Wortlaut der Versicherungsbedingungen.",
+  "pauschale-beihilfe":
+    "Bei der pauschalen Beihilfe zahlt der Dienstherr einen Zuschuss zum Beitrag der Krankenversicherung und ersetzt damit die individuelle Beihilfe. Gesetzlich versicherte Beamte sparen etwa die Hälfte des Beitrags. Es gibt sie nur in einzelnen Ländern, die Entscheidung bindet in der Regel dauerhaft.",
+  "heilfuersorge-polizei":
+    "Heilfürsorge ist die vom Dienstherrn getragene Gesundheitsversorgung für Polizeivollzugsbeamte, die die Beihilfe ersetzt. Angehörige sind nicht eingeschlossen, und sie endet mit dem Ausscheiden oder Statuswechsel. Details regelt das Landesrecht.",
+  "polizeidienstunfaehigkeit":
+    "Polizeidienstunfähig ist ein Polizeivollzugsbeamter, der den besonderen gesundheitlichen Anforderungen des Vollzugsdienstes nicht mehr genügt und seine volle Verwendungsfähigkeit voraussichtlich nicht innerhalb von zwei Jahren wiedererlangt (§ 4 BPolBG). Zuerst wird eine anderweitige Verwendung geprüft.",
   "beamtenpension":
     "Die Beamtenpension (Ruhegehalt) beträgt 1,79375 % der ruhegehaltfähigen Dienstbezüge je Dienstjahr, höchstens 71,75 % nach etwa 40 Jahren. Bei vorzeitigem Ruhestand kann ein Versorgungsabschlag von bis zu 10,8 % abgezogen werden. Von der Brutto-Pension gehen Steuern sowie Kranken- und Pflegeversicherung ab. Länder können abweichen.",
   "ruhegehalt-beamte":
