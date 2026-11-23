@@ -13,6 +13,7 @@ const PKV: ClusterLink[] = [
   { slug: "oeffnungsaktion-pkv-fuer-beamte", label: "Öffnungsaktion der PKV für Beamte" },
 ];
 const REF: ClusterLink[] = [
+  { slug: "welche-versicherungen-als-referendar", label: "Referendariat im Überblick: Welche Versicherungen Sie brauchen" },
   { slug: "pkv-fuer-referendare", label: "PKV für Referendare: Krankenversicherung im Referendariat" },
   { slug: "anwartschaft-im-referendariat", label: "Anwartschaft im Referendariat" },
   { slug: "dienstunfaehigkeitsversicherung", label: "Dienstunfähigkeitsversicherung für Beamte: der Leitfaden" },
