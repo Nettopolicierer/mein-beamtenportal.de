@@ -1,0 +1,58 @@
+name: Hero-Bilder holen
+
+# Holt für die fünf neuen Themenseiten je ein eigenes Titelbild von Unsplash
+# (Secret UNSPLASH_ACCESS_KEY, wie beim Blog-Autopilot) und legt sie auf einem
+# eigenen Branch "hero-bilder" ab - NICHT auf main. So lassen sich die Bilder
+# vor der Übernahme ansehen. Manuell starten: Actions -> "Hero-Bilder holen" -> Run workflow.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  bilder:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Bilder holen und in die Artikel eintragen
+        env:
+          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+        run: |
+          test -n "$UNSPLASH_ACCESS_KEY" || { echo "Secret UNSPLASH_ACCESS_KEY fehlt"; exit 1; }
+          python3 - <<'PY'
+          import json, subprocess
+          JOBS = {
+            "dienstunfaehigkeitsversicherung": ("teacher classroom germany", "Dienstunfähigkeitsversicherung für Beamte: Lehrerin im Klassenzimmer"),
+            "echte-dienstunfaehigkeitsklausel": ("reading contract documents desk", "Echte Dienstunfähigkeitsklausel im Vertrag prüfen"),
+            "pauschale-beihilfe": ("health insurance documents calculator", "Pauschale Beihilfe für Beamte"),
+            "heilfuersorge-polizei": ("german police officers", "Heilfürsorge bei der Polizei"),
+            "polizeidienstunfaehigkeit": ("police officer training", "Polizeidienstunfähigkeit"),
+          }
+          path = "src/content-posts-new.json"
+          raw = open(path).read()
+          data = json.loads(raw)
+          for slug, (query, alt) in JOBS.items():
+              out = subprocess.run(["python3", "migration/fetch_autopilot_image.py", slug, query],
+                                   capture_output=True, text=True)
+              print(slug, out.stdout.strip(), out.stderr.strip())
+              res = json.loads(out.stdout or "{}")
+              if res.get("featuredImage"):
+                  for p in data:
+                      if p["slug"] == slug:
+                          p["featuredImage"], p["featuredImageAlt"] = res["featuredImage"], alt
+          open(path, "w").write(json.dumps(data, indent=2, ensure_ascii=False) + ("\n" if raw.endswith("\n") else ""))
+          PY
+      - name: Auf Branch hero-bilder pushen
+        run: |
+          git config user.name "Hero-Bilder"
+          git config user.email "kontakt@mein-beamtenportal.de"
+          git checkout -B hero-bilder
+          git add public/blog-media src/content-posts-new.json
+          git diff --cached --quiet && { echo "Keine Änderungen"; exit 0; }
+          git commit -m "Eigene Titelbilder für die fünf neuen Themenseiten"
+          git push -f origin hero-bilder
