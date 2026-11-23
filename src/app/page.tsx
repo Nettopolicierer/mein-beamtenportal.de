@@ -93,10 +93,10 @@ export default function Home() {
 
           <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-3xl shadow-lg lg:max-w-md">
             <Image
-              src="/albert-beratung.webp"
-              alt="Albert Sibert im Beratungsgespräch mit einer Kundin"
+              src="/albert-hero-beratung.webp"
+              alt="Albert Sibert, ungebundener Finanzberater für Beamte, Referendare und Anwärter"
               fill
-              className="object-cover object-[72%_50%]"
+              className="object-cover object-[50%_40%]"
               unoptimized
               priority
             />
