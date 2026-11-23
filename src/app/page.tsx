@@ -96,7 +96,7 @@ export default function Home() {
               src="/albert-beratung.webp"
               alt="Albert Sibert im Beratungsgespräch mit einer Kundin"
               fill
-              className="object-cover object-[48%_50%]"
+              className="object-cover object-[72%_50%]"
               unoptimized
               priority
             />
