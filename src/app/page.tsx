@@ -83,17 +83,10 @@ export default function Home() {
                 Zum Ratgeber
               </Link>
             </div>
-
-            <div className="mt-8 flex items-center gap-3">
-              <Image src="/proven-expert.webp" alt="ProvenExpert" width={40} height={40} unoptimized />
-              <Image src="/stars.svg" alt="" width={90} height={16} unoptimized />
-              <span className="text-sm text-mediumdark">4,90 von 5 Sternen</span>
-            </div>
           </div>
 
-          <div className="relative mx-auto w-full max-w-sm py-4 lg:max-w-md">
-            <div className="absolute inset-x-6 top-0 -bottom-0 translate-x-4 translate-y-2 rotate-3 rounded-[2rem] bg-[#C9DCF0]/70" aria-hidden />
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-[0_24px_50px_-24px_rgba(0,40,85,0.35)] ring-1 ring-primary/10">
+          <div className="relative mx-auto w-full max-w-sm pt-4 pb-6 lg:max-w-md">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-t-[999px] rounded-b-3xl shadow-[0_24px_50px_-24px_rgba(0,40,85,0.35)] ring-1 ring-primary/10">
               <Image
                 src="/albert-hero-beratung.webp"
                 alt="Albert Sibert, ungebundener Finanzberater für Beamte, Referendare und Anwärter"
@@ -103,6 +96,21 @@ export default function Home() {
                 priority
               />
             </div>
+            <a
+              href="https://www.provenexpert.com/de-de/albert-sibert/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute bottom-0 left-2 flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-lg ring-1 ring-primary/10 sm:-left-6"
+            >
+              <Image src="/proven-expert.webp" alt="ProvenExpert" width={36} height={36} unoptimized />
+              <span className="leading-tight">
+                <span className="flex items-center gap-1.5">
+                  <Image src="/stars.svg" alt="" width={80} height={14} unoptimized />
+                  <span className="font-heading text-sm font-bold text-primary">4,9/5</span>
+                </span>
+                <span className="block text-xs text-mediumdark">Kundenbewertungen</span>
+              </span>
+            </a>
           </div>
         </div>
 
