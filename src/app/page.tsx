@@ -91,18 +91,16 @@ export default function Home() {
             </div>
           </div>
 
-          <figure className="mx-auto w-full max-w-sm lg:max-w-md">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-gradient-to-b from-[#EAF2FB] to-[#C9DCF0] shadow-lg">
-              <Image
-                src="/albert-hero.png"
-                alt="Albert Sibert, ungebundener Finanzberater für Beamte, Referendare und Anwärter"
-                fill
-                className="object-cover object-[78%_100%]"
-                unoptimized
-                priority
-              />
-            </div>
-          </figure>
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-3xl shadow-lg lg:max-w-md">
+            <Image
+              src="/albert-beratung.webp"
+              alt="Albert Sibert im Beratungsgespräch mit einer Kundin"
+              fill
+              className="object-cover object-[48%_50%]"
+              unoptimized
+              priority
+            />
+          </div>
         </div>
 
         <div className="border-t border-mediumlight/40">
