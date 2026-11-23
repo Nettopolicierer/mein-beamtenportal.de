@@ -91,12 +91,18 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-3xl shadow-lg lg:max-w-md">
+          <div
+            className="relative mx-auto aspect-[4/5] w-full max-w-sm self-end lg:max-w-md"
+            style={{
+              WebkitMaskImage: "linear-gradient(to right, transparent 0%, #000 22%, #000 82%, transparent 100%)",
+              maskImage: "linear-gradient(to right, transparent 0%, #000 22%, #000 82%, transparent 100%)",
+            }}
+          >
             <Image
               src="/albert-hero-beratung.webp"
               alt="Albert Sibert, ungebundener Finanzberater für Beamte, Referendare und Anwärter"
               fill
-              className="object-cover object-[50%_40%]"
+              className="object-cover object-[50%_40%] mix-blend-multiply"
               unoptimized
               priority
             />
