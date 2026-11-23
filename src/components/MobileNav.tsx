@@ -7,7 +7,7 @@ import { BookOpen, UserRound, ShieldCheck, HeartPulse, GraduationCap, Video, Mai
 const NAV = [
   { href: "/dienstunfaehigkeitsversicherung", label: "Dienstunfähigkeit", icon: ShieldCheck },
   { href: "/pkv-fuer-beamte", label: "PKV & Beihilfe", icon: HeartPulse },
-  { href: "/pkv-fuer-referendare", label: "Referendare", icon: GraduationCap },
+  { href: "/welche-versicherungen-als-referendar", label: "Referendare", icon: GraduationCap },
   { href: "/ratgeber", label: "Ratgeber", icon: BookOpen },
   { href: "/webinar", label: "Webinar", icon: Video },
   { href: "/ueber-uns", label: "Über Mich", icon: UserRound },

@@ -18,7 +18,7 @@ const LEISTUNGSVERSPRECHEN = [
 const THEMEN = [
   { href: "/dienstunfaehigkeitsversicherung", title: "Dienstunfähigkeit absichern", text: "Dienstunfähigkeitsversicherung für Beamte: echte Klausel, Kosten, Anwärter und Probezeit." },
   { href: "/pkv-fuer-beamte", title: "PKV und Beihilfe", text: "Private Krankenversicherung für Beamte: Beihilfe, Tarifkriterien und Öffnungsaktion." },
-  { href: "/pkv-fuer-referendare", title: "Referendare und Anwärter", text: "Krankenversicherung im Vorbereitungsdienst: Anwartschaft, Fristen, Bundesland-Regeln." },
+  { href: "/welche-versicherungen-als-referendar", title: "Referendare und Anwärter", text: "Alle Versicherungen im Vorbereitungsdienst im Überblick: PKV, Anwartschaft, Dienstunfähigkeit, Haftpflicht." },
   { href: "/berufsunfaehigkeitsversicherung-fuer-studenten-was-sie-wissen-muessen", title: "Studium und Berufseinstieg", text: "Berufsunfähigkeit im Studium, Verbeamtung auf Probe und die ersten Versicherungen." },
 ];
 

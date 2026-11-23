@@ -77,7 +77,7 @@ export const viewport: Viewport = {
 const NAV = [
   { href: "/dienstunfaehigkeitsversicherung", label: "Dienstunfähigkeit" },
   { href: "/pkv-fuer-beamte", label: "PKV & Beihilfe" },
-  { href: "/pkv-fuer-referendare", label: "Referendare" },
+  { href: "/welche-versicherungen-als-referendar", label: "Referendare" },
   { href: "/ratgeber", label: "Ratgeber" },
   { href: "/ueber-uns", label: "Über Mich" },
 ];
