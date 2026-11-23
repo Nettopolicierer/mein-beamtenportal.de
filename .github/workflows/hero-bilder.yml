@@ -6,6 +6,9 @@ name: Hero-Bilder holen
 # vor der Übernahme ansehen. Manuell starten: Actions -> "Hero-Bilder holen" -> Run workflow.
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/hero-bilder.yml"
 
 permissions:
   contents: write
