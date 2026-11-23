@@ -15,6 +15,13 @@ const LEISTUNGSVERSPRECHEN = [
   "Persönliche Betreuung und schnelle Rückmeldung bei Fristen",
 ];
 
+const THEMEN = [
+  { href: "/dienstunfaehigkeitsversicherung", title: "Dienstunfähigkeit absichern", text: "Dienstunfähigkeitsversicherung für Beamte: echte Klausel, Kosten, Anwärter und Probezeit." },
+  { href: "/pkv-fuer-beamte", title: "PKV und Beihilfe", text: "Private Krankenversicherung für Beamte: Beihilfe, Tarifkriterien und Öffnungsaktion." },
+  { href: "/pkv-fuer-referendare", title: "Referendare und Anwärter", text: "Krankenversicherung im Vorbereitungsdienst: Anwartschaft, Fristen, Bundesland-Regeln." },
+  { href: "/berufsunfaehigkeitsversicherung-fuer-studenten-was-sie-wissen-muessen", title: "Studium und Berufseinstieg", text: "Berufsunfähigkeit im Studium, Verbeamtung auf Probe und die ersten Versicherungen." },
+];
+
 const STATS = [
   { value: "Ø 66,7 %", label: "Ruhegehaltssatz bei der Beamtenpension – den Höchstsatz von 71,75 % erreichen nur wenige.", source: 1 },
   { value: "50–90 %", label: "übernimmt die Beihilfe je Bundesland von den Krankheitskosten – der Rest läuft über die Krankenversicherung.", source: 2 },
@@ -111,6 +118,22 @@ export default function Home() {
               ProvenExpert
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Themen */}
+      <section className="mx-auto max-w-5xl px-6 pt-16">
+        <p className="mb-3 text-xs font-semibold tracking-widest text-primary uppercase">Meine Themen</p>
+        <h2 className="font-heading mb-8 max-w-2xl text-2xl font-bold text-primary sm:text-3xl">
+          Wobei brauchen Sie Klarheit?
+        </h2>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {THEMEN.map((t) => (
+            <Link key={t.href} href={t.href} className="rounded-2xl bg-base p-5 transition hover:shadow-md">
+              <p className="font-heading mb-2 text-lg font-bold text-primary">{t.title}</p>
+              <p className="text-sm text-mediumdark">{t.text}</p>
+            </Link>
+          ))}
         </div>
       </section>
 

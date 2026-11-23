@@ -15,4 +15,11 @@ export const MERGED: Record<string, string> = {
   "referendariat-privat-versichert": "pkv-fuer-referendare",
   "private-krankenversicherung-im-referendariat-lehramt": "pkv-fuer-referendare",
   "pkv-referendare-einstieg": "pkv-fuer-referendare",
+  "beste-pkv-fuer-referendare-berlin": "pkv-referendare-berlin",
+  "beste-pkv-fuer-referendare-baden-wuerttemberg": "pkv-referendare-baden-wuerttemberg",
+  "beste-pkv-fuer-referendare-bayern": "beihilfe-fuer-anwaerter-bayern",
+  "beste-pkv-fuer-referendare-hessen": "beihilfe-fuer-anwaerter-hessen",
+  "beste-pkv-fuer-referendare-niedersachen": "beihilfe-fuer-anwaerter-niedersachsen",
+  "beste-pkv-fuer-referendare-nrw": "pkv-referendare-nordrhein-westfalen",
+  "beste-pkv-fuer-referendare-brandenburg-fuer-2026-ihr-test": "pkv-fuer-referendare",
 };

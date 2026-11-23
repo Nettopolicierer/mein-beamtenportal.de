@@ -34,4 +34,6 @@ export const KURZANTWORTEN: Record<string, string> = {
     "Die Beamtenpension deckt das letzte Netto meist nicht. Zusätzliche Vorsorge ist sinnvoll, zum Beispiel über eine Basisrente (Beiträge nach § 10 EStG absetzbar, für Beamte mit gekürztem Höchstbetrag) oder ein breit gestreutes Depot. Wie viel nötig ist, zeigt eine Berechnung der Pensionslücke.",
   "wie-hoch-ist-die-pension-bei-a13-netto":
     "Bei A13 und 40 Dienstjahren beträgt das Ruhegehalt 71,75 % der Dienstbezüge, laut Richtwert rund 4.380 € brutto und etwa 3.280 € netto im Monat. Das heutige Netto liegt bei rund 4.760 €, die Lücke bei etwa 1.475 € pro Monat in heutiger Kaufkraft.",
+  "pkv-referendare-bundeslaender":
+    "Beihilfesatz, Antragsfristen und eine mögliche pauschale Beihilfe regelt jedes Bundesland selbst. Die Übersicht führt zur passenden Länderseite für Referendare und Anwärter.",
 };

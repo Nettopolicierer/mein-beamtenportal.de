@@ -27,7 +27,7 @@ export function HeaderRight({
 
   return (
     <>
-      <nav className="hidden items-center gap-8 text-sm font-medium tracking-wide text-primary uppercase sm:flex">
+      <nav className="hidden items-center gap-5 text-[13px] font-medium tracking-wide text-primary uppercase xl:gap-7 xl:text-sm xl:flex">
         {nav.map((item) => (
           <Link prefetch={false} key={item.href} href={item.href} className="hover:opacity-70">
             {item.label}

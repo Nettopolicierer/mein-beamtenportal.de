@@ -8,6 +8,7 @@ import { KURZANTWORTEN } from "@/lib/kurzantworten";
 import { quellenFor } from "@/lib/quellen";
 import { RechnerStickyBar } from "@/components/RechnerStickyBar";
 import { GRUPPEN, type Gruppe } from "@/lib/pension-calc";
+import { clusterLinks } from "@/lib/cluster";
 import { ALL_POSTS, getPost, formatDate, getRelatedPosts, BOOKING_LINK } from "@/lib/content";
 
 // Hinweis auf den BU-Check mitten im Artikel - nur bei Artikeln zu Pension, Dienst-
@@ -242,6 +243,23 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                   </>
                 )}
               </>
+            );
+          })()}
+
+          {(() => {
+            const c = clusterLinks(post.slug, post.categories);
+            if (!c) return null;
+            return (
+              <div className="not-prose mt-8 rounded-xl border border-mediumlight/60 p-4 text-sm">
+                <p className="mb-2 font-semibold text-primary">{c.heading}</p>
+                <ul className="flex flex-col gap-1">
+                  {c.links.map((l) => (
+                    <li key={l.slug}>
+                      <Link href={`/${l.slug}`} className="text-primary underline-offset-2 hover:underline">{l.label}</Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             );
           })()}
 

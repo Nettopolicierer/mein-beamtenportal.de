@@ -2,9 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { BookOpen, UserRound, Mail, Video, Menu, X } from "lucide-react";
+import { BookOpen, UserRound, ShieldCheck, HeartPulse, GraduationCap, Video, Mail, Menu, X } from "lucide-react";
 
 const NAV = [
+  { href: "/dienstunfaehigkeitsversicherung", label: "Dienstunfähigkeit", icon: ShieldCheck },
+  { href: "/pkv-fuer-beamte", label: "PKV & Beihilfe", icon: HeartPulse },
+  { href: "/pkv-fuer-referendare", label: "Referendare", icon: GraduationCap },
   { href: "/ratgeber", label: "Ratgeber", icon: BookOpen },
   { href: "/webinar", label: "Webinar", icon: Video },
   { href: "/ueber-uns", label: "Über Mich", icon: UserRound },
@@ -20,7 +23,7 @@ export function MobileNav() {
         type="button"
         aria-label={open ? "Menü schließen" : "Menü öffnen"}
         onClick={() => setOpen((v) => !v)}
-        className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-mediumlight/60 text-primary sm:hidden"
+        className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-mediumlight/60 text-primary xl:hidden"
       >
         {open ? <X className="size-5" /> : <Menu className="size-5" />}
       </button>
@@ -31,9 +34,9 @@ export function MobileNav() {
             type="button"
             aria-label="Menü schließen"
             onClick={() => setOpen(false)}
-            className="fixed inset-0 top-[73px] z-30 bg-primary/20 backdrop-blur-[1px] sm:hidden"
+            className="fixed inset-0 top-[73px] z-30 bg-primary/20 backdrop-blur-[1px] xl:hidden"
           />
-          <div className="absolute inset-x-3 top-[calc(100%+0.5rem)] z-40 overflow-hidden rounded-2xl border border-mediumlight/40 bg-white shadow-xl shadow-primary/10 sm:hidden">
+          <div className="absolute inset-x-3 top-[calc(100%+0.5rem)] z-40 overflow-hidden rounded-2xl border border-mediumlight/40 bg-white shadow-xl shadow-primary/10 xl:hidden">
             <nav className="flex flex-col divide-y divide-mediumlight/30 py-2">
               {NAV.map((item) => (
                 <Link prefetch={false}

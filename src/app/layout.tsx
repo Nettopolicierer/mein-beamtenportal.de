@@ -75,10 +75,11 @@ export const viewport: Viewport = {
 };
 
 const NAV = [
+  { href: "/dienstunfaehigkeitsversicherung", label: "Dienstunfähigkeit" },
+  { href: "/pkv-fuer-beamte", label: "PKV & Beihilfe" },
+  { href: "/pkv-fuer-referendare", label: "Referendare" },
   { href: "/ratgeber", label: "Ratgeber" },
-  { href: "/webinar", label: "Webinar" },
   { href: "/ueber-uns", label: "Über Mich" },
-  { href: "/kontakt", label: "Kontakt" },
 ];
 
 export default function RootLayout({
