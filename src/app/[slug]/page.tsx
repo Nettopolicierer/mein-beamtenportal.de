@@ -223,6 +223,11 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
               <p className="text-sm text-[#0F172A]">{KURZANTWORTEN[post.slug]}</p>
             </div>
           )}
+          {/\d\s*€/.test(post.html) && /(Beitrag|Beiträge|Beitrags|monatlich|kostet|Kosten)/.test(post.html) && post.categories.some((c) => c === "PKV" || c === "DU" || c === "BU") && (
+            <p className="not-prose mb-5 rounded-lg border border-mediumlight/60 bg-base px-3 py-2 text-xs text-mediumdark">
+              Hinweis zu Beträgen: Alle Beitrags- und Kostenangaben in diesem Beitrag sind unverbindliche Orientierungswerte und Beispiele (Stand der jeweiligen Recherche, ohne Gewähr). Ihr tatsächlicher Beitrag hängt von Alter, Gesundheit, Tarif und Dienstherr ab und ergibt sich erst aus Ihrem individuellen Angebot.
+            </p>
+          )}
           {(() => {
             // Marker <!--LEAD--> im Artikeltext: hier sitzt der Pensions-Lückenrechner.
             const body = fixDivs(hasWidget ? withBuCheckCta(post) : withHinweisCard(withBuCheckCta(post), einsteiger ? "checkliste" : "rechner", "/pensionsrechner"));
