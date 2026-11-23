@@ -89,13 +89,6 @@ export default function Home() {
               <Image src="/stars.svg" alt="" width={90} height={16} unoptimized />
               <span className="text-sm text-mediumdark">4,90 von 5 Sternen</span>
             </div>
-            <p className="mt-4 max-w-md text-xs leading-relaxed text-mediumdark">
-              Albert Sibert, Versicherungsvertreter (§ 34d GewO) und Finanzanlagenvermittler (§ 34f GewO).{" "}
-              <a href="https://www.vermittlerregister.info" target="_blank" rel="noopener noreferrer" className="text-primary underline">
-                Im Vermittlerregister prüfen
-              </a>{" "}
-              (Registernr. D-4EHE-G249E-13).
-            </p>
           </div>
 
           <figure className="mx-auto w-full max-w-sm lg:max-w-md">
@@ -109,9 +102,6 @@ export default function Home() {
                 priority
               />
             </div>
-            <figcaption className="mt-3 text-center text-sm text-mediumdark">
-              <span className="font-semibold text-primary">Albert Sibert</span> · Ihr Ansprechpartner, persönlich und ohne Callcenter
-            </figcaption>
           </figure>
         </div>
 
