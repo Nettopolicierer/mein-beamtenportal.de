@@ -80,7 +80,7 @@ export default function Home() {
                 href="/ratgeber"
                 className="rounded-lg border border-primary px-6 py-3 text-sm font-semibold text-primary hover:bg-primary/5"
               >
-                Beratung
+                Zum Ratgeber
               </Link>
             </div>
 
@@ -89,18 +89,30 @@ export default function Home() {
               <Image src="/stars.svg" alt="" width={90} height={16} unoptimized />
               <span className="text-sm text-mediumdark">4,90 von 5 Sternen</span>
             </div>
+            <p className="mt-4 max-w-md text-xs leading-relaxed text-mediumdark">
+              Albert Sibert, Versicherungsvertreter (§ 34d GewO) und Finanzanlagenvermittler (§ 34f GewO).{" "}
+              <a href="https://www.vermittlerregister.info" target="_blank" rel="noopener noreferrer" className="text-primary underline">
+                Im Vermittlerregister prüfen
+              </a>{" "}
+              (Registernr. D-4EHE-G249E-13).
+            </p>
           </div>
 
-          <div className="relative mx-auto aspect-square w-full max-w-sm lg:max-w-none lg:max-h-[520px]">
-            <Image
-              src="/hero-illustration.png"
-              alt="Mein Beamtenportal"
-              fill
-              className="object-contain"
-              unoptimized
-              priority
-            />
-          </div>
+          <figure className="mx-auto w-full max-w-sm lg:max-w-md">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-gradient-to-b from-[#EAF2FB] to-[#C9DCF0] shadow-lg">
+              <Image
+                src="/albert-hero.png"
+                alt="Albert Sibert, ungebundener Finanzberater für Beamte, Referendare und Anwärter"
+                fill
+                className="object-cover object-[78%_100%]"
+                unoptimized
+                priority
+              />
+            </div>
+            <figcaption className="mt-3 text-center text-sm text-mediumdark">
+              <span className="font-semibold text-primary">Albert Sibert</span> · Ihr Ansprechpartner, persönlich und ohne Callcenter
+            </figcaption>
+          </figure>
         </div>
 
         <div className="border-t border-mediumlight/40">
@@ -110,8 +122,8 @@ export default function Home() {
               Beamte beraten
             </div>
             <div className="flex items-center justify-center gap-2 py-3 sm:flex-col sm:gap-0 sm:py-0">
-              <span className="font-heading text-xl font-bold text-primary">&gt;5</span>
-              Jahre Erfahrung
+              <span className="font-heading text-xl font-bold text-primary">Seit 2019</span>
+              für Beamte aktiv
             </div>
             <div className="flex items-center justify-center gap-2 py-3 sm:flex-col sm:gap-0 sm:py-0">
               <span className="font-heading text-xl font-bold text-primary">4,9/5</span>
@@ -200,6 +212,37 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Testimonials */}
+      <TestimonialStrip />
+
+      {/* Ablauf und Transparenz */}
+      <section className="mx-auto max-w-5xl px-6 py-20">
+        <p className="mb-3 text-xs font-semibold tracking-widest text-primary uppercase">Ablauf</p>
+        <h2 className="font-heading max-w-2xl text-2xl font-bold text-primary sm:text-3xl">
+          So läuft das kostenfreie Erstgespräch
+        </h2>
+        <span className="mt-3 mb-10 block h-1 w-12 rounded-full bg-primary" />
+        <ol className="grid gap-6 sm:grid-cols-3">
+          {[
+            ["1", "Termin buchen", "Sie wählen online einen Termin, per Video oder Telefon. Ohne Anmeldung bei einem Portal."],
+            ["2", "Lücken ansehen", "In rund 30 Minuten gehen wir Beihilfe, PKV, Dienstunfähigkeit und Pension für Ihren Status durch."],
+            ["3", "Sie entscheiden", "Sie erhalten eine ehrliche Einschätzung und entscheiden in Ruhe. Kein Abschlussdruck, keine Verpflichtung."],
+          ].map(([n, t, d]) => (
+            <li key={n} className="rounded-2xl bg-base p-6">
+              <span className="font-heading mb-3 flex size-9 items-center justify-center rounded-full bg-primary text-sm font-bold text-white">{n}</span>
+              <p className="font-heading mb-2 text-lg font-semibold text-primary">{t}</p>
+              <p className="text-sm text-mediumdark">{d}</p>
+            </li>
+          ))}
+        </ol>
+        <p className="mt-8 max-w-3xl text-sm text-mediumdark">
+          <strong className="text-primary">Transparenz:</strong> Das Erstgespräch kostet Sie nichts. Als Versicherungsvertreter und
+          Finanzanlagenvermittler werde ich bei einem Abschluss von der jeweiligen Gesellschaft vergütet. Wie, sage ich Ihnen vor jedem
+          Abschluss offen. Mehr zu meiner Zulassung und meinem Werdegang finden Sie unter{" "}
+          <Link href="/ueber-uns" className="text-primary underline">Über mich</Link>.
+        </p>
+      </section>
+
       {/* Latest posts */}
       <section className="mx-auto max-w-5xl px-6 py-20">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
@@ -232,9 +275,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-
-      {/* Testimonials */}
-      <TestimonialStrip />
 
       {/* Absicherungs-CTA */}
       <section className="bg-primary">
