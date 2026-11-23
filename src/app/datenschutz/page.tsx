@@ -144,15 +144,11 @@ export default function DatenschutzPage() {
         dieser E-Mails oder formlos an kontakt@mein-beamtenportal.de. Ihre Adresse bleibt bis zu Ihrem Widerruf gespeichert
         und wird danach gelöscht bzw. nur noch vorgehalten, um künftige E-Mails zu verhindern.
       </P>
-      <H3>BU-Check und Rechner</H3>
+      <H3>Pensionsrechner</H3>
       <P>
-        Beim BU-Check beantworten Sie Fragen zu Status, Berufsbereich, Alter, ungefährem Netto, Dienstzeit und
-        gegebenenfalls zu einem bestehenden Vertrag (Rente, Beitrag, Vertragsbedingungen). Die Berechnung des Ergebnisses
-        erfolgt in Ihrem Browser. Erst wenn Sie das Formular für die persönliche Einschätzung absenden (Name, E-Mail,
-        optional Telefon), übermitteln wir die Angaben an uns und senden Ihnen eine Bestätigung. Rechtsgrundlage ist
-        Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) für die Kontaktaufnahme; Sie können sie jederzeit widerrufen.
-        Gesundheitsdaten werden im BU-Check nicht abgefragt. Der Pensionsrechner auf der Startseite arbeitet vollständig
-        in Ihrem Browser; die eingegebenen Werte werden nicht an uns übermittelt.
+        Der Pensionsrechner arbeitet vollständig in Ihrem Browser; die eingegebenen Werte werden nicht an uns übermittelt.
+        Nur wenn Sie freiwillig eine PDF-Auswertung anfordern, übermitteln Sie uns Ihre Angaben und Ihre E-Mail-Adresse
+        auf Grundlage Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).
       </P>
       <H3>Anfrageformular (Landingpage für Instagram)</H3>
       <P>
@@ -239,7 +235,7 @@ export default function DatenschutzPage() {
       <H2>6. E-Mail-Versand (Mailjet)</H2>
       <P>
         E-Mails, die Sie über unsere Formulare auslösen (Bestätigung der Webinar-Anmeldung und Erinnerungen, Bestätigung
-        und Auswertung zum BU-Check, Bestätigung einer Anfrage) sowie interne Benachrichtigungen versenden wir über den
+        und Auswertung zum Pensionsrechner, Bestätigung einer Anfrage) sowie interne Benachrichtigungen versenden wir über den
         Dienst Mailjet. Anbieter ist die Mailgun Technologies Inc., 112 E Pecan St. #1135, San Antonio, Texas 78205, USA
         (Mailjet). Dabei werden E-Mail-Adressen, Namen und der Inhalt der E-Mails bei Mailjet verarbeitet; Mailjet kann
         außerdem Zustell- und Öffnungsdaten erfassen. Die Datenübertragung in die USA wird auf Standardvertragsklauseln

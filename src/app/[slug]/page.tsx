@@ -11,15 +11,7 @@ import { GRUPPEN, type Gruppe } from "@/lib/pension-calc";
 import { clusterLinks } from "@/lib/cluster";
 import { ALL_POSTS, getPost, formatDate, getRelatedPosts, BOOKING_LINK } from "@/lib/content";
 
-// Hinweis auf den BU-Check mitten im Artikel - nur bei Artikeln zu Pension, Dienst-
-// oder Berufsunfaehigkeit (Kategorie BU/DU/Pension oder Thema in Titel, Slug bzw.
-// Beschreibung). Als HTML-String vor die 3. Zwischenueberschrift gesetzt (statt
-// den Artikel zu teilen), damit die verschachtelten Wrapper-Divs der migrierten
-// Artikel intakt bleiben.
-const CTA_CATEGORIES = ["Pension", "BU", "DU"];
-const CTA_TOPIC = /dienstunf|berufsunf/i;
-
-// Artikel mit Pensions-Lückenrechner (Marker <!--LEAD-->) bekommen keinen BU-Check-Hinweis:
+// Artikel mit Pensions-Lückenrechner (Marker <!--LEAD-->) bekommen keine Rechner-Karte:
 // Der Rechner ist dort der einzige Lead-Pfad.
 const LEAD_MARKER = "<!--LEAD-->";
 
@@ -30,13 +22,8 @@ function defaultGruppeFor(slug: string): Gruppe {
   return (GRUPPEN as string[]).includes(g) ? g : "A13";
 }
 
-function withBuCheckCta(post: { slug: string; title: string; description?: string; categories: string[]; html: string }) {
-  if (post.html.includes(LEAD_MARKER)) return post.html;
-  const relevant =
-    post.categories.some((c) => CTA_CATEGORIES.includes(c)) ||
-    CTA_TOPIC.test(`${post.title} ${post.slug} ${post.description ?? ""}`);
-  if (!relevant) return post.html;
-  const box = `<div class="not-prose my-8 rounded-2xl border border-mediumlight/60 bg-base p-6"><p class="font-heading mb-1 text-lg font-bold text-primary">Und wenn Sie vor der Pension dienstunfähig werden?</p><p class="mb-4 text-sm text-mediumdark">Bei vorzeitiger Dienstunfähigkeit fällt die Versorgung oft deutlich niedriger aus. Machen Sie den kostenfreien BU-Check in einer Minute.</p><a href="/bu-check?src=${encodeURIComponent(post.slug)}" class="inline-block rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary/90">Kostenfreien BU-Check starten</a></div>`;
+function withBeratungCta(post: { slug: string; html: string }) {
+  const box = `<div class="not-prose my-8 rounded-2xl border border-mediumlight/60 bg-base p-6"><p class="font-heading mb-1 text-lg font-bold text-primary">Kostenfreie Beratung für Ihre Situation</p><p class="mb-4 text-sm text-mediumdark">In 30 Minuten klären wir, wo Ihre Lücke liegt und was Sie wirklich brauchen. Unverbindlich und ohne Verpflichtung.</p><a href="${BOOKING_LINK}" class="inline-block rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary/90">Kostenfreies Erstgespräch buchen</a></div>`;
   return insertBeforeSafeH2(post.html, box, 2) ?? post.html + box;
 }
 
@@ -46,9 +33,14 @@ function withBuCheckCta(post: { slug: string; title: string; description?: strin
 // Artikel, bei denen die Checkliste im Vordergrund steht: Einsteiger (Referendare, Anwärter, Berufsanfänger, junge Beamte)
 // sowie Themen Dienstunfähigkeit, Berufsunfähigkeit, Beihilfe, PKV und Krankheit.
 const EINSTEIGER =
-  /referendar|anw(ä|ae)rter|berufsanf|berufseinsteig|einsteiger|junge[nr]? beamte|studenten|studium|verbeamtung|dienstunf|berufsunf|bu-|du-|beihilfe|pkv|krankenversicherung|krankheit/i;
+  /referendar|anw(ä|ae)rter|berufsanf|berufseinsteig|einsteiger|junge[nr]? beamte|studenten|studium|verbeamtung/i;
 function isEinsteiger(post: { slug: string; title: string; categories: string[] }) {
   return post.categories.includes("Referendare") || EINSTEIGER.test(`${post.slug} ${post.title}`);
+}
+// Pension-Themen bekommen die Rechner-Karte, alle übrigen nur die Beratungs-Karte.
+const PENSION_TOPIC = /pension|ruhegehalt|ruhestand|altersvorsorge|rente|versorgungsl/i;
+function isPension(post: { slug: string; categories: string[] }) {
+  return post.categories.includes("Pension") || PENSION_TOPIC.test(post.slug);
 }
 
 // Hinweiskarte vor der 2. Zwischenüberschrift (als HTML-String wie der BU-Check-Hinweis, damit verschachtelte
@@ -142,11 +134,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const related = getRelatedPosts(post);
   const hasWidget = post.html.includes(LEAD_MARKER);
   const einsteiger = !hasWidget && isEinsteiger(post);
+  const pension = !hasWidget && !einsteiger && isPension(post);
 
   return (
     <article data-rechner-bar>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(articleJsonLd(post)) }} />
-      <RechnerStickyBar href={einsteiger ? "/checkliste" : hasWidget ? "#pl-rechner" : "/pensionsrechner"} label={einsteiger ? "Kostenlose Checkliste anfordern" : "Pensionslücke berechnen"} hasWidget={hasWidget} />
+      <RechnerStickyBar href={einsteiger ? "/checkliste" : hasWidget ? "#pl-rechner" : pension ? "/pensionsrechner" : BOOKING_LINK} label={einsteiger ? "Kostenlose Checkliste anfordern" : hasWidget || pension ? "Pensionslücke berechnen" : "Kostenfreies Erstgespräch buchen"} hasWidget={hasWidget} />
       {/* Hero: Hintergrundbild + Titel + Untertitel + CTAs, wie im Original */}
       <div className="relative">
         {post.featuredImage && (
@@ -231,7 +224,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           )}
           {(() => {
             // Marker <!--LEAD--> im Artikeltext: hier sitzt der Pensions-Lückenrechner.
-            const body = fixDivs(hasWidget ? withBuCheckCta(post) : withHinweisCard(withBuCheckCta(post), einsteiger ? "checkliste" : "rechner", "/pensionsrechner"));
+            const withCta = withBeratungCta(post);
+            const body = fixDivs(hasWidget || !(einsteiger || pension) ? withCta : withHinweisCard(withCta, einsteiger ? "checkliste" : "rechner", "/pensionsrechner"));
             const [before, after] = splitBalanced(body, LEAD_MARKER);
             return (
               <>

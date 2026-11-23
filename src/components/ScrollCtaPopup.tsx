@@ -49,7 +49,7 @@ export function ScrollCtaPopup() {
     if (pathname === "/webinar") shown.webinar = true;
     if (pathname === "/kontakt") shown.beratung = true;
     // Werbe-Landingpage: keine Ablenkung vom Check.
-    if (pathname === "/bu-check" || isLandingPath(pathname) || isCalmPath(pathname)) {
+    if (isLandingPath(pathname) || isCalmPath(pathname)) {
       shown.webinar = true;
       shown.beratung = true;
     }

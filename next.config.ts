@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      { source: "/bu-check", destination: "/kontakt", permanent: true },
       // Alte WordPress-Adressen, die noch verlinkt bzw. bei Google bekannt sind.
       { source: "/cookie-richtlinie-eu", destination: "/datenschutz", permanent: true },
       { source: "/beratung", destination: "/kontakt", permanent: true },

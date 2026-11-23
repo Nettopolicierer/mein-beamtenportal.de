@@ -13,18 +13,6 @@ export function HeaderRight({
 }) {
   const pathname = usePathname();
 
-  // Werbe-Landingpage: keine Navigation, nur ein Weg - zum Check.
-  if (pathname === "/bu-check") {
-    return (
-      <a
-        href="#check"
-        className="rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-white hover:bg-primary/90 sm:px-5 sm:py-2.5 sm:text-sm"
-      >
-        Zum BU-Check
-      </a>
-    );
-  }
-
   return (
     <>
       <nav className="hidden items-center gap-5 text-[13px] font-medium tracking-wide text-primary uppercase xl:gap-7 xl:text-sm xl:flex">
