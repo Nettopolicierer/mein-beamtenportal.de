@@ -1,3 +1,4 @@
+import { MERGED } from "./merged";
 import posts from "@/content-posts.json";
 // Vom WordPress-Migrations-Skript (migration/build_content.py) generierte
 // Artikel. Neue Artikel des Blog-Autopiloten landen NICHT hier, sondern in
@@ -34,7 +35,7 @@ export interface StaticPage {
   html: string;
 }
 
-export const ALL_POSTS = [...(posts as Post[]), ...(newPosts as Post[])];
+export const ALL_POSTS = [...(posts as Post[]), ...(newPosts as Post[])].filter((p) => !(p.slug in MERGED));
 export const ALL_PAGES = pages as StaticPage[];
 
 export const SORTED_POSTS = [...ALL_POSTS].sort(
