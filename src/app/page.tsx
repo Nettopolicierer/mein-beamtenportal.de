@@ -98,7 +98,7 @@ export default function Home() {
       </section>
 
       {/* Themen */}
-      <section className="mx-auto max-w-5xl px-6 pt-16">
+      <section className="mx-auto max-w-5xl px-6 pb-16 pt-16">
         <p className="mb-3 text-xs font-semibold tracking-widest text-primary uppercase">Für wen ich da bin</p>
         <h2 className="font-heading mb-8 max-w-2xl text-2xl font-bold text-primary sm:text-3xl">
           Wo stehen Sie gerade?
@@ -144,6 +144,7 @@ export default function Home() {
                 "Zugang zu über 250 Gesellschaften statt nur einem Portfolio",
                 "Antwort meist noch am selben Tag",
                 "Termine per Video, Unterschrift digital, Verträge in der Finanz-App",
+                "Offene Aufklärung über Kosten und Provision, bevor Sie sich entscheiden",
               ].map((t) => (
                 <li key={t} className="flex items-start gap-2.5">
                   <Check className="mt-0.5 size-4 shrink-0 text-primary" />
