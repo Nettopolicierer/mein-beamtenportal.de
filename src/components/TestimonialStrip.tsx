@@ -65,7 +65,7 @@ const TESTIMONIALS = [
 
 function TestimonialCard({ t }: { t: (typeof TESTIMONIALS)[number] }) {
   return (
-    <div className="flex h-full w-80 shrink-0 flex-col gap-3 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-mediumlight/30">
+    <div className="flex w-80 shrink-0 flex-col gap-3 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-mediumlight/30">
       <div className="flex items-center justify-between">
         <div className="flex gap-0.5">
           {Array.from({ length: 5 }).map((_, idx) => (
@@ -106,7 +106,7 @@ export function TestimonialStrip() {
         </div>
       </div>
       <div className="testimonial-mask overflow-hidden">
-        <div className="testimonial-marquee flex w-max gap-5">
+        <div className="testimonial-marquee flex w-max items-stretch gap-5">
           {cards.map((t, i) => (
             <TestimonialCard key={`${t.name}-${i}`} t={t} />
           ))}
