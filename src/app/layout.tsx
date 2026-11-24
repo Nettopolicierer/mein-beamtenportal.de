@@ -8,7 +8,6 @@ import { GoogleAdsTag } from "@/components/GoogleAdsTag";
 import { ClarityTag } from "@/components/ClarityTag";
 import { ClickTracker } from "@/components/ClickTracker";
 import { ScrollCtaPopup } from "@/components/ScrollCtaPopup";
-import { WebinarBanner } from "@/components/WebinarBanner";
 import { LogoLink } from "@/components/LogoLink";
 import { ChromeGate } from "@/components/ChromeGate";
 import { HeaderRight } from "@/components/HeaderRight";
@@ -97,7 +96,6 @@ export default function RootLayout({
         <ClarityTag />
         <GoogleAdsTag />
         <ClickTracker />
-        <WebinarBanner />
         <ChromeGate>
         <header className="sticky top-0 z-40 border-b border-mediumlight/40 bg-white/95 backdrop-blur">
           <div className="relative mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 py-3 sm:gap-3 sm:px-6 sm:py-4">
@@ -133,9 +131,6 @@ export default function RootLayout({
                 </Link>
                 <Link prefetch={false} href="/ratgeber" className="text-mediumdark hover:text-primary">
                   Ratgeber
-                </Link>
-                <Link prefetch={false} href="/webinar" className="text-mediumdark hover:text-primary">
-                  Webinar
                 </Link>
                 <Link prefetch={false} href="/kontakt" className="text-mediumdark hover:text-primary">
                   Kontakt

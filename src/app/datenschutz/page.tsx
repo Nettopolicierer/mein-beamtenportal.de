@@ -124,26 +124,6 @@ export default function DatenschutzPage() {
         (Qualifizierungscheck) übergeben wir beim Klick auf die Terminbuchung zusätzlich Ihre Angaben zu Schulform,
         Start des Referendariats und Geburtsjahr als Notiz an den Kalender, damit wir uns vorbereiten können.
       </P>
-      <H3>Anmeldung zum Webinar</H3>
-      <P>
-        Wenn Sie sich zu einem Webinar vormerken lassen, verarbeiten wir Ihren Namen und Ihre E-Mail-Adresse, um Ihnen
-        die Teilnahmedaten (Teams-Link, Termin als Kalenderdatei) und Erinnerungen zu diesem Webinar zu senden. Der
-        Versand erfolgt über Mailjet (siehe Ziffer 6); Ihre Adresse wird dafür in einer Kontaktliste bei Mailjet
-        gespeichert, die nur für diesen Termin angelegt wird. Das Webinar selbst findet über Microsoft Teams statt (siehe
-        Ziffer 8). Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Durchführung der von Ihnen gewünschten Anmeldung).
-        Nach dem Webinar löschen wir die Liste dieses Termins und Ihre darin gespeicherten Kontaktdaten, sofern Sie nicht
-        in weitere Einladungen eingewilligt haben (siehe unten). Wenn Sie keine Erinnerungen mehr möchten, genügt eine
-        kurze Antwort auf eine der E-Mails.
-      </P>
-      <H3>Einladungen zu weiteren Webinaren und Themen (optional)</H3>
-      <P>
-        Bei der Anmeldung können Sie freiwillig einwilligen, dass wir Sie auch zu weiteren Webinaren und Themen für Beamte
-        per E-Mail einladen. Die Einwilligung wird im Double-Opt-in-Verfahren bestätigt: Sie erhalten eine E-Mail mit einem
-        Bestätigungslink, erst mit dem Klick wird Ihre Adresse in die Einladungsliste bei Mailjet aufgenommen. Rechtsgrundlage
-        ist Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Sie können sie jederzeit widerrufen, über den Abmeldelink in jeder
-        dieser E-Mails oder formlos an kontakt@mein-beamtenportal.de. Ihre Adresse bleibt bis zu Ihrem Widerruf gespeichert
-        und wird danach gelöscht bzw. nur noch vorgehalten, um künftige E-Mails zu verhindern.
-      </P>
       <H3>Pensionsrechner</H3>
       <P>
         Der Pensionsrechner arbeitet vollständig in Ihrem Browser; die eingegebenen Werte werden nicht an uns übermittelt.
@@ -234,7 +214,7 @@ export default function DatenschutzPage() {
 
       <H2>6. E-Mail-Versand (Mailjet)</H2>
       <P>
-        E-Mails, die Sie über unsere Formulare auslösen (Bestätigung der Webinar-Anmeldung und Erinnerungen, Bestätigung
+        E-Mails, die Sie über unsere Formulare auslösen (Bestätigung
         und Auswertung zum Pensionsrechner, Bestätigung einer Anfrage) sowie interne Benachrichtigungen versenden wir über den
         Dienst Mailjet. Anbieter ist die Mailgun Technologies Inc., 112 E Pecan St. #1135, San Antonio, Texas 78205, USA
         (Mailjet). Dabei werden E-Mail-Adressen, Namen und der Inhalt der E-Mails bei Mailjet verarbeitet; Mailjet kann
@@ -254,7 +234,7 @@ export default function DatenschutzPage() {
 
       <H2>8. Audio- und Videokonferenzen (Microsoft Teams)</H2>
       <P>
-        Für Webinare und Beratungsgespräche nutzen wir ggf. Microsoft Teams. Anbieter ist die Microsoft Ireland
+        Für Beratungsgespräche nutzen wir ggf. Microsoft Teams. Anbieter ist die Microsoft Ireland
         Operations Limited (Anschrift siehe Ziffer 5). Dabei werden u. a. Name, E-Mail-Adresse, IP-Adresse sowie bei
         Teilnahme Audio- und Videodaten verarbeitet. Rechtsgrundlage
         ist Art. 6 Abs. 1 lit. b DSGVO bzw. unser berechtigtes Interesse an effektiver Kommunikation (Art. 6 Abs. 1

@@ -8,7 +8,6 @@ Alle Zahlen sind Richtwerte nach Bundesrecht (BeamtVG, BBhV, BeamtStG, EStG). Di
 - [Pensionsrechner](https://www.mein-beamtenportal.de/pensionsrechner): Netto-Pension und Versorgungslücke nach Besoldungsgruppe (A7 bis A15), mit Ruhegehaltssatz 1,79375 % je Dienstjahr (höchstens 71,75 %) und Versorgungsabschlag 3,6 % je Jahr (höchstens 10,8 %).
 - [Beamten-Versorgungs-Checkliste](https://www.mein-beamtenportal.de/checkliste): Beihilfe, PKV, Dienstunfähigkeit, Pension, Steuern und Familie auf zwei Seiten.
 - [Ratgeber](https://www.mein-beamtenportal.de/ratgeber): über 170 Artikel zu Pension (nach Besoldungsgruppe und Bundesland), Beihilfe, PKV, Anwartschaft, Dienstunfähigkeit und Berufsunfähigkeit.
-- [Webinar](https://www.mein-beamtenportal.de/webinar): Einführung in Beihilfe, Pension und Absicherung.
 
 ## Schwerpunktthemen
 - [Dienstunfähigkeitsversicherung für Beamte](https://www.mein-beamtenportal.de/dienstunfaehigkeitsversicherung): Leitfaden zu echter Dienstunfähigkeitsklausel, Kosten, Anwärtern und Beamten auf Probe.

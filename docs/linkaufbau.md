@@ -5,7 +5,7 @@ Stand: Nov. 2026. Ausgangslage laut Ahrefs: nur 5 verweisende Domains. Das ist d
 ## Zielgruppen und Ansprechpartner
 | Zielgruppe | Beispiele | Was anbieten |
 |---|---|---|
-| Beamtenbund und Gewerkschaften | dbb-Landesbünde (z. B. dbb nrw), GEW-Landesverbände, DPolG, Philologenverband, VBE | Gastbeitrag, Pensionsrechner zur Verlinkung, Webinar für Mitglieder |
+| Beamtenbund und Gewerkschaften | dbb-Landesbünde (z. B. dbb nrw), GEW-Landesverbände, DPolG, Philologenverband, VBE | Gastbeitrag, Pensionsrechner zur Verlinkung |
 | Ausbildung | Studienseminare, Fachschaften Lehramt, Hochschulen mit Lehramt | Infoblatt PKV/DU im Referendariat, Link auf Länderübersicht |
 | Foren und Communities | Referendarsforen, Gruppen für Anwärter | Fachliche Antworten mit Link, nur wo Regeln es erlauben |
 | Medien | Podcasts und Blogs zu Beamtenthemen | Interview oder Gastbeitrag |
@@ -22,7 +22,7 @@ Betreff: Informationsangebot für Ihre Mitglieder zu Beihilfe und Dienstunfähig
 
 Guten Tag,
 ich bin Finanzberater mit Erlaubnis nach § 34d GewO und betreibe das Informationsportal mein-beamtenportal.de zu Beihilfe, PKV, Dienstunfähigkeit und Pension für Beamte, Referendare und Anwärter. Unter anderem biete ich einen kostenlosen Pensionsrechner und eine Übersicht zur Krankenversicherung im Referendariat nach Bundesland.
-Falls für Ihre Mitglieder oder Referendare interessant, stelle ich Ihnen gern einen Gastbeitrag oder ein kurzes Webinar zur Verfügung. Über einen Link auf die genannten Seiten würde ich mich freuen.
+Falls für Ihre Mitglieder oder Referendare interessant, stelle ich Ihnen gern einen Gastbeitrag zur Verfügung. Über einen Link auf die genannten Seiten würde ich mich freuen.
 Freundliche Grüße
 
 ## Hinweise
