@@ -10,6 +10,7 @@ import { ClickTracker } from "@/components/ClickTracker";
 import { ScrollCtaPopup } from "@/components/ScrollCtaPopup";
 import { LogoLink } from "@/components/LogoLink";
 import { ChromeGate } from "@/components/ChromeGate";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { HeaderRight } from "@/components/HeaderRight";
 import "./globals.css";
 
@@ -159,6 +160,9 @@ export default function RootLayout({
             </div>
           </div>
         </footer>
+        </ChromeGate>
+        <ChromeGate>
+          <WhatsAppButton />
         </ChromeGate>
         <ScrollCtaPopup />
         </CookieConsentProvider>
