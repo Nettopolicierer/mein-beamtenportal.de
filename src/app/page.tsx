@@ -18,7 +18,7 @@ const LEISTUNGSVERSPRECHEN = [
 const THEMEN = [
   { href: "/welche-versicherungen-als-referendar", title: "Ich bin Referendar oder Anwärter", text: "Alle Versicherungen im Vorbereitungsdienst im Überblick: PKV, Anwartschaft, Dienstunfähigkeit, Haftpflicht." },
   { href: "/verbeamtung-auf-probe-finanzfehler", title: "Ich werde auf Probe verbeamtet", text: "Die häufigsten Finanzfehler beim Start ins Beamtenverhältnis und wie Sie sie vermeiden." },
-  { href: "/dienstunfaehigkeitsversicherung", title: "Ich bin Beamter auf Lebenszeit", text: "Dienstunfähigkeit absichern: echte Klausel, Kosten und was die Pension im Ernstfall leistet." },
+  { href: "/pensionsrechner", title: "Ich bin Beamter auf Lebenszeit", text: "Wie hoch ist Ihre Pension wirklich, und wie groß ist die Lücke zu Ihrem heutigen Netto? Mit dem Pensionsrechner nachrechnen." },
   { href: "/pkv-fuer-beamte", title: "Ich suche die richtige Krankenversicherung", text: "Private Krankenversicherung für Beamte: Beihilfe, Tarifkriterien und Öffnungsaktion." },
 ];
 
