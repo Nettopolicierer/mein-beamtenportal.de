@@ -23,8 +23,11 @@ function defaultGruppeFor(slug: string): Gruppe {
 }
 
 function withBeratungCta(post: { slug: string; html: string }) {
-  const box = `<div class="not-prose my-8 rounded-2xl border border-mediumlight/60 bg-base p-6"><p class="font-heading mb-1 text-lg font-bold text-primary">Kostenfreie Beratung für Ihre Situation</p><p class="mb-4 text-sm text-mediumdark">In 20 Minuten klären wir, wo Ihre Lücke liegt und was Sie wirklich brauchen. Unverbindlich und ohne Verpflichtung.</p><a href="${BOOKING_LINK}" class="inline-block rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary/90">Kostenfreies Erstgespräch buchen</a></div>`;
-  return insertBeforeSafeH2(post.html, box, 2) ?? post.html + box;
+  const box = `<div class="not-prose my-14 rounded-2xl border border-mediumlight/60 bg-base p-7 sm:p-8"><p class="font-heading mb-1 text-lg font-bold text-primary">Kostenfreie Beratung für Ihre Situation</p><p class="mb-4 text-sm text-mediumdark">In 20 Minuten klären wir, wo Ihre Lücke liegt und was Sie wirklich brauchen. Unverbindlich und ohne Verpflichtung.</p><a href="${BOOKING_LINK}" class="inline-block rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary/90">Kostenfreies Erstgespräch buchen</a></div>`;
+  // Weit hinter der Hinweiskarte (Checkliste/Rechner) platzieren, ungefähr ab der Mitte des Artikels.
+  const h2Count = (post.html.match(/<h2[\s>]/g) ?? []).length;
+  const from = Math.max(3, Math.round(h2Count * 0.55));
+  return insertBeforeSafeH2(post.html, box, from) ?? post.html + box;
 }
 
 // Hinweiskarte zum Pensionsrechner vor der 2. Zwischenüberschrift (als HTML-String wie der BU-Check-Hinweis,
@@ -96,7 +99,7 @@ function withHinweisCard(html: string, mode: "checkliste" | "rechner", rechnerHr
     mode === "checkliste"
       ? { h: "Gut abgesichert in den Dienst starten", t: "Die 360°-Beamten-Versorgungs-Checkliste: Beihilfe, PKV, Dienstunfähigkeit und Vorsorge auf zwei Seiten. Kostenlos als PDF.", b: btn("/checkliste", "Kostenlose Checkliste anfordern") }
       : { h: "Wie groß ist Ihre Pensionslücke?", t: "Berechnen Sie in einer Minute, was Ihnen im Ruhestand netto fehlt. Kostenlos, auf Wunsch mit PDF-Auswertung.", b: btn(rechnerHref, "Pensionslücke berechnen") };
-  const card = `<div class="not-prose my-8 rounded-2xl border p-6" style="border-color:#C9DCF0;background:#EAF2FB"><p class="font-heading mb-1 text-lg font-bold" style="color:#002855">${head.h}</p><p class="mb-4 text-sm" style="color:#334155">${head.t}</p>${head.b}</div>`;
+  const card = `<div class="not-prose my-14 rounded-2xl border p-7 sm:p-8" style="border-color:#C9DCF0;background:#EAF2FB"><p class="font-heading mb-1 text-lg font-bold" style="color:#002855">${head.h}</p><p class="mb-4 text-sm" style="color:#334155">${head.t}</p>${head.b}</div>`;
   return insertBeforeSafeH2(html, card, 1) ?? html;
 }
 

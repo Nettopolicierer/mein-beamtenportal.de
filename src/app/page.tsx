@@ -149,7 +149,7 @@ export default function Home() {
             </p>
             <ul className="mb-6 grid gap-x-6 gap-y-2.5 text-sm text-primary sm:grid-cols-2">
               {[
-                "Ich vergleiche mehrere Gesellschaften, nicht nur ein Portfolio",
+                "Zugang zu über 250 Gesellschaften statt nur einem Portfolio",
                 "Antwort meist noch am selben Tag",
                 "Termine per Video, Unterschrift digital, Verträge in der Finanz-App",
                 "Meine Vergütung nenne ich Ihnen vor jedem Abschluss",
