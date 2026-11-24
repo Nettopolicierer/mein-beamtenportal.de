@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import type { Post } from "@/lib/content";
 import { formatDate } from "@/lib/content";
 
@@ -57,8 +58,22 @@ export function PostList({ posts }: { posts: Post[] }) {
             key={post.slug}
             href={`/${post.slug}`}
             prefetch={false}
-            className="group flex flex-col gap-3 rounded-2xl border border-mediumlight/40 bg-base p-6 transition-all hover:border-primary/30"
+            className="group flex gap-4 rounded-2xl border border-mediumlight/40 bg-base p-4 transition-all hover:border-primary/30 sm:p-5"
           >
+            {post.featuredImage && (
+              <div className="relative size-24 shrink-0 overflow-hidden rounded-xl bg-mediumlight/30 sm:size-28">
+                <Image
+                  src={`/thumbs/${post.slug}.webp`}
+                  alt={post.featuredImageAlt || ""}
+                  fill
+                  sizes="112px"
+                  className="object-cover"
+                  unoptimized
+                  loading="lazy"
+                />
+              </div>
+            )}
+            <div className="flex min-w-0 flex-col gap-2">
             <div className="flex items-center gap-2 text-xs text-mediumdark">
               <span className="rounded-full bg-primary/10 px-2 py-0.5 font-medium text-primary">
                 {post.categories[0] ?? "Ratgeber"}
@@ -68,7 +83,8 @@ export function PostList({ posts }: { posts: Post[] }) {
             <h2 className="text-base leading-snug font-semibold text-primary group-hover:opacity-80">
               {post.title}
             </h2>
-            <p className="line-clamp-3 text-sm text-mediumdark">{post.description}</p>
+            <p className="line-clamp-2 text-sm text-mediumdark">{post.description}</p>
+            </div>
           </Link>
         ))}
 
