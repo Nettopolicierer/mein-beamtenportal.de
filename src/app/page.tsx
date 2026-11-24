@@ -3,7 +3,6 @@ import Image from "next/image";
 import { Check } from "lucide-react";
 import { SORTED_POSTS, formatDate, BOOKING_LINK } from "@/lib/content";
 import { TestimonialStrip } from "@/components/TestimonialStrip";
-import { PensionCalculator } from "@/components/PensionCalculator";
 import { Reveal } from "@/components/Reveal";
 
 const THEMEN = [
@@ -112,13 +111,6 @@ export default function Home() {
             </Link>
           ))}
         </div>
-      </section>
-
-      {/* Pensions-Rechner */}
-      <section className="mx-auto max-w-5xl px-6 pb-20">
-        <Reveal variant="scale">
-          <PensionCalculator />
-        </Reveal>
       </section>
 
       {/* Testimonials */}
