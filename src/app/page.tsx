@@ -6,45 +6,11 @@ import { TestimonialStrip } from "@/components/TestimonialStrip";
 import { PensionCalculator } from "@/components/PensionCalculator";
 import { Reveal } from "@/components/Reveal";
 
-const LEISTUNGSVERSPRECHEN = [
-  "Eine umfassende Analyse Ihrer aktuellen Absicherung",
-  "Den passenden PKV-Tarif abgestimmt auf Beihilfesatz und Laufbahn",
-  "Berechnung Ihrer voraussichtlichen Pension und möglicher Lücken (auch bei Beamten auf Widerruf/Probe)",
-  "Ungebundene Beratung zu Dienstunfähigkeitsversicherung und Altersvorsorge",
-  "Antworten auf Ihre konkreten Fragen zu Bezügen, Fristen und Anträgen",
-  "Persönliche Betreuung und schnelle Rückmeldung bei Fristen",
-];
-
 const THEMEN = [
   { href: "/welche-versicherungen-als-referendar", title: "Ich bin Referendar oder Anwärter", text: "Alle Versicherungen im Vorbereitungsdienst im Überblick: PKV, Anwartschaft, Dienstunfähigkeit, Haftpflicht." },
   { href: "/verbeamtung-auf-probe-finanzfehler", title: "Ich werde auf Probe verbeamtet", text: "Die häufigsten Finanzfehler beim Start ins Beamtenverhältnis und wie Sie sie vermeiden." },
   { href: "/pensionsrechner", title: "Ich bin Beamter auf Lebenszeit", text: "Wie hoch ist Ihre Pension wirklich, und wie groß ist die Lücke zu Ihrem heutigen Netto? Mit dem Pensionsrechner nachrechnen." },
   { href: "/pkv-fuer-beamte", title: "Ich suche die richtige Krankenversicherung", text: "Private Krankenversicherung für Beamte: Beihilfe, Tarifkriterien und Öffnungsaktion." },
-];
-
-const STATS = [
-  { value: "Ø 66,7 %", label: "Ruhegehaltssatz bei der Beamtenpension – den Höchstsatz von 71,75 % erreichen nur wenige.", source: 1 },
-  { value: "50–90 %", label: "übernimmt die Beihilfe je Bundesland von den Krankheitskosten – der Rest läuft über die Krankenversicherung.", source: 2 },
-  { value: "1,79 %", label: "mehr Pension bringt jedes volle Dienstjahr nach dem Beamtenversorgungsgesetz.", source: 1 },
-];
-
-const BENEFITS = [
-  {
-    title: "250 Gesellschaften statt 5 Tarife",
-    text: "Die meisten Berater zeigen Ihnen das Portfolio ihres Arbeitgebers. Ich habe selbst bei einer auf den öffentlichen Dienst spezialisierten PKV gearbeitet – und mich bewusst gegen die Bindung an ein Portfolio entschieden.",
-  },
-  {
-    title: `${SORTED_POSTS.length} Artikel, bevor Sie anrufen`,
-    text: "Werfen Sie vorher einen Blick in meinen Ratgeber: ausführliche Antworten zu Beihilfe, PKV, Pension und Dienstunfähigkeit – bevor Sie überhaupt mit mir sprechen.",
-  },
-  {
-    title: "Antwort meist am selben Tag",
-    text: "Schreiben Sie mir per Mail oder WhatsApp, oder rufen Sie an. Ich melde mich selbst zurück, besonders wenn eine Frist drängt.",
-  },
-  {
-    title: "Digital, wenn's passt",
-    text: "Termine per Video, Vertragsunterschrift per E-Signatur, alles einsehbar in der Finanz-App – ohne dass Sie deshalb einen Termin vor Ort verlieren.",
-  },
 ];
 
 export default function Home() {
@@ -148,67 +114,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats / Problem */}
-      <section className="mx-auto max-w-5xl px-6 py-20">
-        <p className="mb-3 text-xs font-semibold tracking-widest text-primary uppercase">
-          Das Beihilfe-Problem
-        </p>
-        <h2 className="font-heading max-w-2xl text-2xl font-bold text-primary sm:text-3xl">
-          Beihilfe, Pension und PKV für Beamte – was Ihnen wirklich zusteht
-        </h2>
-        <span className="mt-3 mb-4 block h-1 w-12 rounded-full bg-primary" />
-        <p className="mb-12 max-w-2xl text-mediumdark">
-          Das Versorgungssystem für Beamte unterscheidet sich grundlegend von der gesetzlichen
-          Rente. Wer die Regeln zur Beihilfe, zur privaten Krankenversicherung, zur
-          Dienstunfähigkeit und zur Pension nicht genau kennt, verschenkt häufig Geld oder verpasst
-          wichtige Versorgungsansprüche.
-        </p>
-        <div className="grid gap-6 sm:grid-cols-3">
-          {STATS.map((s, i) => (
-            <Reveal key={s.value} delay={i * 100}>
-              <div className="rounded-2xl bg-base p-6">
-                <p className="font-heading mb-2 text-3xl font-bold text-primary">{s.value}</p>
-                <p className="text-sm text-mediumdark">
-                  {s.label} <sup>({s.source})</sup>
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-        <p className="mt-4 text-xs text-mediumdark/70">
-          (1) Beamtenversorgungsgesetz (BeamtVG), § 14. (2) Bundesbeihilfeverordnung (BBhV) bzw.
-          jeweilige Landesbeihilfeverordnung.
-        </p>
-      </section>
-
       {/* Pensions-Rechner */}
       <section className="mx-auto max-w-5xl px-6 pb-20">
         <Reveal variant="scale">
           <PensionCalculator />
         </Reveal>
-      </section>
-
-      {/* Benefits */}
-      <section className="bg-base">
-        <div className="mx-auto max-w-5xl px-6 py-20">
-          <p className="mb-3 text-xs font-semibold tracking-widest text-primary uppercase">
-            Ihre Vorteile
-          </p>
-          <h2 className="font-heading max-w-2xl text-2xl font-bold text-primary sm:text-3xl">
-            Was Mein Beamtenportal auszeichnet
-          </h2>
-          <span className="mt-3 mb-12 block h-1 w-12 rounded-full bg-primary" />
-          <div className="grid gap-8 sm:grid-cols-2">
-            {BENEFITS.map((b, i) => (
-              <Reveal key={b.title} delay={i * 80} variant="fade-up">
-                <div>
-                  <h3 className="font-heading mb-2 text-lg font-semibold text-primary">{b.title}</h3>
-                  <p className="text-sm text-mediumdark">{b.text}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
       </section>
 
       {/* Testimonials */}
@@ -237,6 +147,19 @@ export default function Home() {
               Dieses Portal ist mein Weg, Ihnen vorab verständlich zu erklären, wie Beihilfe, PKV, Pension und Dienstunfähigkeit
               zusammenhängen. Wenn Sie danach noch Fragen haben, sprechen wir persönlich darüber.
             </p>
+            <ul className="mb-6 grid gap-x-6 gap-y-2.5 text-sm text-primary sm:grid-cols-2">
+              {[
+                "Ich vergleiche mehrere Gesellschaften, nicht nur ein Portfolio",
+                "Antwort meist noch am selben Tag",
+                "Termine per Video, Unterschrift digital, Verträge in der Finanz-App",
+                "Meine Vergütung nenne ich Ihnen vor jedem Abschluss",
+              ].map((t) => (
+                <li key={t} className="flex items-start gap-2.5">
+                  <Check className="mt-0.5 size-4 shrink-0 text-primary" />
+                  <span>{t}</span>
+                </li>
+              ))}
+            </ul>
             <Link href="/ueber-uns" className="text-sm font-semibold text-primary underline">Mehr über mich und meinen Werdegang</Link>
           </div>
         </div>
@@ -360,50 +283,6 @@ export default function Home() {
               Lieber kurz per WhatsApp schreiben
             </a>
           </div>
-        </div>
-      </section>
-
-      {/* Leistungsversprechen */}
-      <section className="mx-auto max-w-5xl px-6 py-20">
-        <Reveal>
-          <p className="mb-3 text-xs font-semibold tracking-widest text-primary uppercase">
-            Beratung
-          </p>
-          <h2 className="font-heading max-w-2xl text-2xl font-bold text-primary sm:text-3xl">
-            Mein Leistungsversprechen für Ihre Beihilfe und Vorsorge
-          </h2>
-          <span className="mt-3 mb-6 block h-1 w-12 rounded-full bg-primary" />
-          <ul className="grid gap-x-10 gap-y-4 sm:grid-cols-2">
-            {LEISTUNGSVERSPRECHEN.map((item) => (
-              <li key={item} className="flex items-start gap-3">
-                <Check className="mt-0.5 size-5 shrink-0 text-primary" />
-                <span className="text-mediumdark">{item}</span>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
-      </section>
-
-      {/* Final CTA */}
-      <section className="bg-base">
-        <div className="mx-auto max-w-3xl px-6 py-20 text-center">
-          <h2 className="font-heading text-2xl font-bold text-primary sm:text-3xl">
-            Bereit für Klarheit?
-          </h2>
-          <span className="mx-auto mt-3 mb-4 block h-1 w-12 rounded-full bg-primary" />
-          <p className="mb-8 text-mediumdark">
-            In 20 Minuten schaue ich mir Ihre konkrete Situation an: wo bei Beihilfe, PKV oder im
-            Ernstfall einer Dienstunfähigkeit Lücken bestehen – und was sich davon für Sie wirklich
-            zu schließen lohnt.
-          </p>
-          <Link
-            href={BOOKING_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-lg bg-primary px-7 py-3.5 text-sm font-semibold text-white hover:bg-primary/90"
-          >
-            Kostenfreies Erstgespräch vereinbaren
-          </Link>
         </div>
       </section>
     </div>
