@@ -4,7 +4,6 @@ import { Check } from "lucide-react";
 import { SORTED_POSTS, formatDate, BOOKING_LINK } from "@/lib/content";
 import { TestimonialStrip } from "@/components/TestimonialStrip";
 import { Reveal } from "@/components/Reveal";
-import { KurzCheck } from "@/components/KurzCheck";
 
 const THEMEN = [
   { href: "/welche-versicherungen-als-referendar", title: "Ich bin Referendar oder Anwärter", text: "Alle Versicherungen im Vorbereitungsdienst im Überblick: PKV, Anwartschaft, Dienstunfähigkeit, Haftpflicht." },
@@ -156,11 +155,6 @@ export default function Home() {
             <Link href="/ueber-uns" className="text-sm font-semibold text-primary underline">Mehr über mich und meinen Werdegang</Link>
           </div>
         </div>
-      </section>
-
-      {/* Kurzcheck */}
-      <section className="mx-auto max-w-5xl px-6 pb-4">
-        <KurzCheck bookingLink={BOOKING_LINK} />
       </section>
 
       {/* Ablauf und Transparenz */}
