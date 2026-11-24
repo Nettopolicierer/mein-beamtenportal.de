@@ -105,7 +105,7 @@ export function TestimonialStrip() {
           <span className="text-sm text-mediumdark">4,9/5 · echte Kundenstimmen</span>
         </div>
       </div>
-      <div className="testimonial-mask overflow-hidden">
+      <div className="testimonial-mask overflow-hidden py-4">
         <div className="testimonial-marquee flex w-max items-stretch gap-5">
           {cards.map((t, i) => (
             <TestimonialCard key={`${t.name}-${i}`} t={t} />
