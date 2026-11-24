@@ -218,7 +218,7 @@ export async function buildChecklistPdf(): Promise<Uint8Array> {
     const f = bold ? ctx.bold : ctx.reg;
     p.drawText(clean(t), { x: M + (CW - f.widthOfTextAtSize(clean(t), size)) / 2, y: yy, size, font: f, color });
   };
-  c("Nächster Schritt: Ihr kostenfreies 15-Minuten-Erstgespräch", 12.5, y - 24, true, TITLE);
+  c("Nächster Schritt: Ihr kostenfreies 20-Minuten-Orientierungsgespräch", 12.5, y - 24, true, TITLE);
   c("Offene Punkte oder Unsicherheiten? Wir gehen sie kostenfrei per Video oder Telefon gemeinsam durch.", 8.8, y - 40);
   const label = "Termin buchen: cal.com/mein-beamtenportal/kostenfreie-erstberatung";
   const bw = ctx.bold.widthOfTextAtSize(label, 9.5) + 32;

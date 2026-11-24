@@ -130,7 +130,7 @@ export default function UeberUnsPage() {
             Haben Sie Lust auf ein Kennenlernen?
           </h2>
           <p className="mb-8 text-white/80">
-            Im kostenfreien Erstgespräch (ca. 30–45 Minuten, online oder persönlich) schauen wir
+            Im kostenfreien Orientierungsgespräch (20 Minuten, online oder persönlich) schauen wir
             uns Ihre Situation an – Beihilfebemessungssatz, bestehende PKV oder Versorgungslücken
             bei Dienstunfähigkeit. Danach wissen Sie, ob und wo sich etwas lohnt.
           </p>

@@ -23,7 +23,7 @@ function defaultGruppeFor(slug: string): Gruppe {
 }
 
 function withBeratungCta(post: { slug: string; html: string }) {
-  const box = `<div class="not-prose my-8 rounded-2xl border border-mediumlight/60 bg-base p-6"><p class="font-heading mb-1 text-lg font-bold text-primary">Kostenfreie Beratung für Ihre Situation</p><p class="mb-4 text-sm text-mediumdark">In 30 Minuten klären wir, wo Ihre Lücke liegt und was Sie wirklich brauchen. Unverbindlich und ohne Verpflichtung.</p><a href="${BOOKING_LINK}" class="inline-block rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary/90">Kostenfreies Erstgespräch buchen</a></div>`;
+  const box = `<div class="not-prose my-8 rounded-2xl border border-mediumlight/60 bg-base p-6"><p class="font-heading mb-1 text-lg font-bold text-primary">Kostenfreie Beratung für Ihre Situation</p><p class="mb-4 text-sm text-mediumdark">In 20 Minuten klären wir, wo Ihre Lücke liegt und was Sie wirklich brauchen. Unverbindlich und ohne Verpflichtung.</p><a href="${BOOKING_LINK}" class="inline-block rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary/90">Kostenfreies Erstgespräch buchen</a></div>`;
   return insertBeforeSafeH2(post.html, box, 2) ?? post.html + box;
 }
 

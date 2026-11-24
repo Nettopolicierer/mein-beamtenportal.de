@@ -252,7 +252,7 @@ export default function Home() {
         <ol className="grid gap-6 sm:grid-cols-3">
           {[
             ["1", "Termin buchen", "Sie wählen online einen Termin, per Video oder Telefon. Ohne Anmeldung bei einem Portal."],
-            ["2", "Lücken ansehen", "In rund 30 Minuten gehen wir Beihilfe, PKV, Dienstunfähigkeit und Pension für Ihren Status durch."],
+            ["2", "Lücken ansehen", "In 20 Minuten gehen wir Beihilfe, PKV, Dienstunfähigkeit und Pension für Ihren Status durch."],
             ["3", "Sie entscheiden", "Sie erhalten eine ehrliche Einschätzung und entscheiden in Ruhe. Kein Abschlussdruck, keine Verpflichtung."],
           ].map(([n, t, d]) => (
             <li key={n} className="rounded-2xl bg-base p-6">
@@ -304,34 +304,62 @@ export default function Home() {
       </section>
 
       {/* Absicherungs-CTA */}
-      <section className="bg-primary">
-        <div className="mx-auto max-w-3xl px-6 py-20 text-center">
-          <h2 className="font-heading text-2xl font-bold text-white sm:text-3xl">
-            Beihilfe und Pension allein reichen nicht.
-          </h2>
-          <span className="mx-auto mt-3 mb-4 block h-1 w-12 rounded-full bg-white/40" />
-          <p className="mb-6 text-lg text-white/90">Entscheidend ist, was Sie wirklich absichern.</p>
-          <p className="mx-auto mb-8 max-w-xl text-white/70">
-            Die Beihilfe zahlt nicht alles, die Pension deckt nicht Ihr gewohntes Einkommen, und
-            bei Dienstunfähigkeit zählt jeder Monat, den Sie zu spät handeln. In 15 Minuten sehen
-            Sie schwarz auf weiß, wo Ihre Lücken liegen – und was es kostet, sie zu schließen.
-          </p>
-          <Link
-            href={BOOKING_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-lg bg-white px-7 py-3.5 text-sm font-semibold text-primary hover:bg-white/90"
-          >
-            Jetzt Termin sichern
-          </Link>
-          <a
-            href="https://wa.me/4917692609041"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 block text-sm font-medium text-white/80 underline hover:text-white"
-          >
-            Lieber kurz schreiben? Per WhatsApp melden
-          </a>
+      <section className="relative overflow-hidden bg-primary">
+        <div className="pointer-events-none absolute -top-32 -right-24 size-96 rounded-full bg-white/5 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-40 -left-20 size-96 rounded-full bg-white/5 blur-3xl" />
+        <div className="relative mx-auto grid max-w-5xl items-center gap-10 px-6 py-20 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
+          <div>
+            <p className="mb-3 text-xs font-semibold tracking-widest text-white/60 uppercase">Orientierungsgespräch</p>
+            <h2 className="font-heading text-3xl leading-tight font-bold text-white sm:text-4xl">
+              Beihilfe und Pension allein reichen nicht.
+            </h2>
+            <p className="mt-5 max-w-xl text-lg text-white/80">
+              Die Beihilfe zahlt nicht alles, die Pension deckt nicht Ihr gewohntes Einkommen, und bei Dienstunfähigkeit
+              zählt jeder Monat. In 20 Minuten sehen Sie, wo Ihre Lücken liegen und was es kostet, sie zu schließen.
+            </p>
+            <ul className="mt-6 space-y-3 text-white/90">
+              {[
+                "Beihilfe, PKV, Dienstunfähigkeit und Pension für Ihren Status",
+                "Ehrliche Einschätzung, was für Sie wirklich nötig ist",
+                "Kostenfrei und ohne Verpflichtung",
+              ].map((t) => (
+                <li key={t} className="flex items-start gap-3">
+                  <svg viewBox="0 0 20 20" className="mt-1 size-5 shrink-0 text-white" fill="currentColor" aria-hidden="true">
+                    <path fillRule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0L3.3 9.7a1 1 0 1 1 1.4-1.4l3.8 3.8 6.8-6.8a1 1 0 0 1 1.4 0Z" clipRule="evenodd" />
+                  </svg>
+                  <span>{t}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="rounded-3xl bg-white p-7 text-center shadow-2xl shadow-black/20 sm:p-8">
+            <Image
+              src="/albert-portrait.webp"
+              alt="Albert Sibert"
+              width={96}
+              height={96}
+              className="mx-auto size-24 rounded-full object-cover ring-4 ring-base"
+              unoptimized
+            />
+            <p className="font-heading mt-4 text-xl font-bold text-primary">20 Minuten mit Albert</p>
+            <p className="mt-1 text-sm text-mediumdark">Per Video oder Telefon, Termin frei wählbar</p>
+            <Link
+              href={BOOKING_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 flex w-full items-center justify-center rounded-xl bg-primary px-6 py-4 text-base font-semibold text-white transition hover:bg-primary/90"
+            >
+              Jetzt Termin sichern
+            </Link>
+            <a
+              href="https://wa.me/4917692609041"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 flex w-full items-center justify-center rounded-xl border border-mediumlight/60 px-6 py-3 text-sm font-medium text-primary transition hover:bg-base"
+            >
+              Lieber kurz per WhatsApp schreiben
+            </a>
+          </div>
         </div>
       </section>
 
@@ -364,7 +392,7 @@ export default function Home() {
           </h2>
           <span className="mx-auto mt-3 mb-4 block h-1 w-12 rounded-full bg-primary" />
           <p className="mb-8 text-mediumdark">
-            In 15 Minuten schaue ich mir Ihre konkrete Situation an: wo bei Beihilfe, PKV oder im
+            In 20 Minuten schaue ich mir Ihre konkrete Situation an: wo bei Beihilfe, PKV oder im
             Ernstfall einer Dienstunfähigkeit Lücken bestehen – und was sich davon für Sie wirklich
             zu schließen lohnt.
           </p>
