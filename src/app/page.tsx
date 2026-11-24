@@ -209,8 +209,16 @@ export default function Home() {
                 prefetch={false}
                 className="group flex h-full flex-col gap-3 overflow-hidden rounded-2xl border border-mediumlight/40 bg-white shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md"
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={`/thumbs/${post.slug}.webp`} alt="" loading="lazy" className="aspect-[16/9] w-full object-cover" />
+                {post.featuredImage && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={post.featuredImage}
+                    alt={post.featuredImageAlt || ""}
+                    loading="lazy"
+                    style={{ objectPosition: post.featuredImagePosition || "50% 30%" }}
+                    className="aspect-[16/9] w-full object-cover"
+                  />
+                )}
                 <div className="flex flex-col gap-3 px-6 pt-1 pb-6">
                 <div className="flex items-center gap-2 text-xs text-mediumdark">
                   <span>{post.categories[0] ?? "Ratgeber"}</span>
