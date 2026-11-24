@@ -186,9 +186,14 @@ export default function Home() {
       </section>
 
       {/* Latest posts */}
-      <section className="mx-auto max-w-5xl px-6 py-20">
+      <section className="bg-base">
+      <div className="mx-auto max-w-5xl px-6 py-20">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <div>
+            <p className="mb-3 inline-flex items-center gap-2 text-xs font-semibold tracking-widest text-primary uppercase">
+              <span className="rounded-full bg-primary px-2.5 py-0.5 text-[11px] tracking-wider text-white">Neu</span>
+              Frisch veröffentlicht
+            </p>
             <h2 className="font-heading text-2xl font-bold text-primary">Neueste Beiträge</h2>
             <span className="mt-3 block h-1 w-12 rounded-full bg-primary" />
           </div>
@@ -202,8 +207,11 @@ export default function Home() {
               <Link
                 href={`/${post.slug}`}
                 prefetch={false}
-                className="group flex flex-col gap-3 rounded-2xl border border-mediumlight/40 bg-white p-6 transition-colors hover:border-primary/30"
+                className="group flex h-full flex-col gap-3 overflow-hidden rounded-2xl border border-mediumlight/40 bg-white shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md"
               >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={`/thumbs/${post.slug}.webp`} alt="" loading="lazy" className="aspect-[16/9] w-full object-cover" />
+                <div className="flex flex-col gap-3 px-6 pt-1 pb-6">
                 <div className="flex items-center gap-2 text-xs text-mediumdark">
                   <span>{post.categories[0] ?? "Ratgeber"}</span>
                   <span>·</span>
@@ -212,10 +220,12 @@ export default function Home() {
                 <h3 className="font-heading text-base leading-snug font-semibold text-primary group-hover:opacity-80">
                   {post.title}
                 </h3>
+                </div>
               </Link>
             </Reveal>
           ))}
         </div>
+      </div>
       </section>
 
       {/* Absicherungs-CTA */}
