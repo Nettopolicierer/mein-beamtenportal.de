@@ -38,8 +38,8 @@ const BENEFITS = [
     text: "Werfen Sie vorher einen Blick in meinen Ratgeber: ausführliche Antworten zu Beihilfe, PKV, Pension und Dienstunfähigkeit – bevor Sie überhaupt mit mir sprechen.",
   },
   {
-    title: "Kein Callcenter, kein Sachbearbeiter",
-    text: "Sie schreiben oder rufen mich direkt an, nicht eine Hotline. Rückmeldung meist noch am selben Tag.",
+    title: "Antwort meist am selben Tag",
+    text: "Schreiben Sie mir per Mail oder WhatsApp, oder rufen Sie an. Ich melde mich selbst zurück, besonders wenn eine Frist drängt.",
   },
   {
     title: "Digital, wenn's passt",
