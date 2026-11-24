@@ -16,10 +16,10 @@ const LEISTUNGSVERSPRECHEN = [
 ];
 
 const THEMEN = [
-  { href: "/dienstunfaehigkeitsversicherung", title: "Dienstunfähigkeit absichern", text: "Dienstunfähigkeitsversicherung für Beamte: echte Klausel, Kosten, Anwärter und Probezeit." },
-  { href: "/pkv-fuer-beamte", title: "PKV und Beihilfe", text: "Private Krankenversicherung für Beamte: Beihilfe, Tarifkriterien und Öffnungsaktion." },
-  { href: "/welche-versicherungen-als-referendar", title: "Referendare und Anwärter", text: "Alle Versicherungen im Vorbereitungsdienst im Überblick: PKV, Anwartschaft, Dienstunfähigkeit, Haftpflicht." },
-  { href: "/berufsunfaehigkeitsversicherung-fuer-studenten-was-sie-wissen-muessen", title: "Studium und Berufseinstieg", text: "Berufsunfähigkeit im Studium, Verbeamtung auf Probe und die ersten Versicherungen." },
+  { href: "/welche-versicherungen-als-referendar", title: "Ich bin Referendar oder Anwärter", text: "Alle Versicherungen im Vorbereitungsdienst im Überblick: PKV, Anwartschaft, Dienstunfähigkeit, Haftpflicht." },
+  { href: "/verbeamtung-auf-probe-finanzfehler", title: "Ich werde auf Probe verbeamtet", text: "Die häufigsten Finanzfehler beim Start ins Beamtenverhältnis und wie Sie sie vermeiden." },
+  { href: "/dienstunfaehigkeitsversicherung", title: "Ich bin Beamter auf Lebenszeit", text: "Dienstunfähigkeit absichern: echte Klausel, Kosten und was die Pension im Ernstfall leistet." },
+  { href: "/pkv-fuer-beamte", title: "Ich suche die richtige Krankenversicherung", text: "Private Krankenversicherung für Beamte: Beihilfe, Tarifkriterien und Öffnungsaktion." },
 ];
 
 const STATS = [
@@ -134,9 +134,9 @@ export default function Home() {
 
       {/* Themen */}
       <section className="mx-auto max-w-5xl px-6 pt-16">
-        <p className="mb-3 text-xs font-semibold tracking-widest text-primary uppercase">Meine Themen</p>
+        <p className="mb-3 text-xs font-semibold tracking-widest text-primary uppercase">Für wen ich da bin</p>
         <h2 className="font-heading mb-8 max-w-2xl text-2xl font-bold text-primary sm:text-3xl">
-          Wobei brauchen Sie Klarheit?
+          Wo stehen Sie gerade?
         </h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {THEMEN.map((t) => (
@@ -213,6 +213,34 @@ export default function Home() {
 
       {/* Testimonials */}
       <TestimonialStrip />
+
+      {/* Persönlich */}
+      <section className="mx-auto max-w-5xl px-6 pt-20">
+        <div className="grid items-center gap-8 rounded-3xl bg-base p-6 sm:grid-cols-[220px_1fr] sm:gap-10 sm:p-10">
+          <Image
+            src="/albert-portrait.webp"
+            alt="Albert Sibert, Finanzberater für Beamte"
+            width={422}
+            height={421}
+            className="mx-auto w-44 rounded-2xl object-cover shadow-md sm:w-full"
+            unoptimized
+          />
+          <div>
+            <p className="mb-3 text-xs font-semibold tracking-widest text-primary uppercase">Wer berät Sie?</p>
+            <h2 className="font-heading mb-4 text-2xl font-bold text-primary sm:text-3xl">Hallo, ich bin Albert.</h2>
+            <p className="mb-3 text-mediumdark">
+              Seit 2019 berate ich Beamte, Referendare und Anwärter. Ich habe selbst bei einer auf den öffentlichen Dienst
+              spezialisierten PKV gearbeitet und mich dann bewusst gegen die Bindung an ein Portfolio entschieden. So kann ich Ihnen
+              zeigen, was zu Ihrer Situation passt, und nicht, was ich verkaufen muss.
+            </p>
+            <p className="mb-5 text-mediumdark">
+              Dieses Portal ist mein Weg, Ihnen vorab verständlich zu erklären, wie Beihilfe, PKV, Pension und Dienstunfähigkeit
+              zusammenhängen. Wenn Sie danach noch Fragen haben, sprechen wir persönlich darüber.
+            </p>
+            <Link href="/ueber-uns" className="text-sm font-semibold text-primary underline">Mehr über mich und meinen Werdegang</Link>
+          </div>
+        </div>
+      </section>
 
       {/* Ablauf und Transparenz */}
       <section className="mx-auto max-w-5xl px-6 py-20">
@@ -296,6 +324,14 @@ export default function Home() {
           >
             Jetzt Termin sichern
           </Link>
+          <a
+            href="https://wa.me/4917692609041"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 block text-sm font-medium text-white/80 underline hover:text-white"
+          >
+            Lieber kurz schreiben? Per WhatsApp melden
+          </a>
         </div>
       </section>
 
