@@ -152,7 +152,6 @@ export default function Home() {
                 "Zugang zu über 250 Gesellschaften statt nur einem Portfolio",
                 "Antwort meist noch am selben Tag",
                 "Termine per Video, Unterschrift digital, Verträge in der Finanz-App",
-                "Meine Vergütung nenne ich Ihnen vor jedem Abschluss",
               ].map((t) => (
                 <li key={t} className="flex items-start gap-2.5">
                   <Check className="mt-0.5 size-4 shrink-0 text-primary" />
