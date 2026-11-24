@@ -89,9 +89,9 @@ export default function UeberUnsPage() {
           </li>
           <li>Seit 2019 in der Finanzbranche, Schwerpunkt Beamte, Referendare und Anwärter</li>
           <li>
-            Kundenbewertungen auf{" "}
-            <a href="https://www.provenexpert.com/de-de/albert-sibert/" target="_blank" rel="noopener noreferrer" className="text-primary underline">
-              ProvenExpert
+            Kundenbewertungen:{" "}
+            <a href="https://www.horbach.de/albert-sibert/wissenswertes/kundenbewertungen.html" target="_blank" rel="noopener noreferrer" className="text-primary underline">
+              Bewertungen ansehen
             </a>
           </li>
         </ul>

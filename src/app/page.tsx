@@ -97,7 +97,7 @@ export default function Home() {
               />
             </div>
             <a
-              href="https://www.provenexpert.com/de-de/albert-sibert/"
+              href="https://www.horbach.de/albert-sibert/wissenswertes/kundenbewertungen.html"
               target="_blank"
               rel="noopener noreferrer"
               className="absolute bottom-0 left-2 flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-lg ring-1 ring-primary/10 sm:-left-6"
