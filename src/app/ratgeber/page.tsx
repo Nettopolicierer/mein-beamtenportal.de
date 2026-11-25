@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { readdirSync } from "node:fs";
+import path from "node:path";
 import Link from "next/link";
 import { SORTED_POSTS, BOOKING_LINK } from "@/lib/content";
 import { PostList } from "./PostList";
@@ -12,6 +14,8 @@ export const metadata: Metadata = {
 };
 
 export default function RatgeberPage() {
+  // Beiträge ohne kleines Vorschaubild zeigen stattdessen ihr Titelbild.
+  const thumbs = readdirSync(path.join(process.cwd(), "public/thumbs")).map((f) => f.replace(/\.webp$/, ""));
   return (
     <div>
       <div className="mx-auto max-w-5xl px-6 py-16">
@@ -38,7 +42,7 @@ export default function RatgeberPage() {
           </Link>
         </div>
 
-        <PostList posts={SORTED_POSTS} />
+        <PostList posts={SORTED_POSTS} thumbs={thumbs} />
       </div>
 
       <TestimonialStrip />

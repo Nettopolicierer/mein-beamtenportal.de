@@ -6,7 +6,8 @@ import Image from "next/image";
 import type { Post } from "@/lib/content";
 import { formatDate } from "@/lib/content";
 
-export function PostList({ posts }: { posts: Post[] }) {
+export function PostList({ posts, thumbs }: { posts: Post[]; thumbs: string[] }) {
+  const hasThumb = useMemo(() => new Set(thumbs), [thumbs]);
   const categories = useMemo(() => {
     const counts = new Map<string, number>();
     for (const p of posts) {
@@ -63,7 +64,7 @@ export function PostList({ posts }: { posts: Post[] }) {
             {post.featuredImage && (
               <div className="relative size-20 shrink-0 overflow-hidden rounded-xl bg-mediumlight/30 sm:size-28">
                 <Image
-                  src={`/thumbs/${post.slug}.webp`}
+                  src={hasThumb.has(post.slug) ? `/thumbs/${post.slug}.webp` : post.featuredImage}
                   alt={post.featuredImageAlt || ""}
                   fill
                   sizes="112px"
