@@ -73,7 +73,7 @@ export default function AnfragePage() {
             Lass uns sprechen: Dienstunfähigkeit, PKV und Altersvorsorge verständlich geklärt.
           </h1>
           <p className="mt-4 max-w-2xl text-base text-mediumdark sm:text-lg">
-            Wähle unten deine Themen. Ich melde mich persönlich bei dir, kostenfrei und unverbindlich.
+            Wähle unten deine Themen. Ich melde mich persönlich bei dir, kostenfrei.
           </p>
           <a
             href="#check"

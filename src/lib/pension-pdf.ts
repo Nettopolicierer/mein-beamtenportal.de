@@ -404,7 +404,7 @@ export async function buildPensionPdf(input: PensionInput): Promise<Uint8Array> 
     const bwid = ctx.bold.widthOfTextAtSize(t3, 10) + 36;
     roundRect(p, M + (CW - bwid) / 2, y - 58, bwid, 26, 5, BLUE);
     p.drawText(t3, { x: M + (CW - bwid) / 2 + 18, y: y - 75, size: 10, font: ctx.bold, color: WHITE });
-    const t4 = "Digital per Video oder Telefon · Unverbindlich · Kostenfrei";
+    const t4 = "Digital per Video oder Telefon · Kostenfrei";
     p.drawText(t4, { x: M + (CW - ctx.bold.widthOfTextAtSize(t4, 8.5)) / 2, y: y - 94, size: 8.5, font: ctx.bold, color: BLUE });
     y -= 104 + 18;
 

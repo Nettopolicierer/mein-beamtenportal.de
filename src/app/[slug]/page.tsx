@@ -23,7 +23,7 @@ function defaultGruppeFor(slug: string): Gruppe {
 }
 
 function withBeratungCta(post: { slug: string; html: string }) {
-  const box = `<div class="not-prose my-14 rounded-2xl border border-mediumlight/60 bg-base p-7 sm:p-8"><p class="font-heading mb-1 text-lg font-bold text-primary">Kostenfreie Beratung für Ihre Situation</p><p class="mb-4 text-sm text-mediumdark">In 20 Minuten klären wir, wo Ihre Lücke liegt und was Sie wirklich brauchen. Unverbindlich und ohne Verpflichtung.</p><a href="${BOOKING_LINK}" class="inline-block rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary/90">Kostenfreies Erstgespräch buchen</a></div>`;
+  const box = `<div class="not-prose my-14 rounded-2xl border border-mediumlight/60 bg-base p-7 sm:p-8"><p class="font-heading mb-1 text-lg font-bold text-primary">Kostenfreie Beratung für Ihre Situation</p><p class="mb-4 text-sm text-mediumdark">In 20 Minuten klären wir, wo Ihre Lücke liegt und was Sie wirklich brauchen.</p><a href="${BOOKING_LINK}" class="inline-block rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary/90">Kostenfreies Erstgespräch buchen</a></div>`;
   // Weit hinter der Hinweiskarte (Checkliste/Rechner) platzieren, ungefähr ab der Mitte des Artikels.
   const h2Count = (post.html.match(/<h2[\s>]/g) ?? []).length;
   const from = Math.max(3, Math.round(h2Count * 0.55));
@@ -315,7 +315,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                 <h2>
                   <strong>Kostenfreie, individuelle Beratung</strong>
                 </h2>
-                <p>100% kostenfrei &amp; unverbindlich</p>
+                <p>20 Minuten · kostenfrei</p>
               </div>
               <a className="btn" href={BOOKING_LINK} target="_blank" rel="noopener noreferrer">
                 Termin buchen
@@ -365,7 +365,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
               >
                 Termin buchen
               </Link>
-              <p className="text-xs text-white/70">100% kostenfrei &amp; unverbindlich</p>
+              <p className="text-xs text-white/70">20 Minuten · kostenfrei</p>
             </div>
           </div>
         </aside>

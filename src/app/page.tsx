@@ -117,19 +117,23 @@ export default function Home() {
       <TestimonialStrip />
 
       {/* Persönlich */}
-      <section className="mx-auto max-w-5xl px-6 pt-20">
-        <div className="grid items-center gap-8 rounded-3xl bg-base p-6 sm:grid-cols-[220px_1fr] sm:gap-10 sm:p-10">
-          <Image
-            src="/albert-portrait.webp"
-            alt="Albert Sibert, Finanzberater für Beamte"
-            width={422}
-            height={421}
-            className="mx-auto w-44 rounded-2xl object-cover shadow-md sm:w-full"
-            unoptimized
-          />
+      <section className="mx-auto max-w-4xl px-6 pt-20">
+        <div className="rounded-3xl bg-base p-6 sm:p-10">
+          <div className="mb-5 flex items-center gap-4 sm:gap-6">
+            <Image
+              src="/albert-portrait.webp"
+              alt="Albert Sibert, Finanzberater für Beamte"
+              width={422}
+              height={421}
+              className="size-24 shrink-0 rounded-full object-cover shadow-md ring-4 ring-white sm:size-32"
+              unoptimized
+            />
+            <div>
+              <p className="mb-2 text-xs font-semibold tracking-widest text-primary uppercase">Wer berät Sie?</p>
+              <h2 className="font-heading text-2xl font-bold text-primary sm:text-3xl">Hallo, ich bin Albert.</h2>
+            </div>
+          </div>
           <div>
-            <p className="mb-3 text-xs font-semibold tracking-widest text-primary uppercase">Wer berät Sie?</p>
-            <h2 className="font-heading mb-4 text-2xl font-bold text-primary sm:text-3xl">Hallo, ich bin Albert.</h2>
             <p className="mb-3 text-mediumdark">
               Seit 2019 berate ich Beamte, Referendare und Anwärter. Ich habe selbst bei einer auf den öffentlichen Dienst
               spezialisierten PKV gearbeitet und mich dann bewusst gegen die Bindung an ein Portfolio entschieden. So kann ich Ihnen
@@ -166,9 +170,9 @@ export default function Home() {
         <span className="mt-3 mb-10 block h-1 w-12 rounded-full bg-primary" />
         <ol className="grid gap-6 sm:grid-cols-3">
           {[
-            ["1", "Termin buchen", "Sie wählen online einen Termin, per Video oder Telefon. Ohne Anmeldung bei einem Portal."],
+            ["1", "Termin buchen", "Sie wählen online einen Termin, per Video oder Telefon."],
             ["2", "Lücken ansehen", "In 20 Minuten gehen wir Beihilfe, PKV, Dienstunfähigkeit und Pension für Ihren Status durch."],
-            ["3", "Sie entscheiden", "Sie erhalten eine ehrliche Einschätzung und entscheiden in Ruhe. Kein Abschlussdruck, keine Verpflichtung."],
+            ["3", "Sie entscheiden", "Sie erhalten eine ehrliche Einschätzung und entscheiden in Ruhe."],
           ].map(([n, t, d]) => (
             <li key={n} className="rounded-2xl bg-base p-6">
               <span className="font-heading mb-3 flex size-9 items-center justify-center rounded-full bg-primary text-sm font-bold text-white">{n}</span>
@@ -180,8 +184,7 @@ export default function Home() {
         <p className="mt-8 max-w-3xl text-sm text-mediumdark">
           <strong className="text-primary">Transparenz:</strong> Das Erstgespräch kostet Sie nichts. Als Versicherungsvertreter und
           Finanzanlagenvermittler werde ich bei einem Abschluss von der jeweiligen Gesellschaft vergütet. Wie, sage ich Ihnen vor jedem
-          Abschluss offen. Mehr zu meiner Zulassung und meinem Werdegang finden Sie unter{" "}
-          <Link href="/ueber-uns" className="text-primary underline">Über mich</Link>.
+          Abschluss offen.
         </p>
       </section>
 
@@ -254,7 +257,7 @@ export default function Home() {
               {[
                 "Beihilfe, PKV, Dienstunfähigkeit und Pension für Ihren Status",
                 "Ehrliche Einschätzung, was für Sie wirklich nötig ist",
-                "Kostenfrei und ohne Verpflichtung",
+                "Kostenfrei",
               ].map((t) => (
                 <li key={t} className="flex items-start gap-3">
                   <svg viewBox="0 0 20 20" className="mt-1 size-5 shrink-0 text-white" fill="currentColor" aria-hidden="true">

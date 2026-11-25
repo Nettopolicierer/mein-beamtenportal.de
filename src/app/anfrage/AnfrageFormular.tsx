@@ -119,7 +119,7 @@ export function AnfrageFormular() {
       className="scroll-mt-4 flex flex-col gap-5 rounded-2xl border border-mediumlight/60 bg-white p-5 shadow-xl shadow-primary/5 sm:p-8"
     >
       <div>
-        <p className="text-xs font-semibold tracking-wide text-mediumdark uppercase">Unverbindlich &amp; kostenfrei</p>
+        <p className="text-xs font-semibold tracking-wide text-mediumdark uppercase">Kostenfrei</p>
         <h2 className="font-heading mt-1 text-2xl font-bold text-primary">Lass uns sprechen.</h2>
         <p className="mt-1 text-sm text-mediumdark">Wähle deine Themen, dann bereite ich mich vor.</p>
       </div>

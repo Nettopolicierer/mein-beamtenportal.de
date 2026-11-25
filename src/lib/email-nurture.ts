@@ -49,7 +49,7 @@ function mail(stage: number, v: NurtureMailVars): Mail {
       ],
       closing: [
         "Ein erster Schritt, der nichts kostet: Fragen Sie bei Ihrer Versorgungsstelle nach Ihren bisher anerkannten ruhegehaltfähigen Dienstzeiten.",
-        "Wenn Sie wissen möchten, welche der drei Punkte bei Ihnen am meisten ausmachen, schauen wir gemeinsam darauf, kostenlos und unverbindlich:",
+        "Wenn Sie wissen möchten, welche der drei Punkte bei Ihnen am meisten ausmachen, schauen wir gemeinsam darauf, kostenlos:",
       ],
       cta: { label: "Kurz besprechen", url: BOOKING_LINK },
     };
@@ -79,7 +79,7 @@ function mail(stage: number, v: NurtureMailVars): Mail {
     paragraphs: [
       greet(v),
       `in der PDF habe ich Ihnen den 3-Töpfe-Fahrplan vorgestellt. Ob er für Sie passt, hängt von Ihren echten Zahlen ab. Der Rechner liefert nur Richtwerte (bei Ihnen zuletzt: Lücke rund ${eur(luecke)} pro Monat). Mit Ihren tatsächlichen Daten wird daraus eine belastbare Zahl.`,
-      "Dafür biete ich Ihnen ein kostenloses, unverbindliches Gespräch an (etwa 20 Minuten). Sie gehen danach mit diesen Antworten raus:",
+      "Dafür biete ich Ihnen ein kostenloses Gespräch an (etwa 20 Minuten). Sie gehen danach mit diesen Antworten raus:",
     ],
     list: [
       "Wie hoch Ihre Pension auf Basis von Dienstjahren, Vordienstzeiten und Besoldung tatsächlich ausfällt, und wie groß Ihre Lücke nach Steuern und Krankenversicherung wirklich ist.",
@@ -87,7 +87,7 @@ function mail(stage: number, v: NurtureMailVars): Mail {
       "Welche Töpfe und welcher Beitrag zu Ihrer Situation passen, mit einem konkreten Vorschlag, den Sie in Ruhe prüfen können (keine Steuerberatung).",
     ],
     closing: [
-      "Es gibt keine Verpflichtung. Hilfreich, aber nicht nötig: Ihr letzter Bescheid der Versorgungsstelle und Ihre Besoldungsmitteilung. Den Termin wählen Sie selbst:",
+      "Hilfreich, aber nicht nötig: Ihr letzter Bescheid der Versorgungsstelle und Ihre Besoldungsmitteilung. Den Termin wählen Sie selbst:",
     ],
     cta: { label: "Termin wählen", url: BOOKING_LINK },
   };
@@ -135,7 +135,7 @@ function checklisteMail(stage: number, v: NurtureMailVars): Mail {
     paragraphs: [
       greetC(v),
       "die Checkliste zeigt, was zu prüfen ist. Was davon für Sie wirklich wichtig ist, hängt von Ihrem Status, Ihrer Familie und Ihren Plänen ab.",
-      "Gern gehe ich die offenen Punkte in einem kostenlosen, unverbindlichen Gespräch (etwa 20 Minuten) mit Ihnen durch. Danach wissen Sie, welche zwei oder drei Punkte bei Ihnen Vorrang haben und was als Nächstes sinnvoll ist. Den Termin wählen Sie selbst:",
+      "Gern gehe ich die offenen Punkte in einem kostenlosen Gespräch (etwa 20 Minuten) mit Ihnen durch. Danach wissen Sie, welche zwei oder drei Punkte bei Ihnen Vorrang haben und was als Nächstes sinnvoll ist. Den Termin wählen Sie selbst:",
     ],
     cta: { label: "Termin wählen", url: BOOKING_LINK },
   };

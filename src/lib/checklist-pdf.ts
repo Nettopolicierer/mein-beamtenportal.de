@@ -224,7 +224,7 @@ export async function buildChecklistPdf(): Promise<Uint8Array> {
   const bw = ctx.bold.widthOfTextAtSize(label, 9.5) + 32;
   roundRect(p, M + (CW - bw) / 2, y - 50, bw, 22, 5, BLUE);
   p.drawText(label, { x: M + (CW - bw) / 2 + 16, y: y - 64, size: 9.5, font: ctx.bold, color: WHITE });
-  c("Ungebunden  ·  Spezialisiert auf Beamte  ·  Unverbindlich und digital", 8.5, y - 82, true, BLUE);
+  c("Ungebunden  ·  Spezialisiert auf Beamte  ·  Digital", 8.5, y - 82, true, BLUE);
   y -= gh + 12;
 
   text(p, ctx, "Impressum und Registerangaben:", M, y, 8, { bold: true, color: MUTED });
