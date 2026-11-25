@@ -52,16 +52,16 @@ export function PostList({ posts }: { posts: Post[] }) {
         })}
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         {visible.map((post) => (
           <Link
             key={post.slug}
             href={`/${post.slug}`}
             prefetch={false}
-            className="group flex gap-4 rounded-2xl border border-mediumlight/40 bg-base p-4 transition-all hover:border-primary/30 sm:p-5"
+            className="group flex min-w-0 gap-3 sm:gap-4 rounded-2xl border border-mediumlight/40 bg-base p-4 transition-all hover:border-primary/30 sm:p-5"
           >
             {post.featuredImage && (
-              <div className="relative size-24 shrink-0 overflow-hidden rounded-xl bg-mediumlight/30 sm:size-28">
+              <div className="relative size-20 shrink-0 overflow-hidden rounded-xl bg-mediumlight/30 sm:size-28">
                 <Image
                   src={`/thumbs/${post.slug}.webp`}
                   alt={post.featuredImageAlt || ""}
@@ -80,16 +80,16 @@ export function PostList({ posts }: { posts: Post[] }) {
               </span>
               <span>{formatDate(post.date)}</span>
             </div>
-            <h2 className="text-base leading-snug font-semibold text-primary group-hover:opacity-80">
+            <h2 className="hyphens-auto break-words text-base leading-snug font-semibold text-primary group-hover:opacity-80">
               {post.title}
             </h2>
-            <p className="line-clamp-2 text-sm text-mediumdark">{post.description}</p>
+            <p className="line-clamp-2 break-words hyphens-auto text-sm text-mediumdark">{post.description}</p>
             </div>
           </Link>
         ))}
 
         {visible.length === 0 && (
-          <p className="col-span-2 py-8 text-center text-sm text-mediumdark/70">
+          <p className="py-8 sm:col-span-2 text-center text-sm text-mediumdark/70">
             Noch keine Beiträge in dieser Kategorie.
           </p>
         )}
