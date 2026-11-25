@@ -182,9 +182,8 @@ export default function Home() {
           ))}
         </ol>
         <p className="mt-8 max-w-3xl text-sm text-mediumdark">
-          <strong className="text-primary">Transparenz:</strong> Das Erstgespräch kostet Sie nichts. Als Versicherungsvertreter und
-          Finanzanlagenvermittler werde ich bei einem Abschluss von der jeweiligen Gesellschaft vergütet. Wie, sage ich Ihnen vor jedem
-          Abschluss offen.
+          <strong className="text-primary">Transparenz:</strong> Das Erstgespräch kostet Sie nichts. Als Finanzberater werde ich bei einem Abschluss von der jeweiligen
+          Gesellschaft vergütet.
         </p>
       </section>
 
