@@ -193,7 +193,10 @@ export default function Home() {
         <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="mb-3 inline-flex items-center gap-2 text-xs font-semibold tracking-widest text-primary uppercase">
-              <span className="rounded-full bg-primary px-2.5 py-0.5 text-[11px] tracking-wider text-white">Neu</span>
+              <span className="relative inline-flex">
+                <span aria-hidden="true" className="absolute inset-0 animate-ping rounded-full bg-[#e8702a] opacity-60 motion-reduce:hidden" />
+                <span className="relative rounded-full bg-[#e8702a] px-3 py-1 text-xs font-bold tracking-wider text-white">Neu</span>
+              </span>
               Vor kurzem erschienen
             </p>
             <h2 className="font-heading text-2xl font-bold text-primary">Neueste Beiträge</h2>
