@@ -193,10 +193,6 @@ export default function Home() {
         <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="mb-3 inline-flex items-center gap-2 text-xs font-semibold tracking-widest text-primary uppercase">
-              <span className="relative inline-flex">
-                <span aria-hidden="true" className="absolute inset-0 animate-ping rounded-full bg-[#e8702a] opacity-60 motion-reduce:hidden" />
-                <span className="relative rounded-full bg-[#e8702a] px-3 py-1 text-xs font-bold tracking-wider text-white">Neu</span>
-              </span>
               Vor kurzem erschienen
             </p>
             <h2 className="font-heading text-2xl font-bold text-primary">Neueste Beiträge</h2>
@@ -212,8 +208,12 @@ export default function Home() {
               <Link
                 href={`/${post.slug}`}
                 prefetch={false}
-                className="group flex h-full flex-col gap-3 overflow-hidden rounded-2xl border border-mediumlight/40 bg-white shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md"
+                className="group relative flex h-full flex-col gap-3 overflow-hidden rounded-2xl border border-mediumlight/40 bg-white shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md"
               >
+                <span className="absolute top-3 left-3 z-10 inline-flex">
+                  <span aria-hidden="true" className="absolute inset-0 animate-ping rounded-full bg-[#e8702a] opacity-60 motion-reduce:hidden" />
+                  <span className="relative rounded-full bg-[#e8702a] px-3 py-1 text-xs font-bold tracking-wider text-white uppercase shadow-md">Neu</span>
+                </span>
                 {post.featuredImage && (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
