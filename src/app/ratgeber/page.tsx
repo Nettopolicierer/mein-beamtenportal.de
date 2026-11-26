@@ -42,7 +42,18 @@ export default function RatgeberPage() {
           </Link>
         </div>
 
-        <PostList posts={SORTED_POSTS} thumbs={thumbs} />
+        <PostList
+          thumbs={thumbs}
+          posts={SORTED_POSTS.map(({ slug, title, description, date, categories, featuredImage, featuredImageAlt }) => ({
+            slug,
+            title,
+            description,
+            date,
+            categories,
+            featuredImage,
+            featuredImageAlt,
+          }))}
+        />
       </div>
 
       <TestimonialStrip />

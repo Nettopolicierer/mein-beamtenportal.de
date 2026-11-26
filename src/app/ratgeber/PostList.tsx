@@ -4,9 +4,16 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { Post } from "@/lib/content";
-import { formatDate } from "@/lib/content";
+import { formatDate } from "@/lib/site";
 
-export function PostList({ posts, thumbs }: { posts: Post[]; thumbs: string[] }) {
+// Nur die Felder, die die Übersicht anzeigt. Niemals ganze Post-Objekte übergeben:
+// Client-Props landen vollständig in der ausgelieferten Seite (inkl. Beitragstexte).
+export type PostTeaser = Pick<
+  Post,
+  "slug" | "title" | "description" | "date" | "categories" | "featuredImage" | "featuredImageAlt"
+>;
+
+export function PostList({ posts, thumbs }: { posts: PostTeaser[]; thumbs: string[] }) {
   const hasThumb = useMemo(() => new Set(thumbs), [thumbs]);
   const categories = useMemo(() => {
     const counts = new Map<string, number>();

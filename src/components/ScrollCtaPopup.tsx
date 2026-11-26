@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { X } from "lucide-react";
-import { BOOKING_LINK } from "@/lib/content";
+import { BOOKING_LINK } from "@/lib/site";
 import { isCalmPath, isLandingPath } from "@/lib/landing";
 
 // Beratungs-Hinweis ab 70 % Scroll-Tiefe (liest noch, ist also überzeugt). Einmal weggeklickt,

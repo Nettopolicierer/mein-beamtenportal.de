@@ -4,7 +4,7 @@ import { track } from "@/lib/track";
 import { useState } from "react";
 import Link from "next/link";
 import { CalendarCheck, CheckCircle2, MessageCircle } from "lucide-react";
-import { BOOKING_LINK } from "@/lib/content";
+import { BOOKING_LINK } from "@/lib/site";
 
 const WHATSAPP_NUMBER = "4917692609041";
 const THEMEN = ["Dienstunfähigkeit / BU", "PKV und Beihilfe", "Altersvorsorge", "Vertragscheck"];

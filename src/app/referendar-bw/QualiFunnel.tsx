@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, CalendarCheck, CheckCircle2, MessageCircle, Mail } from "lucide-react";
-import { BOOKING_LINK } from "@/lib/content";
+import { BOOKING_LINK } from "@/lib/site";
 import { GOOGLE_ADS_BOOKING_LABEL, GOOGLE_ADS_ID } from "@/lib/google-ads";
 
 const WHATSAPP_NUMBER = "4917692609041";

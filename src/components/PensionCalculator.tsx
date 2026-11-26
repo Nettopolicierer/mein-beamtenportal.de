@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { BOOKING_LINK } from "@/lib/content";
+import { BOOKING_LINK } from "@/lib/site";
 
 const PROZENT_PRO_DIENSTJAHR = 1.79375;
 const HOECHSTSATZ = 71.75;

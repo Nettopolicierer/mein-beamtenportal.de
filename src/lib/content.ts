@@ -1,4 +1,6 @@
 import { MERGED } from "./merged";
+
+export { BOOKING_LINK, formatDate } from "./site";
 import posts from "@/content-posts.json";
 // Vom WordPress-Migrations-Skript (migration/build_content.py) generierte
 // Artikel. Neue Artikel des Blog-Autopiloten landen NICHT hier, sondern in
@@ -67,14 +69,3 @@ export function getRelatedPosts(current: Post, limit = 3): Post[] {
   );
   return [...sameCategory, ...rest].slice(0, limit);
 }
-
-export function formatDate(iso: string): string {
-  return new Intl.DateTimeFormat("de-DE", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    timeZone: "Europe/Berlin",
-  }).format(new Date(iso));
-}
-
-export const BOOKING_LINK = "https://cal.com/mein-beamtenportal/kostenfreie-erstberatung";
